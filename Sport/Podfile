@@ -4,6 +4,6 @@
 use_frameworks!
 
 target 'Sport' do
-    pod 'SQLite.swift', '~> 0.10.1'
+    pod 'RealmSwift'
 end
 

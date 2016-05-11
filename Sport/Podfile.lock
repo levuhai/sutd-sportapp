@@ -1,10 +1,15 @@
 PODS:
-  - SQLite.swift (0.10.1)
+  - Realm (0.102.0):
+    - Realm/Headers (= 0.102.0)
+  - Realm/Headers (0.102.0)
+  - RealmSwift (0.102.0):
+    - Realm (= 0.102.0)
 
 DEPENDENCIES:
-  - SQLite.swift (~> 0.10.1)
+  - RealmSwift
 
 SPEC CHECKSUMS:
-  SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
+  Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
+  RealmSwift: e6f436f9fea1c57b9ad6d1c46d57562c845f3c4c
 
 COCOAPODS: 0.39.0
