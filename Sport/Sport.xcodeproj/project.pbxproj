@@ -21,6 +21,7 @@
 		72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
 		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
+		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		72B91D7D1CE2165D000E4923 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
 		9DC91002C9502203A1525AEB /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A73913731CE47E4E00874A04 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D6883B83CF75FC985F57A716 /* Pods-Sport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
 				72B91D691CDF2266000E4923 /* MediaPlayer.framework in Frameworks */,
 				A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */,
@@ -73,6 +76,7 @@
 		62A4BE94FF812D39540CFB3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A73913731CE47E4E00874A04 /* Accelerate.framework */,
 				72A6BC501CE24CE7007C0254 /* aubio.framework */,
 				72B91D7D1CE2165D000E4923 /* AVFoundation.framework */,
 				72B91D681CDF2266000E4923 /* MediaPlayer.framework */,
