@@ -9,58 +9,62 @@
 import UIKit
 import MediaPlayer
 import AVFoundation
+import MobileCoreServices
 
 protocol ItunesDataImporterDelegate {
     
 }
 
 class ItunesDataImporter: NSObject {
+    
     class func importItunesSongs() {
         let mediaQuery = MPMediaQuery.songsQuery()
-        let songs = mediaQuery.items;
+        let mediaItems = mediaQuery.items;
         
-        guard let songArray  = songs else {
+        guard let songs  = mediaItems else {
             return
         }
         
-        for song in songArray {
-            print("Song path: \(song.assetURL), persistent id \(song.persistentID)")
+        func createExporterWithMediaItem(song: MPMediaItem) -> AVAssetExportSession? {
+            print("Song persistent id \(song.persistentID)")
             if song.assetURL == nil {
-                continue
+                return nil
             }
             
             let avUrl = AVURLAsset(URL: song.assetURL!)
             
             let exporter = AVAssetExportSession(asset: avUrl, presetName: AVAssetExportPresetPassthrough)
-            
-            let exportPath = basePathForExportFile().stringByAppendingPathComponent("\(song.persistentID)")
-            exporter?.outputURL = NSURL(fileURLWithPath: exportPath)
             exporter?.outputFileType = "com.apple.quicktime-movie"
+            let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
+            if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
+                FileManager.removeItemAtPath(exportPath)
+            }
+            exporter?.outputURL = NSURL(fileURLWithPath: exportPath)
+            
+            return exporter
+        }
+        
+        for song in songs {
+            
+            let exporter = createExporterWithMediaItem(song)
+            
             exporter?.exportAsynchronouslyWithCompletionHandler({ 
-                print("Export completed with url \(exporter!.outputURL)")
-                let fileExist = NSFileManager.defaultManager().fileExistsAtPath((exporter!.outputURL?.path)!)
-                if fileExist {
-                    print("File exist")
+                if exporter!.status == .Completed {
+                    
+                    let fileType = song.assetURL?.absoluteString.componentsSeparatedByString("?").first?.pathExtension
+                    print("File type: \(fileType)")
+                    let srcPath = exporter?.outputURL?.path
+                    let dstPath = srcPath?.stringByAppendingPathExtension(fileType!)
+                    FileManager.moveFileAtPath(srcPath!, toPath: dstPath!)
+                    AubioWrapper.simpleAnalyzeAudioFile(dstPath)
                 } else {
-                    print("File not exist")
+                    print("Export has problems: \(exporter?.error)")
                 }
-                let srcPath = exporter?.outputURL?.path
-                let dstPath = srcPath?.stringByAppendingString(".mp3")
-                do {
-                    try NSFileManager.defaultManager().moveItemAtPath(srcPath!, toPath: dstPath!)
-                } catch {
-                    print(error)
-                }
-                AubioWrapper.simpleAnalyzeAudioFile(dstPath)
-                print("Export status \(exporter?.status == .Completed)")
-                print("Export error \(exporter?.error)")
             })
         }
     }
     
-    class func basePathForExportFile() -> NSString {
-        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
-    }
+    
    
     
 }

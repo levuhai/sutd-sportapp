@@ -10,8 +10,10 @@ import UIKit
 
 class HomePresenterImpl: HomePresenter {
     
+    let view: HomeView!
+    
     init(view: HomeView) {
-        
+        self.view = view
     }
     
     func initialize() {
