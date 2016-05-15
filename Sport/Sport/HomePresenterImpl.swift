@@ -18,8 +18,9 @@ class HomePresenterImpl: HomePresenter {
     }
     
     func initialize() {
-        
-        let path = NSBundle.mainBundle().pathForResource("4135626658456512543", ofType: "mp3")
+//        ItunesDataImporter.importItunesSongs()
+//        let path = NSBundle.mainBundle().pathForResource("4135626658456512543", ofType: "mp3")
+        let path = NSBundle.mainBundle().pathForResource("04", ofType: "m4a")
         print("Path \(path)")
         SongAnalyzer.analyzeWithPath(path!)
         
