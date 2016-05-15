@@ -10,4 +10,5 @@ import Foundation
 
 protocol HomePresenter: class {
     func initialize()
+    func tempoValueChanged(newValue: Float)
 }

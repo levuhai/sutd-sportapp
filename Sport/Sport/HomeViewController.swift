@@ -10,6 +10,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var tempoSlider: UISlider!
+    @IBOutlet weak var currentTempoLabel: UILabel!
+    
     var homePresenter: HomePresenter?
     
     override func viewDidLoad() {
@@ -18,8 +21,18 @@ class HomeViewController: UIViewController {
         
         homePresenter?.initialize()
     }
+    
+    @IBAction func tempoSliderValueChanged(sender: UISlider) {
+        homePresenter?.tempoValueChanged(sender.value)
+    }
 }
 
 extension HomeViewController: HomeView {
+    func showCurrentTempoValue(tempoValue: Float) {
+        currentTempoLabel.text = "\(Int(tempoValue))"
+    }
     
+    func updateTempoSliderValue(tempoValue: Float) {
+        tempoSlider.setValue(tempoValue, animated: true)
+    }
 }

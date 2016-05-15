@@ -9,5 +9,6 @@
 import UIKit
 
 protocol HomeView: class {
-    
+    func showCurrentTempoValue(tempoValue: Float)
+    func updateTempoSliderValue(tempoValue: Float)
 }

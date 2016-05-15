@@ -27,6 +27,11 @@
 		72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D771CDF4ABF000E4923 /* HomeView.swift */; };
 		72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
+		72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CA1CE896B800142CD0 /* SPSlider.swift */; };
+		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
+		72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D11CE8E59800142CD0 /* SongRepository.swift */; };
+		72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */; };
+		72F6F0D61CE8E80E00142CD0 /* SongFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D51CE8E80E00142CD0 /* SongFakeRepository.swift */; };
 		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
 		A706E6791CE83B5F00A8ACE7 /* 04.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A706E6781CE83B5F00A8ACE7 /* 04.m4a */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
@@ -57,6 +62,11 @@
 		72B91D771CDF4ABF000E4923 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesDataImporter.swift; sourceTree = "<group>"; };
 		72B91D7D1CE2165D000E4923 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		72F6F0CA1CE896B800142CD0 /* SPSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPSlider.swift; sourceTree = "<group>"; };
+		72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
+		72F6F0D11CE8E59800142CD0 /* SongRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
+		72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRealmRepository.swift; sourceTree = "<group>"; };
+		72F6F0D51CE8E80E00142CD0 /* SongFakeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFakeRepository.swift; sourceTree = "<group>"; };
 		9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
 		9DC91002C9502203A1525AEB /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A706E6781CE83B5F00A8ACE7 /* 04.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04.m4a; sourceTree = "<group>"; };
@@ -146,6 +156,7 @@
 				72B91D6B1CDF2E56000E4923 /* MainScreen */,
 				72B91D6A1CDF2D46000E4923 /* AppDelegate */,
 				72B91D6C1CDF2E75000E4923 /* Others */,
+				72F6F0CA1CE896B800142CD0 /* SPSlider.swift */,
 			);
 			path = Sport;
 			sourceTree = "<group>";
@@ -193,8 +204,8 @@
 		72B91D6F1CDF2EB8000E4923 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				72B91D6D1CDF2EA6000E4923 /* HomeViewController.swift */,
 				72B91D771CDF4ABF000E4923 /* HomeView.swift */,
+				72B91D6D1CDF2EA6000E4923 /* HomeViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -211,12 +222,24 @@
 		72B91D7B1CDF6B5D000E4923 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				72F6F0D01CE8E50900142CD0 /* SongRepositories */,
 				72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */,
 				72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */,
 				72A6BC9E1CE4F695007C0254 /* FileManager.swift */,
 				720AC1B71CE7A61500898A87 /* RealmManager.swift */,
+				72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */,
 			);
 			name = Manager;
+			sourceTree = "<group>";
+		};
+		72F6F0D01CE8E50900142CD0 /* SongRepositories */ = {
+			isa = PBXGroup;
+			children = (
+				72F6F0D11CE8E59800142CD0 /* SongRepository.swift */,
+				72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */,
+				72F6F0D51CE8E80E00142CD0 /* SongFakeRepository.swift */,
+			);
+			name = SongRepositories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,17 +367,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				720AC1B81CE7A61500898A87 /* RealmManager.swift in Sources */,
+				72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */,
 				72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */,
 				72A6BC9D1CE4EBAD007C0254 /* String+Extension.swift in Sources */,
 				72B91D761CDF34DA000E4923 /* HomePresenterImpl.swift in Sources */,
 				72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */,
+				72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */,
+				72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */,
 				72A6BC571CE386DD007C0254 /* AubioWrapper.m in Sources */,
 				720AC1B31CE70EED00898A87 /* SongData.swift in Sources */,
 				72A6BC9F1CE4F695007C0254 /* FileManager.swift in Sources */,
+				72F6F0D61CE8E80E00142CD0 /* SongFakeRepository.swift in Sources */,
 				72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */,
 				72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,
+				72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */,
 				720AC1B61CE799A400898A87 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,13 +14,72 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="20" maxValue="250" translatesAutoresizingMaskIntoConstraints="NO" id="bCo-XH-Fjl" customClass="SPSlider" customModule="Sport" customModuleProvider="target">
+                                <rect key="frame" x="18" y="481" width="339" height="31"/>
+                                <connections>
+                                    <action selector="tempoSliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="wlA-G9-11a"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tempo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDz-89-gOe">
+                                <rect key="frame" x="20" y="438" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnW-YZ-lWb">
+                                <rect key="frame" x="20" y="465" width="15" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYV-4c-4Ud">
+                                <rect key="frame" x="333" y="465" width="22" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5u-k9-vEV">
+                                <rect key="frame" x="314" y="439" width="10" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bpm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAz-lr-a1G">
+                                <rect key="frame" x="326" y="442" width="29" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bCo-XH-Fjl" secondAttribute="bottom" constant="156" id="6uK-NM-uqH"/>
+                            <constraint firstItem="bCo-XH-Fjl" firstAttribute="top" secondItem="lDz-89-gOe" secondAttribute="bottom" constant="22" id="6yL-ET-koW"/>
+                            <constraint firstItem="a5u-k9-vEV" firstAttribute="baseline" secondItem="eAz-lr-a1G" secondAttribute="baseline" id="Duj-MN-XrE"/>
+                            <constraint firstItem="bCo-XH-Fjl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="L13-OQ-Sy0"/>
+                            <constraint firstItem="bCo-XH-Fjl" firstAttribute="top" secondItem="FYV-4c-4Ud" secondAttribute="bottom" constant="2" id="Lwd-li-ph7"/>
+                            <constraint firstItem="eAz-lr-a1G" firstAttribute="bottom" secondItem="lDz-89-gOe" secondAttribute="bottom" id="MNY-bS-8no"/>
+                            <constraint firstItem="wnW-YZ-lWb" firstAttribute="leading" secondItem="bCo-XH-Fjl" secondAttribute="leading" id="QuH-ip-4uI"/>
+                            <constraint firstItem="bCo-XH-Fjl" firstAttribute="top" secondItem="wnW-YZ-lWb" secondAttribute="bottom" constant="2" id="aoY-xg-Azx"/>
+                            <constraint firstItem="eAz-lr-a1G" firstAttribute="leading" secondItem="a5u-k9-vEV" secondAttribute="trailing" constant="2" id="ipV-jz-qyw"/>
+                            <constraint firstItem="FYV-4c-4Ud" firstAttribute="trailing" secondItem="bCo-XH-Fjl" secondAttribute="trailing" id="jF2-Jh-FAs"/>
+                            <constraint firstItem="eAz-lr-a1G" firstAttribute="trailing" secondItem="bCo-XH-Fjl" secondAttribute="trailing" id="pRb-lY-AQl"/>
+                            <constraint firstItem="lDz-89-gOe" firstAttribute="leading" secondItem="bCo-XH-Fjl" secondAttribute="leading" id="rYr-T7-9GQ"/>
+                            <constraint firstAttribute="trailing" secondItem="bCo-XH-Fjl" secondAttribute="trailing" constant="20" id="xeA-Mv-hbw"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="currentTempoLabel" destination="a5u-k9-vEV" id="9kw-ai-K1m"/>
+                        <outlet property="tempoSlider" destination="bCo-XH-Fjl" id="76P-rS-4zC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139.5" y="219.5"/>
         </scene>
     </scenes>
 </document>
