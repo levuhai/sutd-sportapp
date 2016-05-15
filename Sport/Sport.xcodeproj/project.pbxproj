@@ -28,6 +28,7 @@
 		72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
 		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
+		A706E6791CE83B5F00A8ACE7 /* 04.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A706E6781CE83B5F00A8ACE7 /* 04.m4a */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		72B91D7D1CE2165D000E4923 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
 		9DC91002C9502203A1525AEB /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A706E6781CE83B5F00A8ACE7 /* 04.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04.m4a; sourceTree = "<group>"; };
 		A73913731CE47E4E00874A04 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D6883B83CF75FC985F57A716 /* Pods-Sport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +179,7 @@
 		72B91D6C1CDF2E75000E4923 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				A706E6781CE83B5F00A8ACE7 /* 04.m4a */,
 				720AC1BB1CE8170900898A87 /* 4135626658456512543.mp3 */,
 				72349B561CDDFBA4002B3B84 /* Main.storyboard */,
 				72349B591CDDFBA4002B3B84 /* Assets.xcassets */,
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
+				A706E6791CE83B5F00A8ACE7 /* 04.m4a in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
 				720AC1BC1CE8170900898A87 /* 4135626658456512543.mp3 in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
