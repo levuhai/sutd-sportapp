@@ -30,7 +30,7 @@
     double currnetBpm = 0, lastBpm = 0;
     double rate = 0.5;
     double outputValue = 0;
-    int count = 0;
+
     do {
         aubio_source_do(source, inputVec, &read);
         
@@ -39,14 +39,14 @@
         
         // do something with the beats
         if (outputVec->data[0] != 0) {
-            count++;
-            
+#ifdef DEBUG
             NSLog(@"beat at %.3fs, frame %d, %.2fbpm with confidence %.2f\n",
-                  aubio_tempo_get_last_s(tempoObject),
-                  aubio_tempo_get_last(tempoObject),
-                  aubio_tempo_get_bpm(tempoObject),
-                  aubio_tempo_get_confidence(tempoObject));
-            
+                      aubio_tempo_get_last_s(tempoObject),
+                      aubio_tempo_get_last(tempoObject),
+                      aubio_tempo_get_bpm(tempoObject),
+                      aubio_tempo_get_confidence(tempoObject));
+#endif
+        
             // Low pass filter
             currnetBpm = aubio_tempo_get_bpm(tempoObject);
             outputValue = rate * currnetBpm + (1.0 - rate) * lastBpm;
@@ -57,8 +57,12 @@
         }
         nFrames += read;
     } while (read == hopSize);
-
+    
+#ifdef DEBUG
+    // Print tempo value
     NSLog(@"TEMPO: %f", outputValue);
+#endif
+    
     del_aubio_tempo(tempoObject);
     del_fvec(inputVec);
     del_fvec(outputVec);
