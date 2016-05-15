@@ -24,6 +24,8 @@
     aubio_tempo_t *tempoObject = new_aubio_tempo("default", winSize, hopSize, sampleRate);
     uint_t nFrames = 0;
     uint_t read = 0;
+    double averageBpm = 0;
+    int count = 0;
     do {
         aubio_source_do(source, inputVec, &read);
         
@@ -32,13 +34,18 @@
         
         // do something with the beats
         if (outputVec->data[0] != 0) {
+            count++;
+            averageBpm += aubio_tempo_get_bpm(tempoObject);
             NSLog(@"beat at %.3fms, %.3fs, frame %d, %.2fbpm with confidence %.2f\n",
                   aubio_tempo_get_last_ms(tempoObject), aubio_tempo_get_last_s(tempoObject),
                   aubio_tempo_get_last(tempoObject), aubio_tempo_get_bpm(tempoObject), aubio_tempo_get_confidence(tempoObject));
+        } else {
+//            NSLog(@"missed");
         }
         nFrames += read;
     } while (read == hopSize);
-    
+    averageBpm /= count;
+    NSLog(@"TEMPO: %f", averageBpm);
     del_aubio_tempo(tempoObject);
     del_fvec(inputVec);
     del_fvec(outputVec);

@@ -42,7 +42,7 @@ class FileManager: NSObject {
     }
     
     class func songImportFolder() -> String {
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true).first!
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
         return documentDirectory.stringByAppendingPathComponent(IMPORT_FOLDER)
     }
     

@@ -40,7 +40,7 @@ class ItunesDataImporter: NSObject {
                 FileManager.removeItemAtPath(exportPath)
             }
             exporter?.outputURL = NSURL(fileURLWithPath: exportPath)
-            
+            print("Output \(exportPath)")
             return exporter
         }
         
