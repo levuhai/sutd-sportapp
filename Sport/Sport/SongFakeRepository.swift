@@ -10,6 +10,14 @@ import UIKit
 
 class SongFakeRepository: SongRepository {
 
+    func addSong(song: SongData) {
+        
+    }
+    
+    func addSongs(songs: [SongData]) {
+        
+    }
+    
     func loadSongsWithCompletion(completion: ((songs: [SongData]?, error: NSError?) -> Void)) {
         
     }

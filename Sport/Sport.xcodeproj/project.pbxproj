@@ -15,6 +15,8 @@
 		72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72349B561CDDFBA4002B3B84 /* Main.storyboard */; };
 		72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72349B591CDDFBA4002B3B84 /* Assets.xcassets */; };
 		72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72349B5B1CDDFBA4002B3B84 /* LaunchScreen.storyboard */; };
+		72468B961CEA2ACC00EFBF62 /* AnalysisOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 72468B951CEA2ACC00EFBF62 /* AnalysisOutput.m */; };
+		72468B981CEA3B3C00EFBF62 /* SongImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72468B971CEA3B3C00EFBF62 /* SongImporter.swift */; };
 		72A6BC511CE24CE7007C0254 /* aubio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6BC501CE24CE7007C0254 /* aubio.framework */; };
 		72A6BC571CE386DD007C0254 /* AubioWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC561CE386DD007C0254 /* AubioWrapper.m */; };
 		72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */; };
@@ -48,6 +50,9 @@
 		72349B591CDDFBA4002B3B84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72349B5C1CDDFBA4002B3B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72349B5E1CDDFBA4002B3B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72468B941CEA2ACC00EFBF62 /* AnalysisOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalysisOutput.h; sourceTree = "<group>"; };
+		72468B951CEA2ACC00EFBF62 /* AnalysisOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalysisOutput.m; sourceTree = "<group>"; };
+		72468B971CEA3B3C00EFBF62 /* SongImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongImporter.swift; sourceTree = "<group>"; };
 		72A6BC501CE24CE7007C0254 /* aubio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aubio.framework; path = Sport/Frameworks/aubio.framework; sourceTree = "<group>"; };
 		72A6BC521CE24F6E007C0254 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		72A6BC551CE386DD007C0254 /* AubioWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AubioWrapper.h; sourceTree = "<group>"; };
@@ -161,11 +166,22 @@
 			path = Sport;
 			sourceTree = "<group>";
 		};
+		72468B991CEA3C0A00EFBF62 /* Importer */ = {
+			isa = PBXGroup;
+			children = (
+				72468B971CEA3B3C00EFBF62 /* SongImporter.swift */,
+				72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */,
+			);
+			name = Importer;
+			sourceTree = "<group>";
+		};
 		72A6BC541CE386B7007C0254 /* AubioWrapper */ = {
 			isa = PBXGroup;
 			children = (
 				72A6BC551CE386DD007C0254 /* AubioWrapper.h */,
 				72A6BC561CE386DD007C0254 /* AubioWrapper.m */,
+				72468B941CEA2ACC00EFBF62 /* AnalysisOutput.h */,
+				72468B951CEA2ACC00EFBF62 /* AnalysisOutput.m */,
 			);
 			name = AubioWrapper;
 			sourceTree = "<group>";
@@ -222,8 +238,8 @@
 		72B91D7B1CDF6B5D000E4923 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				72468B991CEA3C0A00EFBF62 /* Importer */,
 				72F6F0D01CE8E50900142CD0 /* SongRepositories */,
-				72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */,
 				72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */,
 				72A6BC9E1CE4F695007C0254 /* FileManager.swift */,
 				720AC1B71CE7A61500898A87 /* RealmManager.swift */,
@@ -371,6 +387,7 @@
 				72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */,
 				72A6BC9D1CE4EBAD007C0254 /* String+Extension.swift in Sources */,
 				72B91D761CDF34DA000E4923 /* HomePresenterImpl.swift in Sources */,
+				72468B961CEA2ACC00EFBF62 /* AnalysisOutput.m in Sources */,
 				72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */,
 				72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */,
 				72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */,
@@ -379,6 +396,7 @@
 				72A6BC9F1CE4F695007C0254 /* FileManager.swift in Sources */,
 				72F6F0D61CE8E80E00142CD0 /* SongFakeRepository.swift in Sources */,
 				72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */,
+				72468B981CEA3B3C00EFBF62 /* SongImporter.swift in Sources */,
 				72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,

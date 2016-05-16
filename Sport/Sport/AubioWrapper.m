@@ -7,10 +7,11 @@
 //
 
 #import "AubioWrapper.h"
+#import <aubio/aubio.h>
 
 @implementation AubioWrapper
 
-+ (void)simpleAnalyzeAudioFile:(NSString *)srcPath {
++ (AnalysisOutput *)simpleAnalyzeAudioFile:(NSString *)srcPath {
     // Low pass array
     
     uint_t winSize = 1024;
@@ -69,6 +70,8 @@
     del_aubio_source(source);
     aubio_cleanup();
     
+    AnalysisOutput *output = [[AnalysisOutput alloc] initWithTempo:outputValue energy:0 valence:0];
+    return output;
 }
 
 @end

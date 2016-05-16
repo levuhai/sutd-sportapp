@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <aubio/aubio.h>
+#import "AnalysisOutput.h"
 
 @interface AubioWrapper : NSObject
 
-+ (void)simpleAnalyzeAudioFile:(NSString *)srcPath;
++ (AnalysisOutput *)simpleAnalyzeAudioFile:(NSString *)srcPath;
 
 @end

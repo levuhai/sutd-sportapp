@@ -9,6 +9,13 @@
 import UIKit
 
 class SongRealmRepository: SongRepository {
+    func addSong(song: SongData) {
+        
+    }
+    
+    func addSongs(songs: [SongData]) {
+        
+    }
     
     func loadSongsWithCompletion(completion: ((songs: [SongData]?, error: NSError?) -> Void)) {
         

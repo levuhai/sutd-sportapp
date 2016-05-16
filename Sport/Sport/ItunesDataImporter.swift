@@ -15,56 +15,99 @@ protocol ItunesDataImporterDelegate {
     
 }
 
-class ItunesDataImporter: NSObject {
+class ItunesDataImporter: SongImporter {
     
-    class func importItunesSongs() {
+    func importToRepository(repository: SongRepository, completion: (()->())?) {
         let mediaQuery = MPMediaQuery.songsQuery()
         let mediaItems = mediaQuery.items;
         
         guard let songs  = mediaItems else {
+            completion()
             return
         }
         
-        func createExporterWithMediaItem(song: MPMediaItem) -> AVAssetExportSession? {
-            print("Song persistent id \(song.persistentID)")
-            if song.assetURL == nil {
-                return nil
-            }
+        // Copy song to app folder and start extracting.
+        let importWorker = ImportWorker()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
             
-            let avUrl = AVURLAsset(URL: song.assetURL!)
-            
-            let exporter = AVAssetExportSession(asset: avUrl, presetName: AVAssetExportPresetPassthrough)
-            exporter?.outputFileType = "com.apple.quicktime-movie"
-            let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
-            if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
-                FileManager.removeItemAtPath(exportPath)
-            }
-            exporter?.outputURL = NSURL(fileURLWithPath: exportPath)
-            print("Output \(exportPath)")
-            return exporter
-        }
-        
-        for song in songs {
-            
-            let exporter = createExporterWithMediaItem(song)
-            
-            exporter?.exportAsynchronouslyWithCompletionHandler({ 
-                if exporter!.status == .Completed {
+            for song in songs {
+                // Import to app folder.
+                let resultPath = importWorker.synchronousExportWithMediaItem(song)
+                if (resultPath != nil) {
+                    // Extract informations.
+                    let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(resultPath!)
+                    let persistentId = song.valueForProperty(MPMediaItemPropertyPersistentID)
+                    let songTitle = song.valueForProperty(MPMediaItemPropertyTitle)
+                    let songData = SongData(persistentId: persistentId, title: songTitle, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
                     
-                    let fileType = song.assetURL?.absoluteString.componentsSeparatedByString("?").first?.pathExtension
-                    print("File type: \(fileType)")
-                    let srcPath = exporter?.outputURL?.path
-                    let dstPath = srcPath?.stringByAppendingPathExtension(fileType!)
-                    FileManager.moveFileAtPath(srcPath!, toPath: dstPath!)
-                    AubioWrapper.simpleAnalyzeAudioFile(dstPath)
+                    repository.addSong(song)
                 } else {
-                    print("Export has problems: \(exporter?.error)")
+                    
                 }
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), { 
+                completion()
             })
         }
+        
     }
     
     
-   
+}
+
+// -----------------------------------------------------------------
+// Import means import from other app to this app. Here is import from Ipod library.
+private class ImportWorker: NSObject {
     
+    // -------------------------------------------------------------
+    // Synchronous export a song from ipod library. 
+    // Return path to exported file if success, otherwise nil
+    func synchronousExportWithMediaItem(song: MPMediaItem) -> String? {
+        let exporter = createExporterWithMediaItem(song)
+        
+        guard let realExporter = exporter else {
+            return nil
+        }
+        
+        let semaphore = dispatch_semaphore_create(0)
+        let resultPath: String? = nil
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        realExporter.exportAsynchronouslyWithCompletionHandler { 
+            if (realExporter.status == .Completed) {
+                let fileType = song.assetURL?.absoluteString.componentsSeparatedByString("?").first?.pathExtension
+                print("File type: \(fileType)")
+                let srcPath = exporter?.outputURL?.path
+                let dstPath = srcPath?.stringByAppendingPathExtension(fileType!)
+                FileManager.moveFileAtPath(srcPath!, toPath: dstPath!)
+                
+                resultPath = dstPath!
+            }
+            dispatch_semaphore_signal(semaphore)
+        }
+        
+        return resultPath
+    }
+    
+    // --------------------------------------------------------------
+    // Return a exporter to export song from ipod library
+    private func createExporterWithMediaItem(song: MPMediaItem) -> AVAssetExportSession? {
+        print("Song persistent id \(song.persistentID)")
+        if song.assetURL == nil {
+            return nil
+        }
+        
+        let avUrl = AVURLAsset(URL: song.assetURL!)
+        
+        let exporter = AVAssetExportSession(asset: avUrl, presetName: AVAssetExportPresetPassthrough)
+        exporter?.outputFileType = "com.apple.quicktime-movie"
+        let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
+        if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
+            FileManager.removeItemAtPath(exportPath)
+        }
+        exporter?.outputURL = NSURL(fileURLWithPath: exportPath)
+        print("Output \(exportPath)")
+        return exporter
+    }
 }
