@@ -19,11 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FileManager.prepare()
-        let song = SongData()
-        let realm = RealmManager.sharedInstance.realm
-        realm.beginWrite()
-        realm.add(song)
-        try! realm.commitWrite()
         return true
     }
 

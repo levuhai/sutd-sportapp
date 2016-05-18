@@ -22,7 +22,7 @@ class ItunesDataImporter: SongImporter {
         let mediaItems = mediaQuery.items;
         
         guard let songs  = mediaItems else {
-            completion()
+            completion?()
             return
         }
         
@@ -36,18 +36,18 @@ class ItunesDataImporter: SongImporter {
                 if (resultPath != nil) {
                     // Extract informations.
                     let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(resultPath!)
-                    let persistentId = song.valueForProperty(MPMediaItemPropertyPersistentID)
-                    let songTitle = song.valueForProperty(MPMediaItemPropertyTitle)
+                    let persistentId = song.valueForProperty(MPMediaItemPropertyPersistentID) as! String
+                    let songTitle = song.valueForProperty(MPMediaItemPropertyTitle) as! String
                     let songData = SongData(persistentId: persistentId, title: songTitle, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
                     
-                    repository.addSong(song)
+                    repository.addSong(songData)
                 } else {
                     
                 }
             }
             
             dispatch_async(dispatch_get_main_queue(), { 
-                completion()
+                completion?()
             })
         }
         
@@ -71,7 +71,7 @@ private class ImportWorker: NSObject {
         }
         
         let semaphore = dispatch_semaphore_create(0)
-        let resultPath: String? = nil
+        var resultPath: String? = nil
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         realExporter.exportAsynchronouslyWithCompletionHandler { 

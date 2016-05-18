@@ -18,11 +18,6 @@ class HomePresenterImpl: HomePresenter {
     }
     
     func initialize() {
-//        ItunesDataImporter.importItunesSongs()
-//        let path = NSBundle.mainBundle().pathForResource("4135626658456512543", ofType: "mp3")
-        let path = NSBundle.mainBundle().pathForResource("04", ofType: "m4a")
-        print("Path \(path)")
-        SongAnalyzer.analyzeWithPath(path!)
         
         let lastTempo = AppUserDefaults.lastTempo()
         if let lastTempo = lastTempo {

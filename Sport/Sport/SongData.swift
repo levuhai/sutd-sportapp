@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Realm
 import RealmSwift
 
 class SongData: Object {
@@ -30,5 +31,21 @@ class SongData: Object {
         self.energy = energy
         self.valence = valence
         self.tempo = tempo
+        
+        super.init()
     }
+    
+    required init() {
+        super.init()
+    }
+    
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
+    
+    required init(value: AnyObject, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
+    }
+    
+    
 }
