@@ -17,7 +17,7 @@ class RealmManager: NSObject {
 
     private lazy var realm: Realm = {
         print("Execute once")
-       return try! Realm(configuration: self.realmConfig)
+        return try! Realm(configuration: self.realmConfig)
     }()
     
     private let realmDispatchQueue = dispatch_queue_create("com.tiennth.Sport.realm_queue", DISPATCH_QUEUE_SERIAL)

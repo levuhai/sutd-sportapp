@@ -10,7 +10,7 @@ import UIKit
 
 class HomePresenterImpl: HomePresenter {
     
-    let view: HomeView!
+    weak var view: HomeView?
     let songRepository: SongRepository!
     
     init(view: HomeView, repository: SongRepository) {
@@ -23,11 +23,11 @@ class HomePresenterImpl: HomePresenter {
         
         let lastTempo = AppUserDefaults.lastTempo()
         if let lastTempo = lastTempo {
-            view.showCurrentTempoValue(lastTempo)
-            view.updateTempoSliderValue(lastTempo)
+            view?.showCurrentTempoValue(lastTempo)
+            view?.updateTempoSliderValue(lastTempo)
         } else {
-            view.showCurrentTempoValue(Constants.Defaults.tempoMin)
-            view.updateTempoSliderValue(Constants.Defaults.tempoMin)
+            view?.showCurrentTempoValue(Constants.Defaults.tempoMin)
+            view?.updateTempoSliderValue(Constants.Defaults.tempoMin)
         }
         
         songRepository.importSongsWithCompletion { 
@@ -36,6 +36,6 @@ class HomePresenterImpl: HomePresenter {
     }
     
     func tempoValueChanged(newValue: Float) {
-        view.showCurrentTempoValue(newValue)
+        view?.showCurrentTempoValue(newValue)
     }
 }
