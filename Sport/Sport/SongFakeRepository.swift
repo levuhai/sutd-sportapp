@@ -11,7 +11,7 @@ import UIKit
 class SongFakeRepository: SongRepository {
 
     func addSong(song: SongData) {
-        
+        print("Song added \(song.persistentId), \(song.tempo)")
     }
     
     func addSongs(songs: [SongData]) {
@@ -22,4 +22,7 @@ class SongFakeRepository: SongRepository {
         
     }
     
+    func importSongsWithCompletion(completion: (() -> ())?) {
+        
+    }
 }

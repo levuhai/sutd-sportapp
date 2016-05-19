@@ -9,6 +9,8 @@
 #import "AubioWrapper.h"
 #import <aubio/aubio.h>
 
+#define AUBIO_DEBUG 0
+
 @implementation AubioWrapper
 
 + (AnalysisOutput *)simpleAnalyzeAudioFile:(NSString *)srcPath {
@@ -40,7 +42,7 @@
         
         // do something with the beats
         if (outputVec->data[0] != 0) {
-#ifdef DEBUG
+#if AUBIO_DEBUG
             NSLog(@"beat at %.3fs, frame %d, %.2fbpm with confidence %.2f\n",
                       aubio_tempo_get_last_s(tempoObject),
                       aubio_tempo_get_last(tempoObject),
@@ -59,7 +61,7 @@
         nFrames += read;
     } while (read == hopSize);
     
-#ifdef DEBUG
+#ifdef AUBIO_DEBUG
     // Print tempo value
     NSLog(@"TEMPO: %f", outputValue);
 #endif

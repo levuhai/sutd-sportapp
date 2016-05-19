@@ -17,6 +17,8 @@ protocol ItunesDataImporterDelegate {
 
 class ItunesDataImporter: SongImporter {
     
+    static let sharedInstance = ItunesDataImporter()
+    
     func importToRepository(repository: SongRepository, completion: (()->())?) {
         let mediaQuery = MPMediaQuery.songsQuery()
         let mediaItems = mediaQuery.items;

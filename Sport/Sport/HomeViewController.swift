@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePresenter = HomePresenterImpl(view: self)
+        homePresenter = HomePresenterImpl(view: self, repository: SongRepositories.realmRepository)
         
         homePresenter?.initialize()
     }

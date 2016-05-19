@@ -11,10 +11,12 @@ import UIKit
 class HomePresenterImpl: HomePresenter {
     
     let view: HomeView!
+    let songRepository: SongRepository!
     
-    init(view: HomeView) {
+    init(view: HomeView, repository: SongRepository) {
         
         self.view = view
+        self.songRepository = repository
     }
     
     func initialize() {
@@ -26,6 +28,10 @@ class HomePresenterImpl: HomePresenter {
         } else {
             view.showCurrentTempoValue(Constants.Defaults.tempoMin)
             view.updateTempoSliderValue(Constants.Defaults.tempoMin)
+        }
+        
+        songRepository.importSongsWithCompletion { 
+            print("Presenter -- Import completed")
         }
     }
     

@@ -10,7 +10,9 @@
 		720AC1B31CE70EED00898A87 /* SongData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B21CE70EED00898A87 /* SongData.swift */; };
 		720AC1B61CE799A400898A87 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B51CE799A400898A87 /* Constants.swift */; };
 		720AC1B81CE7A61500898A87 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B71CE7A61500898A87 /* RealmManager.swift */; };
-		720AC1BC1CE8170900898A87 /* 4135626658456512543.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 720AC1BB1CE8170900898A87 /* 4135626658456512543.mp3 */; };
+		722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8D71CECD29800E51D68 /* SongRepositories.swift */; };
+		722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */; };
+		722BE8E41CEE191E00E51D68 /* songs in Resources */ = {isa = PBXBuildFile; fileRef = 722BE8E31CEE191E00E51D68 /* songs */; };
 		72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72349B521CDDFBA4002B3B84 /* AppDelegate.swift */; };
 		72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72349B561CDDFBA4002B3B84 /* Main.storyboard */; };
 		72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72349B591CDDFBA4002B3B84 /* Assets.xcassets */; };
@@ -33,9 +35,7 @@
 		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
 		72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D11CE8E59800142CD0 /* SongRepository.swift */; };
 		72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */; };
-		72F6F0D61CE8E80E00142CD0 /* SongFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D51CE8E80E00142CD0 /* SongFakeRepository.swift */; };
 		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
-		A706E6791CE83B5F00A8ACE7 /* 04.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A706E6781CE83B5F00A8ACE7 /* 04.m4a */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,9 @@
 		720AC1B21CE70EED00898A87 /* SongData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongData.swift; sourceTree = "<group>"; };
 		720AC1B51CE799A400898A87 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		720AC1B71CE7A61500898A87 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		720AC1BB1CE8170900898A87 /* 4135626658456512543.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 4135626658456512543.mp3; sourceTree = "<group>"; };
+		722BE8D71CECD29800E51D68 /* SongRepositories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepositories.swift; sourceTree = "<group>"; };
+		722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleDataImporter.swift; sourceTree = "<group>"; };
+		722BE8E31CEE191E00E51D68 /* songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = songs; sourceTree = "<group>"; };
 		72349B4F1CDDFBA4002B3B84 /* Sport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72349B521CDDFBA4002B3B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72349B571CDDFBA4002B3B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,10 +73,8 @@
 		72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
 		72F6F0D11CE8E59800142CD0 /* SongRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
 		72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRealmRepository.swift; sourceTree = "<group>"; };
-		72F6F0D51CE8E80E00142CD0 /* SongFakeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFakeRepository.swift; sourceTree = "<group>"; };
 		9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
 		9DC91002C9502203A1525AEB /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A706E6781CE83B5F00A8ACE7 /* 04.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04.m4a; sourceTree = "<group>"; };
 		A73913731CE47E4E00874A04 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D6883B83CF75FC985F57A716 /* Pods-Sport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +133,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		722BE8DD1CECD51A00E51D68 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				722BE8E31CEE191E00E51D68 /* songs */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		72349B461CDDFBA4002B3B84 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +179,7 @@
 			children = (
 				72468B971CEA3B3C00EFBF62 /* SongImporter.swift */,
 				72B91D791CDF6B52000E4923 /* ItunesDataImporter.swift */,
+				722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */,
 			);
 			name = Importer;
 			sourceTree = "<group>";
@@ -206,8 +215,7 @@
 		72B91D6C1CDF2E75000E4923 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				A706E6781CE83B5F00A8ACE7 /* 04.m4a */,
-				720AC1BB1CE8170900898A87 /* 4135626658456512543.mp3 */,
+				722BE8DD1CECD51A00E51D68 /* Resources */,
 				72349B561CDDFBA4002B3B84 /* Main.storyboard */,
 				72349B591CDDFBA4002B3B84 /* Assets.xcassets */,
 				72349B5B1CDDFBA4002B3B84 /* LaunchScreen.storyboard */,
@@ -251,9 +259,9 @@
 		72F6F0D01CE8E50900142CD0 /* SongRepositories */ = {
 			isa = PBXGroup;
 			children = (
+				722BE8D71CECD29800E51D68 /* SongRepositories.swift */,
 				72F6F0D11CE8E59800142CD0 /* SongRepository.swift */,
 				72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */,
-				72F6F0D51CE8E80E00142CD0 /* SongFakeRepository.swift */,
 			);
 			name = SongRepositories;
 			sourceTree = "<group>";
@@ -320,10 +328,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
-				A706E6791CE83B5F00A8ACE7 /* 04.m4a in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
-				720AC1BC1CE8170900898A87 /* 4135626658456512543.mp3 in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
+				722BE8E41CEE191E00E51D68 /* songs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,20 +389,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */,
 				720AC1B81CE7A61500898A87 /* RealmManager.swift in Sources */,
 				72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */,
+				722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */,
 				72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */,
 				72A6BC9D1CE4EBAD007C0254 /* String+Extension.swift in Sources */,
 				72B91D761CDF34DA000E4923 /* HomePresenterImpl.swift in Sources */,
 				72468B961CEA2ACC00EFBF62 /* AnalysisOutput.m in Sources */,
+				72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */,
 				72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */,
 				72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */,
 				72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */,
 				72A6BC571CE386DD007C0254 /* AubioWrapper.m in Sources */,
 				720AC1B31CE70EED00898A87 /* SongData.swift in Sources */,
 				72A6BC9F1CE4F695007C0254 /* FileManager.swift in Sources */,
-				72F6F0D61CE8E80E00142CD0 /* SongFakeRepository.swift in Sources */,
-				72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */,
 				72468B981CEA3B3C00EFBF62 /* SongImporter.swift in Sources */,
 				72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
