@@ -13,5 +13,7 @@ protocol SongRepository: class {
     func addSong(song: SongData)
     func loadSongsWithCompletion(completion: ((songs: [SongData]?, error: NSError?) -> Void))
     
+    func isSongExisting(persistenceId: String) -> Bool
+    
     func importSongsWithCompletion(completion: (()->())?)
 }

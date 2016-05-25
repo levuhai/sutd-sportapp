@@ -33,16 +33,27 @@ class ItunesDataImporter: SongImporter {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
             
             for song in songs {
+                let songPersistentId = "\(song.persistentID)"
+                
+                // Check and skip existing songs.
+                if repository.isSongExisting(songPersistentId) {
+                    print("Song with id \(songPersistentId) is existing")
+                    continue
+                }
+                
                 // Import to app folder.
                 let resultPath = importWorker.synchronousExportWithMediaItem(song)
                 if (resultPath != nil) {
                     // Extract informations.
-                    let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(resultPath!)
-                    let persistentId = song.valueForProperty(MPMediaItemPropertyPersistentID) as! String
+                    let actualResultPath = resultPath!
+                    let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(actualResultPath)
+                    let persistentId = songPersistentId
                     let songTitle = song.valueForProperty(MPMediaItemPropertyTitle) as! String
                     let songData = SongData(persistentId: persistentId, title: songTitle, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
                     
                     repository.addSong(songData)
+                    
+                    importWorker.cleanup(actualResultPath)
                 } else {
                     
                 }
@@ -75,7 +86,6 @@ private class ImportWorker: NSObject {
         let semaphore = dispatch_semaphore_create(0)
         var resultPath: String? = nil
         
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         realExporter.exportAsynchronouslyWithCompletionHandler { 
             if (realExporter.status == .Completed) {
                 let fileType = song.assetURL?.absoluteString.componentsSeparatedByString("?").first?.pathExtension
@@ -88,7 +98,7 @@ private class ImportWorker: NSObject {
             }
             dispatch_semaphore_signal(semaphore)
         }
-        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         return resultPath
     }
     
@@ -111,5 +121,9 @@ private class ImportWorker: NSObject {
         exporter?.outputURL = NSURL(fileURLWithPath: exportPath)
         print("Output \(exportPath)")
         return exporter
+    }
+    
+    private func cleanup(fileUrl: String) {
+        FileManager.removeItemAtPath(fileUrl)
     }
 }

@@ -17,7 +17,7 @@ class SongRealmRepository: SongRepository {
     }
     
     func addSong(song: SongData) {
-        print("Song added \(song.persistentId), \(song.tempo)")
+        print("Song added \(song.persistentId), \(song.title)")
         
         RealmManager.sharedInstance.execute { (realm) in
             try! realm.write({
@@ -38,5 +38,16 @@ class SongRealmRepository: SongRepository {
         songImporter.importToRepository(self) { 
             completion?()
         }
+    }
+    
+    func isSongExisting(persistenceId: String) -> Bool {
+        var isExisting = false
+        RealmManager.sharedInstance.execute { (realm) in
+            let predicate = NSPredicate(format: "\(SongData.Column.PersistentId) == %@", persistenceId)
+            print(predicate)
+            let songs = realm.objects(SongData).filter(predicate)
+            isExisting = songs.count > 0
+        }
+        return isExisting
     }
 }

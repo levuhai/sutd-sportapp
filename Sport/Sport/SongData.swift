@@ -12,6 +12,10 @@ import Realm
 import RealmSwift
 
 class SongData: Object {
+    struct Column {
+        static let PersistentId = "persistentId"
+    }
+    
     // Persistent ID of this song in itunes library.
     dynamic var persistentId = ""
     
