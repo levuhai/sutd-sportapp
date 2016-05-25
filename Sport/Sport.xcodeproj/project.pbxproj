@@ -10,6 +10,7 @@
 		720AC1B31CE70EED00898A87 /* SongData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B21CE70EED00898A87 /* SongData.swift */; };
 		720AC1B61CE799A400898A87 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B51CE799A400898A87 /* Constants.swift */; };
 		720AC1B81CE7A61500898A87 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B71CE7A61500898A87 /* RealmManager.swift */; };
+		720B344F1CF60646001D8893 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B344E1CF60646001D8893 /* MusicViewController.swift */; };
 		722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8D71CECD29800E51D68 /* SongRepositories.swift */; };
 		722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */; };
 		722BE8E41CEE191E00E51D68 /* songs in Resources */ = {isa = PBXBuildFile; fileRef = 722BE8E31CEE191E00E51D68 /* songs */; };
@@ -43,6 +44,7 @@
 		720AC1B21CE70EED00898A87 /* SongData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongData.swift; sourceTree = "<group>"; };
 		720AC1B51CE799A400898A87 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		720AC1B71CE7A61500898A87 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		720B344E1CF60646001D8893 /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		722BE8D71CECD29800E51D68 /* SongRepositories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepositories.swift; sourceTree = "<group>"; };
 		722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleDataImporter.swift; sourceTree = "<group>"; };
 		722BE8E31CEE191E00E51D68 /* songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = songs; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		720B344D1CF60618001D8893 /* MusicScreen */ = {
+			isa = PBXGroup;
+			children = (
+				720B344E1CF60646001D8893 /* MusicViewController.swift */,
+			);
+			name = MusicScreen;
+			sourceTree = "<group>";
+		};
 		722BE8DD1CECD51A00E51D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +176,7 @@
 				720AC1B91CE7AFB500898A87 /* Common */,
 				72B91D7B1CDF6B5D000E4923 /* Manager */,
 				720AC1BA1CE7AFC700898A87 /* Models */,
+				720B344D1CF60618001D8893 /* MusicScreen */,
 				72B91D6B1CDF2E56000E4923 /* MainScreen */,
 				72B91D6A1CDF2D46000E4923 /* AppDelegate */,
 				72B91D6C1CDF2E75000E4923 /* Others */,
@@ -405,6 +416,7 @@
 				720AC1B31CE70EED00898A87 /* SongData.swift in Sources */,
 				72A6BC9F1CE4F695007C0254 /* FileManager.swift in Sources */,
 				72468B981CEA3B3C00EFBF62 /* SongImporter.swift in Sources */,
+				720B344F1CF60646001D8893 /* MusicViewController.swift in Sources */,
 				72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,
