@@ -11,6 +11,9 @@
 		720AC1B61CE799A400898A87 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B51CE799A400898A87 /* Constants.swift */; };
 		720AC1B81CE7A61500898A87 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AC1B71CE7A61500898A87 /* RealmManager.swift */; };
 		720B344F1CF60646001D8893 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B344E1CF60646001D8893 /* MusicViewController.swift */; };
+		720B346F1CF74D9D001D8893 /* UIColor+Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B346E1CF74D9D001D8893 /* UIColor+Sport.swift */; };
+		720B34771CF75278001D8893 /* Ionicons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34761CF75278001D8893 /* Ionicons.swift */; };
+		720B34781CF75EFA001D8893 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 720B34741CF75149001D8893 /* ionicons.ttf */; };
 		722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8D71CECD29800E51D68 /* SongRepositories.swift */; };
 		722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */; };
 		722BE8E41CEE191E00E51D68 /* songs in Resources */ = {isa = PBXBuildFile; fileRef = 722BE8E31CEE191E00E51D68 /* songs */; };
@@ -45,6 +48,9 @@
 		720AC1B51CE799A400898A87 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		720AC1B71CE7A61500898A87 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		720B344E1CF60646001D8893 /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		720B346E1CF74D9D001D8893 /* UIColor+Sport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Sport.swift"; sourceTree = "<group>"; };
+		720B34741CF75149001D8893 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		720B34761CF75278001D8893 /* Ionicons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ionicons.swift; sourceTree = "<group>"; };
 		722BE8D71CECD29800E51D68 /* SongRepositories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepositories.swift; sourceTree = "<group>"; };
 		722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleDataImporter.swift; sourceTree = "<group>"; };
 		722BE8E31CEE191E00E51D68 /* songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = songs; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 			children = (
 				72A6BC9C1CE4EBAD007C0254 /* String+Extension.swift */,
 				720AC1B51CE799A400898A87 /* Constants.swift */,
+				720B346E1CF74D9D001D8893 /* UIColor+Sport.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -143,9 +150,26 @@
 			name = MusicScreen;
 			sourceTree = "<group>";
 		};
+		720B34731CF750F1001D8893 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				720B34751CF75278001D8893 /* Ionicons */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		720B34751CF75278001D8893 /* Ionicons */ = {
+			isa = PBXGroup;
+			children = (
+				720B34761CF75278001D8893 /* Ionicons.swift */,
+			);
+			path = Ionicons;
+			sourceTree = "<group>";
+		};
 		722BE8DD1CECD51A00E51D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				720B34741CF75149001D8893 /* ionicons.ttf */,
 				722BE8E31CEE191E00E51D68 /* songs */,
 			);
 			path = Resources;
@@ -172,6 +196,7 @@
 		72349B511CDDFBA4002B3B84 /* Sport */ = {
 			isa = PBXGroup;
 			children = (
+				720B34731CF750F1001D8893 /* Libraries */,
 				72A6BC541CE386B7007C0254 /* AubioWrapper */,
 				720AC1B91CE7AFB500898A87 /* Common */,
 				72B91D7B1CDF6B5D000E4923 /* Manager */,
@@ -338,6 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				720B34781CF75EFA001D8893 /* ionicons.ttf in Resources */,
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
@@ -402,6 +428,7 @@
 			files = (
 				722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */,
 				720AC1B81CE7A61500898A87 /* RealmManager.swift in Sources */,
+				720B346F1CF74D9D001D8893 /* UIColor+Sport.swift in Sources */,
 				72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */,
 				722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */,
 				72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */,
@@ -418,6 +445,7 @@
 				72468B981CEA3B3C00EFBF62 /* SongImporter.swift in Sources */,
 				720B344F1CF60646001D8893 /* MusicViewController.swift in Sources */,
 				72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */,
+				720B34771CF75278001D8893 /* Ionicons.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,
 				72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */,
