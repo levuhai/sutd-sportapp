@@ -10,44 +10,31 @@ import UIKit
 
 class SongRealmRepository: SongRepository {
     
-    let songImporter: SongImporter!
-    
-    init(songImporter: SongImporter) {
-        self.songImporter = songImporter
-    }
-    
     func addSong(song: SongData) {
         print("Song added \(song.persistentId), \(song.title)")
         
-        RealmManager.sharedInstance.execute { (realm) in
-            try! realm.write({
-                realm.add(song)
-            })
-        }
+        let realm = RealmFactory.sharedInstance.newRealm()
+        realm.beginWrite()
+        realm.add(song)
+        try! realm.commitWrite()
     }
     
     func addSongs(songs: [SongData]) {
         
     }
     
-    func loadSongsWithCompletion(completion: ((songs: [SongData]?, error: NSError?) -> Void)) {
-        
-    }
-    
-    func importSongsWithCompletion(completion: (() -> ())?) {
-        songImporter.importToRepository(self) { 
-            completion?()
-        }
-    }
-    
     func isSongExisting(persistenceId: String) -> Bool {
         var isExisting = false
-        RealmManager.sharedInstance.execute { (realm) in
-            let predicate = NSPredicate(format: "\(SongData.Column.PersistentId) == %@", persistenceId)
-            print(predicate)
-            let songs = realm.objects(SongData).filter(predicate)
-            isExisting = songs.count > 0
-        }
+        let realm = RealmFactory.sharedInstance.newRealm()
+        let predicate = NSPredicate(format: "\(SongData.Column.PersistentId) == %@", persistenceId)
+        let songs = realm.objects(SongData).filter(predicate)
+        isExisting = songs.count > 0
         return isExisting
+    }
+    
+    func loadSongs() -> [SongData] {
+        let realm = RealmFactory.sharedInstance.newRealm()
+        let result = realm.objects(SongData)
+        return Array(result)
     }
 }

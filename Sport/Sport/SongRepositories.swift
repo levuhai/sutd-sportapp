@@ -10,6 +10,6 @@ import UIKit
 
 class SongRepositories: NSObject {
 
-    static let realmRepository = SongRealmRepository(songImporter: BundleDataImporter.sharedInstance)
+    static let realmRepository = SongRealmRepository()
 
 }

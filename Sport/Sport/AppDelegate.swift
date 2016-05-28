@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let barAttributes :Dictionary = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18),
                                          NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().titleTextAttributes = barAttributes
-        
     }
 }
 

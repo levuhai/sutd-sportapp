@@ -1,5 +1,5 @@
 //
-//  MusicViewController.swift
+//  MusicPlayerController.swift
 //  Sport
 //
 //  Created by Tien on 5/25/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicViewController: UIViewController {
+class MusicPlayerController: UIViewController {
 
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var songTitleLabel: UILabel!
@@ -24,12 +24,15 @@ class MusicViewController: UIViewController {
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var fastForwardButton: UIButton!
     
+    var screenPresenter: MusicPlayerPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        decorate()
-        // Do any additional setup after loading the view.
+        let router = MusicPlayerRouterImpl(controller: self)
+        screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router)
+        
+        screenPresenter?.initialize()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,7 +40,46 @@ class MusicViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func decorate() {
+    func leftBarButtonDidClick(sender: UIBarButtonItem) {
+        screenPresenter?.onLeftBarButtonClicked()
+    }
+    
+    func rightBarButtonDidClick(sender: UIBarButtonItem) {
+        screenPresenter?.onRightBarButtonClicked()
+    }
+}
+
+extension MusicPlayerController: MusicPlayerView {
+    func initialize() {
+        let leftBarItem = UIBarButtonItem(title: "LIB", style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        
+        let rightBarItem = UIBarButtonItem(title: "M", style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        
+        decorate()
+    }
+    
+    func switchControlMode(runningMode: Bool) {
+        if runningMode {
+            showAutoControl()
+        } else {
+            showManualControl()
+        }
+    }
+    
+    func showManualControl() {
+        autoControlView.hidden = true
+        manualControlView.hidden = false
+    }
+    
+    func showAutoControl() {
+        manualControlView.hidden = true
+        autoControlView.hidden = false
+    }
+    
+    // MARK -- Private methods
+    private func decorate() {
         // Setting font then icon for title
         playPauseButton.titleLabel?.font = UIFont.ioniconOfSize(45)
         playPauseButton.layer.cornerRadius = playPauseButton.frame.size.width / 2
@@ -52,7 +94,7 @@ class MusicViewController: UIViewController {
         fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), forState: .Normal)
     }
     
-    func setButtonPlayImage(isPlaying: Bool) {
+    private func setButtonPlayImage(isPlaying: Bool) {
         if isPlaying {
             playPauseButton.setTitle(String.ioniconWithName(.IosPlay), forState: .Normal)
         } else {
@@ -60,13 +102,5 @@ class MusicViewController: UIViewController {
         }
     }
     
-    func showManualControl() {
-        autoControlView.hidden = true
-        manualControlView.hidden = false
-    }
     
-    func showAutoControl() {
-        manualControlView.hidden = true
-        autoControlView.hidden = false
-    }
 }

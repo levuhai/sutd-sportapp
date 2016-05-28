@@ -29,10 +29,6 @@ class HomePresenterImpl: HomePresenter {
             view?.showCurrentTempoValue(Constants.Defaults.tempoMin)
             view?.updateTempoSliderValue(Constants.Defaults.tempoMin)
         }
-        
-        songRepository.importSongsWithCompletion { 
-            print("Presenter -- Import completed")
-        }
     }
     
     func tempoValueChanged(newValue: Float) {

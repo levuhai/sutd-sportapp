@@ -11,9 +11,8 @@ import UIKit
 protocol SongRepository: class {
     func addSongs(songs: [SongData])
     func addSong(song: SongData)
-    func loadSongsWithCompletion(completion: ((songs: [SongData]?, error: NSError?) -> Void))
+    
+    func loadSongs() -> [SongData]
     
     func isSongExisting(persistenceId: String) -> Bool
-    
-    func importSongsWithCompletion(completion: (()->())?)
 }
