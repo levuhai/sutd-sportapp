@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MusicLibraryPresenter: class, UITableViewDelegate, UITableViewDataSource {
-    var libraryView: MusicLibraryView { get }
+    var libraryView: MusicLibraryView? { get }
     
     func initialize()
     

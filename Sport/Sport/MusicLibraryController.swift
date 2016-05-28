@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MusicLibraryController: UIViewController {
     
@@ -37,8 +38,12 @@ extension MusicLibraryController: MusicLibraryView {
         // So, if we want to custom back button shown in this vc, you should do like this.
         self.navigationController?.navigationBar.topItem!.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
-        // Add right bar button 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "R", style: .Plain, target: self, action: #selector(MusicLibraryController.barButtonReloadDidClick(_:)))
+        let attributes = [NSFontAttributeName: UIFont.ioniconOfSize(40)] as Dictionary!
+        
+        // Add right bar button
+        let rightBarButton =  UIBarButtonItem(title: String.ioniconWithName(.IosRefreshEmpty), style: .Plain, target: self, action: #selector(MusicLibraryController.barButtonReloadDidClick(_:)))
+        rightBarButton.setTitleTextAttributes(attributes, forState: .Normal)
+        self.navigationItem.rightBarButtonItem = rightBarButton
         
         songTableView.rowHeight = UITableViewAutomaticDimension
         songTableView.estimatedRowHeight = 10
@@ -60,6 +65,14 @@ extension MusicLibraryController: MusicLibraryView {
     }
     
     func showLoading(show: Bool) {
-        
+        if (show) {
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        } else {
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+        }
+    }
+    
+    func enableRightBarButton(enable: Bool) {
+        self.navigationItem.rightBarButtonItem?.enabled = enable
     }
 }

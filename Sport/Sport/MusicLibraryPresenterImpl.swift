@@ -10,7 +10,8 @@ import UIKit
 
 class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     
-    var libraryView: MusicLibraryView
+    weak var libraryView: MusicLibraryView?
+    
     var songRepository: SongRepository
     var songImporter: SongImporter
     var songsList: [SongData] = []
@@ -23,7 +24,8 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     
     func initialize() {
         
-        libraryView.initViews()
+        libraryView?.initViews()
+        
         
         reloadData()
     }
@@ -37,9 +39,9 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     
     func displaySongs() {
         if songsList.isEmpty {
-            libraryView.showEmptyList()
+            libraryView?.showEmptyList()
         } else {
-            libraryView.showSongList()
+            libraryView?.showSongList()
         }
     }
     
@@ -56,11 +58,13 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     }
     
     func onBarButonReloadClick() {
-        libraryView.showLoading(true)
+        libraryView?.enableRightBarButton(false)
+        libraryView?.showLoading(true)
         songImporter.importToRepository(self.songRepository) { 
             self.reloadData()
             
-            self.libraryView.showLoading(false)
+            self.libraryView?.enableRightBarButton(true)
+            self.libraryView?.showLoading(false)
         }
     }
 }

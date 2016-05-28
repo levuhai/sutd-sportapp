@@ -171,6 +171,9 @@
                                         <state key="normal" title="A">
                                             <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="playpauseButtonDidClick:" destination="wXN-UV-aQG" eventType="touchUpInside" id="wpJ-Wh-Agc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYM-7S-LKy">
                                         <rect key="frame" x="253" y="24" width="48" height="48"/>
@@ -182,6 +185,9 @@
                                         <state key="normal">
                                             <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="fastforwardButtonDidClick:" destination="wXN-UV-aQG" eventType="touchUpInside" id="EpX-Mw-JI2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-FV-QOd">
                                         <rect key="frame" x="73" y="24" width="48" height="48"/>
@@ -193,6 +199,9 @@
                                         <state key="normal">
                                             <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="rewindButtonDidClick:" destination="wXN-UV-aQG" eventType="touchUpInside" id="Tze-yb-uJn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>

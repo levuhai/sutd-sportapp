@@ -15,4 +15,6 @@ protocol MusicLibraryView: class {
     func showSongList()
     
     func showLoading(show: Bool)
+    
+    func enableRightBarButton(enable: Bool)
 }

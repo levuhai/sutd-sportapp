@@ -24,6 +24,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var fastForwardButton: UIButton!
     
+    var currentSong: SongData?
     var screenPresenter: MusicPlayerPresenter?
     
     override func viewDidLoad() {
@@ -46,6 +47,18 @@ class MusicPlayerController: UIViewController {
     
     func rightBarButtonDidClick(sender: UIBarButtonItem) {
         screenPresenter?.onRightBarButtonClicked()
+    }
+    
+    @IBAction func playpauseButtonDidClick(sender: UIButton) {
+        screenPresenter?.onPlayPauseButonClicked()
+    }
+    
+    @IBAction func fastforwardButtonDidClick(sender: UIButton) {
+        screenPresenter?.onFastForwardButtonClicked()
+    }
+    
+    @IBAction func rewindButtonDidClick(sender: UIButton) {
+        screenPresenter?.onRewindButtonClicked()
     }
 }
 

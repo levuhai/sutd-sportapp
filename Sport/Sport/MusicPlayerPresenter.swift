@@ -17,4 +17,8 @@ protocol MusicPlayerPresenter: class {
     func onLeftBarButtonClicked()
     
     func onRightBarButtonClicked()
+    
+    func onPlayPauseButonClicked()
+    func onRewindButtonClicked()
+    func onFastForwardButtonClicked()
 }
