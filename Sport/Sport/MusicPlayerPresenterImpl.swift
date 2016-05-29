@@ -33,5 +33,17 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         runningMode = !runningMode
         playerView?.switchControlMode(runningMode)
     }
+    
+    func onRewindButtonClicked() {
+        
+    }
+    
+    func onFastForwardButtonClicked() {
+        
+    }
+    
+    func onPlayPauseButonClicked() {
+        
+    }
 }
 
