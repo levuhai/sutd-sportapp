@@ -25,6 +25,7 @@
 		720B34941CF9E4EE001D8893 /* MusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34931CF9E4EE001D8893 /* MusicPlayerRouter.swift */; };
 		720B34961CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34951CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift */; };
 		720B34991CFC9973001D8893 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34981CFC9973001D8893 /* AudioPlayer.swift */; };
+		720B349B1CFCD946001D8893 /* big.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 720B349A1CFCD946001D8893 /* big.mp3 */; };
 		722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8D71CECD29800E51D68 /* SongRepositories.swift */; };
 		722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */; };
 		722BE8E41CEE191E00E51D68 /* songs in Resources */ = {isa = PBXBuildFile; fileRef = 722BE8E31CEE191E00E51D68 /* songs */; };
@@ -73,6 +74,7 @@
 		720B34931CF9E4EE001D8893 /* MusicPlayerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerRouter.swift; sourceTree = "<group>"; };
 		720B34951CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerRouterImpl.swift; sourceTree = "<group>"; };
 		720B34981CFC9973001D8893 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		720B349A1CFCD946001D8893 /* big.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = big.mp3; sourceTree = "<group>"; };
 		722BE8D71CECD29800E51D68 /* SongRepositories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepositories.swift; sourceTree = "<group>"; };
 		722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleDataImporter.swift; sourceTree = "<group>"; };
 		722BE8E31CEE191E00E51D68 /* songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = songs; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 		72B91D6C1CDF2E75000E4923 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				720B349A1CFCD946001D8893 /* big.mp3 */,
 				722BE8DD1CECD51A00E51D68 /* Resources */,
 				72349B561CDDFBA4002B3B84 /* Main.storyboard */,
 				72349B591CDDFBA4002B3B84 /* Assets.xcassets */,
@@ -455,6 +458,7 @@
 				720B34781CF75EFA001D8893 /* ionicons.ttf in Resources */,
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
+				720B349B1CFCD946001D8893 /* big.mp3 in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
 				722BE8E41CEE191E00E51D68 /* songs in Resources */,
 			);

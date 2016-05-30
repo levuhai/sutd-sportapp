@@ -36,6 +36,12 @@ class AudioPlayer: NSObject {
         thePlayer = AVQueuePlayer(items: songQueue)
         thePlayer?.actionAtItemEnd = .Advance
     }
+   
+    // Test purpose only
+    func setupTest(path: String) {
+        let playerItem = AVPlayerItem(URL: NSURL(fileURLWithPath: path))
+        thePlayer = AVQueuePlayer(playerItem: playerItem)
+    }
     
     // MARK: - Event listeners
     // Set progress listener
@@ -89,9 +95,10 @@ extension AudioPlayer {
             
             let currentTimeSecond = CMTimeGetSeconds(self.thePlayer!.currentTime())
             let durationInSecond = CMTimeGetSeconds(duration)
-            print("Current time/ duration = \(currentTimeSecond)-\(durationInSecond)")
-            block!(progress: currentTimeSecond/durationInSecond)
-            })
+            if currentTimeSecond >= 0 && currentTimeSecond <= durationInSecond {
+                block!(progress: currentTimeSecond/durationInSecond)
+            }
+        })
     }
     
     func unregisterTimeTracking() {
@@ -125,12 +132,7 @@ extension AudioPlayer {
             if avasset == nil {
                 continue
             }
-            avasset?.loadValuesAsynchronouslyForKeys(["duration"], completionHandler: { 
-                let durationStatus = avasset?.statusOfValueForKey("duration", error: nil)
-                if durationStatus == .Loaded {
-                    print("Duration: \(CMTimeGetSeconds(avasset!.duration))")
-                }
-            })
+            
             let playerItem = AVPlayerItem(asset: avasset!)
             playerItems.append(playerItem)
         }

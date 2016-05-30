@@ -25,7 +25,8 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         playerView?.initialize()
         
         let audioPlayer = AudioPlayer.sharedInstance
-        audioPlayer.setup(["1339496926179059070"])
+//        audioPlayer.setup(["1339496926179059070"])
+        audioPlayer.setupTest(NSBundle.mainBundle().pathForResource("big", ofType: "mp3")!)
         audioPlayer.setProgressHandler { [unowned self] (progress) in
             self.playerView?.updatePlaybackProgress(progress)
         }
