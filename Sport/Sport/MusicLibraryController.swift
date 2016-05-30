@@ -18,7 +18,7 @@ class MusicLibraryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        libraryPresenter = MusicLibraryPresenterImpl(libraryView: self, songRepository: SongRepositories.realmRepository, songImporter: BundleDataImporter.sharedInstance)
+        libraryPresenter = MusicLibraryPresenterImpl(libraryView: self, songRepository: SongRepositories.realmRepository, songImporter: ItunesDataImporter.sharedInstance)
         songTableView.dataSource = libraryPresenter
         songTableView.delegate = libraryPresenter
         

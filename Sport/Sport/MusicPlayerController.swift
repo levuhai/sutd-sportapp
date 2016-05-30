@@ -20,6 +20,7 @@ class MusicPlayerController: UIViewController {
     
     @IBOutlet weak var trackpadView: UIView!
     
+    @IBOutlet weak var playbackProgressView: UIProgressView!
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var fastForwardButton: UIButton!
@@ -70,6 +71,8 @@ extension MusicPlayerController: MusicPlayerView {
         let rightBarItem = UIBarButtonItem(title: "M", style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
         
+        updatePlaybackProgress(0)
+        
         decorate()
     }
     
@@ -79,6 +82,10 @@ extension MusicPlayerController: MusicPlayerView {
         } else {
             showManualControl()
         }
+    }
+    
+    func updatePlaybackProgress(progress: Double) {
+        playbackProgressView.progress = Float(progress)
     }
     
     func showManualControl() {

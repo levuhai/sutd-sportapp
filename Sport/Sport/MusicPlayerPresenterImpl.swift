@@ -23,6 +23,14 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     
     func initialize() {
         playerView?.initialize()
+        
+        let audioPlayer = AudioPlayer.sharedInstance
+        audioPlayer.setup(["1339496926179059070"])
+        audioPlayer.setProgressHandler { [unowned self] (progress) in
+            self.playerView?.updatePlaybackProgress(progress)
+        }
+        audioPlayer.attachListener()
+        audioPlayer.play()
     }
     
     func onLeftBarButtonClicked() {

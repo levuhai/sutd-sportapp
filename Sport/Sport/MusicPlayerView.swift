@@ -12,4 +12,6 @@ protocol MusicPlayerView: class {
     func initialize()
     
     func switchControlMode(runningMode: Bool)
+    
+    func updatePlaybackProgress(progress: Double)
 }

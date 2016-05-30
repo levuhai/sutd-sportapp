@@ -359,6 +359,7 @@
                         <outlet property="fastForwardButton" destination="GYM-7S-LKy" id="BFR-yP-Jxu"/>
                         <outlet property="manualControlView" destination="DNu-n5-Ceu" id="uAx-Q4-s8A"/>
                         <outlet property="playPauseButton" destination="Nhz-wR-U52" id="iXO-fv-FuO"/>
+                        <outlet property="playbackProgressView" destination="CD8-IM-vev" id="Dxj-af-aM1"/>
                         <outlet property="rewindButton" destination="HkD-FV-QOd" id="UWf-Ax-hpO"/>
                         <outlet property="songArtistLabel" destination="2Mm-Xp-9f4" id="drO-zc-957"/>
                         <outlet property="songTempoLabel" destination="zaM-bt-aVl" id="zX0-gu-QeV"/>
