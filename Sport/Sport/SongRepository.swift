@@ -15,4 +15,6 @@ protocol SongRepository: class {
     func loadSongs() -> [SongData]
     
     func isSongExisting(persistenceId: String) -> Bool
+    
+    func loadSongs(tempo: Float) -> [SongData]
 }

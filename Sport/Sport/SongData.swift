@@ -12,8 +12,11 @@ import Realm
 import RealmSwift
 
 class SongData: Object {
+    
+    // Name of column should exactly match property name.
     struct Column {
         static let PersistentId = "persistentId"
+        static let Tempo = "tempo"
     }
     
     // Persistent ID of this song in itunes library.

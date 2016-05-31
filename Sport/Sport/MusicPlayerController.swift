@@ -25,6 +25,8 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var fastForwardButton: UIButton!
     
+    @IBOutlet weak var tempoSlider: SPSlider!
+    
     var currentSong: SongData?
     var screenPresenter: MusicPlayerPresenter?
     
@@ -32,7 +34,7 @@ class MusicPlayerController: UIViewController {
         super.viewDidLoad()
         
         let router = MusicPlayerRouterImpl(controller: self)
-        screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router)
+        screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router, songRepository: SongRepositories.realmRepository)
         
         screenPresenter?.initialize()
     }
@@ -60,6 +62,11 @@ class MusicPlayerController: UIViewController {
     
     @IBAction func rewindButtonDidClick(sender: UIButton) {
         screenPresenter?.onRewindButtonClicked()
+    }
+    
+    @IBAction func tempoSliderValueChanged(sender: UISlider) {
+        print("Tempo value: \(sender.value)")
+        screenPresenter?.onTempoSliderValueChanged(sender.value)
     }
 }
 
@@ -116,11 +123,19 @@ extension MusicPlayerController: MusicPlayerView {
     
     private func setButtonPlayImage(isPlaying: Bool) {
         if isPlaying {
-            playPauseButton.setTitle(String.ioniconWithName(.IosPlay), forState: .Normal)
-        } else {
+            playPauseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
             playPauseButton.setTitle(String.ioniconWithName(.IosPause), forState: .Normal)
+        } else {
+            playPauseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0)
+            playPauseButton.setTitle(String.ioniconWithName(.IosPlay), forState: .Normal)
         }
     }
     
+    func setTempoSliderValue(tempo: Float) {
+        tempoSlider.setValue(tempo, animated: true)
+    }
     
+    func updateViewForPlayingState(isPlaying: Bool) {
+        setButtonPlayImage(isPlaying)
+    }
 }

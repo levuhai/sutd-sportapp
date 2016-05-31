@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Realm
-import RealmSwift
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FileManager.prepare()
         decorate()
+        
+        // Enable playing music while app is in the background
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         
         return true
     }

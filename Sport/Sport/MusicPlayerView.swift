@@ -14,4 +14,8 @@ protocol MusicPlayerView: class {
     func switchControlMode(runningMode: Bool)
     
     func updatePlaybackProgress(progress: Double)
+    
+    func setTempoSliderValue(tempo: Float)
+    
+    func updateViewForPlayingState(isPlaying: Bool)
 }

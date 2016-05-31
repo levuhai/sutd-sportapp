@@ -167,7 +167,6 @@
                                             <constraint firstAttribute="width" constant="64" id="MEE-Ku-frP"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="35"/>
-                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="A">
                                             <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -289,11 +288,14 @@
                                         <color key="textColor" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ej7-lU-dPF" customClass="SPSlider" customModule="Sport" customModuleProvider="target">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="20" maxValue="250" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ej7-lU-dPF" customClass="SPSlider" customModule="Sport" customModuleProvider="target">
                                         <rect key="frame" x="6" y="30" width="363" height="31"/>
                                         <color key="minimumTrackTintColor" red="0.69019607843137254" green="0.71372549019607845" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="maximumTrackTintColor" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="thumbTintColor" red="0.96470588235294119" green="0.2196078431372549" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="tempoSliderValueChanged:" destination="wXN-UV-aQG" eventType="valueChanged" id="chd-2L-6pW"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -364,6 +366,7 @@
                         <outlet property="songArtistLabel" destination="2Mm-Xp-9f4" id="drO-zc-957"/>
                         <outlet property="songTempoLabel" destination="zaM-bt-aVl" id="zX0-gu-QeV"/>
                         <outlet property="songTitleLabel" destination="JLb-Nb-Xra" id="VRu-Om-Zb6"/>
+                        <outlet property="tempoSlider" destination="ej7-lU-dPF" id="7DY-Jh-cWw"/>
                         <outlet property="trackpadView" destination="7aC-Pr-mJ1" id="2nh-aR-EA6"/>
                     </connections>
                 </viewController>
