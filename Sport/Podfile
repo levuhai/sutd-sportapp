@@ -8,5 +8,7 @@ target 'Sport' do
     pod 'MBProgressHUD'
     pod 'SnapKit'
     pod 'ChameleonFramework/Swift'
+    pod 'Fabric'
+    pod 'Crashlytics'
 end
 
