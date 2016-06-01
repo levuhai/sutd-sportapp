@@ -1,5 +1,5 @@
 //
-//  AudioPlayer.swift
+//  SPAudioPlayer.swift
 //  Sport
 //
 //  Created by Tien on 5/30/16.
@@ -10,38 +10,48 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-enum AudioPlaybackState {
+enum SPAudioPlaybackState {
     case Stopped
     case Paused
+    case Preparing
     case Playing
 }
 
-class AudioPlayer: NSObject {
-    
-    
+protocol SPAudioPlayerDelegate: class {
+    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer)
+    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer)
+}
+
+class SPAudioPlayer: NSObject {
     
     // Shared instance.
-    static let sharedInstance = AudioPlayer()
+    static let sharedInstance = SPAudioPlayer()
+    
+    weak var delegate: SPAudioPlayerDelegate?
     
     // Instance variables
     var thePlayer: AVPlayer?
     var playbackObserver: AnyObject?
     
-    var playerItems: [AVPlayerItem] = []
+    var playerItems: [SPPlayerItem] = []
     var currentPlayingIndex = 0
-    var currentItem: AVPlayerItem? {
+    var currentItem: SPPlayerItem? {
         didSet {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AudioPlayer.playerItemDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SPAudioPlayer.playerItemDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
         }
     }
     // Events handler.
     var progressHandlerBlock: ((progress: Double)->())?
     
-    var playbackState: AudioPlaybackState = .Stopped
+    var playbackState: SPAudioPlaybackState = .Stopped
 
-    func setup(playList: [String]) {
+    /// =============================================================================
+    //  Methods
+    //
+    
+    func setup(songQueue: [SPPlayerItem]) {
+        currentItem = nil
         
-        let songQueue = createPlayerItems(playList)
         playerItems = Array(songQueue)
     }
    
@@ -54,15 +64,12 @@ class AudioPlayer: NSObject {
     // MARK: - Playback functions
     // Play current song currentItem
     func play() {
+        playbackState = .Preparing
         if (currentItem == nil) {
-            return
+            currentItem = playerItems.first
+            currentPlayingIndex = 0
         }
-        
-        thePlayer = AVPlayer(playerItem: currentItem!)
-        attachListener(currentItem!)
-        
-        playbackState = .Playing
-        thePlayer?.play()
+        playCurrentItem()
     }
     
     func resume() {
@@ -77,44 +84,71 @@ class AudioPlayer: NSObject {
     
     func stop() {
         playbackState = .Stopped
-        detachListener(currentItem!)
+        detachListener(currentItem)
         thePlayer?.pause()
+        currentItem = nil
     }
     
-    func playNext() {
+    func moveToNext() {
+        let isPlaying = playbackState == .Playing
         stop()
         if let nextItem = nextPlayerItem() {
             currentPlayingIndex += 1
             currentItem = nextItem
-            play()
+            
+            if (isPlaying) {
+                playCurrentItem()
+            }
         } else {
+            playbackState = .Stopped
             didStoppedPlaying()
         }
     }
     
-    func playPrevious() {
+    func moveToPrevious() {
+        let isPlaying = playbackState == .Playing
         stop()
         if let previousItem = previousPlayerItem() {
             currentPlayingIndex -= 1
             currentItem = previousItem
-            play()
+            
+            if (isPlaying) {
+                playCurrentItem()
+            }
         } else {
+            playbackState = .Stopped
             didStoppedPlaying()
         }
     }
     
+    func playCurrentItem() {
+        if (currentItem == nil) {
+            return
+        }
+        
+        
+        if (thePlayer == nil) {
+            thePlayer = AVPlayer(playerItem: currentItem!)
+        } else {
+            thePlayer?.replaceCurrentItemWithPlayerItem(currentItem)
+        }
+        thePlayer?.seekToTime(kCMTimeZero)
+        
+        attachListener(currentItem!)
+    }
+   
     func isPlaying() -> Bool {
         return playbackState == .Playing
     }
     
-    func nextPlayerItem() -> AVPlayerItem? {
+    func nextPlayerItem() -> SPPlayerItem? {
         if (currentPlayingIndex + 1 == playerItems.count) {
             return nil
         }
         return playerItems[currentPlayingIndex + 1]
     }
     
-    func previousPlayerItem() -> AVPlayerItem? {
+    func previousPlayerItem() -> SPPlayerItem? {
         if (currentPlayingIndex == 0) {
             return nil
         }
@@ -122,27 +156,42 @@ class AudioPlayer: NSObject {
     }
     
     func playerItemDidFinishPlaying(notification: NSNotification) {
-        playNext()
+        moveToNext()
     }
     
-    func didStartedPlaySong(song: AVPlayerItem) {
+    func didStartedPlaySong(song: SPPlayerItem) {
         
     }
     
     func didStoppedPlaying() {
         
     }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if let item = object as? SPPlayerItem, let keyPath = keyPath where item == currentItem && keyPath == "status" {
+            let status = item.status
+            if status == .Failed {
+                playbackState = .Stopped
+                delegate?.audioPlayerFailedToPlay(self)
+            } else if status == .ReadyToPlay {
+                playbackState = .Playing
+                thePlayer?.play()
+            }
+        }
+    }
 }
 
-extension AudioPlayer {
+extension SPAudioPlayer {
     
     // MARK: - Private methods.
-    func attachListener(playerItem: AVPlayerItem) {
+    func attachListener(playerItem: SPPlayerItem) {
         registerForTimeTracking(progressHandlerBlock)
+        playerItem.addObserver(self, forKeyPath: "status", options: .New, context: nil)
     }
     
-    func detachListener(playerItem: AVPlayerItem) {
+    func detachListener(playerItem: SPPlayerItem?) {
         unregisterTimeTracking()
+        playerItem?.removeObserver(self, forKeyPath: "status")
     }
     
     func registerForTimeTracking(block: ((progress: Double)->())?) {
@@ -183,42 +232,4 @@ extension AudioPlayer {
     }
     
     
-}
-
-extension AudioPlayer {
-    // Create list of playerItems from list of song's persistent ids.
-    private func createPlayerItems(songPersistentIds: [String]) -> [AVPlayerItem] {
-        var playerItems: [AVPlayerItem] = []
-        for persistentId in songPersistentIds {
-            // make sure the song with that id is currently exist.
-            let mediaItem = MPMediaItemFromPersistentId(persistentId)
-            if mediaItem == nil {
-                continue
-            }
-            // Make sure that media item is local file (has avassetURL)
-            let avasset = AVAssetFromMPMediaItem(mediaItem!)
-            if avasset == nil {
-                continue
-            }
-            
-            let playerItem = AVPlayerItem(asset: avasset!)
-            playerItems.append(playerItem)
-        }
-        return playerItems
-    }
-    
-    private func AVAssetFromMPMediaItem(mediaItem: MPMediaItem) -> AVAsset? {
-        guard let assetURL = mediaItem.assetURL else {
-            return nil
-        }
-        return AVURLAsset(URL: assetURL)
-    }
-    
-    // Get media item from persistentId.
-    private func MPMediaItemFromPersistentId(persistentId: String) -> MPMediaItem? {
-        let query = MPMediaQuery.songsQuery()
-        let predicate = MPMediaPropertyPredicate(value: persistentId, forProperty: MPMediaItemPropertyPersistentID)
-        query.addFilterPredicate(predicate)
-        return query.items?.first
-    }
 }

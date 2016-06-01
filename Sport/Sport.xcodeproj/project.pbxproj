@@ -24,8 +24,10 @@
 		720B34901CF8BA4E001D8893 /* SongTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B348F1CF8BA4E001D8893 /* SongTableCell.swift */; };
 		720B34941CF9E4EE001D8893 /* MusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34931CF9E4EE001D8893 /* MusicPlayerRouter.swift */; };
 		720B34961CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34951CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift */; };
-		720B34991CFC9973001D8893 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34981CFC9973001D8893 /* AudioPlayer.swift */; };
+		720B34991CFC9973001D8893 /* SPAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34981CFC9973001D8893 /* SPAudioPlayer.swift */; };
 		720B349B1CFCD946001D8893 /* big.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 720B349A1CFCD946001D8893 /* big.mp3 */; };
+		720B34B11CFF2855001D8893 /* SPPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34B01CFF2855001D8893 /* SPPlayerItem.swift */; };
+		720B34B41CFF5317001D8893 /* SPPlayerItemAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34B31CFF5317001D8893 /* SPPlayerItemAdapter.swift */; };
 		722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8D71CECD29800E51D68 /* SongRepositories.swift */; };
 		722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */; };
 		722BE8E41CEE191E00E51D68 /* songs in Resources */ = {isa = PBXBuildFile; fileRef = 722BE8E31CEE191E00E51D68 /* songs */; };
@@ -73,8 +75,10 @@
 		720B348F1CF8BA4E001D8893 /* SongTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableCell.swift; sourceTree = "<group>"; };
 		720B34931CF9E4EE001D8893 /* MusicPlayerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerRouter.swift; sourceTree = "<group>"; };
 		720B34951CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerRouterImpl.swift; sourceTree = "<group>"; };
-		720B34981CFC9973001D8893 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		720B34981CFC9973001D8893 /* SPAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPAudioPlayer.swift; sourceTree = "<group>"; };
 		720B349A1CFCD946001D8893 /* big.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = big.mp3; sourceTree = "<group>"; };
+		720B34B01CFF2855001D8893 /* SPPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPlayerItem.swift; sourceTree = "<group>"; };
+		720B34B31CFF5317001D8893 /* SPPlayerItemAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPlayerItemAdapter.swift; sourceTree = "<group>"; };
 		722BE8D71CECD29800E51D68 /* SongRepositories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepositories.swift; sourceTree = "<group>"; };
 		722BE8DB1CECD44400E51D68 /* BundleDataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleDataImporter.swift; sourceTree = "<group>"; };
 		722BE8E31CEE191E00E51D68 /* songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = songs; sourceTree = "<group>"; };
@@ -257,6 +261,16 @@
 			name = Router;
 			sourceTree = "<group>";
 		};
+		720B34B21CFF514E001D8893 /* SPAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				720B34981CFC9973001D8893 /* SPAudioPlayer.swift */,
+				720B34B01CFF2855001D8893 /* SPPlayerItem.swift */,
+				720B34B31CFF5317001D8893 /* SPPlayerItemAdapter.swift */,
+			);
+			name = SPAudioPlayer;
+			sourceTree = "<group>";
+		};
 		722BE8DD1CECD51A00E51D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,7 +393,7 @@
 				72A6BC9E1CE4F695007C0254 /* FileManager.swift */,
 				720AC1B71CE7A61500898A87 /* RealmFactory.swift */,
 				72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */,
-				720B34981CFC9973001D8893 /* AudioPlayer.swift */,
+				720B34B21CFF514E001D8893 /* SPAudioPlayer */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -528,8 +542,10 @@
 				720B34881CF8AC45001D8893 /* MusicLibraryController.swift in Sources */,
 				722BE8D81CECD29800E51D68 /* SongRepositories.swift in Sources */,
 				720AC1B81CE7A61500898A87 /* RealmFactory.swift in Sources */,
+				720B34B11CFF2855001D8893 /* SPPlayerItem.swift in Sources */,
 				720B34941CF9E4EE001D8893 /* MusicPlayerRouter.swift in Sources */,
 				720B347E1CF89A70001D8893 /* MusicPlayerView.swift in Sources */,
+				720B34B41CFF5317001D8893 /* SPPlayerItemAdapter.swift in Sources */,
 				720B346F1CF74D9D001D8893 /* UIColor+Sport.swift in Sources */,
 				72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */,
 				722BE8DC1CECD44400E51D68 /* BundleDataImporter.swift in Sources */,
@@ -551,7 +567,7 @@
 				720B344F1CF60646001D8893 /* MusicPlayerController.swift in Sources */,
 				72B91D7A1CDF6B52000E4923 /* ItunesDataImporter.swift in Sources */,
 				720B348E1CF8B04A001D8893 /* MusicLibraryPresenterImpl.swift in Sources */,
-				720B34991CFC9973001D8893 /* AudioPlayer.swift in Sources */,
+				720B34991CFC9973001D8893 /* SPAudioPlayer.swift in Sources */,
 				720B34771CF75278001D8893 /* Ionicons.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				720B34821CF89AA6001D8893 /* MusicPlayerPresenterImpl.swift in Sources */,

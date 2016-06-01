@@ -138,4 +138,14 @@ extension MusicPlayerController: MusicPlayerView {
     func updateViewForPlayingState(isPlaying: Bool) {
         setButtonPlayImage(isPlaying)
     }
+    
+    func updateSongInfo(title: String, tempo: Float, artist: String, albumImage: UIImage) {
+        songTitleLabel.text = title
+        songTempoLabel.text = "Tempo \(Int(tempo)) bpm"
+        songArtistLabel.text = artist
+        albumImageView.image = albumImage
+        
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
 }

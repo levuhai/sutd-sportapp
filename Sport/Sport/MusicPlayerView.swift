@@ -18,4 +18,6 @@ protocol MusicPlayerView: class {
     func setTempoSliderValue(tempo: Float)
     
     func updateViewForPlayingState(isPlaying: Bool)
+    
+    func updateSongInfo(title: String, tempo: Float, artist: String, albumImage: UIImage)
 }
