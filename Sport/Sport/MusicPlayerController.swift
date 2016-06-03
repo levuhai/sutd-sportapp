@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBCircularProgressBar
 
 class MusicPlayerController: UIViewController {
 
@@ -20,10 +21,11 @@ class MusicPlayerController: UIViewController {
     
     @IBOutlet weak var trackpadView: UIView!
     
-    @IBOutlet weak var playbackProgressView: UIProgressView!
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var fastForwardButton: UIButton!
+    
+    @IBOutlet weak var progressView: MBCircularProgressBarView!
     
     @IBOutlet weak var tempoSlider: SPSlider!
     
@@ -92,7 +94,7 @@ extension MusicPlayerController: MusicPlayerView {
     }
     
     func updatePlaybackProgress(progress: Double) {
-        playbackProgressView.progress = Float(progress)
+        progressView.value = CGFloat(progress)
     }
     
     func showManualControl() {
@@ -110,8 +112,6 @@ extension MusicPlayerController: MusicPlayerView {
         // Setting font then icon for title
         playPauseButton.titleLabel?.font = UIFont.ioniconOfSize(45)
         playPauseButton.layer.cornerRadius = playPauseButton.frame.size.width / 2
-        playPauseButton.layer.borderColor = UIColor.sportPink().CGColor
-        playPauseButton.layer.borderWidth = 1.5
         setButtonPlayImage(true)
         
         rewindButton.titleLabel?.font = UIFont.ioniconOfSize(45)

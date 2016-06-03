@@ -142,14 +142,14 @@ class SPAudioPlayer: NSObject {
     }
     
     func nextPlayerItem() -> SPPlayerItem? {
-        if (currentPlayingIndex + 1 == playerItems.count) {
+        if (currentPlayingIndex + 1 >= playerItems.count) {
             return nil
         }
         return playerItems[currentPlayingIndex + 1]
     }
     
     func previousPlayerItem() -> SPPlayerItem? {
-        if (currentPlayingIndex == 0) {
+        if (currentPlayingIndex <= 0) {
             return nil
         }
         return playerItems[currentPlayingIndex - 1]

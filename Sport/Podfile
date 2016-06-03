@@ -10,5 +10,6 @@ target 'Sport' do
     pod 'ChameleonFramework/Swift'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'MBCircularProgressBar'
 end
 
