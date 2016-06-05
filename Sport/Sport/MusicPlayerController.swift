@@ -86,8 +86,7 @@ class MusicPlayerController: UIViewController {
     }
     
     @IBAction func playlistButtonDidClick(sender: UIButton) {
-        showPlaylistView(!isPlaylistOpened, animated: true)
-        isPlaylistOpened = !isPlaylistOpened
+        toggleShowPlaylist()
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,15 +109,48 @@ class MusicPlayerController: UIViewController {
         playlistHeaderView.layer.mask = mask
         playlistHeaderView.clipsToBounds = true
     }
+    
+    func controlButtonLongPressed(gesture: UILongPressGestureRecognizer) {
+        let sender = gesture.view
+        let state = gesture.state
+        
+        switch state {
+        case .Began:
+            if sender == rewindButton {
+                screenPresenter?.onRewindStarted()
+            } else if sender == fastForwardButton {
+                screenPresenter?.onFastForwardStarted()
+            }
+        case .Ended:
+            if sender == rewindButton {
+                screenPresenter?.onRewindEnded()
+            } else if sender == fastForwardButton {
+                screenPresenter?.onFastForwardEnded()
+            }
+        default:
+            break
+        }
+    }
+    
+    func toggleShowPlaylist() {
+        showPlaylistView(!isPlaylistOpened, animated: true)
+        isPlaylistOpened = !isPlaylistOpened
+    }
 }
 
 extension MusicPlayerController: MusicPlayerView {
     func initialize() {
+        self.title = "Music"
+        
         playlistTableView.dataSource = self
         playlistTableView.delegate = self
         playlistTableView.rowHeight = UITableViewAutomaticDimension
         playlistTableView.estimatedRowHeight = 80
         
+        let tapPlaylistHeaderGesture = UITapGestureRecognizer(target: self, action: #selector(MusicPlayerController.toggleShowPlaylist))
+        playlistHeaderView.addGestureRecognizer(tapPlaylistHeaderGesture)
+        
+        // Navigation bar items
         let leftBarItem = UIBarButtonItem(image: UIImage(named: "music_library")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
         leftBarItem.tintColor = UIColor.blueColor()
         
@@ -140,6 +172,12 @@ extension MusicPlayerController: MusicPlayerView {
         
         expandCollapseButton.titleLabel?.font = UIFont.ioniconOfSize(24)
         expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), forState: .Normal)
+        
+        let longTapFastForwardGestureRegcognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicPlayerController.controlButtonLongPressed(_:)))
+        fastForwardButton.addGestureRecognizer(longTapFastForwardGestureRegcognizer)
+        
+        let longTapRewindGestureRegcognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicPlayerController.controlButtonLongPressed(_:)))
+        rewindButton.addGestureRecognizer(longTapRewindGestureRegcognizer)
         
         updatePlaybackProgress(0)
         

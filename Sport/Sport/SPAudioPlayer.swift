@@ -46,6 +46,7 @@ class SPAudioPlayer: NSObject {
     
     var playbackState: SPAudioPlaybackState = .Stopped
 
+    var seekTimer: NSTimer?
     /// =============================================================================
     //  Methods
     //
@@ -145,7 +146,6 @@ class SPAudioPlayer: NSObject {
             return false
         }
         
-        
         if (thePlayer == nil) {
             thePlayer = AVPlayer(playerItem: currentItem!)
         } else {
@@ -155,9 +155,53 @@ class SPAudioPlayer: NSObject {
         
         attachListener(currentItem!)
         
+        delegate?.audioPlayerReadyToPlay(self, song: currentItem!)
+        playbackState = .Playing
+        thePlayer?.play()
+        
         return true
     }
    
+    func rewind() {
+        if playbackState == .Playing {
+            seekTimer?.invalidate()
+            seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SPAudioPlayer.moveRewind), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func fastforward() {
+        if playbackState == .Playing {
+            seekTimer?.invalidate()
+            seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SPAudioPlayer.moveFastForward), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func moveFastForward() {
+        guard let currentTime = thePlayer?.currentTime() else {
+            return
+        }
+        
+        let future = CMTimeMakeWithSeconds(CMTimeGetSeconds(currentTime) + 5, currentTime.timescale)
+        thePlayer?.seekToTime(future, completionHandler: { (success) in
+            
+        })
+    }
+    
+    func moveRewind() {
+        guard let currentTime = thePlayer?.currentTime() else {
+            return
+        }
+        
+        let future = CMTimeMakeWithSeconds(CMTimeGetSeconds(currentTime) - 5, currentTime.timescale)
+        thePlayer?.seekToTime(future, completionHandler: { (success) in
+            
+        })
+    }
+    
+    func endSeek() {
+        seekTimer?.invalidate()
+    }
+    
     func isPlaying() -> Bool {
         return playbackState == .Playing
     }
@@ -177,6 +221,7 @@ class SPAudioPlayer: NSObject {
     }
     
     func playerItemDidFinishPlaying(notification: NSNotification) {
+        seekTimer?.invalidate()
         moveToNext()
     }
     
@@ -194,10 +239,6 @@ class SPAudioPlayer: NSObject {
             if status == .Failed {
                 playbackState = .Stopped
                 delegate?.audioPlayerFailedToPlay(self, song: item)
-            } else if status == .ReadyToPlay {
-                delegate?.audioPlayerReadyToPlay(self, song: item)
-                playbackState = .Playing
-                thePlayer?.play()
             }
         }
     }

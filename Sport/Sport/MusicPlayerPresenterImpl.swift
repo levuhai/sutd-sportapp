@@ -61,6 +61,22 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         showCurrentSongInfo(audioPlayer.currentItem)
     }
     
+    func onFastForwardStarted() {
+        audioPlayer.fastforward()
+    }
+    
+    func onFastForwardEnded() {
+        audioPlayer.endSeek()
+    }
+    
+    func onRewindStarted() {
+        audioPlayer.rewind()
+    }
+    
+    func onRewindEnded() {
+        audioPlayer.endSeek()
+    }
+    
     func onPlayPauseButonClicked() {
         
         if audioPlayer.isPlaying() {
