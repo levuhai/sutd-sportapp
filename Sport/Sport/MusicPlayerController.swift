@@ -28,6 +28,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var tempoSlider: SPSlider!
     @IBOutlet weak var playlistView: UIView!
     @IBOutlet weak var playlistHeaderView: UIView!
+    @IBOutlet weak var expandCollapseButton: UIButton!
     
     @IBOutlet weak var playlistTableView: UITableView!
     
@@ -118,15 +119,29 @@ extension MusicPlayerController: MusicPlayerView {
         playlistTableView.rowHeight = UITableViewAutomaticDimension
         playlistTableView.estimatedRowHeight = 80
         
-        let leftBarItem = UIBarButtonItem(title: "LIB", style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
+        let leftBarItem = UIBarButtonItem(image: UIImage(named: "music_library")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
+        leftBarItem.tintColor = UIColor.blueColor()
+        
         self.navigationItem.leftBarButtonItem = leftBarItem
         
-        let rightBarItem = UIBarButtonItem(title: "M", style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
+        let rightBarItem = UIBarButtonItem(image: UIImage(named: "ic_running")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
         
-        updatePlaybackProgress(0)
+        // Setting font then icon for title
+        playPauseButton.titleLabel?.font = UIFont.ioniconOfSize(45)
+        playPauseButton.layer.cornerRadius = playPauseButton.frame.size.width / 2
+        setButtonPlayImage(true)
         
-        decorate()
+        rewindButton.titleLabel?.font = UIFont.ioniconOfSize(45)
+        rewindButton.setTitle(String.ioniconWithName(.IosRewind), forState: .Normal)
+        
+        fastForwardButton.titleLabel?.font = UIFont.ioniconOfSize(45)
+        fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), forState: .Normal)
+        
+        expandCollapseButton.titleLabel?.font = UIFont.ioniconOfSize(24)
+        expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), forState: .Normal)
+        
+        updatePlaybackProgress(0)
         
         showPlaylistView(false, animated: false)
         
@@ -156,20 +171,6 @@ extension MusicPlayerController: MusicPlayerView {
     }
     
     // MARK -- Private methods
-    private func decorate() {
-        // Setting font then icon for title
-        playPauseButton.titleLabel?.font = UIFont.ioniconOfSize(45)
-        playPauseButton.layer.cornerRadius = playPauseButton.frame.size.width / 2
-        setButtonPlayImage(true)
-        
-        rewindButton.titleLabel?.font = UIFont.ioniconOfSize(45)
-        rewindButton.setTitle(String.ioniconWithName(.IosRewind), forState: .Normal)
-        
-        fastForwardButton.titleLabel?.font = UIFont.ioniconOfSize(45)
-        fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), forState: .Normal)
-        
-        
-    }
     
     private func setButtonPlayImage(isPlaying: Bool) {
         if isPlaying {
@@ -203,21 +204,41 @@ extension MusicPlayerController: MusicPlayerView {
     }
     
     func showPlaylistView(show: Bool, animated: Bool) {
+        var expandButtonIcon: String
         if show {
+            expandButtonIcon = String.ioniconWithName(.ArrowDownB)
             topPlaylistToParentBottomConstraint.constant = self.view.bounds.size.height
         } else {
+            expandButtonIcon = String.ioniconWithName(.ArrowUpB)
             topPlaylistToParentBottomConstraint.constant = 44
         }
         self.view.setNeedsLayout()
         if animated {
+//            UIView.animateWithDuration(0.5, animations: {
+//                self.view.layoutIfNeeded()
+//                }, completion: )
             UIView.animateWithDuration(0.5, animations: {
                 self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    self.expandCollapseButton.setTitle(expandButtonIcon, forState: .Normal)
             })
         } else {
             self.view.layoutIfNeeded()
+            self.expandCollapseButton.setTitle(expandButtonIcon, forState: .Normal)
         }
     }
     
+    func showPlayingSong(indexInPlaylist: Int) {
+        for i in 0..<playlistSong.count {
+            let songAtIndex = playlistSong[i]
+            if i == indexInPlaylist {
+                songAtIndex.isPlaying = true
+            } else {
+                songAtIndex.isPlaying = false
+            }
+        }
+        playlistTableView.reloadData()
+    }
 }
 
 extension MusicPlayerController: UITableViewDataSource {

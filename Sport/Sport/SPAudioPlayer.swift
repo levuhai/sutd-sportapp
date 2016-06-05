@@ -11,8 +11,8 @@ import AVFoundation
 import MediaPlayer
 
 protocol SPAudioPlayerDelegate: class {
-    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer)
-    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer)
+    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
     func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer)
 }
 
@@ -181,7 +181,7 @@ class SPAudioPlayer: NSObject {
     }
     
     func didStartedPlaySong(song: SPPlayerItem) {
-        
+        delegate?.audioPlayerReadyToPlay(self, song: song)
     }
     
     func didReachEndOfPlaylist() {
@@ -193,8 +193,9 @@ class SPAudioPlayer: NSObject {
             let status = item.status
             if status == .Failed {
                 playbackState = .Stopped
-                delegate?.audioPlayerFailedToPlay(self)
+                delegate?.audioPlayerFailedToPlay(self, song: item)
             } else if status == .ReadyToPlay {
+                delegate?.audioPlayerReadyToPlay(self, song: item)
                 playbackState = .Playing
                 thePlayer?.play()
             }

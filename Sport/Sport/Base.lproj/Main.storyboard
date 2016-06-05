@@ -46,14 +46,14 @@
                                 <rect key="frame" x="20" y="996" width="335" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSX-b7-BD6" userLabel="Heart rate container view">
-                                        <rect key="frame" x="175.5" y="0.0" width="159.5" height="64"/>
+                                        <rect key="frame" x="176" y="0.0" width="159" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Mfp-EV-PBd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="dz7-SX-Gtc"/>
@@ -248,10 +248,12 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2K-XG-2EK">
                                                 <rect key="frame" x="331" y="0.0" width="44" height="44"/>
-                                                <color key="backgroundColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Q2K-XG-2EK" secondAttribute="height" id="8Sp-HJ-RFU"/>
                                                 </constraints>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="playlistButtonDidClick:" destination="wXN-UV-aQG" eventType="touchUpInside" id="2u8-sQ-gfh"/>
                                                 </connections>
@@ -290,7 +292,7 @@
                                                                 <constraint firstAttribute="height" constant="48" id="W7c-PG-gEA"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ASi-4T-k7a">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play" translatesAutoresizingMaskIntoConstraints="NO" id="ASi-4T-k7a">
                                                             <rect key="frame" x="295" y="30" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="aea-yD-SVW"/>
@@ -393,6 +395,7 @@
                     <connections>
                         <outlet property="albumImageView" destination="XCX-kl-TOI" id="dnD-aj-VUT"/>
                         <outlet property="autoControlView" destination="2Qs-yJ-YoN" id="GBE-fG-pqT"/>
+                        <outlet property="expandCollapseButton" destination="Q2K-XG-2EK" id="f1e-4b-VKO"/>
                         <outlet property="fastForwardButton" destination="GYM-7S-LKy" id="BFR-yP-Jxu"/>
                         <outlet property="manualControlView" destination="DNu-n5-Ceu" id="uAx-Q4-s8A"/>
                         <outlet property="playPauseButton" destination="Nhz-wR-U52" id="iXO-fv-FuO"/>
@@ -545,5 +548,6 @@
     </scenes>
     <resources>
         <image name="bgImage" width="375" height="290"/>
+        <image name="ic_play" width="164" height="164"/>
     </resources>
 </document>

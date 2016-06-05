@@ -107,7 +107,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func setupNewPlayList() {
         audioDoStop()
         audioPlayer.setup(playList)
-        
+        playerView?.displayPlaylist(getPlaylistForDisplay(playList, currentPlayingItem: audioPlayer.currentItem))
     }
     
     func showCurrentSongInfo(playerItem: SPPlayerItem?) {
@@ -120,7 +120,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         playerView?.updateSongInfo(currentSongViewData)
     }
     
-    func getPlaylistForDisplay(playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem) -> [SongViewData] {
+    func getPlaylistForDisplay(playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem?) -> [SongViewData] {
         var listSongViews = [SongViewData]()
         for spItem in playlist {
             let songView = songViewFromPlayerItem(spItem)
@@ -141,15 +141,26 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
 
 extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
     
-    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer) {
+    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+        let currentItem = song
         
+        var indexOfPlayingItem = -1
+        for i in 0..<playList.count {
+            let item = playList[i]
+            if item == currentItem {
+                indexOfPlayingItem = i
+                break
+            }
+        }
+        playerView?.showPlayingSong(indexOfPlayingItem)
     }
     
-    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer) {
+    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
         
     }
     
     func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer) {
         audioDoStop()
+        playerView?.showPlayingSong(-1)
     }
 }
