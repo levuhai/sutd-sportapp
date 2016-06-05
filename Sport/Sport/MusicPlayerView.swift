@@ -19,5 +19,7 @@ protocol MusicPlayerView: class {
     
     func updateViewForPlayingState(isPlaying: Bool)
     
-    func updateSongInfo(title: String, tempo: Float, artist: String, albumImage: UIImage)
+    func updateSongInfo(playerViewData: SongViewData)
+    
+    func displayPlaylist(playlist: [SongViewData])
 }

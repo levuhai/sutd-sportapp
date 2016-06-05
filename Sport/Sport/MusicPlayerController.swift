@@ -13,8 +13,6 @@ class MusicPlayerController: UIViewController {
 
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var songTitleLabel: UILabel!
-    @IBOutlet weak var songArtistLabel: UILabel!
-    @IBOutlet weak var songTempoLabel: UILabel!
     
     @IBOutlet weak var autoControlView: UIView!
     @IBOutlet weak var manualControlView: UIView!
@@ -28,9 +26,24 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var progressView: MBCircularProgressBarView!
     
     @IBOutlet weak var tempoSlider: SPSlider!
+    @IBOutlet weak var playlistView: UIView!
+    @IBOutlet weak var playlistHeaderView: UIView!
+    
+    @IBOutlet weak var playlistTableView: UITableView!
+    
+    @IBOutlet weak var topPlaylistToParentBottomConstraint: NSLayoutConstraint!
+    
     
     var currentSong: SongData?
+    var playlistSong = [SongViewData]()
+    
     var screenPresenter: MusicPlayerPresenter?
+    var isPlaylistOpened = false
+    
+    
+    deinit {
+        print("MusicVC deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,10 +83,41 @@ class MusicPlayerController: UIViewController {
         print("Tempo value: \(sender.value)")
         screenPresenter?.onTempoSliderValueChanged(sender.value)
     }
+    
+    @IBAction func playlistButtonDidClick(sender: UIButton) {
+        showPlaylistView(!isPlaylistOpened, animated: true)
+        isPlaylistOpened = !isPlaylistOpened
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        maskPlaylistView()
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        if isPlaylistOpened {
+            topPlaylistToParentBottomConstraint.constant = self.view.bounds.size.height
+        }
+        maskPlaylistView()
+        self.view.layoutIfNeeded()
+    }
+    
+    func maskPlaylistView() {
+        let maskPath = UIBezierPath(roundedRect: playlistHeaderView.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSizeMake(10, 10))
+        let mask = CAShapeLayer()
+        mask.path = maskPath.CGPath
+        playlistHeaderView.layer.mask = mask
+        playlistHeaderView.clipsToBounds = true
+    }
 }
 
 extension MusicPlayerController: MusicPlayerView {
     func initialize() {
+        playlistTableView.dataSource = self
+        playlistTableView.delegate = self
+        playlistTableView.rowHeight = UITableViewAutomaticDimension
+        playlistTableView.estimatedRowHeight = 80
+        
         let leftBarItem = UIBarButtonItem(title: "LIB", style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
         self.navigationItem.leftBarButtonItem = leftBarItem
         
@@ -83,6 +127,10 @@ extension MusicPlayerController: MusicPlayerView {
         updatePlaybackProgress(0)
         
         decorate()
+        
+        showPlaylistView(false, animated: false)
+        
+        displayPlaylist(DependencyInjector.dummyPlaylistToView())
     }
     
     func switchControlMode(runningMode: Bool) {
@@ -119,6 +167,8 @@ extension MusicPlayerController: MusicPlayerView {
         
         fastForwardButton.titleLabel?.font = UIFont.ioniconOfSize(45)
         fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), forState: .Normal)
+        
+        
     }
     
     private func setButtonPlayImage(isPlaying: Bool) {
@@ -139,13 +189,50 @@ extension MusicPlayerController: MusicPlayerView {
         setButtonPlayImage(isPlaying)
     }
     
-    func updateSongInfo(title: String, tempo: Float, artist: String, albumImage: UIImage) {
-        songTitleLabel.text = title
-        songTempoLabel.text = "Tempo \(Int(tempo)) bpm"
-        songArtistLabel.text = artist
-        albumImageView.image = albumImage
+    func updateSongInfo(playerViewData: SongViewData) {
+        songTitleLabel.text = playerViewData.title
+        albumImageView.image = playerViewData.image
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
+    
+    func displayPlaylist(playlist: [SongViewData]) {
+        self.playlistSong = playlist
+        playlistTableView.reloadData()
+    }
+    
+    func showPlaylistView(show: Bool, animated: Bool) {
+        if show {
+            topPlaylistToParentBottomConstraint.constant = self.view.bounds.size.height
+        } else {
+            topPlaylistToParentBottomConstraint.constant = 44
+        }
+        self.view.setNeedsLayout()
+        if animated {
+            UIView.animateWithDuration(0.5, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+}
+
+extension MusicPlayerController: UITableViewDataSource {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistSongCell") as! PlaylistSongCell
+        let songInfo = playlistSong[indexPath.row]
+        cell.displaySongInfo(songInfo.title, album: songInfo.artist, image: songInfo.image, playing: songInfo.isPlaying)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playlistSong.count
+    }
+}
+
+extension MusicPlayerController: UITableViewDelegate {
+    
 }

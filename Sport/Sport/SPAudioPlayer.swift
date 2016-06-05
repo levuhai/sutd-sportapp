@@ -10,19 +10,20 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-enum SPAudioPlaybackState {
-    case Stopped
-    case Paused
-    case Preparing
-    case Playing
-}
-
 protocol SPAudioPlayerDelegate: class {
     func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer)
     func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer)
+    func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer)
 }
 
 class SPAudioPlayer: NSObject {
+    
+    enum SPAudioPlaybackState {
+        case Stopped
+        case Paused
+        case Preparing
+        case Playing
+    }
     
     // Shared instance.
     static let sharedInstance = SPAudioPlayer()
@@ -63,13 +64,23 @@ class SPAudioPlayer: NSObject {
     
     // MARK: - Playback functions
     // Play current song currentItem
-    func play() {
+    func playOrResume() -> Bool {
+        if playbackState == .Paused {
+            resume()
+            return true
+        } else if playbackState == .Stopped {
+            return play()
+        }
+        return false
+    }
+    
+    func play() -> Bool {
         playbackState = .Preparing
         if (currentItem == nil) {
             currentItem = playerItems.first
             currentPlayingIndex = 0
         }
-        playCurrentItem()
+        return playCurrentItem()
     }
     
     func resume() {
@@ -89,7 +100,7 @@ class SPAudioPlayer: NSObject {
         currentItem = nil
     }
     
-    func moveToNext() {
+    func moveToNext() -> Bool {
         let isPlaying = playbackState == .Playing
         stop()
         if let nextItem = nextPlayerItem() {
@@ -99,13 +110,17 @@ class SPAudioPlayer: NSObject {
             if (isPlaying) {
                 playCurrentItem()
             }
+            
+            return true
         } else {
             playbackState = .Stopped
-            didStoppedPlaying()
+            didReachEndOfPlaylist()
+            
+            return false
         }
     }
     
-    func moveToPrevious() {
+    func moveToPrevious() -> Bool {
         let isPlaying = playbackState == .Playing
         stop()
         if let previousItem = previousPlayerItem() {
@@ -115,15 +130,19 @@ class SPAudioPlayer: NSObject {
             if (isPlaying) {
                 playCurrentItem()
             }
+            
+            return true
         } else {
             playbackState = .Stopped
-            didStoppedPlaying()
+            didReachEndOfPlaylist()
+            
+            return false
         }
     }
     
-    func playCurrentItem() {
+    func playCurrentItem() -> Bool {
         if (currentItem == nil) {
-            return
+            return false
         }
         
         
@@ -135,6 +154,8 @@ class SPAudioPlayer: NSObject {
         thePlayer?.seekToTime(kCMTimeZero)
         
         attachListener(currentItem!)
+        
+        return true
     }
    
     func isPlaying() -> Bool {
@@ -163,8 +184,8 @@ class SPAudioPlayer: NSObject {
         
     }
     
-    func didStoppedPlaying() {
-        
+    func didReachEndOfPlaylist() {
+        delegate?.audioPlayerDidReachEndOfPlaylist(self)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
