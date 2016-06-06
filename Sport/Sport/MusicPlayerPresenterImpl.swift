@@ -33,7 +33,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         audioPlayer.setProgressHandler { [unowned self] (progress) in
             self.playerView?.updatePlaybackProgress(progress)
         }
-        
+        audioPlayer.delegate = self
         let savedTempo = AppUserDefaults.lastTempo() ?? Constants.Defaults.tempoMin
         playerView?.setTempoSliderValue(savedTempo)
         
@@ -41,8 +41,6 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         
         setupNewPlayList()
     }
-    
-    
     
     func onLeftBarButtonClicked() {
         router.navigateToLibraryScreen()
@@ -61,6 +59,22 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func onFastForwardButtonClicked() {
         audioPlayer.moveToNext()
         showCurrentSongInfo(audioPlayer.currentItem)
+    }
+    
+    func onFastForwardStarted() {
+        audioPlayer.fastforward()
+    }
+    
+    func onFastForwardEnded() {
+        audioPlayer.endSeek()
+    }
+    
+    func onRewindStarted() {
+        audioPlayer.rewind()
+    }
+    
+    func onRewindEnded() {
+        audioPlayer.endSeek()
     }
     
     func onPlayPauseButonClicked() {
@@ -82,12 +96,9 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     }
     
     func audioDoPlay() {
-        if audioPlayer.playbackState == .Paused {
-            audioPlayer.resume()
-        } else if audioPlayer.playbackState == .Stopped {
-            audioPlayer.play()
+        if audioPlayer.playOrResume() {
+            playerView?.updateViewForPlayingState(true)
         }
-        playerView?.updateViewForPlayingState(true)
     }
     
     func audioDoPause() {
@@ -98,6 +109,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func audioDoStop() {
         audioPlayer.stop()
         playerView?.updateViewForPlayingState(false)
+        playerView?.updatePlaybackProgress(0)
     }
     
     func loadSongs(tempo: Float) {
@@ -111,6 +123,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func setupNewPlayList() {
         audioDoStop()
         audioPlayer.setup(playList)
+        playerView?.displayPlaylist(getPlaylistForDisplay(playList, currentPlayingItem: audioPlayer.currentItem))
     }
     
     func showCurrentSongInfo(playerItem: SPPlayerItem?) {
@@ -119,10 +132,51 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
             return
         }
         
-        let title = currentItem.mediaItem.title ?? "Unknown"
-        let artist = currentItem.mediaItem.artist ?? "Unknown"
-        let albumImage = currentItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
-        playerView?.updateSongInfo(title, tempo: currentItem.tempo, artist: artist, albumImage: albumImage!)
+        let currentSongViewData = songViewFromPlayerItem(currentItem)
+        playerView?.updateSongInfo(currentSongViewData)
+    }
+    
+    func getPlaylistForDisplay(playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem?) -> [SongViewData] {
+        var listSongViews = [SongViewData]()
+        for spItem in playlist {
+            let songView = songViewFromPlayerItem(spItem)
+            songView.isPlaying = spItem == currentPlayingItem
+            listSongViews.append(songView)
+        }
+        return listSongViews
+    }
+    
+    func songViewFromPlayerItem(playerItem: SPPlayerItem) -> SongViewData {
+        let title = playerItem.mediaItem.title ?? "Unknown"
+        let artist = playerItem.mediaItem.artist ?? "Unknown"
+        let albumImage = playerItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
+        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo)
+        
     }
 }
 
+extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
+    
+    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+        let currentItem = song
+        
+        var indexOfPlayingItem = -1
+        for i in 0..<playList.count {
+            let item = playList[i]
+            if item == currentItem {
+                indexOfPlayingItem = i
+                break
+            }
+        }
+        playerView?.showPlayingSong(indexOfPlayingItem)
+    }
+    
+    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+        
+    }
+    
+    func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer) {
+        audioDoStop()
+        playerView?.showPlayingSong(-1)
+    }
+}

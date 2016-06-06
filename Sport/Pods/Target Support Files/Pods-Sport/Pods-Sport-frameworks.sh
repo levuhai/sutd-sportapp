@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Sport/ChameleonFramework.framework"
+  install_framework "Pods-Sport/MBCircularProgressBar.framework"
   install_framework "Pods-Sport/MBProgressHUD.framework"
   install_framework "Pods-Sport/Realm.framework"
   install_framework "Pods-Sport/RealmSwift.framework"
@@ -92,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Sport/ChameleonFramework.framework"
+  install_framework "Pods-Sport/MBCircularProgressBar.framework"
   install_framework "Pods-Sport/MBProgressHUD.framework"
   install_framework "Pods-Sport/Realm.framework"
   install_framework "Pods-Sport/RealmSwift.framework"

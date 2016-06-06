@@ -10,19 +10,20 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-enum SPAudioPlaybackState {
-    case Stopped
-    case Paused
-    case Preparing
-    case Playing
-}
-
 protocol SPAudioPlayerDelegate: class {
-    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer)
-    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer)
+    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer)
 }
 
 class SPAudioPlayer: NSObject {
+    
+    enum SPAudioPlaybackState {
+        case Stopped
+        case Paused
+        case Preparing
+        case Playing
+    }
     
     // Shared instance.
     static let sharedInstance = SPAudioPlayer()
@@ -45,6 +46,7 @@ class SPAudioPlayer: NSObject {
     
     var playbackState: SPAudioPlaybackState = .Stopped
 
+    var seekTimer: NSTimer?
     /// =============================================================================
     //  Methods
     //
@@ -63,13 +65,23 @@ class SPAudioPlayer: NSObject {
     
     // MARK: - Playback functions
     // Play current song currentItem
-    func play() {
+    func playOrResume() -> Bool {
+        if playbackState == .Paused {
+            resume()
+            return true
+        } else if playbackState == .Stopped {
+            return play()
+        }
+        return false
+    }
+    
+    func play() -> Bool {
         playbackState = .Preparing
         if (currentItem == nil) {
             currentItem = playerItems.first
             currentPlayingIndex = 0
         }
-        playCurrentItem()
+        return playCurrentItem()
     }
     
     func resume() {
@@ -89,7 +101,7 @@ class SPAudioPlayer: NSObject {
         currentItem = nil
     }
     
-    func moveToNext() {
+    func moveToNext() -> Bool {
         let isPlaying = playbackState == .Playing
         stop()
         if let nextItem = nextPlayerItem() {
@@ -99,13 +111,17 @@ class SPAudioPlayer: NSObject {
             if (isPlaying) {
                 playCurrentItem()
             }
+            
+            return true
         } else {
             playbackState = .Stopped
-            didStoppedPlaying()
+            didReachEndOfPlaylist()
+            
+            return false
         }
     }
     
-    func moveToPrevious() {
+    func moveToPrevious() -> Bool {
         let isPlaying = playbackState == .Playing
         stop()
         if let previousItem = previousPlayerItem() {
@@ -115,17 +131,20 @@ class SPAudioPlayer: NSObject {
             if (isPlaying) {
                 playCurrentItem()
             }
+            
+            return true
         } else {
             playbackState = .Stopped
-            didStoppedPlaying()
+            didReachEndOfPlaylist()
+            
+            return false
         }
     }
     
-    func playCurrentItem() {
+    func playCurrentItem() -> Bool {
         if (currentItem == nil) {
-            return
+            return false
         }
-        
         
         if (thePlayer == nil) {
             thePlayer = AVPlayer(playerItem: currentItem!)
@@ -135,36 +154,83 @@ class SPAudioPlayer: NSObject {
         thePlayer?.seekToTime(kCMTimeZero)
         
         attachListener(currentItem!)
+        
+        delegate?.audioPlayerReadyToPlay(self, song: currentItem!)
+        playbackState = .Playing
+        thePlayer?.play()
+        
+        return true
     }
    
+    func rewind() {
+        if playbackState == .Playing {
+            seekTimer?.invalidate()
+            seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SPAudioPlayer.moveRewind), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func fastforward() {
+        if playbackState == .Playing {
+            seekTimer?.invalidate()
+            seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SPAudioPlayer.moveFastForward), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func moveFastForward() {
+        guard let currentTime = thePlayer?.currentTime() else {
+            return
+        }
+        
+        let future = CMTimeMakeWithSeconds(CMTimeGetSeconds(currentTime) + 5, currentTime.timescale)
+        thePlayer?.seekToTime(future, completionHandler: { (success) in
+            
+        })
+    }
+    
+    func moveRewind() {
+        guard let currentTime = thePlayer?.currentTime() else {
+            return
+        }
+        
+        let future = CMTimeMakeWithSeconds(CMTimeGetSeconds(currentTime) - 5, currentTime.timescale)
+        thePlayer?.seekToTime(future, completionHandler: { (success) in
+            
+        })
+    }
+    
+    func endSeek() {
+        seekTimer?.invalidate()
+    }
+    
     func isPlaying() -> Bool {
         return playbackState == .Playing
     }
     
     func nextPlayerItem() -> SPPlayerItem? {
-        if (currentPlayingIndex + 1 == playerItems.count) {
+        if (currentPlayingIndex + 1 >= playerItems.count) {
             return nil
         }
         return playerItems[currentPlayingIndex + 1]
     }
     
     func previousPlayerItem() -> SPPlayerItem? {
-        if (currentPlayingIndex == 0) {
+        if (currentPlayingIndex <= 0) {
             return nil
         }
         return playerItems[currentPlayingIndex - 1]
     }
     
     func playerItemDidFinishPlaying(notification: NSNotification) {
+        seekTimer?.invalidate()
         moveToNext()
     }
     
     func didStartedPlaySong(song: SPPlayerItem) {
-        
+        delegate?.audioPlayerReadyToPlay(self, song: song)
     }
     
-    func didStoppedPlaying() {
-        
+    func didReachEndOfPlaylist() {
+        delegate?.audioPlayerDidReachEndOfPlaylist(self)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -172,10 +238,7 @@ class SPAudioPlayer: NSObject {
             let status = item.status
             if status == .Failed {
                 playbackState = .Stopped
-                delegate?.audioPlayerFailedToPlay(self)
-            } else if status == .ReadyToPlay {
-                playbackState = .Playing
-                thePlayer?.play()
+                delegate?.audioPlayerFailedToPlay(self, song: item)
             }
         }
     }

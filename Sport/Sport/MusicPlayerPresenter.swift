@@ -21,6 +21,12 @@ protocol MusicPlayerPresenter: class {
     func onPlayPauseButonClicked()
     func onRewindButtonClicked()
     func onFastForwardButtonClicked()
+    func onFastForwardStarted()
+    func onFastForwardEnded()
+    func onRewindStarted()
+    func onRewindEnded()
     
     func onTempoSliderValueChanged(newValue: Float)
+    
+    
 }
