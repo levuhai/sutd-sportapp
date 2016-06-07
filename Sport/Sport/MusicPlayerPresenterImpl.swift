@@ -53,7 +53,6 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     
     func onRewindButtonClicked() {
         audioPlayer.moveToPrevious()
-        showCurrentSongInfo(audioPlayer.currentItem)
     }
     
     func onFastForwardButtonClicked() {
@@ -78,13 +77,11 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     }
     
     func onPlayPauseButonClicked() {
-        
         if audioPlayer.isPlaying() {
             audioDoPause()
         } else {
             audioDoPlay()
         }
-        showCurrentSongInfo(audioPlayer.currentItem)
     }
     
     func onTempoSliderValueChanged(newValue: Float) {
@@ -96,20 +93,15 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     }
     
     func audioDoPlay() {
-        if audioPlayer.playOrResume() {
-            playerView?.updateViewForPlayingState(true)
-        }
+        audioPlayer.play()
     }
     
     func audioDoPause() {
         audioPlayer.pause()
-        playerView?.updateViewForPlayingState(false)
     }
     
     func audioDoStop() {
         audioPlayer.stop()
-        playerView?.updateViewForPlayingState(false)
-        playerView?.updatePlaybackProgress(0)
     }
     
     func loadSongs(tempo: Float) {
@@ -157,7 +149,9 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
 
 extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
     
-    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+    func audioPlayerDidStartPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+        playerView?.updatePlaybackProgress(0)
+        
         let currentItem = song
         
         var indexOfPlayingItem = -1
@@ -168,7 +162,22 @@ extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
                 break
             }
         }
-        playerView?.showPlayingSong(indexOfPlayingItem)
+        playerView?.showPlayingSongInPlaylist(indexOfPlayingItem)
+        showCurrentSongInfo(song)
+        playerView?.updateViewForPlayingState(true)
+    }
+    
+    func audioPlayerDidStop(audioPlayer: SPAudioPlayer) {
+        playerView?.updateViewForPlayingState(false)
+        playerView?.updatePlaybackProgress(0)
+    }
+    
+    func audioPlayerDidPause(audioPlayer: SPAudioPlayer) {
+        playerView?.updateViewForPlayingState(false)
+    }
+    
+    func audioPlayerDidResume(audioPlayer: SPAudioPlayer) {
+        playerView?.updateViewForPlayingState(true)
     }
     
     func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
@@ -177,6 +186,6 @@ extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
     
     func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer) {
         audioDoStop()
-        playerView?.showPlayingSong(-1)
+        playerView?.showPlayingSongInPlaylist(-1)
     }
 }

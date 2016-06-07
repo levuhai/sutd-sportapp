@@ -252,9 +252,6 @@ extension MusicPlayerController: MusicPlayerView {
         }
         self.view.setNeedsLayout()
         if animated {
-//            UIView.animateWithDuration(0.5, animations: {
-//                self.view.layoutIfNeeded()
-//                }, completion: )
             UIView.animateWithDuration(0.5, animations: {
                 self.view.layoutIfNeeded()
                 }, completion: { (success) in
@@ -266,7 +263,8 @@ extension MusicPlayerController: MusicPlayerView {
         }
     }
     
-    func showPlayingSong(indexInPlaylist: Int) {
+    func showPlayingSongInPlaylist(indexInPlaylist: Int) {
+        // Change status of songViewData(s), determine which song is currently playing
         for i in 0..<playlistSong.count {
             let songAtIndex = playlistSong[i]
             if i == indexInPlaylist {

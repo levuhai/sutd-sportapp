@@ -11,7 +11,10 @@ import AVFoundation
 import MediaPlayer
 
 protocol SPAudioPlayerDelegate: class {
-    func audioPlayerReadyToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerDidStartPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerDidPause(audioPlayer: SPAudioPlayer)
+    func audioPlayerDidResume(audioPlayer: SPAudioPlayer)
+    func audioPlayerDidStop(audioPlayer: SPAudioPlayer)
     func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
     func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer)
 }
@@ -38,9 +41,13 @@ class SPAudioPlayer: NSObject {
     var currentPlayingIndex = 0
     var currentItem: SPPlayerItem? {
         didSet {
+            if (currentItem == nil) {
+                return
+            }
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SPAudioPlayer.playerItemDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
         }
     }
+    
     // Events handler.
     var progressHandlerBlock: ((progress: Double)->())?
     
@@ -65,33 +72,35 @@ class SPAudioPlayer: NSObject {
     
     // MARK: - Playback functions
     // Play current song currentItem
-    func playOrResume() -> Bool {
-        if playbackState == .Paused {
-            resume()
-            return true
-        } else if playbackState == .Stopped {
-            return play()
-        }
-        return false
-    }
-    
-    func play() -> Bool {
+    func playPlayListFromBeginning() {
         playbackState = .Preparing
         if (currentItem == nil) {
             currentItem = playerItems.first
             currentPlayingIndex = 0
         }
-        return playCurrentItem()
+        playCurrentItem()
+    }
+    
+    func play() {
+        if playbackState == .Paused {
+            resume()
+        } else if playbackState == .Stopped {
+            playPlayListFromBeginning()
+        }
     }
     
     func resume() {
         playbackState = .Playing
         thePlayer?.play()
+        
+        delegate?.audioPlayerDidResume(self)
     }
     
     func pause() {
         playbackState = .Paused
         thePlayer?.pause()
+        
+        delegate?.audioPlayerDidPause(self)
     }
     
     func stop() {
@@ -99,51 +108,62 @@ class SPAudioPlayer: NSObject {
         detachListener(currentItem)
         thePlayer?.pause()
         currentItem = nil
+        
+        // call delegate
+        delegate?.audioPlayerDidStop(self)
     }
     
-    func moveToNext() -> Bool {
-        let isPlaying = playbackState == .Playing
+    func moveToNext() {
+        let shouldAutoPlay = playbackState == .Playing
+        moveToNext(shouldAutoPlay)
+    }
+    
+    func moveToPrevious() {
+        let shouldAutoPlay = playbackState == .Playing
+        moveToPrevious(shouldAutoPlay)
+    }
+    
+    func moveToNext(autoPlay: Bool) {
         stop()
+        next(autoPlay)
+    }
+    
+    func next(autoPlay: Bool) {
         if let nextItem = nextPlayerItem() {
             currentPlayingIndex += 1
             currentItem = nextItem
             
-            if (isPlaying) {
+            if (autoPlay) {
                 playCurrentItem()
             }
-            
-            return true
         } else {
             playbackState = .Stopped
             didReachEndOfPlaylist()
-            
-            return false
         }
     }
     
-    func moveToPrevious() -> Bool {
-        let isPlaying = playbackState == .Playing
-        stop()
+    func previous(autoPlay: Bool) {
         if let previousItem = previousPlayerItem() {
             currentPlayingIndex -= 1
             currentItem = previousItem
             
-            if (isPlaying) {
+            if (autoPlay) {
                 playCurrentItem()
             }
-            
-            return true
         } else {
             playbackState = .Stopped
             didReachEndOfPlaylist()
-            
-            return false
         }
     }
     
-    func playCurrentItem() -> Bool {
+    func moveToPrevious(autoPlay: Bool) {
+        stop()
+        previous(autoPlay)
+    }
+    
+    func playCurrentItem() {
         if (currentItem == nil) {
-            return false
+            return
         }
         
         if (thePlayer == nil) {
@@ -155,11 +175,10 @@ class SPAudioPlayer: NSObject {
         
         attachListener(currentItem!)
         
-        delegate?.audioPlayerReadyToPlay(self, song: currentItem!)
         playbackState = .Playing
         thePlayer?.play()
         
-        return true
+        delegate?.audioPlayerDidStartPlay(self, song: currentItem!)
     }
    
     func rewind() {
@@ -221,12 +240,10 @@ class SPAudioPlayer: NSObject {
     }
     
     func playerItemDidFinishPlaying(notification: NSNotification) {
+        print("Finished")
         seekTimer?.invalidate()
-        moveToNext()
-    }
-    
-    func didStartedPlaySong(song: SPPlayerItem) {
-        delegate?.audioPlayerReadyToPlay(self, song: song)
+        stop()
+        next(true)
     }
     
     func didReachEndOfPlaylist() {
@@ -255,6 +272,7 @@ extension SPAudioPlayer {
     func detachListener(playerItem: SPPlayerItem?) {
         unregisterTimeTracking()
         playerItem?.removeObserver(self, forKeyPath: "status")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
     }
     
     func registerForTimeTracking(block: ((progress: Double)->())?) {
