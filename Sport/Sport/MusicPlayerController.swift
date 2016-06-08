@@ -11,6 +11,8 @@ import MBCircularProgressBar
 
 class MusicPlayerController: UIViewController {
 
+    let playlistHeaderViewHeight: CGFloat = 44
+    
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var songTitleLabel: UILabel!
     
@@ -31,8 +33,11 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var expandCollapseButton: UIButton!
     
     @IBOutlet weak var playlistTableView: UITableView!
+    @IBOutlet weak var playlistSummaryLabel: UILabel!
     
     @IBOutlet weak var topPlaylistToParentBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomPlaylistToParentBottomConstraint: NSLayoutConstraint!
     
     
     var currentSong: SongData?
@@ -236,6 +241,7 @@ extension MusicPlayerController: MusicPlayerView {
     
     func displayPlaylist(playlist: [SongViewData]) {
         self.playlistSong = playlist
+        playlistSummaryLabel.text = "Total \(playlist.count) \(playlist.count > 1 ? "songs" : "song")"
         playlistTableView.reloadData()
     }
     
@@ -244,9 +250,11 @@ extension MusicPlayerController: MusicPlayerView {
         if show {
             expandButtonIcon = String.ioniconWithName(.ArrowDownB)
             topPlaylistToParentBottomConstraint.constant = self.view.bounds.size.height
+            bottomPlaylistToParentBottomConstraint.constant = 0
         } else {
             expandButtonIcon = String.ioniconWithName(.ArrowUpB)
-            topPlaylistToParentBottomConstraint.constant = 44
+            bottomPlaylistToParentBottomConstraint.constant = -100
+            topPlaylistToParentBottomConstraint.constant = playlistHeaderViewHeight
         }
         self.view.setNeedsLayout()
         if animated {
