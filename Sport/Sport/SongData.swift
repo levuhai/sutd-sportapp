@@ -22,18 +22,14 @@ class SongData: Object {
     // Persistent ID of this song in itunes library.
     dynamic var persistentId = ""
     
-    // Song title.
-    dynamic var title = ""
-    
     // Analyzed data.
     dynamic var energy = 0.0
     dynamic var valence = 0.0
     dynamic var tempo = 0.0
     dynamic var rms = 0.0
     
-    init(persistentId: String, title: String, energy: Double, valence: Double, tempo: Double) {
+    init(persistentId: String, energy: Double, valence: Double, tempo: Double) {
         self.persistentId = persistentId
-        self.title = title
         
         self.energy = energy
         self.valence = valence
@@ -54,5 +50,7 @@ class SongData: Object {
         super.init(value: value, schema: schema)
     }
     
-    
+    override static func primaryKey() -> String? {
+        return Column.PersistentId
+    }
 }

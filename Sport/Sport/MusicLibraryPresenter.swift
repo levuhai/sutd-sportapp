@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MusicLibraryPresenter: class, UITableViewDelegate, UITableViewDataSource {
+protocol MusicLibraryPresenter: class {
     var libraryView: MusicLibraryView? { get }
     
     func initialize()

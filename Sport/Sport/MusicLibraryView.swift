@@ -12,7 +12,7 @@ protocol MusicLibraryView: class {
     func initViews()
     
     func showEmptyList()
-    func showSongList()
+    func showSongList(songViewData: [SongViewData])
     
     func showLoading(show: Bool)
     

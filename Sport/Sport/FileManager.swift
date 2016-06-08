@@ -15,6 +15,10 @@ class FileManager: NSObject {
         initializeFolder(songImportFolder())
     }
     
+    static var libraryFolder: String {
+        return NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true).first!
+    }
+    
     /**
      Create folder if not existing
      
@@ -42,8 +46,7 @@ class FileManager: NSObject {
     }
     
     class func songImportFolder() -> String {
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
-        return documentDirectory.stringByAppendingPathComponent(IMPORT_FOLDER)
+        return libraryFolder.stringByAppendingPathComponent(IMPORT_FOLDER)
     }
     
     class func moveFileAtPath(srcPath: String, toPath dstPath: String) {

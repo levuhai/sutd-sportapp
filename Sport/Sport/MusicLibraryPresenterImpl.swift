@@ -13,13 +13,13 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     weak var libraryView: MusicLibraryView?
     
     var songRepository: SongRepository
-    var songImporter: SongImporter
-    var songsList: [SongData] = []
+    var songSyncManager: SongSyncManager
+    var songsList = [SongViewData]()
     
-    init(libraryView: MusicLibraryView, songRepository: SongRepository, songImporter: SongImporter) {
+    init(libraryView: MusicLibraryView, songRepository: SongRepository, songSyncManager: SongSyncManager) {
         self.libraryView = libraryView
         self.songRepository = songRepository
-        self.songImporter = songImporter
+        self.songSyncManager = songSyncManager
     }
     
     func initialize() {
@@ -31,8 +31,7 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     }
     
     func reloadData() {
-        let songList = songRepository.loadSongs()
-        setSongs(songList)
+        songsList = songRepository.loadListSongViewData()
         
         displaySongs()
     }
@@ -41,7 +40,7 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
         if songsList.isEmpty {
             libraryView?.showEmptyList()
         } else {
-            libraryView?.showSongList()
+            libraryView?.showSongList(songsList)
         }
     }
     
@@ -49,42 +48,15 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
         print("Error: \(error)")
     }
     
-    func setSongs(songs: [SongData]?) {
-        songsList.removeAll()
-        
-        if let realSongs = songs {
-            songsList = realSongs
-        }
-    }
-    
     func onBarButonReloadClick() {
         libraryView?.enableRightBarButton(false)
         libraryView?.showLoading(true)
-        songImporter.importToRepository(self.songRepository) { 
+        songSyncManager.syncWithRepo(songRepository, completion: { 
             self.reloadData()
             
             self.libraryView?.enableRightBarButton(true)
             self.libraryView?.showLoading(false)
-        }
+        })
     }
 }
 
-extension MusicLibraryPresenterImpl: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let songCell = tableView.dequeueReusableCellWithIdentifier("SongTableCell") as! SongTableCell
-        let song = songsList[indexPath.row]
-        songCell.displaySong(song)
-        return songCell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return songsList.count
-    }
-}
-
-extension MusicLibraryPresenterImpl: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-    }
-}

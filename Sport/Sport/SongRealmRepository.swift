@@ -6,12 +6,14 @@
 //  Copyright © 2016 tiennth. All rights reserved.
 //
 
-import UIKit
+import MediaPlayer
 
 class SongRealmRepository: SongRepository {
     
+    static let sharedInstance = SongRealmRepository()
+    
     func addSong(song: SongData) {
-        print("Song added \(song.persistentId), \(song.title)")
+        print("Song added \(song.persistentId)")
         
         let realm = RealmFactory.sharedInstance.newRealm()
         realm.beginWrite()
@@ -24,12 +26,8 @@ class SongRealmRepository: SongRepository {
     }
     
     func isSongExisting(persistenceId: String) -> Bool {
-        var isExisting = false
         let realm = RealmFactory.sharedInstance.newRealm()
-        let predicate = NSPredicate(format: "\(SongData.Column.PersistentId) == %@", persistenceId)
-        let songs = realm.objects(SongData).filter(predicate)
-        isExisting = songs.count > 0
-        return isExisting
+        return realm.objectForPrimaryKey(SongData.self, key: persistenceId) != nil
     }
     
     func loadSongs() -> [SongData] {
@@ -43,5 +41,29 @@ class SongRealmRepository: SongRepository {
         let predicate = NSPredicate(format: "\(SongData.Column.Tempo) BETWEEN {%f, %f}", tempo - 10, tempo + 10)
         let result = realm.objects(SongData).filter(predicate)
         return Array(result)
+    }
+    
+    func loadListSongViewData() -> [SongViewData] {
+        let songUtils = SongUtils()
+        let listSongData = loadSongs()
+        var listSongView = [SongViewData]()
+        for song in listSongData {
+            let songView = songUtils.songViewDataFromPersistentId(song.persistentId, analysisInfo: song)
+            if (songView == nil) {
+                continue
+            }
+            listSongView.append(songView!)
+        }
+        return listSongView
+    }
+    
+    func deleteSong(persistentId: String) {
+        let realm = RealmFactory.sharedInstance.newRealm()
+        let objectToDelete = realm.objectForPrimaryKey(SongData.self, key: persistentId)
+        if let obj = objectToDelete {
+            realm.beginWrite()
+            realm.delete(obj)
+            try! realm.commitWrite()
+        }
     }
 }

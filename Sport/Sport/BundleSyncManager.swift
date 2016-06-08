@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BundleDataImporter: SongImporter {
+class BundleDataImporter: SongSyncManager {
     
     static let sharedInstance = BundleDataImporter()
     
@@ -20,8 +20,7 @@ class BundleDataImporter: SongImporter {
                 
                 let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(path)
                 let persistentId = "persistent_id"
-                let songTitle = path.stringByDeletingPathExtension.lastPathComponent
-                let songData = SongData(persistentId: persistentId, title: songTitle, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
+                let songData = SongData(persistentId: persistentId, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
                 
                 repository.addSong(songData)
             }
@@ -30,5 +29,9 @@ class BundleDataImporter: SongImporter {
                 completion?()
             })
         }
+    }
+    
+    func syncWithRepo(repository: SongRepository, completion: (() -> ())?) {
+        
     }
 }

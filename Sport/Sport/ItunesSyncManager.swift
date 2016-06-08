@@ -15,9 +15,29 @@ protocol ItunesDataImporterDelegate {
     
 }
 
-class ItunesDataImporter: SongImporter {
+class ItunesSyncManager: SongSyncManager {
     
-    static let sharedInstance = ItunesDataImporter()
+    static let sharedInstance = ItunesSyncManager()
+    
+    func syncWithRepo(repository: SongRepository, completion: (()->())?) {
+        func isExistInItuneLibrary(songPersistentId: String) -> Bool {
+                let query = MPMediaQuery.songsQuery()
+                let predicate = MPMediaPropertyPredicate(value: songPersistentId, forProperty: MPMediaItemPropertyPersistentID)
+                query.addFilterPredicate(predicate)
+                return query.items?.count > 0
+        }
+        
+        // Remove all songs that doesn't exist in Ipod library any more.
+        let localSongList = repository.loadSongs()
+        for localSong in localSongList {
+            let isExisting = isExistInItuneLibrary(localSong.persistentId)
+            if !isExisting {
+                repository.deleteSong(localSong.persistentId)
+            }
+        }
+        
+        importToRepository(repository, completion: completion)
+    }
     
     func importToRepository(repository: SongRepository, completion: (()->())?) {
         let mediaQuery = MPMediaQuery.songsQuery()
@@ -48,8 +68,7 @@ class ItunesDataImporter: SongImporter {
                     let actualResultPath = resultPath!
                     let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(actualResultPath)
                     let persistentId = songPersistentId
-                    let songTitle = song.valueForProperty(MPMediaItemPropertyTitle) as! String
-                    let songData = SongData(persistentId: persistentId, title: songTitle, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
+                    let songData = SongData(persistentId: persistentId, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
                     
                     repository.addSong(songData)
                     

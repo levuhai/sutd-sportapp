@@ -28,9 +28,9 @@ class SongTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func displaySong(song: SongData) {
+    func displaySong(song: SongViewData) {
         songTitleLabel.text = song.title
-        songAlbumLabel.text = "Album"
+        songAlbumLabel.text = song.artist
         tempoLabel.text = "\(Int(song.tempo)) bpm"
         
         energyLabel.text = "Energy"

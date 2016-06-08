@@ -50,7 +50,7 @@ class MusicPlayerController: UIViewController {
         super.viewDidLoad()
         
         let router = MusicPlayerRouterImpl(controller: self)
-        screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router, songRepository: SongRepositories.realmRepository)
+        screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router, songRepository: SongRealmRepository.sharedInstance)
         
         screenPresenter?.initialize()
     }
@@ -182,8 +182,6 @@ extension MusicPlayerController: MusicPlayerView {
         updatePlaybackProgress(0)
         
         showPlaylistView(false, animated: false)
-        
-        displayPlaylist(DependencyInjector.dummyPlaylistToView())
     }
     
     func switchControlMode(runningMode: Bool) {

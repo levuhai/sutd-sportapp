@@ -12,15 +12,16 @@ import MBProgressHUD
 class MusicLibraryController: UIViewController {
     
     var libraryPresenter: MusicLibraryPresenter?
+    var songViewData = [SongViewData]()
     
     @IBOutlet weak var songTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        songTableView.dataSource = self
+        songTableView.delegate = self
         
-        libraryPresenter = MusicLibraryPresenterImpl(libraryView: self, songRepository: SongRepositories.realmRepository, songImporter: ItunesDataImporter.sharedInstance)
-        songTableView.dataSource = libraryPresenter
-        songTableView.delegate = libraryPresenter
+        libraryPresenter = MusicLibraryPresenterImpl(libraryView: self, songRepository: SongRealmRepository.sharedInstance, songSyncManager: ItunesSyncManager.sharedInstance)
         
         libraryPresenter?.initialize()
     }
@@ -54,7 +55,8 @@ extension MusicLibraryController: MusicLibraryView {
         songTableView.hidden = true
     }
     
-    func showSongList() {
+    func showSongList(songViewData: [SongViewData]) {
+        self.songViewData = songViewData
         songTableView.hidden = false
         // emptyView.hidden = true
         songTableView.reloadData()
@@ -74,5 +76,25 @@ extension MusicLibraryController: MusicLibraryView {
     
     func enableRightBarButton(enable: Bool) {
         self.navigationItem.rightBarButtonItem?.enabled = enable
+    }
+}
+
+extension MusicLibraryController: UITableViewDataSource {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let songCell = tableView.dequeueReusableCellWithIdentifier("SongTableCell") as! SongTableCell
+        let song = songViewData[indexPath.row]
+        songCell.displaySong(song)
+        return songCell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return songViewData.count
+    }
+}
+
+extension MusicLibraryController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
 }
