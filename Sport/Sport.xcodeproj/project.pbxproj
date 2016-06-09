@@ -223,14 +223,14 @@
 			name = Presenter;
 			sourceTree = "<group>";
 		};
-		720B34831CF89B77001D8893 /* UI */ = {
+		720B34831CF89B77001D8893 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				720B34841CF8AC0C001D8893 /* LibraryScreen */,
 				720B344D1CF60618001D8893 /* MusicScreen */,
 				72B91D6B1CDF2E56000E4923 /* MainScreen */,
 			);
-			name = UI;
+			name = Screens;
 			sourceTree = "<group>";
 		};
 		720B34841CF8AC0C001D8893 /* LibraryScreen */ = {
@@ -315,7 +315,7 @@
 				720AC1B91CE7AFB500898A87 /* Common */,
 				72B91D7B1CDF6B5D000E4923 /* Manager */,
 				720AC1BA1CE7AFC700898A87 /* Models */,
-				720B34831CF89B77001D8893 /* UI */,
+				720B34831CF89B77001D8893 /* Screens */,
 				72B91D6A1CDF2D46000E4923 /* AppDelegate */,
 				72B91D6C1CDF2E75000E4923 /* Others */,
 				72F6F0CA1CE896B800142CD0 /* SPSlider.swift */,

@@ -40,6 +40,13 @@ class SPAudioPlayer: NSObject {
     var playerItems: [SPPlayerItem] = []
     var currentPlayingIndex = 0
     var currentItem: SPPlayerItem? {
+        willSet {
+            if (currentItem == nil) {
+                return
+            }
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
+        }
+        
         didSet {
             if (currentItem == nil) {
                 return
@@ -47,6 +54,7 @@ class SPAudioPlayer: NSObject {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SPAudioPlayer.playerItemDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
         }
     }
+    var observingObject: SPPlayerItem?
     
     // Events handler.
     var progressHandlerBlock: ((progress: Double)->())?
@@ -267,12 +275,13 @@ extension SPAudioPlayer {
     func attachListener(playerItem: SPPlayerItem) {
         registerForTimeTracking(progressHandlerBlock)
         playerItem.addObserver(self, forKeyPath: "status", options: .New, context: nil)
+        observingObject = playerItem
     }
     
     func detachListener(playerItem: SPPlayerItem?) {
         unregisterTimeTracking()
-        playerItem?.removeObserver(self, forKeyPath: "status")
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+        observingObject?.removeObserver(self, forKeyPath: "status")
+        observingObject = nil
     }
     
     func registerForTimeTracking(block: ((progress: Double)->())?) {

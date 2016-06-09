@@ -46,14 +46,14 @@
                                 <rect key="frame" x="20" y="463" width="335" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSX-b7-BD6" userLabel="Heart rate container view">
-                                        <rect key="frame" x="175.5" y="0.0" width="159.5" height="64"/>
+                                        <rect key="frame" x="176" y="0.0" width="159" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Mfp-EV-PBd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="dz7-SX-Gtc"/>

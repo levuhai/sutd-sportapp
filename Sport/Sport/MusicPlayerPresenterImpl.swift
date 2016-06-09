@@ -53,6 +53,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     
     func onRewindButtonClicked() {
         audioPlayer.moveToPrevious()
+        showCurrentSongInfo(audioPlayer.currentItem)
     }
     
     func onFastForwardButtonClicked() {
