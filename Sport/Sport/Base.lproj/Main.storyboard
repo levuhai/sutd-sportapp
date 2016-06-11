@@ -46,14 +46,14 @@
                                 <rect key="frame" x="20" y="463" width="335" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSX-b7-BD6" userLabel="Heart rate container view">
-                                        <rect key="frame" x="176" y="0.0" width="159" height="64"/>
+                                        <rect key="frame" x="175" y="0.0" width="159.5" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Mfp-EV-PBd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="dz7-SX-Gtc"/>
@@ -104,22 +104,40 @@
                                         <color key="textColor" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="20" maxValue="250" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ej7-lU-dPF" customClass="SPSlider" customModule="Sport" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7i-xq-y7j" customClass="TNSlider" customModule="Sport" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="33" width="375" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="fyb-mr-txa"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="trackMinColor">
+                                                <color key="value" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="trackMaxColor">
+                                                <color key="value" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tempoSliderValueChanged:" destination="wXN-UV-aQG" eventType="valueChanged" id="AHI-CR-bYD"/>
+                                        </connections>
+                                    </view>
+                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="20" maxValue="250" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ej7-lU-dPF" customClass="SPSlider" customModule="Sport" customModuleProvider="target">
                                         <rect key="frame" x="6" y="30" width="363" height="31"/>
                                         <color key="minimumTrackTintColor" red="0.69019607843137254" green="0.71372549019607845" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="maximumTrackTintColor" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="thumbTintColor" red="0.96470588235294119" green="0.2196078431372549" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="tempoSliderValueChanged:" destination="wXN-UV-aQG" eventType="valueChanged" id="chd-2L-6pW"/>
-                                        </connections>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="g82-Oc-hk6" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" constant="8" id="1H7-Oz-bDR"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="top" secondItem="HE4-lC-0Gk" secondAttribute="bottom" constant="4" id="7Id-9q-xII"/>
+                                    <constraint firstAttribute="trailing" secondItem="L7i-xq-y7j" secondAttribute="trailing" id="9qP-2X-60c"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" constant="8" id="Cya-Ka-xtm"/>
+                                    <constraint firstAttribute="bottom" secondItem="L7i-xq-y7j" secondAttribute="bottom" id="Dun-ga-uYz"/>
                                     <constraint firstAttribute="trailing" secondItem="ZCd-yy-ckM" secondAttribute="trailing" constant="8" id="FoK-0H-GH3"/>
+                                    <constraint firstItem="L7i-xq-y7j" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" id="GVD-ix-Uom"/>
                                     <constraint firstAttribute="height" constant="64" id="Izp-cB-WeH"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="top" secondItem="g82-Oc-hk6" secondAttribute="bottom" id="KEH-S5-ldI"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="top" secondItem="ZCd-yy-ckM" secondAttribute="bottom" id="eEH-W0-EQl"/>
@@ -438,13 +456,14 @@
                         <outlet property="rewindButton" destination="HkD-FV-QOd" id="UWf-Ax-hpO"/>
                         <outlet property="songTitleLabel" destination="JLb-Nb-Xra" id="VRu-Om-Zb6"/>
                         <outlet property="tempoSlider" destination="ej7-lU-dPF" id="7DY-Jh-cWw"/>
+                        <outlet property="tnTempoSlider" destination="L7i-xq-y7j" id="DY3-Ex-oNE"/>
                         <outlet property="topPlaylistToParentBottomConstraint" destination="DlU-J2-xbX" id="FZA-bm-FAc"/>
                         <outlet property="trackpadView" destination="7aC-Pr-mJ1" id="2nh-aR-EA6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6E-8b-VU4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1477.5" y="219"/>
+            <point key="canvasLocation" x="1477.5" y="218.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MyK-uq-eUL">

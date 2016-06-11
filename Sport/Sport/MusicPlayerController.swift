@@ -27,6 +27,7 @@ class MusicPlayerController: UIViewController {
     
     @IBOutlet weak var progressView: MBCircularProgressBarView!
     
+    @IBOutlet weak var tnTempoSlider: TNSlider!
     @IBOutlet weak var tempoSlider: SPSlider!
     @IBOutlet weak var playlistView: UIView!
     @IBOutlet weak var playlistHeaderView: UIView!
@@ -53,6 +54,8 @@ class MusicPlayerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         let router = MusicPlayerRouterImpl(controller: self)
         screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router, songRepository: SongRealmRepository.sharedInstance)
@@ -85,8 +88,7 @@ class MusicPlayerController: UIViewController {
         screenPresenter?.onRewindButtonClicked()
     }
     
-    @IBAction func tempoSliderValueChanged(sender: UISlider) {
-        print("Tempo value: \(sender.value)")
+    @IBAction func tempoSliderValueChanged(sender: TNSlider) {
         screenPresenter?.onTempoSliderValueChanged(sender.value)
     }
     
@@ -146,6 +148,9 @@ class MusicPlayerController: UIViewController {
 extension MusicPlayerController: MusicPlayerView {
     func initialize() {
         self.title = "Music"
+        
+        tnTempoSlider.minimumValue = 20
+        tnTempoSlider.maximumValue = 200
         
         playlistTableView.dataSource = self
         playlistTableView.delegate = self
@@ -225,6 +230,7 @@ extension MusicPlayerController: MusicPlayerView {
     
     func setTempoSliderValue(tempo: Float) {
         tempoSlider.setValue(tempo, animated: true)
+        tnTempoSlider.value = tempo
     }
     
     func updateViewForPlayingState(isPlaying: Bool) {
