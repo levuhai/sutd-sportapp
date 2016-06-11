@@ -455,7 +455,6 @@
                         <outlet property="progressView" destination="HGA-Mz-Shb" id="8jX-yI-A3A"/>
                         <outlet property="rewindButton" destination="HkD-FV-QOd" id="UWf-Ax-hpO"/>
                         <outlet property="songTitleLabel" destination="JLb-Nb-Xra" id="VRu-Om-Zb6"/>
-                        <outlet property="tempoSlider" destination="ej7-lU-dPF" id="7DY-Jh-cWw"/>
                         <outlet property="tnTempoSlider" destination="L7i-xq-y7j" id="DY3-Ex-oNE"/>
                         <outlet property="topPlaylistToParentBottomConstraint" destination="DlU-J2-xbX" id="FZA-bm-FAc"/>
                         <outlet property="trackpadView" destination="7aC-Pr-mJ1" id="2nh-aR-EA6"/>

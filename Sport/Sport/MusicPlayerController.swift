@@ -28,7 +28,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var progressView: MBCircularProgressBarView!
     
     @IBOutlet weak var tnTempoSlider: TNSlider!
-    @IBOutlet weak var tempoSlider: SPSlider!
+//    @IBOutlet weak var tempoSlider: SPSlider!
     @IBOutlet weak var playlistView: UIView!
     @IBOutlet weak var playlistHeaderView: UIView!
     @IBOutlet weak var expandCollapseButton: UIButton!
@@ -229,7 +229,7 @@ extension MusicPlayerController: MusicPlayerView {
     }
     
     func setTempoSliderValue(tempo: Float) {
-        tempoSlider.setValue(tempo, animated: true)
+//        tempoSlider.setValue(tempo, animated: true)
         tnTempoSlider.value = tempo
     }
     
