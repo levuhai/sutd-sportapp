@@ -6,7 +6,6 @@
 //  Copyright © 2016 tiennth. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import MediaPlayer
 
@@ -200,6 +199,7 @@ class SPAudioPlayer: NSObject {
         thePlayer?.play()
         
         delegate?.audioPlayerDidStartPlay(self, song: currentItem!)
+        configureNowPlayingInfo(currentItem!.mediaItem)
     }
    
     func rewind() {
@@ -333,8 +333,18 @@ extension SPAudioPlayer {
         }
         return kCMTimeInvalid
     }
-    
-    
 }
 
-extension
+// Show playing item on lock screen.
+extension SPAudioPlayer {
+    func configureNowPlayingInfo(mediaItem: MPMediaItem) {
+        let infoCenter = MPNowPlayingInfoCenter.defaultCenter()
+        var newInfo = [String: AnyObject]()
+        let itemProperties = Set([MPMediaItemPropertyTitle, MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPMediaItemPropertyAlbumTitle, MPNowPlayingInfoPropertyElapsedPlaybackTime])
+        mediaItem.enumerateValuesForProperties(itemProperties) { (property, value, stop) in
+            newInfo[property] = value
+        }
+        
+        infoCenter.nowPlayingInfo = newInfo
+    }
+}

@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Enable playing music while app is in the background
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
         
         Fabric.with([Crashlytics.self])
         return true
@@ -50,6 +51,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func remoteControlReceivedWithEvent(event: UIEvent?) {
+        let type = event?.subtype
+        if type == UIEventSubtype.RemoteControlPlay {
+            SPAudioPlayer.sharedInstance.play()
+        } else if type == UIEventSubtype.RemoteControlPause {
+            print("UIEventSubtype.RemoteControlPause")
+            SPAudioPlayer.sharedInstance.pause()
+        } else if type == UIEventSubtype.RemoteControlNextTrack {
+            print("UIEventSubtype.RemoteControlNextTrack")
+            SPAudioPlayer.sharedInstance.moveToNext()
+        } else if type == UIEventSubtype.RemoteControlPreviousTrack {
+            print("UIEventSubtype.RemoteControlPreviousTrack")
+            SPAudioPlayer.sharedInstance.moveToPrevious()
+        } else if type == UIEventSubtype.RemoteControlBeginSeekingForward {
+            print("UIEventSubtype.RemoteControlBeginSeekingForward")
+        } else if type == UIEventSubtype.RemoteControlEndSeekingForward {
+            print("UIEventSubtype.RemoteControlEndSeekingForward")
+        } else if type == UIEventSubtype.RemoteControlBeginSeekingBackward {
+            print("UIEventSubtype.RemoteControlBeginSeekingBackward")
+        } else if type == UIEventSubtype.RemoteControlEndSeekingBackward {
+            print("UIEventSubtype.RemoteControlEndSeekingBackward")
+        }
+        
     }
     
     func decorate() {

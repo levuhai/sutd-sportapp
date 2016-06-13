@@ -55,8 +55,6 @@ class MusicPlayerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         let router = MusicPlayerRouterImpl(controller: self)
         screenPresenter = MusicPlayerPresenterImpl(musicView: self, router: router, songRepository: SongRealmRepository.sharedInstance)
         
