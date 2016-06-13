@@ -151,7 +151,7 @@ extension MusicPlayerPresenterImpl {
     
     func showCurrentSongInfo(playerItem: SPPlayerItem?) {
         guard let currentItem = playerItem else {
-            // ??? What to do
+            // ??? What to do if current item is nil 
             return
         }
         
@@ -170,8 +170,8 @@ extension MusicPlayerPresenterImpl {
     }
     
     func songViewFromPlayerItem(playerItem: SPPlayerItem) -> SongViewData {
-        let title = playerItem.mediaItem.title ?? "Unknown"
-        let artist = playerItem.mediaItem.artist ?? "Unknown"
+        let title = playerItem.mediaItem.title ?? Localizations.UnknownArtist
+        let artist = playerItem.mediaItem.artist ?? Localizations.UnknownTitle
         let albumImage = playerItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
         return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo)
         
@@ -195,5 +195,10 @@ extension MusicPlayerPresenterImpl {
         
         let adapter = SPPlayerItemAdapter()
         playList = adapter.createPlayerItems(songs)
+    }
+    
+    func a() {
+        
+        
     }
 }

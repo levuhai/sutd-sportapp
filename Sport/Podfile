@@ -6,8 +6,6 @@ use_frameworks!
 target 'Sport' do
     pod 'RealmSwift'
     pod 'MBProgressHUD'
-    pod 'SnapKit'
-    pod 'ChameleonFramework/Swift'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'MBCircularProgressBar'

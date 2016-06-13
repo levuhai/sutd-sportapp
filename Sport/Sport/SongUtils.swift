@@ -24,8 +24,8 @@ class SongUtils: NSObject {
             return nil
         }
         
-        let title = mpItem.title ?? "Unknown"
-        let artist = mpItem.artist ?? "Unknown"
+        let title = mpItem.title ?? Localizations.UnknownTitle
+        let artist = mpItem.artist ?? Localizations.UnknownArtist
         let albumImage = mpItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
         let tempo = Float(analysisInfo.tempo)
         return SongViewData(image: albumImage!, title: title, artist: artist, tempo: tempo)

@@ -38,6 +38,8 @@
 		72468B961CEA2ACC00EFBF62 /* AnalysisOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 72468B951CEA2ACC00EFBF62 /* AnalysisOutput.m */; };
 		72468B981CEA3B3C00EFBF62 /* SongSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72468B971CEA3B3C00EFBF62 /* SongSyncManager.swift */; };
 		72571D4A1D0DA24C001198E5 /* SPTrackPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72571D491D0DA24C001198E5 /* SPTrackPad.swift */; };
+		72571D6D1D0F2F14001198E5 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72571D6F1D0F2F14001198E5 /* Localization.strings */; };
+		72571D711D0F329E001198E5 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72571D701D0F329E001198E5 /* Localization.swift */; };
 		7297330C1D034869000A6384 /* SongViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297330B1D034869000A6384 /* SongViewData.swift */; };
 		7297330E1D0348CE000A6384 /* PlaylistSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297330D1D0348CE000A6384 /* PlaylistSongCell.swift */; };
 		72A6BC511CE24CE7007C0254 /* aubio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6BC501CE24CE7007C0254 /* aubio.framework */; };
@@ -99,6 +101,8 @@
 		72468B951CEA2ACC00EFBF62 /* AnalysisOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalysisOutput.m; sourceTree = "<group>"; };
 		72468B971CEA3B3C00EFBF62 /* SongSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongSyncManager.swift; sourceTree = "<group>"; };
 		72571D491D0DA24C001198E5 /* SPTrackPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTrackPad.swift; sourceTree = "<group>"; };
+		72571D6E1D0F2F14001198E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
+		72571D701D0F329E001198E5 /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		7297330B1D034869000A6384 /* SongViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongViewData.swift; sourceTree = "<group>"; };
 		7297330D1D0348CE000A6384 /* PlaylistSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistSongCell.swift; sourceTree = "<group>"; };
 		72A6BC501CE24CE7007C0254 /* aubio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aubio.framework; path = Sport/Frameworks/aubio.framework; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 		720AC1B91CE7AFB500898A87 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				72571D701D0F329E001198E5 /* Localization.swift */,
 				72A6BC9C1CE4EBAD007C0254 /* String+Extension.swift */,
 				720AC1B51CE799A400898A87 /* Constants.swift */,
 				720B346E1CF74D9D001D8893 /* UIColor+Sport.swift */,
@@ -391,6 +396,7 @@
 				72349B5B1CDDFBA4002B3B84 /* LaunchScreen.storyboard */,
 				72349B5E1CDDFBA4002B3B84 /* Info.plist */,
 				72A6BC521CE24F6E007C0254 /* BridgingHeader.h */,
+				72571D6F1D0F2F14001198E5 /* Localization.strings */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 			files = (
 				720B34781CF75EFA001D8893 /* ionicons.ttf in Resources */,
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
+				72571D6D1D0F2F14001198E5 /* Localization.strings in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
 				720B349B1CFCD946001D8893 /* big.mp3 in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
@@ -623,6 +630,7 @@
 				720B348A1CF8AD87001D8893 /* MusicLibraryView.swift in Sources */,
 				72A8C3D21D0C8DD700DF08DF /* TNSlider.swift in Sources */,
 				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,
+				72571D711D0F329E001198E5 /* Localization.swift in Sources */,
 				72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */,
 				720AC1B61CE799A400898A87 /* Constants.swift in Sources */,
 				7297330E1D0348CE000A6384 /* PlaylistSongCell.swift in Sources */,
@@ -646,6 +654,14 @@
 				72349B5C1CDDFBA4002B3B84 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		72571D6F1D0F2F14001198E5 /* Localization.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72571D6E1D0F2F14001198E5 /* en */,
+			);
+			name = Localization.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
