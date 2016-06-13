@@ -80,7 +80,7 @@ class SPAudioPlayer: NSObject {
     
     // MARK: - Playback functions
     // Play current song currentItem
-    func playPlayListFromBeginning() {
+    func playPlayListFromStopped() {
         playbackState = .Preparing
         if (currentItem == nil) {
             currentItem = playerItems.first
@@ -89,11 +89,24 @@ class SPAudioPlayer: NSObject {
         playCurrentItem()
     }
     
+    func playPlayListFromIndex(index: Int) {
+        stop()
+        if index > playerItems.count {
+            return
+        }
+        
+        let choosenSong = playerItems[index]
+        currentItem = choosenSong
+        currentPlayingIndex = index
+        
+        playCurrentItem()
+    }
+    
     func play() {
         if playbackState == .Paused {
             resume()
         } else if playbackState == .Stopped {
-            playPlayListFromBeginning()
+            playPlayListFromStopped()
         }
     }
     

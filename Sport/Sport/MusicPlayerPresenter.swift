@@ -28,5 +28,5 @@ protocol MusicPlayerPresenter: class {
     
     func onTempoSliderValueChanged(newValue: Float)
     
-    
+    func playlistDidSelectItemAtIndex(indexPath: NSIndexPath)
 }

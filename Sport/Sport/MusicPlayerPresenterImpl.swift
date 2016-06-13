@@ -93,58 +93,8 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         setupNewPlayList()
     }
     
-    func audioDoPlay() {
-        audioPlayer.play()
-    }
-    
-    func audioDoPause() {
-        audioPlayer.pause()
-    }
-    
-    func audioDoStop() {
-        audioPlayer.stop()
-    }
-    
-    func loadSongs(tempo: Float) {
-        let songs = songRepository.loadSongs(tempo)
-        playList.removeAll()
-        
-        let adapter = SPPlayerItemAdapter()
-        playList = adapter.createPlayerItems(songs)
-    }
-    
-    func setupNewPlayList() {
-        audioDoStop()
-        audioPlayer.setup(playList)
-        playerView?.displayPlaylist(getPlaylistForDisplay(playList, currentPlayingItem: audioPlayer.currentItem))
-    }
-    
-    func showCurrentSongInfo(playerItem: SPPlayerItem?) {
-        guard let currentItem = playerItem else {
-            // ??? What to do
-            return
-        }
-        
-        let currentSongViewData = songViewFromPlayerItem(currentItem)
-        playerView?.updateSongInfo(currentSongViewData)
-    }
-    
-    func getPlaylistForDisplay(playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem?) -> [SongViewData] {
-        var listSongViews = [SongViewData]()
-        for spItem in playlist {
-            let songView = songViewFromPlayerItem(spItem)
-            songView.isPlaying = spItem == currentPlayingItem
-            listSongViews.append(songView)
-        }
-        return listSongViews
-    }
-    
-    func songViewFromPlayerItem(playerItem: SPPlayerItem) -> SongViewData {
-        let title = playerItem.mediaItem.title ?? "Unknown"
-        let artist = playerItem.mediaItem.artist ?? "Unknown"
-        let albumImage = playerItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
-        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo)
-        
+    func playlistDidSelectItemAtIndex(indexPath: NSIndexPath) {
+        audioPlayer.playPlayListFromIndex(indexPath.row)
     }
 }
 
@@ -188,5 +138,62 @@ extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
     func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer) {
         audioDoStop()
         playerView?.showPlayingSongInPlaylist(-1)
+    }
+}
+
+extension MusicPlayerPresenterImpl {
+    
+    func setupNewPlayList() {
+        audioDoStop()
+        audioPlayer.setup(playList)
+        playerView?.displayPlaylist(getPlaylistForDisplay(playList, currentPlayingItem: audioPlayer.currentItem))
+    }
+    
+    func showCurrentSongInfo(playerItem: SPPlayerItem?) {
+        guard let currentItem = playerItem else {
+            // ??? What to do
+            return
+        }
+        
+        let currentSongViewData = songViewFromPlayerItem(currentItem)
+        playerView?.updateSongInfo(currentSongViewData)
+    }
+    
+    func getPlaylistForDisplay(playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem?) -> [SongViewData] {
+        var listSongViews = [SongViewData]()
+        for spItem in playlist {
+            let songView = songViewFromPlayerItem(spItem)
+            songView.isPlaying = spItem == currentPlayingItem
+            listSongViews.append(songView)
+        }
+        return listSongViews
+    }
+    
+    func songViewFromPlayerItem(playerItem: SPPlayerItem) -> SongViewData {
+        let title = playerItem.mediaItem.title ?? "Unknown"
+        let artist = playerItem.mediaItem.artist ?? "Unknown"
+        let albumImage = playerItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
+        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo)
+        
+    }
+    
+    func audioDoPlay() {
+        audioPlayer.play()
+    }
+    
+    func audioDoPause() {
+        audioPlayer.pause()
+    }
+    
+    func audioDoStop() {
+        audioPlayer.stop()
+    }
+    
+    func loadSongs(tempo: Float) {
+        let songs = songRepository.loadSongs(tempo)
+        playList.removeAll()
+        
+        let adapter = SPPlayerItemAdapter()
+        playList = adapter.createPlayerItems(songs)
     }
 }
