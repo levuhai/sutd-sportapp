@@ -96,7 +96,7 @@ public class TNSlider: UIControl {
         }
     }
     
-    public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
+    @IBInspectable public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
     
     private var trackLayer: TNTrackLayer
     private var thumbLayer: CATextLayer
@@ -258,6 +258,10 @@ public class TNSlider: UIControl {
         commonInit()
         updateLayersPosition()
         redrawLayers()
+    }
+    
+    public override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: frame.size.width, height: 31)
     }
     
     // MARK: - Helper functions

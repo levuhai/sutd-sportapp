@@ -6,7 +6,6 @@
 //  Copyright © 2016 tiennth. All rights reserved.
 //
 
-import UIKit
 import MediaPlayer
 import AVFoundation
 import MobileCoreServices

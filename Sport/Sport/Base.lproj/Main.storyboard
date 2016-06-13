@@ -30,7 +30,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgImage" translatesAutoresizingMaskIntoConstraints="NO" id="XWY-gf-sTr">
                                 <rect key="frame" x="0.0" y="20" width="375" height="334"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aC-Pr-mJ1" userLabel="Trackpad view">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aC-Pr-mJ1" userLabel="Trackpad view" customClass="SPTrackPad" customModule="Sport" customModuleProvider="target">
                                 <rect key="frame" x="20" y="40" width="335" height="407"/>
                                 <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -46,14 +46,14 @@
                                 <rect key="frame" x="20" y="463" width="335" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSX-b7-BD6" userLabel="Heart rate container view">
-                                        <rect key="frame" x="175" y="0.0" width="159.5" height="64"/>
+                                        <rect key="frame" x="175" y="0.0" width="160" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Mfp-EV-PBd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="64"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="dz7-SX-Gtc"/>
@@ -105,7 +105,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7i-xq-y7j" customClass="TNSlider" customModule="Sport" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="33" width="375" height="31"/>
+                                        <rect key="frame" x="12" y="33" width="351" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="fyb-mr-txa"/>
@@ -117,6 +117,7 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="trackMaxColor">
                                                 <color key="value" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="continuous" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="tempoSliderValueChanged:" destination="wXN-UV-aQG" eventType="valueChanged" id="AHI-CR-bYD"/>
@@ -133,11 +134,11 @@
                                 <constraints>
                                     <constraint firstItem="g82-Oc-hk6" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" constant="8" id="1H7-Oz-bDR"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="top" secondItem="HE4-lC-0Gk" secondAttribute="bottom" constant="4" id="7Id-9q-xII"/>
-                                    <constraint firstAttribute="trailing" secondItem="L7i-xq-y7j" secondAttribute="trailing" id="9qP-2X-60c"/>
+                                    <constraint firstAttribute="trailing" secondItem="L7i-xq-y7j" secondAttribute="trailing" constant="12" id="9qP-2X-60c"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" constant="8" id="Cya-Ka-xtm"/>
                                     <constraint firstAttribute="bottom" secondItem="L7i-xq-y7j" secondAttribute="bottom" id="Dun-ga-uYz"/>
                                     <constraint firstAttribute="trailing" secondItem="ZCd-yy-ckM" secondAttribute="trailing" constant="8" id="FoK-0H-GH3"/>
-                                    <constraint firstItem="L7i-xq-y7j" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" id="GVD-ix-Uom"/>
+                                    <constraint firstItem="L7i-xq-y7j" firstAttribute="leading" secondItem="DNu-n5-Ceu" secondAttribute="leading" constant="12" id="GVD-ix-Uom"/>
                                     <constraint firstAttribute="height" constant="64" id="Izp-cB-WeH"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="top" secondItem="g82-Oc-hk6" secondAttribute="bottom" id="KEH-S5-ldI"/>
                                     <constraint firstItem="ej7-lU-dPF" firstAttribute="top" secondItem="ZCd-yy-ckM" secondAttribute="bottom" id="eEH-W0-EQl"/>
