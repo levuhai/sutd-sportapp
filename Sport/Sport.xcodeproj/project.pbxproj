@@ -58,6 +58,8 @@
 		72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D771CDF4ABF000E4923 /* HomeView.swift */; };
 		72B91D7A1CDF6B52000E4923 /* ItunesSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
+		72E11C801D1526260024803E /* EssentiaTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11C7F1D15256C0024803E /* EssentiaTouch.framework */; };
+		72E11C811D1526260024803E /* EssentiaTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11C7F1D15256C0024803E /* EssentiaTouch.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		72E85BD51D040E790025CAFE /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E85BD41D040E790025CAFE /* DependencyInjector.swift */; };
 		72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CA1CE896B800142CD0 /* SPSlider.swift */; };
 		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
@@ -66,6 +68,37 @@
 		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		72E11C7E1D15256C0024803E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72E11C7A1D15256C0024803E /* EssentiaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A111635318158A980062F63F;
+			remoteInfo = EssentiaTouch;
+		};
+		72E11C821D1526260024803E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72E11C7A1D15256C0024803E /* EssentiaTouch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A111635218158A980062F63F;
+			remoteInfo = EssentiaTouch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		72E11C841D1526260024803E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				72E11C811D1526260024803E /* EssentiaTouch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		720AC1B21CE70EED00898A87 /* SongData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongData.swift; sourceTree = "<group>"; };
@@ -124,6 +157,7 @@
 		72B91D771CDF4ABF000E4923 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesSyncManager.swift; sourceTree = "<group>"; };
 		72B91D7D1CE2165D000E4923 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		72E11C7A1D15256C0024803E /* EssentiaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EssentiaTouch.xcodeproj; path = Sport/Libraries/EssentiaTouch/EssentiaTouch.xcodeproj; sourceTree = "<group>"; };
 		72E85BD41D040E790025CAFE /* DependencyInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
 		72F6F0CA1CE896B800142CD0 /* SPSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPSlider.swift; sourceTree = "<group>"; };
 		72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
@@ -140,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E11C801D1526260024803E /* EssentiaTouch.framework in Frameworks */,
 				729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */,
 				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
@@ -316,6 +351,7 @@
 		72349B461CDDFBA4002B3B84 = {
 			isa = PBXGroup;
 			children = (
+				72E11C7A1D15256C0024803E /* EssentiaTouch.xcodeproj */,
 				72349B511CDDFBA4002B3B84 /* Sport */,
 				72349B501CDDFBA4002B3B84 /* Products */,
 				2645E1D6706C137743103C56 /* Pods */,
@@ -437,6 +473,14 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		72E11C7B1D15256C0024803E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				72E11C7F1D15256C0024803E /* EssentiaTouch.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		72F6F0D01CE8E50900142CD0 /* SongRepositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,10 +504,12 @@
 				22E780F2A9821E2941934D46 /* Embed Pods Frameworks */,
 				D17292C9EC5F8425BE6A7E24 /* Copy Pods Resources */,
 				720B34B51CFF6093001D8893 /* Run Fabric Script */,
+				72E11C841D1526260024803E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				72E11C831D1526260024803E /* PBXTargetDependency */,
 			);
 			name = Sport;
 			productName = Sport;
@@ -501,12 +547,28 @@
 			mainGroup = 72349B461CDDFBA4002B3B84;
 			productRefGroup = 72349B501CDDFBA4002B3B84 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 72E11C7B1D15256C0024803E /* Products */;
+					ProjectRef = 72E11C7A1D15256C0024803E /* EssentiaTouch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				72349B4E1CDDFBA4002B3B84 /* Sport */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		72E11C7F1D15256C0024803E /* EssentiaTouch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = EssentiaTouch.framework;
+			remoteRef = 72E11C7E1D15256C0024803E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		72349B4D1CDDFBA4002B3B84 /* Resources */ = {
@@ -642,6 +704,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72E11C831D1526260024803E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EssentiaTouch;
+			targetProxy = 72E11C821D1526260024803E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		72349B561CDDFBA4002B3B84 /* Main.storyboard */ = {
