@@ -19,7 +19,8 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var autoControlView: UIView!
     @IBOutlet weak var manualControlView: UIView!
     
-    @IBOutlet weak var trackpadView: UIView!
+    @IBOutlet weak var trackpadView: SPTrackPad!
+    @IBOutlet weak var activityRateView: UIView!
     
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -28,7 +29,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var progressView: MBCircularProgressBarView!
     
     @IBOutlet weak var tnTempoSlider: TNSlider!
-//    @IBOutlet weak var tempoSlider: SPSlider!
+
     @IBOutlet weak var playlistView: UIView!
     @IBOutlet weak var playlistHeaderView: UIView!
     @IBOutlet weak var expandCollapseButton: UIButton!
@@ -150,6 +151,16 @@ extension MusicPlayerController: MusicPlayerView {
         tnTempoSlider.minimumValue = 20
         tnTempoSlider.maximumValue = 200
         
+        // Setup trackpad view.
+        trackpadView.layer.cornerRadius = 8
+        trackpadView.clipsToBounds = true
+        
+        // Setup activity rate view
+        activityRateView.layer.cornerRadius = 8
+        activityRateView.clipsToBounds = true
+        
+        // ==============================================================
+        // Setup playlist view
         playlistTableView.dataSource = self
         playlistTableView.delegate = self
         playlistTableView.rowHeight = UITableViewAutomaticDimension
@@ -158,16 +169,20 @@ extension MusicPlayerController: MusicPlayerView {
         let tapPlaylistHeaderGesture = UITapGestureRecognizer(target: self, action: #selector(MusicPlayerController.toggleShowPlaylist))
         playlistHeaderView.addGestureRecognizer(tapPlaylistHeaderGesture)
         
+        expandCollapseButton.titleLabel?.font = UIFont.ioniconOfSize(24)
+        expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), forState: .Normal)
+        
+        // ==============================================================
         // Navigation bar items
         let leftBarItem = UIBarButtonItem(image: UIImage(named: "music_library")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
         leftBarItem.tintColor = UIColor.blueColor()
-        
         self.navigationItem.leftBarButtonItem = leftBarItem
         
         let rightBarItem = UIBarButtonItem(image: UIImage(named: "ic_running")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
         
-        // Setting font then icon for title
+        // ==============================================================
+        // Setup music control
         playPauseButton.titleLabel?.font = UIFont.ioniconOfSize(45)
         playPauseButton.layer.cornerRadius = playPauseButton.frame.size.width / 2
         setButtonPlayImage(true)
@@ -178,15 +193,13 @@ extension MusicPlayerController: MusicPlayerView {
         fastForwardButton.titleLabel?.font = UIFont.ioniconOfSize(45)
         fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), forState: .Normal)
         
-        expandCollapseButton.titleLabel?.font = UIFont.ioniconOfSize(24)
-        expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), forState: .Normal)
-        
         let longTapFastForwardGestureRegcognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicPlayerController.controlButtonLongPressed(_:)))
         fastForwardButton.addGestureRecognizer(longTapFastForwardGestureRegcognizer)
         
         let longTapRewindGestureRegcognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicPlayerController.controlButtonLongPressed(_:)))
         rewindButton.addGestureRecognizer(longTapRewindGestureRegcognizer)
         
+        // Init
         updatePlaybackProgress(0)
         
         showPlaylistView(false, animated: false)
