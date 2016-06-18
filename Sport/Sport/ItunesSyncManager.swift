@@ -8,7 +8,6 @@
 
 import MediaPlayer
 import AVFoundation
-import MobileCoreServices
 
 protocol ItunesDataImporterDelegate {
     
@@ -66,6 +65,7 @@ class ItunesSyncManager: SongSyncManager {
                     // Extract informations.
                     let actualResultPath = resultPath!
                     let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(actualResultPath)
+                    EssentiaWrapper.foo()
                     let persistentId = songPersistentId
                     let songData = SongData(persistentId: persistentId, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
                     
