@@ -58,8 +58,8 @@
 		72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D771CDF4ABF000E4923 /* HomeView.swift */; };
 		72B91D7A1CDF6B52000E4923 /* ItunesSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
-		72E11C801D1526260024803E /* EssentiaTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11C7F1D15256C0024803E /* EssentiaTouch.framework */; };
-		72E11C811D1526260024803E /* EssentiaTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11C7F1D15256C0024803E /* EssentiaTouch.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		72E11C851D1528FB0024803E /* EssentiaTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11C7F1D15256C0024803E /* EssentiaTouch.framework */; };
+		72E11C861D1528FB0024803E /* EssentiaTouch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11C7F1D15256C0024803E /* EssentiaTouch.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		72E85BD51D040E790025CAFE /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E85BD41D040E790025CAFE /* DependencyInjector.swift */; };
 		72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CA1CE896B800142CD0 /* SPSlider.swift */; };
 		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
@@ -77,7 +77,7 @@
 			remoteGlobalIDString = A111635318158A980062F63F;
 			remoteInfo = EssentiaTouch;
 		};
-		72E11C821D1526260024803E /* PBXContainerItemProxy */ = {
+		72E11C871D1528FB0024803E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 72E11C7A1D15256C0024803E /* EssentiaTouch.xcodeproj */;
 			proxyType = 1;
@@ -87,13 +87,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		72E11C841D1526260024803E /* Embed Frameworks */ = {
+		72E11C891D1528FB0024803E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				72E11C811D1526260024803E /* EssentiaTouch.framework in Embed Frameworks */,
+				72E11C861D1528FB0024803E /* EssentiaTouch.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72E11C801D1526260024803E /* EssentiaTouch.framework in Frameworks */,
+				72E11C851D1528FB0024803E /* EssentiaTouch.framework in Frameworks */,
 				729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */,
 				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
@@ -504,12 +504,12 @@
 				22E780F2A9821E2941934D46 /* Embed Pods Frameworks */,
 				D17292C9EC5F8425BE6A7E24 /* Copy Pods Resources */,
 				720B34B51CFF6093001D8893 /* Run Fabric Script */,
-				72E11C841D1526260024803E /* Embed Frameworks */,
+				72E11C891D1528FB0024803E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				72E11C831D1526260024803E /* PBXTargetDependency */,
+				72E11C881D1528FB0024803E /* PBXTargetDependency */,
 			);
 			name = Sport;
 			productName = Sport;
@@ -706,10 +706,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		72E11C831D1526260024803E /* PBXTargetDependency */ = {
+		72E11C881D1528FB0024803E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = EssentiaTouch;
-			targetProxy = 72E11C821D1526260024803E /* PBXContainerItemProxy */;
+			targetProxy = 72E11C871D1528FB0024803E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
