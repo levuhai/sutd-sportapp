@@ -131,7 +131,7 @@ private class ImportWorker: NSObject {
         let avUrl = AVURLAsset(URL: song.assetURL!)
         
         let exporter = AVAssetExportSession(asset: avUrl, presetName: AVAssetExportPresetPassthrough)
-        exporter?.outputFileType = "com.apple.quicktime-movie"
+        exporter?.outputFileType = AVFileTypeAppleM4A
         let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
         if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
             FileManager.removeItemAtPath(exportPath)
