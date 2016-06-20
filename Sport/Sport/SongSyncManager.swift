@@ -9,5 +9,5 @@
 import UIKit
 
 protocol SongSyncManager: class {
-    func syncWithRepo(repository: SongRepository, completion: (()->())?)
+    func syncWithRepo(repository: SongRepository, progress: ((current: Int, total: Int) -> ())?, completion: (() -> Void)?)
 }

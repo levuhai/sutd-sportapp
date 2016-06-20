@@ -13,6 +13,7 @@ class MusicLibraryController: UIViewController {
     
     var libraryPresenter: MusicLibraryPresenter?
     var songViewData = [SongViewData]()
+    var hud: MBProgressHUD?
     
     @IBOutlet weak var songTableView: UITableView!
     
@@ -68,10 +69,14 @@ extension MusicLibraryController: MusicLibraryView {
     
     func showLoading(show: Bool) {
         if (show) {
-            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         } else {
             MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
+    }
+    
+    func dispatchProgress(completed: Int, total: Int) {
+        hud?.labelText = "Processing \(completed)/\(total)"
     }
     
     func enableRightBarButton(enable: Bool) {

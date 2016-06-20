@@ -58,9 +58,9 @@
 		72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D771CDF4ABF000E4923 /* HomeView.swift */; };
 		72B91D7A1CDF6B52000E4923 /* ItunesSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
-		72E11C8D1D152BC30024803E /* EssentiaWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72E11C8C1D152BC30024803E /* EssentiaWrapper.mm */; };
-		72E11CF21D15819A0024803E /* libessentia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E11CF11D15819A0024803E /* libessentia.a */; };
 		72E85BD51D040E790025CAFE /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E85BD41D040E790025CAFE /* DependencyInjector.swift */; };
+		72ED32171D185DCA001CF71D /* SingleAnalysisOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ED32161D185DCA001CF71D /* SingleAnalysisOperation.swift */; };
+		72ED32191D186333001CF71D /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ED32181D186333001CF71D /* ConcurrentOperation.swift */; };
 		72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CA1CE896B800142CD0 /* SPSlider.swift */; };
 		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
 		72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D11CE8E59800142CD0 /* SongRepository.swift */; };
@@ -235,6 +235,8 @@
 		72E11CF01D15819A0024803E /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		72E11CF11D15819A0024803E /* libessentia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libessentia.a; sourceTree = "<group>"; };
 		72E85BD41D040E790025CAFE /* DependencyInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
+		72ED32161D185DCA001CF71D /* SingleAnalysisOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAnalysisOperation.swift; sourceTree = "<group>"; };
+		72ED32181D186333001CF71D /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		72F6F0CA1CE896B800142CD0 /* SPSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPSlider.swift; sourceTree = "<group>"; };
 		72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
 		72F6F0D11CE8E59800142CD0 /* SongRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
@@ -253,7 +255,6 @@
 				729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */,
 				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
-				72E11CF21D15819A0024803E /* libessentia.a in Frameworks */,
 				72B91D691CDF2266000E4923 /* MediaPlayer.framework in Frameworks */,
 				A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */,
 			);
@@ -446,8 +447,8 @@
 		72349B511CDDFBA4002B3B84 /* Sport */ = {
 			isa = PBXGroup;
 			children = (
-				72E11C8A1D152B980024803E /* EssentiaWrapper */,
 				720B34731CF750F1001D8893 /* Libraries */,
+				72E11C8A1D152B980024803E /* EssentiaWrapper */,
 				72A6BC541CE386B7007C0254 /* AubioWrapper */,
 				720AC1B91CE7AFB500898A87 /* Common */,
 				72B91D7B1CDF6B5D000E4923 /* Manager */,
@@ -467,6 +468,8 @@
 				72468B971CEA3B3C00EFBF62 /* SongSyncManager.swift */,
 				72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */,
 				722BE8DB1CECD44400E51D68 /* BundleSyncManager.swift */,
+				72ED32161D185DCA001CF71D /* SingleAnalysisOperation.swift */,
+				72ED32181D186333001CF71D /* ConcurrentOperation.swift */,
 			);
 			name = Sync;
 			sourceTree = "<group>";
@@ -884,7 +887,6 @@
 				72468B961CEA2ACC00EFBF62 /* AnalysisOutput.m in Sources */,
 				72A8C3D41D0C8DD700DF08DF /* TNTrackLayer.swift in Sources */,
 				720B34901CF8BA4E001D8893 /* SongTableCell.swift in Sources */,
-				72E11C8D1D152BC30024803E /* EssentiaWrapper.mm in Sources */,
 				72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */,
 				72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */,
 				72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */,
@@ -902,7 +904,9 @@
 				720B34771CF75278001D8893 /* Ionicons.swift in Sources */,
 				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				720B34821CF89AA6001D8893 /* MusicPlayerPresenterImpl.swift in Sources */,
+				72ED32171D185DCA001CF71D /* SingleAnalysisOperation.swift in Sources */,
 				720B348A1CF8AD87001D8893 /* MusicLibraryView.swift in Sources */,
+				72ED32191D186333001CF71D /* ConcurrentOperation.swift in Sources */,
 				72A8C3D21D0C8DD700DF08DF /* TNSlider.swift in Sources */,
 				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,
 				72571D711D0F329E001198E5 /* Localization.swift in Sources */,

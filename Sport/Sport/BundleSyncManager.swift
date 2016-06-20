@@ -1,5 +1,5 @@
 //
-//  BundleDataImporter.swift
+//  BundleSyncManager.swift
 //  Sport
 //
 //  Created by Tien on 5/18/16.
@@ -8,9 +8,9 @@
 
 import MediaPlayer
 
-class BundleDataImporter: SongSyncManager {
+class BundleSyncManager: SongSyncManager {
     
-    static let sharedInstance = BundleDataImporter()
+    static let sharedInstance = BundleSyncManager()
     
     func importToRepository(repository: SongRepository, completion: (() -> ())?) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
@@ -33,7 +33,7 @@ class BundleDataImporter: SongSyncManager {
         }
     }
     
-    func syncWithRepo(repository: SongRepository, completion: (() -> ())?) {
+    func syncWithRepo(repository: SongRepository, progress: ((current: Int, total: Int) -> ())?, completion: (() -> Void)?) {
         func isExistInItuneLibrary(songPersistentId: String) -> Bool {
             let query = MPMediaQuery.songsQuery()
             let predicate = MPMediaPropertyPredicate(value: songPersistentId, forProperty: MPMediaItemPropertyPersistentID)

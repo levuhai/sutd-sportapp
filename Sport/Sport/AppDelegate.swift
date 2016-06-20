@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable playing music while app is in the background
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
-        EssentiaWrapper.foo()
         
         Fabric.with([Crashlytics.self])
         return true

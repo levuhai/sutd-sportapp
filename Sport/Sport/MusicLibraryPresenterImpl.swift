@@ -51,7 +51,11 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
     func onBarButonReloadClick() {
         libraryView?.enableRightBarButton(false)
         libraryView?.showLoading(true)
-        songSyncManager.syncWithRepo(songRepository, completion: { 
+        
+        songSyncManager.syncWithRepo(songRepository, progress: { (current, total) in
+            print("Progress: \(current)/\(total)")
+            self.libraryView?.dispatchProgress(current, total: total)
+        }, completion: {
             self.reloadData()
             
             self.libraryView?.enableRightBarButton(true)

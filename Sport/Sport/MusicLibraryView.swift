@@ -15,6 +15,7 @@ protocol MusicLibraryView: class {
     func showSongList(songViewData: [SongViewData])
     
     func showLoading(show: Bool)
+    func dispatchProgress(completed: Int, total: Int)
     
     func enableRightBarButton(enable: Bool)
 }
