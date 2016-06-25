@@ -28,7 +28,7 @@ class SingleAnalysisOperation: ConcurrentOperation {
     
     func beginProcessing() {
         let songPersistentId = "\(song.persistentID)"
-        print("Song: \(song.title)")
+        print("Song Name: \(song.title)")
         // Check and skip existing songs.
         if song.assetURL == nil || repository.isSongExisting(songPersistentId) {
             print("Song with id \(songPersistentId) is existing")
