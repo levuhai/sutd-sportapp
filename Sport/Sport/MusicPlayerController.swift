@@ -20,7 +20,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var manualControlView: UIView!
     
     @IBOutlet weak var trackpadView: SPTrackPad!
-    @IBOutlet weak var activityRateView: UIView!
+    @IBOutlet weak var activityRateView: SPActivityRateView!
     
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -297,6 +297,10 @@ extension MusicPlayerController: MusicPlayerView {
             }
         }
         playlistTableView.reloadData()
+    }
+    
+    func updateActivityRatesData(data: Float) {
+        activityRateView.add(data)
     }
 }
 

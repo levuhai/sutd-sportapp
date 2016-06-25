@@ -18,4 +18,8 @@ class AppUserDefaults: NSObject {
     class func lastTempo() -> Float? {
         return NSUserDefaults.standardUserDefaults().objectForKey(SP_LAST_TEMPO_KEY)?.floatValue
     }
+    
+    class func isFirstInitialSuccessfully() -> Bool {
+        return false
+    }
 }

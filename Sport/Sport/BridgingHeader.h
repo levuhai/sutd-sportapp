@@ -10,6 +10,5 @@
 #define BridgingHeader_h
 
 #import "AubioWrapper.h"
-#import "EssentiaWrapper.h"
 
 #endif /* BridgingHeader_h */

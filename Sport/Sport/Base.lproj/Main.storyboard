@@ -45,7 +45,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qs-yJ-YoN" userLabel="Auto View">
                                 <rect key="frame" x="20" y="431" width="335" height="80"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View" customClass="SPActivityRateView" customModule="Sport" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>

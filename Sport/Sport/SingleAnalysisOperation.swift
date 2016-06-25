@@ -28,7 +28,7 @@ class SingleAnalysisOperation: ConcurrentOperation {
     
     func beginProcessing() {
         let songPersistentId = "\(song.persistentID)"
-        
+        print("Song: \(song.title)")
         // Check and skip existing songs.
         if song.assetURL == nil || repository.isSongExisting(songPersistentId) {
             print("Song with id \(songPersistentId) is existing")
@@ -109,6 +109,7 @@ class SingleAnalysisOperation: ConcurrentOperation {
         
         let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
         if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
+            print("Remove \(exportPath)")
             FileManager.removeItemAtPath(exportPath)
         }
         exporter.outputURL = NSURL(fileURLWithPath: exportPath)

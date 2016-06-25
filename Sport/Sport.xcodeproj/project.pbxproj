@@ -52,15 +52,15 @@
 		72A8C3D31D0C8DD700DF08DF /* TNTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A8C3D01D0C8DD700DF08DF /* TNTextLayer.swift */; };
 		72A8C3D41D0C8DD700DF08DF /* TNTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A8C3D11D0C8DD700DF08DF /* TNTrackLayer.swift */; };
 		72B91D691CDF2266000E4923 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D681CDF2266000E4923 /* MediaPlayer.framework */; };
-		72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D6D1CDF2EA6000E4923 /* HomeViewController.swift */; };
-		72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D731CDF2F1F000E4923 /* HomePresenter.swift */; };
-		72B91D761CDF34DA000E4923 /* HomePresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D751CDF34DA000E4923 /* HomePresenterImpl.swift */; };
-		72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D771CDF4ABF000E4923 /* HomeView.swift */; };
 		72B91D7A1CDF6B52000E4923 /* ItunesSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */; };
 		72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B91D7D1CE2165D000E4923 /* AVFoundation.framework */; };
 		72E85BD51D040E790025CAFE /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E85BD41D040E790025CAFE /* DependencyInjector.swift */; };
+		72E91A571D1AB8CF00896153 /* 3283577656088715478.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72E91A561D1AB8CF00896153 /* 3283577656088715478.mp3 */; };
+		72E91A5A1D1ABDD500896153 /* 3283577656088715472.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 72E91A591D1ABD9700896153 /* 3283577656088715472.m4a */; };
 		72ED32171D185DCA001CF71D /* SingleAnalysisOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ED32161D185DCA001CF71D /* SingleAnalysisOperation.swift */; };
 		72ED32191D186333001CF71D /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ED32181D186333001CF71D /* ConcurrentOperation.swift */; };
+		72EEA8691D1C6F2300E35D56 /* 3283577656088715482.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72EEA8681D1C6F2300E35D56 /* 3283577656088715482.mp3 */; };
+		72EEA86B1D1D8C7C00E35D56 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EEA86A1D1D8C7C00E35D56 /* CoreMotion.framework */; };
 		72F6F0CB1CE896B800142CD0 /* SPSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CA1CE896B800142CD0 /* SPSlider.swift */; };
 		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
 		72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D11CE8E59800142CD0 /* SongRepository.swift */; };
@@ -133,14 +133,8 @@
 		72A8C3D01D0C8DD700DF08DF /* TNTextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNTextLayer.swift; sourceTree = "<group>"; };
 		72A8C3D11D0C8DD700DF08DF /* TNTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNTrackLayer.swift; sourceTree = "<group>"; };
 		72B91D681CDF2266000E4923 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		72B91D6D1CDF2EA6000E4923 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		72B91D731CDF2F1F000E4923 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
-		72B91D751CDF34DA000E4923 /* HomePresenterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenterImpl.swift; sourceTree = "<group>"; };
-		72B91D771CDF4ABF000E4923 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		72B91D791CDF6B52000E4923 /* ItunesSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesSyncManager.swift; sourceTree = "<group>"; };
 		72B91D7D1CE2165D000E4923 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		72E11C8B1D152BC30024803E /* EssentiaWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaWrapper.h; sourceTree = "<group>"; };
-		72E11C8C1D152BC30024803E /* EssentiaWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EssentiaWrapper.mm; sourceTree = "<group>"; };
 		72E11C901D15819A0024803E /* algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = algorithm.h; sourceTree = "<group>"; };
 		72E11C911D15819A0024803E /* algorithmfactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = algorithmfactory.h; sourceTree = "<group>"; };
 		72E11C921D15819A0024803E /* algorithmfactory_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = algorithmfactory_impl.h; sourceTree = "<group>"; };
@@ -235,8 +229,12 @@
 		72E11CF01D15819A0024803E /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		72E11CF11D15819A0024803E /* libessentia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libessentia.a; sourceTree = "<group>"; };
 		72E85BD41D040E790025CAFE /* DependencyInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
+		72E91A561D1AB8CF00896153 /* 3283577656088715478.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3283577656088715478.mp3; sourceTree = "<group>"; };
+		72E91A591D1ABD9700896153 /* 3283577656088715472.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3283577656088715472.m4a; sourceTree = "<group>"; };
 		72ED32161D185DCA001CF71D /* SingleAnalysisOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAnalysisOperation.swift; sourceTree = "<group>"; };
 		72ED32181D186333001CF71D /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		72EEA8681D1C6F2300E35D56 /* 3283577656088715482.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3283577656088715482.mp3; sourceTree = "<group>"; };
+		72EEA86A1D1D8C7C00E35D56 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		72F6F0CA1CE896B800142CD0 /* SPSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPSlider.swift; sourceTree = "<group>"; };
 		72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
 		72F6F0D11CE8E59800142CD0 /* SongRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
@@ -252,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72EEA86B1D1D8C7C00E35D56 /* CoreMotion.framework in Frameworks */,
 				729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */,
 				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
@@ -275,6 +274,7 @@
 		62A4BE94FF812D39540CFB3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72EEA86A1D1D8C7C00E35D56 /* CoreMotion.framework */,
 				A73913731CE47E4E00874A04 /* Accelerate.framework */,
 				72A6BC501CE24CE7007C0254 /* aubio.framework */,
 				72B91D7D1CE2165D000E4923 /* AVFoundation.framework */,
@@ -359,7 +359,6 @@
 			children = (
 				720B34841CF8AC0C001D8893 /* LibraryScreen */,
 				720B344D1CF60618001D8893 /* MusicScreen */,
-				72B91D6B1CDF2E56000E4923 /* MainScreen */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -414,6 +413,9 @@
 		722BE8DD1CECD51A00E51D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				72EEA8681D1C6F2300E35D56 /* 3283577656088715482.mp3 */,
+				72E91A591D1ABD9700896153 /* 3283577656088715472.m4a */,
+				72E91A561D1AB8CF00896153 /* 3283577656088715478.mp3 */,
 				720B349A1CFCD946001D8893 /* big.mp3 */,
 				72349B561CDDFBA4002B3B84 /* Main.storyboard */,
 				72349B591CDDFBA4002B3B84 /* Assets.xcassets */,
@@ -448,7 +450,6 @@
 			isa = PBXGroup;
 			children = (
 				720B34731CF750F1001D8893 /* Libraries */,
-				72E11C8A1D152B980024803E /* EssentiaWrapper */,
 				72A6BC541CE386B7007C0254 /* AubioWrapper */,
 				720AC1B91CE7AFB500898A87 /* Common */,
 				72B91D7B1CDF6B5D000E4923 /* Manager */,
@@ -503,39 +504,12 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		72B91D6B1CDF2E56000E4923 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				72B91D701CDF2EC8000E4923 /* Presenter */,
-				72B91D6F1CDF2EB8000E4923 /* View */,
-			);
-			name = MainScreen;
-			sourceTree = "<group>";
-		};
 		72B91D6C1CDF2E75000E4923 /* Others */ = {
 			isa = PBXGroup;
 			children = (
 				72A6BC521CE24F6E007C0254 /* BridgingHeader.h */,
 			);
 			name = Others;
-			sourceTree = "<group>";
-		};
-		72B91D6F1CDF2EB8000E4923 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				72B91D771CDF4ABF000E4923 /* HomeView.swift */,
-				72B91D6D1CDF2EA6000E4923 /* HomeViewController.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		72B91D701CDF2EC8000E4923 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				72B91D731CDF2F1F000E4923 /* HomePresenter.swift */,
-				72B91D751CDF34DA000E4923 /* HomePresenterImpl.swift */,
-			);
-			name = Presenter;
 			sourceTree = "<group>";
 		};
 		72B91D7B1CDF6B5D000E4923 /* Manager */ = {
@@ -551,15 +525,6 @@
 				72E85BD41D040E790025CAFE /* DependencyInjector.swift */,
 			);
 			name = Manager;
-			sourceTree = "<group>";
-		};
-		72E11C8A1D152B980024803E /* EssentiaWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				72E11C8B1D152BC30024803E /* EssentiaWrapper.h */,
-				72E11C8C1D152BC30024803E /* EssentiaWrapper.mm */,
-			);
-			name = EssentiaWrapper;
 			sourceTree = "<group>";
 		};
 		72E11C8E1D15819A0024803E /* Essentia */ = {
@@ -787,12 +752,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E91A5A1D1ABDD500896153 /* 3283577656088715472.m4a in Resources */,
 				720B34781CF75EFA001D8893 /* ionicons.ttf in Resources */,
+				72E91A571D1AB8CF00896153 /* 3283577656088715478.mp3 in Resources */,
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
 				72571D6D1D0F2F14001198E5 /* Localization.strings in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
 				720B349B1CFCD946001D8893 /* big.mp3 in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
+				72EEA8691D1C6F2300E35D56 /* 3283577656088715482.mp3 in Resources */,
 				722BE8E41CEE191E00E51D68 /* songs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,13 +849,11 @@
 				72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */,
 				720B34961CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift in Sources */,
 				72A6BC9D1CE4EBAD007C0254 /* String+Extension.swift in Sources */,
-				72B91D761CDF34DA000E4923 /* HomePresenterImpl.swift in Sources */,
 				723EDB1C1D088AA6008ADCA9 /* SongUtils.swift in Sources */,
 				72E85BD51D040E790025CAFE /* DependencyInjector.swift in Sources */,
 				72468B961CEA2ACC00EFBF62 /* AnalysisOutput.m in Sources */,
 				72A8C3D41D0C8DD700DF08DF /* TNTrackLayer.swift in Sources */,
 				720B34901CF8BA4E001D8893 /* SongTableCell.swift in Sources */,
-				72B91D741CDF2F1F000E4923 /* HomePresenter.swift in Sources */,
 				72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */,
 				72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */,
 				72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */,
@@ -902,13 +868,11 @@
 				720B34991CFC9973001D8893 /* SPAudioPlayer.swift in Sources */,
 				72A8C3D31D0C8DD700DF08DF /* TNTextLayer.swift in Sources */,
 				720B34771CF75278001D8893 /* Ionicons.swift in Sources */,
-				72B91D781CDF4ABF000E4923 /* HomeView.swift in Sources */,
 				720B34821CF89AA6001D8893 /* MusicPlayerPresenterImpl.swift in Sources */,
 				72ED32171D185DCA001CF71D /* SingleAnalysisOperation.swift in Sources */,
 				720B348A1CF8AD87001D8893 /* MusicLibraryView.swift in Sources */,
 				72ED32191D186333001CF71D /* ConcurrentOperation.swift in Sources */,
 				72A8C3D21D0C8DD700DF08DF /* TNSlider.swift in Sources */,
-				72B91D6E1CDF2EA6000E4923 /* HomeViewController.swift in Sources */,
 				72571D711D0F329E001198E5 /* Localization.swift in Sources */,
 				72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */,
 				720AC1B61CE799A400898A87 /* Constants.swift in Sources */,

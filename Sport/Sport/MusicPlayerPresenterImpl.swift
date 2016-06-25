@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     
@@ -14,6 +15,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     let router: MusicPlayerRouter
     var songRepository: SongRepository
     let audioPlayer = SPAudioPlayer.sharedInstance
+    let motionManager = CMMotionManager()
     
     var runningMode = false
     var playList: [SPPlayerItem] = []
@@ -49,6 +51,22 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func onRightBarButtonClicked() {
         runningMode = !runningMode
         playerView?.switchControlMode(runningMode)
+        if !motionManager.accelerometerAvailable {
+            return
+        }
+        if runningMode {
+            motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: { (accelerometerData, error) in
+                guard let accelerometerData = accelerometerData else {
+                    return
+                }
+//                print(accelerometerData)
+                self.playerView?.updateActivityRatesData(Float(accelerometerData.acceleration.x))
+                
+            })
+        } else {
+            motionManager.stopAccelerometerUpdates()
+        }
+        
     }
     
     func onRewindButtonClicked() {
@@ -149,6 +167,10 @@ extension MusicPlayerPresenterImpl {
         playerView?.displayPlaylist(getPlaylistForDisplay(playList, currentPlayingItem: audioPlayer.currentItem))
     }
     
+    func setupMotionManager() {
+        motionManager.accelerometerUpdateInterval = 0.1
+    }
+    
     func showCurrentSongInfo(playerItem: SPPlayerItem?) {
         guard let currentItem = playerItem else {
             // ??? What to do if current item is nil 
@@ -196,9 +218,5 @@ extension MusicPlayerPresenterImpl {
         let adapter = SPPlayerItemAdapter()
         playList = adapter.createPlayerItems(songs)
     }
-    
-    func a() {
-        
-        
-    }
+
 }
