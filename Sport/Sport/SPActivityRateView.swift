@@ -10,7 +10,7 @@ import UIKit
 
 class SPActivityRateView: UIView {
     
-    var maximumValue = Float(2)
+    let maximumValue = Float(1.2)
     let minimumValue = Float(0)
     
     var activityRates = [Float]()
@@ -25,9 +25,20 @@ class SPActivityRateView: UIView {
     var lastRefresh = NSDate()
     let drawInterval: NSTimeInterval = 0.2
     
+    var currentMin = Float(1)
+    
+    var expiredIndex: Int = 0
+    
     func add(value: Float) {
-        activityRates.append(value)
-        
+        if (expiredIndex > 0) {
+            activityRates.removeLast(activityRates.count - expiredIndex)
+        }
+        if (value < currentMin) {
+            currentMin = value
+            print("Val \(value)")
+        }
+        activityRates.insert(value, atIndex: 0)
+
         reloadData()
     }
     
@@ -56,13 +67,14 @@ class SPActivityRateView: UIView {
         let lastY = CGFloat(1 - data[0] / valueLength) * height
         path.moveToPoint(CGPoint(x: x, y: lastY))
         
-        for index in (1..<data.count).reverse() {
+        for index in 1..<data.count {
             let value = data[index]
             let y = CGFloat(1 - value / valueLength) * height
             path.addLineToPoint(CGPoint(x: x, y: y))
             x -= horizontalSpacing
             
             if x < 0 {
+                expiredIndex = index + 1
                 break
             }
         }
