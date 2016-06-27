@@ -32,6 +32,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     }
     
     func initialize() {
+        setupMotionManager()
         playerView?.initialize()
         
         let audioPlayer = SPAudioPlayer.sharedInstance
@@ -208,7 +209,8 @@ extension MusicPlayerPresenterImpl {
     }
     
     func setupMotionManager() {
-        motionManager.accelerometerUpdateInterval = 0.1
+        motionManager.accelerometerUpdateInterval = 1.0/60
+        print("Accelerometer interval: \(motionManager.accelerometerUpdateInterval)")
     }
     
     func showCurrentSongInfo(playerItem: SPPlayerItem?) {

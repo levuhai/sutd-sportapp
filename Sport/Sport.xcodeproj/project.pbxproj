@@ -25,7 +25,6 @@
 		720B34941CF9E4EE001D8893 /* MusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34931CF9E4EE001D8893 /* MusicPlayerRouter.swift */; };
 		720B34961CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34951CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift */; };
 		720B34991CFC9973001D8893 /* SPAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34981CFC9973001D8893 /* SPAudioPlayer.swift */; };
-		720B349B1CFCD946001D8893 /* big.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 720B349A1CFCD946001D8893 /* big.mp3 */; };
 		720B34B11CFF2855001D8893 /* SPPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34B01CFF2855001D8893 /* SPPlayerItem.swift */; };
 		720B34B41CFF5317001D8893 /* SPPlayerItemAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B34B31CFF5317001D8893 /* SPPlayerItemAdapter.swift */; };
 		722BE8DC1CECD44400E51D68 /* BundleSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BE8DB1CECD44400E51D68 /* BundleSyncManager.swift */; };
@@ -98,7 +97,6 @@
 		720B34931CF9E4EE001D8893 /* MusicPlayerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerRouter.swift; sourceTree = "<group>"; };
 		720B34951CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerRouterImpl.swift; sourceTree = "<group>"; };
 		720B34981CFC9973001D8893 /* SPAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPAudioPlayer.swift; sourceTree = "<group>"; };
-		720B349A1CFCD946001D8893 /* big.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = big.mp3; path = ../big.mp3; sourceTree = "<group>"; };
 		720B34B01CFF2855001D8893 /* SPPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPlayerItem.swift; sourceTree = "<group>"; };
 		720B34B31CFF5317001D8893 /* SPPlayerItemAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPlayerItemAdapter.swift; sourceTree = "<group>"; };
 		722BE8DB1CECD44400E51D68 /* BundleSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleSyncManager.swift; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 		722BE8DD1CECD51A00E51D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				720B349A1CFCD946001D8893 /* big.mp3 */,
 				72349B561CDDFBA4002B3B84 /* Main.storyboard */,
 				72349B591CDDFBA4002B3B84 /* Assets.xcassets */,
 				72349B5B1CDDFBA4002B3B84 /* LaunchScreen.storyboard */,
@@ -747,7 +744,6 @@
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
 				72571D6D1D0F2F14001198E5 /* Localization.strings in Resources */,
 				72349B5A1CDDFBA4002B3B84 /* Assets.xcassets in Resources */,
-				720B349B1CFCD946001D8893 /* big.mp3 in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
 				722BE8E41CEE191E00E51D68 /* songs in Resources */,
 			);

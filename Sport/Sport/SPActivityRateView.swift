@@ -23,7 +23,7 @@ class SPActivityRateView: UIView {
     var path = UIBezierPath()
     
     var lastRefresh = NSDate()
-    let drawInterval: NSTimeInterval = 0.2
+    let drawInterval: NSTimeInterval = 0
     
     var currentMin = Float(1)
     
