@@ -28,10 +28,8 @@ class SingleAnalysisOperation: ConcurrentOperation {
     
     func beginProcessing() {
         let songPersistentId = "\(song.persistentID)"
-        print("Song Name: \(song.title)")
         // Check and skip existing songs.
         if song.assetURL == nil || repository.isSongExisting(songPersistentId) {
-            print("Song with id \(songPersistentId) is existing")
             completeOperation()
             return
         }
@@ -49,7 +47,6 @@ class SingleAnalysisOperation: ConcurrentOperation {
         }
         
         exporter?.determineCompatibleFileTypesWithCompletionHandler({ (supportedFileTypes) in
-            print("Supported \(supportedFileTypes)")
             if supportedFileTypes.contains(AVFileTypeAppleM4A) {
                 outputFileType = AVFileTypeAppleM4A
             } else if supportedFileTypes.contains(AVFileTypeQuickTimeMovie) {
@@ -73,14 +70,12 @@ class SingleAnalysisOperation: ConcurrentOperation {
         realExporter.exportAsynchronouslyWithCompletionHandler {
             if (realExporter.status == .Completed) {
                 let fileType = self.song.assetURL!.absoluteString.componentsSeparatedByString("?").first?.pathExtension
-                print("File type: \(fileType)")
                 let srcPath = exporter?.outputURL?.path
                 let dstPath = srcPath?.stringByAppendingPathExtension(fileType!)
                 FileManager.moveFileAtPath(srcPath!, toPath: dstPath!)
                 
                 exportPath = dstPath!
             }
-            print(realExporter.error)
             dispatch_group_leave(dispatchGroupExport)
         }
         dispatch_group_wait(dispatchGroupExport, DISPATCH_TIME_FOREVER)
@@ -109,7 +104,6 @@ class SingleAnalysisOperation: ConcurrentOperation {
         
         let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
         if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
-            print("Remove \(exportPath)")
             FileManager.removeItemAtPath(exportPath)
         }
         exporter.outputURL = NSURL(fileURLWithPath: exportPath)

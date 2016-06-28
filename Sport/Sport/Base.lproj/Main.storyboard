@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GHK-1j-wPf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -18,7 +18,7 @@
         <!--Music Player Controller-->
         <scene sceneID="m6V-sW-Jl8">
             <objects>
-                <viewController id="wXN-UV-aQG" customClass="MusicPlayerController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MusicPlayerController" id="wXN-UV-aQG" customClass="MusicPlayerController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5c9-3k-EcD"/>
                         <viewControllerLayoutGuide type="bottom" id="oU0-Vs-srb"/>
@@ -443,25 +443,6 @@
             </objects>
             <point key="canvasLocation" x="1477.5" y="218.5"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="MyK-uq-eUL">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GHK-1j-wPf" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wOv-rt-vtI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="wXN-UV-aQG" kind="relationship" relationship="rootViewController" id="wHc-5q-iVn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sC6-aY-0E5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="665" y="219"/>
-        </scene>
         <!--Music Library Controller-->
         <scene sceneID="IVQ-hY-1Nt">
             <objects>
@@ -572,7 +553,147 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wf-2e-TDS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="664.5" y="1055.5"/>
+            <point key="canvasLocation" x="1477.5" y="-685.5"/>
+        </scene>
+        <!--Tour Guider Controller-->
+        <scene sceneID="1qb-Y8-xbT">
+            <objects>
+                <viewController storyboardIdentifier="TourGuideController" id="otJ-GC-xF8" customClass="TourGuiderController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O64-MJ-HkX"/>
+                        <viewControllerLayoutGuide type="bottom" id="RcD-8x-UrT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hNg-aB-2qS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-Ue-Maq">
+                                <rect key="frame" x="126" y="609" width="123" height="38"/>
+                                <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
+                                <state key="normal" title="Ok, got it"/>
+                                <connections>
+                                    <action selector="gotItButtonDidClick:" destination="otJ-GC-xF8" eventType="touchUpInside" id="HLc-Uw-v8p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RcD-8x-UrT" firstAttribute="top" secondItem="Hr4-Ue-Maq" secondAttribute="bottom" constant="20" id="chD-AK-tyD"/>
+                            <constraint firstItem="Hr4-Ue-Maq" firstAttribute="centerX" secondItem="hNg-aB-2qS" secondAttribute="centerX" id="sND-PJ-eVZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="g4E-Hz-ito"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="gotItButton" destination="Hr4-Ue-Maq" id="8v2-mG-nPw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vUT-rW-1bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1476.5" y="1178.5"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="eL0-Mq-TPw">
+            <objects>
+                <pageViewController storyboardIdentifier="TutorialPageContainer" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0aD-Bn-w23" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mLv-30-KL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2289.5" y="1178.5"/>
+        </scene>
+        <!--Tour Guide Content Controller-->
+        <scene sceneID="57V-hT-Vwb">
+            <objects>
+                <viewController storyboardIdentifier="PageContentController" id="o3q-zT-fd3" customClass="TourGuideContentController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ngo-rj-7sd"/>
+                        <viewControllerLayoutGuide type="bottom" id="nBR-eu-rQf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n4U-2L-eAj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sal-lI-ycP">
+                                <rect key="frame" x="16" y="83" width="343" height="584"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmO-fz-wUF">
+                                <rect key="frame" x="166" y="46" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nBR-eu-rQf" firstAttribute="top" secondItem="sal-lI-ycP" secondAttribute="bottom" id="58p-SX-J2b"/>
+                            <constraint firstItem="sal-lI-ycP" firstAttribute="top" secondItem="RmO-fz-wUF" secondAttribute="bottom" constant="16" id="8ZT-wa-ffq"/>
+                            <constraint firstItem="RmO-fz-wUF" firstAttribute="top" secondItem="Ngo-rj-7sd" secondAttribute="bottom" constant="26" id="JQ8-PH-hbV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sal-lI-ycP" secondAttribute="trailing" id="acv-Vd-CFs"/>
+                            <constraint firstItem="RmO-fz-wUF" firstAttribute="centerX" secondItem="n4U-2L-eAj" secondAttribute="centerX" id="sz9-1a-yh7"/>
+                            <constraint firstItem="sal-lI-ycP" firstAttribute="leading" secondItem="n4U-2L-eAj" secondAttribute="leadingMargin" id="vFp-E8-zVY"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="guideImageView" destination="sal-lI-ycP" id="VHy-qJ-OWn"/>
+                        <outlet property="titleLabel" destination="RmO-fz-wUF" id="C0g-Bw-sfe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2JV-31-fhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3101.5" y="1178.5"/>
+        </scene>
+        <!--Initial View Controller-->
+        <scene sceneID="iWQ-XK-oZA">
+            <objects>
+                <viewController storyboardIdentifier="InitialViewController" id="nHA-vT-pkV" customClass="InitialViewController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b7d-Z2-nc9"/>
+                        <viewControllerLayoutGuide type="bottom" id="bz8-yT-fCf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eXo-pS-NJT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Tgm-0t-A21">
+                                <rect key="frame" x="177" y="418" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Processing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtS-Ki-dfx">
+                                <rect key="frame" x="145" y="456" width="85" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNr-39-eYi">
+                                <rect key="frame" x="241" y="609" width="118" height="38"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                <state key="normal" title="Get started"/>
+                                <connections>
+                                    <action selector="getStartedButtonDidClick:" destination="nHA-vT-pkV" eventType="touchUpInside" id="hwP-Q8-ELb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bz8-yT-fCf" firstAttribute="top" secondItem="xNr-39-eYi" secondAttribute="bottom" constant="20" id="84z-5p-z6d"/>
+                            <constraint firstItem="bz8-yT-fCf" firstAttribute="top" secondItem="rtS-Ki-dfx" secondAttribute="bottom" constant="190" id="BIT-AO-lsN"/>
+                            <constraint firstItem="rtS-Ki-dfx" firstAttribute="top" secondItem="Tgm-0t-A21" secondAttribute="bottom" constant="18" id="LeA-H6-814"/>
+                            <constraint firstItem="xNr-39-eYi" firstAttribute="trailing" secondItem="eXo-pS-NJT" secondAttribute="trailingMargin" id="Tzy-de-3OX"/>
+                            <constraint firstItem="Tgm-0t-A21" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="XKA-8o-BCg"/>
+                            <constraint firstItem="rtS-Ki-dfx" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="tMh-qE-3Yt"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="Tgm-0t-A21" id="QDg-uc-fNU"/>
+                        <outlet property="getStartedButton" destination="xNr-39-eYi" id="Jx4-Fy-9rh"/>
+                        <outlet property="statusLabel" destination="rtS-Ki-dfx" id="bzP-Ox-1gw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HaJ-hv-MgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1468.5" y="2222.5"/>
         </scene>
     </scenes>
     <resources>

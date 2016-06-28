@@ -40,6 +40,9 @@
 		72571D6D1D0F2F14001198E5 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72571D6F1D0F2F14001198E5 /* Localization.strings */; };
 		72571D711D0F329E001198E5 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72571D701D0F329E001198E5 /* Localization.swift */; };
 		725EF46C1D132DD3001F050B /* SPActivityRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725EF46B1D132DD3001F050B /* SPActivityRateView.swift */; };
+		727F322A1D226B0700A7A947 /* TourGuiderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727F32291D226B0700A7A947 /* TourGuiderController.swift */; };
+		727F322C1D22BEB400A7A947 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727F322B1D22BEB400A7A947 /* InitialViewController.swift */; };
+		727F322E1D22C4FC00A7A947 /* TourGuideContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727F322D1D22C4FC00A7A947 /* TourGuideContentController.swift */; };
 		7297330C1D034869000A6384 /* SongViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297330B1D034869000A6384 /* SongViewData.swift */; };
 		7297330E1D0348CE000A6384 /* PlaylistSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297330D1D0348CE000A6384 /* PlaylistSongCell.swift */; };
 		729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6BC501CE24CE7007C0254 /* aubio.framework */; };
@@ -115,6 +118,9 @@
 		72571D6E1D0F2F14001198E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		72571D701D0F329E001198E5 /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		725EF46B1D132DD3001F050B /* SPActivityRateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPActivityRateView.swift; sourceTree = "<group>"; };
+		727F32291D226B0700A7A947 /* TourGuiderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourGuiderController.swift; sourceTree = "<group>"; };
+		727F322B1D22BEB400A7A947 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		727F322D1D22C4FC00A7A947 /* TourGuideContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourGuideContentController.swift; sourceTree = "<group>"; };
 		7297330B1D034869000A6384 /* SongViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongViewData.swift; sourceTree = "<group>"; };
 		7297330D1D0348CE000A6384 /* PlaylistSongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistSongCell.swift; sourceTree = "<group>"; };
 		72A6BC501CE24CE7007C0254 /* aubio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aubio.framework; path = Sport/Frameworks/aubio.framework; sourceTree = "<group>"; };
@@ -350,8 +356,10 @@
 		720B34831CF89B77001D8893 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				720B34841CF8AC0C001D8893 /* LibraryScreen */,
+				727F32281D226AE500A7A947 /* TourGuideScreen */,
+				727F322F1D22EB3400A7A947 /* InitialScreen */,
 				720B344D1CF60618001D8893 /* MusicScreen */,
+				720B34841CF8AC0C001D8893 /* LibraryScreen */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -463,6 +471,23 @@
 				72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */,
 			);
 			name = Sync;
+			sourceTree = "<group>";
+		};
+		727F32281D226AE500A7A947 /* TourGuideScreen */ = {
+			isa = PBXGroup;
+			children = (
+				727F32291D226B0700A7A947 /* TourGuiderController.swift */,
+				727F322D1D22C4FC00A7A947 /* TourGuideContentController.swift */,
+			);
+			name = TourGuideScreen;
+			sourceTree = "<group>";
+		};
+		727F322F1D22EB3400A7A947 /* InitialScreen */ = {
+			isa = PBXGroup;
+			children = (
+				727F322B1D22BEB400A7A947 /* InitialViewController.swift */,
+			);
+			name = InitialScreen;
 			sourceTree = "<group>";
 		};
 		72A6BC541CE386B7007C0254 /* AubioWrapper */ = {
@@ -831,6 +856,7 @@
 				722BE8DC1CECD44400E51D68 /* BundleSyncManager.swift in Sources */,
 				720B348C1CF8B03B001D8893 /* MusicLibraryPresenter.swift in Sources */,
 				72349B531CDDFBA4002B3B84 /* AppDelegate.swift in Sources */,
+				727F322C1D22BEB400A7A947 /* InitialViewController.swift in Sources */,
 				720B34961CF9E4FD001D8893 /* MusicPlayerRouterImpl.swift in Sources */,
 				72A6BC9D1CE4EBAD007C0254 /* String+Extension.swift in Sources */,
 				723EDB1C1D088AA6008ADCA9 /* SongUtils.swift in Sources */,
@@ -852,6 +878,7 @@
 				720B34991CFC9973001D8893 /* SPAudioPlayer.swift in Sources */,
 				72A8C3D31D0C8DD700DF08DF /* TNTextLayer.swift in Sources */,
 				720B34771CF75278001D8893 /* Ionicons.swift in Sources */,
+				727F322E1D22C4FC00A7A947 /* TourGuideContentController.swift in Sources */,
 				720B34821CF89AA6001D8893 /* MusicPlayerPresenterImpl.swift in Sources */,
 				72ED32171D185DCA001CF71D /* SingleAnalysisOperation.swift in Sources */,
 				720B348A1CF8AD87001D8893 /* MusicLibraryView.swift in Sources */,
@@ -860,6 +887,7 @@
 				72571D711D0F329E001198E5 /* Localization.swift in Sources */,
 				72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */,
 				720AC1B61CE799A400898A87 /* Constants.swift in Sources */,
+				727F322A1D226B0700A7A947 /* TourGuiderController.swift in Sources */,
 				725EF46C1D132DD3001F050B /* SPActivityRateView.swift in Sources */,
 				7297330E1D0348CE000A6384 /* PlaylistSongCell.swift in Sources */,
 			);

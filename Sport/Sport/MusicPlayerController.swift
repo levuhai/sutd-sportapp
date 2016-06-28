@@ -193,6 +193,8 @@ extension MusicPlayerController: MusicPlayerView {
     }
     
     func initNavigationBar() {
+        self.navigationController?.navigationBarHidden = false
+        
         let leftBarItem = UIBarButtonItem(image: UIImage(named: "music_library")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
         leftBarItem.tintColor = UIColor.blueColor()
         self.navigationItem.leftBarButtonItem = leftBarItem

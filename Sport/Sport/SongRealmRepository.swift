@@ -13,8 +13,6 @@ class SongRealmRepository: SongRepository {
     static let sharedInstance = SongRealmRepository()
     
     func addSong(song: SongData) {
-        print("Song added \(song.persistentId)")
-        
         let realm = RealmFactory.sharedInstance.newRealm()
         realm.beginWrite()
         realm.add(song)

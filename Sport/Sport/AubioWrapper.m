@@ -20,7 +20,6 @@
     uint_t hopSize = winSize / 4;
     aubio_source_t *source = new_aubio_source((char_t *)(srcPath.UTF8String), 0, hopSize);
     uint_t sampleRate = aubio_source_get_samplerate(source);
-    NSLog(@"Sample rate: %d", sampleRate);
     
     fvec_t *inputVec = new_fvec(hopSize); // input audio buffer
     fvec_t *outputVec = new_fvec(2); // output position
@@ -61,7 +60,7 @@
         nFrames += read;
     } while (read == hopSize);
     
-#ifdef AUBIO_DEBUG
+#if AUBIO_DEBUG
     // Print tempo value
     NSLog(@"TEMPO: %f", outputValue);
 #endif
