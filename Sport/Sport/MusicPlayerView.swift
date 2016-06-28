@@ -19,7 +19,7 @@ protocol MusicPlayerView: class {
     
     func updateViewForPlayingState(isPlaying: Bool)
     
-    func updateSongInfo(playerViewData: SongViewData)
+    func updateSongInfo(playerViewData: SongViewData?)
     
     func displayPlaylist(playlist: [SongViewData])
     func showPlayingSongInPlaylist(indexInPlaylist: Int)

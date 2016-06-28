@@ -284,6 +284,7 @@
 				720AC1B51CE799A400898A87 /* Constants.swift */,
 				720B346E1CF74D9D001D8893 /* UIColor+Sport.swift */,
 				723EDB1B1D088AA6008ADCA9 /* SongUtils.swift */,
+				72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -459,6 +460,7 @@
 				722BE8DB1CECD44400E51D68 /* BundleSyncManager.swift */,
 				72ED32161D185DCA001CF71D /* SingleAnalysisOperation.swift */,
 				72ED32181D186333001CF71D /* ConcurrentOperation.swift */,
+				72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */,
 			);
 			name = Sync;
 			sourceTree = "<group>";
@@ -505,11 +507,9 @@
 			children = (
 				72468B991CEA3C0A00EFBF62 /* Sync */,
 				72F6F0D01CE8E50900142CD0 /* SongRepositories */,
-				72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */,
+				720B34B21CFF514E001D8893 /* SPAudioPlayer */,
 				72A6BC9E1CE4F695007C0254 /* FileManager.swift */,
 				720AC1B71CE7A61500898A87 /* RealmFactory.swift */,
-				72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */,
-				720B34B21CFF514E001D8893 /* SPAudioPlayer */,
 				72E85BD41D040E790025CAFE /* DependencyInjector.swift */,
 			);
 			name = Manager;

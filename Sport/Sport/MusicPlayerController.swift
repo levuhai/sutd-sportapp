@@ -161,6 +161,20 @@ extension MusicPlayerController: MusicPlayerView {
         
         // ==============================================================
         // Setup playlist view
+        initPlaylistView()
+        
+        // ==============================================================
+        // Navigation bar items
+        initNavigationBar()
+        
+        // ==============================================================
+        // Setup music control
+        initMusicControlView()
+        
+        activityRateView.dataSource = screenPresenter
+    }
+    
+    func initPlaylistView() {
         playlistTableView.dataSource = self
         playlistTableView.delegate = self
         playlistTableView.rowHeight = UITableViewAutomaticDimension
@@ -172,17 +186,22 @@ extension MusicPlayerController: MusicPlayerView {
         expandCollapseButton.titleLabel?.font = UIFont.ioniconOfSize(24)
         expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), forState: .Normal)
         
-        // ==============================================================
-        // Navigation bar items
+        // Playing song info.
+        updateSongInfo(nil)
+        
+        showPlaylistView(false, animated: false)
+    }
+    
+    func initNavigationBar() {
         let leftBarItem = UIBarButtonItem(image: UIImage(named: "music_library")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
         leftBarItem.tintColor = UIColor.blueColor()
         self.navigationItem.leftBarButtonItem = leftBarItem
         
         let rightBarItem = UIBarButtonItem(image: UIImage(named: "ic_running")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
-        
-        // ==============================================================
-        // Setup music control
+    }
+    
+    func initMusicControlView() {
         playPauseButton.titleLabel?.font = UIFont.ioniconOfSize(45)
         playPauseButton.layer.cornerRadius = playPauseButton.frame.size.width / 2
         setButtonPlayImage(true)
@@ -201,8 +220,6 @@ extension MusicPlayerController: MusicPlayerView {
         
         // Init
         updatePlaybackProgress(0)
-        
-        showPlaylistView(false, animated: false)
     }
     
     func switchControlMode(runningMode: Bool) {
@@ -220,9 +237,13 @@ extension MusicPlayerController: MusicPlayerView {
     func showManualControl() {
         autoControlView.hidden = true
         manualControlView.hidden = false
+        
+        activityRateView.stopReceivingUpdates()
     }
     
     func showAutoControl() {
+        activityRateView.startReceivingUpdate()
+        
         manualControlView.hidden = true
         autoControlView.hidden = false
     }
@@ -248,10 +269,14 @@ extension MusicPlayerController: MusicPlayerView {
         setButtonPlayImage(isPlaying)
     }
     
-    func updateSongInfo(playerViewData: SongViewData) {
-        songTitleLabel.text = playerViewData.title
-        albumImageView.image = playerViewData.image
-        
+    func updateSongInfo(playerViewData: SongViewData?) {
+        if (playerViewData == nil) {
+            songTitleLabel.text = "---"
+            albumImageView.image = UIImage(named: "unknown_album")
+        } else {
+            songTitleLabel.text = playerViewData!.title
+            albumImageView.image = playerViewData!.image
+        }
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }

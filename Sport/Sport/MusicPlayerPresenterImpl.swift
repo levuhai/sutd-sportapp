@@ -55,59 +55,16 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func onRightBarButtonClicked() {
         runningMode = !runningMode
         playerView?.switchControlMode(runningMode)
+        
         if !motionManager.accelerometerAvailable {
             return
         }
         if runningMode {
-            motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: { (nilableAccelerometerData, error) in
-                guard let accelerometerData = nilableAccelerometerData, lastAccelerometerData = self.lastAccelerometerData else {
-                    self.lastAccelerometerData = nilableAccelerometerData
-                    return
-                }
-                
-                let dValue = self.calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
-                self.lastAccelerometerData = accelerometerData
-                self.storeDvalue(dValue, dvaltable: &self.dvalArray)
-                let wma = self.calculateWMA(self.dvalArray)
-                self.playerView?.updateActivityRatesData(Float(dValue))
-                
-            })
+            motionManager.startAccelerometerUpdates()
         } else {
             motionManager.stopAccelerometerUpdates()
         }
         
-    }
-    
-    func calculateDValue(currentAccel: CMAccelerometerData, lastAccel: CMAccelerometerData) -> Double {
-        
-        let x = currentAccel.acceleration.x
-        let y = currentAccel.acceleration.y
-        let z = currentAccel.acceleration.z
-        
-        let x0 = lastAccel.acceleration.x
-        let y0 = lastAccel.acceleration.y
-        let z0 = lastAccel.acceleration.z
-        
-        let d = (x*x0 + y*y0 + z*z0) / sqrt((x*x + y*y + z*z) * (x0*x0 + y0*y0 + z0*z0));
-        return d
-    }
-    
-    func calculateWMA(dvaltable: [Double]) -> Double {
-        var sum: Double = 0
-        var factor: Double = 10
-        
-        for index in (0..<dvaltable.count).reverse() {
-            sum += factor * dvaltable[index]
-            factor -= 1
-        }
-        return sum / 55.0
-    }
-    
-    func storeDvalue(value: Double, inout dvaltable: [Double]) {
-        if (dvaltable.count > 10) {
-            dvaltable.removeFirst()
-        }
-        dvaltable.append(value)
     }
     
     func onRewindButtonClicked() {
@@ -149,6 +106,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         
         loadSongs(newValue)
         
+        playerView?.updateSongInfo(nil)
         setupNewPlayList()
     }
     
@@ -197,6 +155,55 @@ extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
     func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer) {
         audioDoStop()
         playerView?.showPlayingSongInPlaylist(-1)
+    }
+}
+
+extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
+    func dataForActivityRateView(view: SPActivityRateView) -> Float {
+        let nilableAccelerometerData = motionManager.accelerometerData
+        
+        guard let accelerometerData = nilableAccelerometerData, lastAccelerometerData = self.lastAccelerometerData else {
+            self.lastAccelerometerData = nilableAccelerometerData
+            return Float(1.0)
+        }
+        
+        let dValue = self.calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
+        self.lastAccelerometerData = accelerometerData
+//        self.storeDvalue(dValue, dvaltable: &self.dvalArray)
+//        let wma = self.calculateWMA(self.dvalArray)
+        return Float(dValue)
+    }
+    
+    func calculateDValue(currentAccel: CMAccelerometerData, lastAccel: CMAccelerometerData) -> Double {
+        
+        let x = currentAccel.acceleration.x
+        let y = currentAccel.acceleration.y
+        let z = currentAccel.acceleration.z
+        
+        let x0 = lastAccel.acceleration.x
+        let y0 = lastAccel.acceleration.y
+        let z0 = lastAccel.acceleration.z
+        
+        let d = (x*x0 + y*y0 + z*z0) / sqrt((x*x + y*y + z*z) * (x0*x0 + y0*y0 + z0*z0));
+        return d
+    }
+    
+    func calculateWMA(dvaltable: [Double]) -> Double {
+        var sum: Double = 0
+        var factor: Double = 10
+        
+        for index in (0..<dvaltable.count).reverse() {
+            sum += factor * dvaltable[index]
+            factor -= 1
+        }
+        return sum / 55.0
+    }
+    
+    func storeDvalue(value: Double, inout dvaltable: [Double]) {
+        if (dvaltable.count > 10) {
+            dvaltable.removeFirst()
+        }
+        dvaltable.append(value)
     }
 }
 
@@ -262,3 +269,4 @@ extension MusicPlayerPresenterImpl {
     }
 
 }
+

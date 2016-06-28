@@ -10,6 +10,7 @@ import UIKit
 
 class AppUserDefaults: NSObject {
     private static let SP_LAST_TEMPO_KEY = "last_tempo"
+    private static let SP_INITIALIZED = "initialized"
     
     class func saveLastTempo(tempo: Float) {
         NSUserDefaults.standardUserDefaults().setObject(tempo, forKey: SP_LAST_TEMPO_KEY)
@@ -20,6 +21,6 @@ class AppUserDefaults: NSObject {
     }
     
     class func isFirstInitialSuccessfully() -> Bool {
-        return false
+        return NSUserDefaults.standardUserDefaults().objectForKey(SP_INITIALIZED)?.boolValue ?? false
     }
 }

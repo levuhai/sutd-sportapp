@@ -65,10 +65,6 @@ extension MusicLibraryController: MusicLibraryView {
     
     func barButtonReloadDidClick(sender: UIBarButtonItem) {
         libraryPresenter?.onBarButonReloadClick()
-//        let path = NSBundle.mainBundle().pathForResource("3283577656088715482", ofType: "mp3")
-//        for _ in 1..<100 {
-//            AubioWrapper.simpleAnalyzeAudioFile(path)
-//        }
     }
     
     func showLoading(show: Bool) {
@@ -103,7 +99,7 @@ extension MusicLibraryController: UITableViewDataSource {
 
 extension MusicLibraryController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
     }
 }

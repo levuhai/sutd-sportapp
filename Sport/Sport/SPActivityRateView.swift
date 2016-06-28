@@ -8,38 +8,59 @@
 
 import UIKit
 
+protocol SPActivityRateViewDataSource: NSObjectProtocol {
+    func dataForActivityRateView(view: SPActivityRateView) -> Float
+}
+
 class SPActivityRateView: UIView {
     
     let maximumValue = Float(1.2)
     let minimumValue = Float(0)
-    
-    var activityRates = [Float]()
-    
     let horizontalSpacing: CGFloat = 1
     let top: CGFloat = 10
     let bottom: CGFloat = 10
     let left: CGFloat = 10
     
+    var activityRates = [Float]()
+
     var path = UIBezierPath()
     
     var lastRefresh = NSDate()
-    let drawInterval: NSTimeInterval = 0
-    
-    var currentMin = Float(1)
+    let drawInterval: NSTimeInterval = 1.0 / 60
     
     var expiredIndex: Int = 0
+    
+    var drawingTimer: NSTimer?
+    
+    weak var dataSource: SPActivityRateViewDataSource?
+    
+    // MARK: - Functions
+    // ===============================================================================
+    // FUNCTIONS
+    
+    func startReceivingUpdate() {
+        guard let _ = dataSource else {
+            return
+        }
+        drawingTimer = NSTimer.scheduledTimerWithTimeInterval(drawInterval, target: self, selector: #selector(timerDidTick(_:)), userInfo: nil, repeats: true)
+    }
+    
+    func stopReceivingUpdates() {
+        drawingTimer?.invalidate()
+    }
+    
+    func timerDidTick(timer: NSTimer) {
+        let value = dataSource!.dataForActivityRateView(self)
+        add(value)
+        
+        reloadData()
+    }
     
     func add(value: Float) {
         if (expiredIndex > 0) {
             activityRates.removeLast(activityRates.count - expiredIndex)
         }
-        if (value < currentMin) {
-            currentMin = value
-            print("Val \(value)")
-        }
         activityRates.insert(value, atIndex: 0)
-
-        reloadData()
     }
     
     override func layoutSubviews() {

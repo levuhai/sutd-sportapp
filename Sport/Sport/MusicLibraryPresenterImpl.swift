@@ -52,11 +52,10 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
         libraryView?.enableRightBarButton(false)
         libraryView?.showLoading(true)
         
-        songSyncManager.syncWithRepo(songRepository, progress: { (current, total) in
-            print("Progress: \(current)/\(total)")
-            self.libraryView?.dispatchProgress(current, total: total)
+        songSyncManager.syncWithRepo(songRepository, progress: { [weak self] (current, total) in
+            self?.libraryView?.dispatchProgress(current, total: total)
         }, completion: {
-            self.reloadData()
+            self.reloadData(    )
             
             self.libraryView?.enableRightBarButton(true)
             self.libraryView?.showLoading(false)

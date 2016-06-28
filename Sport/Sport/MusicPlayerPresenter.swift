@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MusicPlayerPresenter: class {
+protocol MusicPlayerPresenter: SPActivityRateViewDataSource {
     
     var playerView: MusicPlayerView? { get }
     
