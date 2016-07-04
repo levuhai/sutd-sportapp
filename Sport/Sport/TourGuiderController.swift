@@ -39,7 +39,7 @@ class TourGuiderController: UIViewController {
         view.bringSubviewToFront(pageControl)
     }
     
-    @IBAction func gotItButtonDidClick(sender: UIButton) {
+    func gotItButtonDidClick() {
         let finished = true
         AppUserDefaults.saveTutorialStatus(finished)
         
@@ -53,7 +53,7 @@ class TourGuiderController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func contentViewControllerAtIndex(index: Int) -> UIViewController? {
+    func contentViewControllerAtIndex(index: Int) -> TourGuideContentController? {
         if (index < 0 || index >= pageTitles.count) {
             return nil
         }
@@ -71,12 +71,20 @@ extension TourGuiderController: UIPageViewControllerDataSource {
         let contentController = viewController as! TourGuideContentController
         let pageIndex = contentController.pageIndex
         
-        // Last page
+        // After last page
         if (pageIndex == pageTitles.count - 1) {
             return nil
         }
         
-        return contentViewControllerAtIndex(pageIndex + 1)
+        let controller = contentViewControllerAtIndex(pageIndex + 1)
+        // Last page
+        if (controller?.pageIndex == pageTitles.count - 1) {
+            controller?.enableFinishButtonWithAction({ 
+                self.gotItButtonDidClick()
+            })
+        }
+        
+        return controller
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
