@@ -45,6 +45,7 @@ class InitialViewController: UIViewController {
             }
             }, completion: {
                 self.getStartedButton.enabled = true
+                self.statusLabel.text = "All done"
                 self.timer?.invalidate()
         })
     }
