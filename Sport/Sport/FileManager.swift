@@ -51,6 +51,9 @@ class FileManager: NSObject {
     
     class func moveFileAtPath(srcPath: String, toPath dstPath: String) {
         do {
+            if (NSFileManager.defaultManager().fileExistsAtPath(dstPath)) {
+                try NSFileManager.defaultManager().removeItemAtPath(dstPath)
+            }
             try NSFileManager.defaultManager().moveItemAtPath(srcPath, toPath: dstPath)
         } catch {
             print(error)

@@ -669,11 +669,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Tgm-0t-A21">
-                                <rect key="frame" x="177" y="418" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Processing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtS-Ki-dfx">
-                                <rect key="frame" x="145" y="456" width="85" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting_1" translatesAutoresizingMaskIntoConstraints="NO" id="HhF-io-GUJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtS-Ki-dfx">
+                                <rect key="frame" x="145" y="429" width="86" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -686,21 +686,67 @@
                                     <action selector="getStartedButtonDidClick:" destination="nHA-vT-pkV" eventType="touchUpInside" id="hwP-Q8-ELb"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GR4-OW-aCA" customClass="MBCircularProgressBarView">
+                                <rect key="frame" x="113" y="259" width="150" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="2d4-Gk-e3P"/>
+                                    <constraint firstAttribute="width" constant="150" id="CWR-fN-F5L"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="progressColor">
+                                        <color key="value" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progressAngle">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progressLineWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progressRotationAngle">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="progressStrokeColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showUnitString" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="emptyLineWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HhF-io-GUJ" firstAttribute="top" secondItem="eXo-pS-NJT" secondAttribute="top" id="3X7-4X-QPG"/>
                             <constraint firstItem="bz8-yT-fCf" firstAttribute="top" secondItem="xNr-39-eYi" secondAttribute="bottom" constant="20" id="84z-5p-z6d"/>
-                            <constraint firstItem="bz8-yT-fCf" firstAttribute="top" secondItem="rtS-Ki-dfx" secondAttribute="bottom" constant="190" id="BIT-AO-lsN"/>
-                            <constraint firstItem="rtS-Ki-dfx" firstAttribute="top" secondItem="Tgm-0t-A21" secondAttribute="bottom" constant="18" id="LeA-H6-814"/>
+                            <constraint firstItem="rtS-Ki-dfx" firstAttribute="top" secondItem="GR4-OW-aCA" secondAttribute="bottom" constant="20" id="AUQ-hY-tIM"/>
+                            <constraint firstItem="GR4-OW-aCA" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="EHc-e0-pve"/>
+                            <constraint firstAttribute="trailing" secondItem="HhF-io-GUJ" secondAttribute="trailing" id="JTU-JC-jEs"/>
                             <constraint firstItem="xNr-39-eYi" firstAttribute="trailing" secondItem="eXo-pS-NJT" secondAttribute="trailingMargin" id="Tzy-de-3OX"/>
-                            <constraint firstItem="Tgm-0t-A21" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="XKA-8o-BCg"/>
+                            <constraint firstAttribute="bottom" secondItem="HhF-io-GUJ" secondAttribute="bottom" id="kv5-de-q9K"/>
                             <constraint firstItem="rtS-Ki-dfx" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="tMh-qE-3Yt"/>
+                            <constraint firstItem="HhF-io-GUJ" firstAttribute="leading" secondItem="eXo-pS-NJT" secondAttribute="leading" id="vNV-ig-LBE"/>
+                            <constraint firstItem="GR4-OW-aCA" firstAttribute="centerY" secondItem="eXo-pS-NJT" secondAttribute="centerY" id="zFS-gg-BPE"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="activityIndicatorView" destination="Tgm-0t-A21" id="QDg-uc-fNU"/>
                         <outlet property="getStartedButton" destination="xNr-39-eYi" id="Jx4-Fy-9rh"/>
+                        <outlet property="progressView" destination="GR4-OW-aCA" id="G83-qh-dFi"/>
+                        <outlet property="slideImageView" destination="HhF-io-GUJ" id="7lC-dI-oZ3"/>
                         <outlet property="statusLabel" destination="rtS-Ki-dfx" id="bzP-Ox-1gw"/>
                     </connections>
                 </viewController>
@@ -712,5 +758,6 @@
     <resources>
         <image name="bgImage" width="375" height="290"/>
         <image name="ic_play" width="164" height="164"/>
+        <image name="waiting_1" width="421" height="667"/>
     </resources>
 </document>
