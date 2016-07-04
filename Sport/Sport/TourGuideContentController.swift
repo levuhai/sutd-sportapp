@@ -23,6 +23,7 @@ class TourGuideContentController: UIViewController {
 
         // Do any additional setup after loading the view.
         titleLabel.text = pageTitle
+        guideImageView.clipsToBounds = true
         guideImageView.image = UIImage(named: guideImageName)
     }
 

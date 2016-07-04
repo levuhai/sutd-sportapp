@@ -558,7 +558,7 @@
         <!--Tour Guider Controller-->
         <scene sceneID="1qb-Y8-xbT">
             <objects>
-                <viewController storyboardIdentifier="TourGuideController" id="otJ-GC-xF8" customClass="TourGuiderController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TourGuideController" automaticallyAdjustsScrollViewInsets="NO" id="otJ-GC-xF8" customClass="TourGuiderController" customModule="Sport" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O64-MJ-HkX"/>
                         <viewControllerLayoutGuide type="bottom" id="RcD-8x-UrT"/>
@@ -567,25 +567,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-Ue-Maq">
-                                <rect key="frame" x="126" y="609" width="123" height="38"/>
-                                <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
-                                <state key="normal" title="Ok, got it"/>
-                                <connections>
-                                    <action selector="gotItButtonDidClick:" destination="otJ-GC-xF8" eventType="touchUpInside" id="HLc-Uw-v8p"/>
-                                </connections>
-                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="XDT-YN-BuZ">
+                                <rect key="frame" x="168" y="630" width="39" height="37"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RcD-8x-UrT" firstAttribute="top" secondItem="Hr4-Ue-Maq" secondAttribute="bottom" constant="20" id="chD-AK-tyD"/>
-                            <constraint firstItem="Hr4-Ue-Maq" firstAttribute="centerX" secondItem="hNg-aB-2qS" secondAttribute="centerX" id="sND-PJ-eVZ"/>
+                            <constraint firstItem="XDT-YN-BuZ" firstAttribute="centerX" secondItem="hNg-aB-2qS" secondAttribute="centerX" id="JeB-H5-tQ7"/>
+                            <constraint firstItem="RcD-8x-UrT" firstAttribute="top" secondItem="XDT-YN-BuZ" secondAttribute="bottom" id="KoS-FS-oaA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="g4E-Hz-ito"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="gotItButton" destination="Hr4-Ue-Maq" id="8v2-mG-nPw"/>
+                        <outlet property="pageControl" destination="XDT-YN-BuZ" id="iWd-Ah-0OC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUT-rW-1bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -595,7 +590,8 @@
         <!--Page View Controller-->
         <scene sceneID="eL0-Mq-TPw">
             <objects>
-                <pageViewController storyboardIdentifier="TutorialPageContainer" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0aD-Bn-w23" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="TutorialPageContainer" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0aD-Bn-w23" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLv-30-KL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -614,24 +610,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sal-lI-ycP">
-                                <rect key="frame" x="16" y="83" width="343" height="584"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmO-fz-wUF">
                                 <rect key="frame" x="166" y="46" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sal-lI-ycP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nBR-eu-rQf" firstAttribute="top" secondItem="sal-lI-ycP" secondAttribute="bottom" id="58p-SX-J2b"/>
-                            <constraint firstItem="sal-lI-ycP" firstAttribute="top" secondItem="RmO-fz-wUF" secondAttribute="bottom" constant="16" id="8ZT-wa-ffq"/>
-                            <constraint firstItem="RmO-fz-wUF" firstAttribute="top" secondItem="Ngo-rj-7sd" secondAttribute="bottom" constant="26" id="JQ8-PH-hbV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sal-lI-ycP" secondAttribute="trailing" id="acv-Vd-CFs"/>
+                            <constraint firstAttribute="bottom" secondItem="sal-lI-ycP" secondAttribute="bottom" id="GlG-z5-Kmj"/>
+                            <constraint firstItem="RmO-fz-wUF" firstAttribute="top" secondItem="Ngo-rj-7sd" secondAttribute="bottom" constant="26" id="Wl9-cZ-YBa"/>
+                            <constraint firstAttribute="trailing" secondItem="sal-lI-ycP" secondAttribute="trailing" id="acv-Vd-CFs"/>
+                            <constraint firstItem="sal-lI-ycP" firstAttribute="top" secondItem="n4U-2L-eAj" secondAttribute="top" id="ksa-Gd-m2y"/>
                             <constraint firstItem="RmO-fz-wUF" firstAttribute="centerX" secondItem="n4U-2L-eAj" secondAttribute="centerX" id="sz9-1a-yh7"/>
-                            <constraint firstItem="sal-lI-ycP" firstAttribute="leading" secondItem="n4U-2L-eAj" secondAttribute="leadingMargin" id="vFp-E8-zVY"/>
+                            <constraint firstItem="sal-lI-ycP" firstAttribute="leading" secondItem="n4U-2L-eAj" secondAttribute="leading" id="vFp-E8-zVY"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

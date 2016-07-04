@@ -88,10 +88,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Sport/MBProgressHUD.framework"
   install_framework "Pods-Sport/Realm.framework"
   install_framework "Pods-Sport/RealmSwift.framework"
+  install_framework "Pods-Sport/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Sport/MBCircularProgressBar.framework"
   install_framework "Pods-Sport/MBProgressHUD.framework"
   install_framework "Pods-Sport/Realm.framework"
   install_framework "Pods-Sport/RealmSwift.framework"
+  install_framework "Pods-Sport/SnapKit.framework"
 fi

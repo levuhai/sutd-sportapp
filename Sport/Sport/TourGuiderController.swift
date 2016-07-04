@@ -10,11 +10,11 @@ import UIKit
 
 class TourGuiderController: UIViewController {
 
-    @IBOutlet weak var gotItButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
     var pageViewController: UIPageViewController!
     
     let pageTitles = ["Hello", "Welcome to Sport", "Final screen"]
-    let pageImages = ["bgImage", "bgImage", "bgImage"]
+    let pageImages = ["city_1", "city_2", "city_3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,22 +24,20 @@ class TourGuiderController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         pageViewController = storyboard.instantiateViewControllerWithIdentifier("TutorialPageContainer") as! UIPageViewController
         pageViewController.dataSource = self
+        pageViewController.delegate = self
         
         let firstController = contentViewControllerAtIndex(0)!
         pageViewController.setViewControllers([firstController], direction: .Forward, animated: false, completion: nil)
         
-        pageViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height - 78)
+        pageViewController.view.frame = UIScreen.mainScreen().bounds
         
         addChildViewController(pageViewController)
         view.addSubview(pageViewController.view)
         pageViewController.didMoveToParentViewController(self)
         
-        // Do any additional setup after loading the view.
-        gotItButton.layer.borderColor = UIColor.greenColor().CGColor
-        gotItButton.layer.borderWidth = 1.0
-        gotItButton.layer.cornerRadius = 2.0
+        pageControl.numberOfPages = pageTitles.count;
+        view.bringSubviewToFront(pageControl)
     }
-
     
     @IBAction func gotItButtonDidClick(sender: UIButton) {
         let finished = true
@@ -91,12 +89,18 @@ extension TourGuiderController: UIPageViewControllerDataSource {
         }
         return contentViewControllerAtIndex(pageIndex - 1)
     }
-    
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return pageTitles.count
+}
+
+extension TourGuiderController: UIPageViewControllerDelegate {
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+        let contentController = pendingViewControllers[0] as! TourGuideContentController
+        pageControl.currentPage = contentController.pageIndex
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return 0
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if (!completed) {
+            let contentController = previousViewControllers[0] as! TourGuideContentController
+            pageControl.currentPage = contentController.pageIndex
+        }
     }
 }

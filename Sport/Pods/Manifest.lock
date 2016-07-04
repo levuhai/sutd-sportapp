@@ -9,6 +9,7 @@ PODS:
   - Realm/Headers (1.0.1)
   - RealmSwift (1.0.1):
     - Realm (= 1.0.1)
+  - SnapKit (0.21.1)
 
 DEPENDENCIES:
   - Crashlytics
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - MBCircularProgressBar
   - MBProgressHUD
   - RealmSwift
+  - SnapKit
 
 SPEC CHECKSUMS:
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
@@ -24,5 +26,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
   RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
+  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
 
 COCOAPODS: 0.39.0
