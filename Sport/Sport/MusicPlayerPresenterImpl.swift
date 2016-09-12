@@ -70,13 +70,19 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         }
         if runningMode {
             motionManager.startAccelerometerUpdates()
-//            pedometer.startPedometerWithUpdateInterval(1, handler: { [weak self] (totalSteps) in
-//                self?.playerView?.updateStepCount(totalSteps)
-//            })
+            // TODO: Start step counter here and update total steps in the handler.
+            /*
+             
+             pedometer.startPedometerWithUpdateInterval(1, handler: { [weak self] (totalSteps) in
+                self?.playerView?.updateStepCount(totalSteps)
+             })
+             
+             */
             stepTimer?.invalidate()
             stepTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(updateTotalStep), userInfo: nil, repeats: true)
         } else {
             motionManager.stopAccelerometerUpdates()
+            // TODO: Stop step counter.
 //            pedometer.stopStepCounter()
             stepTimer?.invalidate()
         }

@@ -32,7 +32,7 @@
     double currnetBpm = 0, lastBpm = 0;
     double rate = 0.5;
     double outputValue = 0;
-
+    // TODO: Add energy, happiness analisys here.
     do {
         aubio_source_do(source, inputVec, &read);
         
@@ -71,6 +71,7 @@
     del_aubio_source(source);
     aubio_cleanup();
     
+    // TODO: Change value of energy & valence to the analized value.
     AnalysisOutput *output = [[AnalysisOutput alloc] initWithTempo:outputValue energy:0 valence:0];
     return output;
 }
