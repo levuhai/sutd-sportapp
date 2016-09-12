@@ -11,6 +11,10 @@ import CoreMotion
 
 class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     
+    let rightLegThreshold = 0.96
+    let leftLegThreshold = 0.96
+    
+    var stepCount = 0
     weak var playerView: MusicPlayerView?
     let router: MusicPlayerRouter
     var songRepository: SongRepository
@@ -21,7 +25,12 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     var playList: [SPPlayerItem] = []
     
     var lastAccelerometerData: CMAccelerometerData? = nil
+    var lastAccelerometerDataStepTracking: CMAccelerometerData? = nil
     var dvalArray = [Double]()
+    
+    let pedometer = SPPedometer()
+    
+    var stepTimer: NSTimer?
     
     init(musicView: MusicPlayerView, router: MusicPlayerRouter, songRepository: SongRepository) {
         self.playerView = musicView
@@ -61,10 +70,16 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         }
         if runningMode {
             motionManager.startAccelerometerUpdates()
+//            pedometer.startPedometerWithUpdateInterval(1, handler: { [weak self] (totalSteps) in
+//                self?.playerView?.updateStepCount(totalSteps)
+//            })
+            stepTimer?.invalidate()
+            stepTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(updateTotalStep), userInfo: nil, repeats: true)
         } else {
             motionManager.stopAccelerometerUpdates()
+//            pedometer.stopStepCounter()
+            stepTimer?.invalidate()
         }
-        
     }
     
     func onRewindButtonClicked() {
@@ -167,11 +182,30 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
             return Float(1.0)
         }
         
-        let dValue = self.calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
+        let dValue = calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
         self.lastAccelerometerData = accelerometerData
-//        self.storeDvalue(dValue, dvaltable: &self.dvalArray)
-//        let wma = self.calculateWMA(self.dvalArray)
+        storeDvalue(dValue, dvaltable: &self.dvalArray)
+        
         return Float(dValue)
+    }
+    
+    func updateTotalStep() {
+//        let nilableAccelerometerData = motionManager.accelerometerData
+//        
+//        guard let accelerometerData = nilableAccelerometerData, lastAccelerometerData = self.lastAccelerometerDataStepTracking else {
+//            self.lastAccelerometerDataStepTracking = nilableAccelerometerData
+//            return
+//        }
+//        
+//        let dValue = calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
+//        self.lastAccelerometerDataStepTracking = accelerometerData
+//        storeDvalue(dValue, dvaltable: &self.dvalArray)
+        let wma = self.calculateWMA(self.dvalArray)
+        if (wma < rightLegThreshold) {
+            stepCount += 1
+        }
+        
+        playerView?.updateStepCount(stepCount)
     }
     
     func calculateDValue(currentAccel: CMAccelerometerData, lastAccel: CMAccelerometerData) -> Double {
@@ -190,17 +224,17 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
     
     func calculateWMA(dvaltable: [Double]) -> Double {
         var sum: Double = 0
-        var factor: Double = 10
+        var factor: Double = 60
         
         for index in (0..<dvaltable.count).reverse() {
             sum += factor * dvaltable[index]
             factor -= 1
         }
-        return sum / 55.0
+        return sum / 1830.0
     }
     
     func storeDvalue(value: Double, inout dvaltable: [Double]) {
-        if (dvaltable.count > 10) {
+        if (dvaltable.count > 60) {
             dvaltable.removeFirst()
         }
         dvaltable.append(value)

@@ -45,21 +45,29 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qs-yJ-YoN" userLabel="Auto View">
                                 <rect key="frame" x="20" y="431" width="335" height="80"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" userLabel="Activity Container View" customClass="SPActivityRateView" customModule="Sport" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" customClass="SPActivityRateView" customModule="Sport" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="dz7-SX-Gtc"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQI-5u-agq">
+                                        <rect key="frame" x="326" y="63" width="9" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="4Ws-eA-grF"/>
                                     <constraint firstItem="1FI-UX-eLK" firstAttribute="leading" secondItem="2Qs-yJ-YoN" secondAttribute="leading" id="SyB-Bo-Ill"/>
                                     <constraint firstAttribute="trailing" secondItem="1FI-UX-eLK" secondAttribute="trailing" id="TUo-ak-asH"/>
+                                    <constraint firstAttribute="trailing" secondItem="NQI-5u-agq" secondAttribute="trailing" id="cm7-nV-G3l"/>
                                     <constraint firstItem="1FI-UX-eLK" firstAttribute="centerY" secondItem="2Qs-yJ-YoN" secondAttribute="centerY" id="dTw-wV-kPy"/>
                                     <constraint firstItem="1FI-UX-eLK" firstAttribute="top" secondItem="2Qs-yJ-YoN" secondAttribute="top" id="f0S-xX-gq9"/>
+                                    <constraint firstAttribute="bottom" secondItem="NQI-5u-agq" secondAttribute="bottom" id="h7s-JR-r8c"/>
                                     <constraint firstAttribute="bottom" secondItem="1FI-UX-eLK" secondAttribute="bottom" id="hsv-gY-7To"/>
                                 </constraints>
                                 <variation key="default">
@@ -282,10 +290,10 @@
                                         <color key="backgroundColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistSongCell" rowHeight="83" id="WZB-GQ-WPO" customClass="PlaylistSongCell" customModule="Sport" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="50" width="375" height="83"/>
+                                                <rect key="frame" x="0.0" y="49.5" width="375" height="83"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WZB-GQ-WPO" id="QCh-v6-IHd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aoq-GB-4iI">
@@ -434,6 +442,7 @@
                         <outlet property="progressView" destination="HGA-Mz-Shb" id="8jX-yI-A3A"/>
                         <outlet property="rewindButton" destination="HkD-FV-QOd" id="UWf-Ax-hpO"/>
                         <outlet property="songTitleLabel" destination="JLb-Nb-Xra" id="VRu-Om-Zb6"/>
+                        <outlet property="stepCountLabel" destination="NQI-5u-agq" id="AS0-NJ-PRd"/>
                         <outlet property="tnTempoSlider" destination="L7i-xq-y7j" id="DY3-Ex-oNE"/>
                         <outlet property="topPlaylistToParentBottomConstraint" destination="DlU-J2-xbX" id="FZA-bm-FAc"/>
                         <outlet property="trackpadView" destination="7aC-Pr-mJ1" id="2nh-aR-EA6"/>
@@ -463,7 +472,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9oz-nd-vQU" id="6ae-AL-ISk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="108.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="73U-gH-7j5">
@@ -758,6 +767,6 @@
     <resources>
         <image name="bgImage" width="375" height="290"/>
         <image name="ic_play" width="164" height="164"/>
-        <image name="waiting_1" width="421" height="667"/>
+        <image name="waiting_1" width="416" height="662"/>
     </resources>
 </document>

@@ -25,4 +25,5 @@ protocol MusicPlayerView: class {
     func showPlayingSongInPlaylist(indexInPlaylist: Int)
     
     func updateActivityRatesData(data: Float)
+    func updateStepCount(stepCount: Int)
 }

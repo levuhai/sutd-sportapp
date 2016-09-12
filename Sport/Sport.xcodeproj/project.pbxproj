@@ -64,6 +64,7 @@
 		72F6F0CF1CE8C80000142CD0 /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */; };
 		72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D11CE8E59800142CD0 /* SongRepository.swift */; };
 		72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */; };
+		72F8F5F61D2EC23A008C7517 /* SPPedometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8F5F51D2EC23A008C7517 /* SPPedometer.swift */; };
 		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
@@ -237,6 +238,7 @@
 		72F6F0CE1CE8C80000142CD0 /* AppUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
 		72F6F0D11CE8E59800142CD0 /* SongRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
 		72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRealmRepository.swift; sourceTree = "<group>"; };
+		72F8F5F51D2EC23A008C7517 /* SPPedometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPedometer.swift; sourceTree = "<group>"; };
 		9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
 		9DC91002C9502203A1525AEB /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73913731CE47E4E00874A04 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -349,6 +351,7 @@
 			children = (
 				720B347F1CF89A92001D8893 /* MusicPlayerPresenter.swift */,
 				720B34811CF89AA6001D8893 /* MusicPlayerPresenterImpl.swift */,
+				72F8F5F51D2EC23A008C7517 /* SPPedometer.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -879,6 +882,7 @@
 				72A8C3D31D0C8DD700DF08DF /* TNTextLayer.swift in Sources */,
 				720B34771CF75278001D8893 /* Ionicons.swift in Sources */,
 				727F322E1D22C4FC00A7A947 /* TourGuideContentController.swift in Sources */,
+				72F8F5F61D2EC23A008C7517 /* SPPedometer.swift in Sources */,
 				720B34821CF89AA6001D8893 /* MusicPlayerPresenterImpl.swift in Sources */,
 				72ED32171D185DCA001CF71D /* SingleAnalysisOperation.swift in Sources */,
 				720B348A1CF8AD87001D8893 /* MusicLibraryView.swift in Sources */,
