@@ -14,8 +14,6 @@
 @implementation AubioWrapper
 
 + (AnalysisOutput *)simpleAnalyzeAudioFile:(NSString *)srcPath {
-    // Low pass array
-    
     uint_t winSize = 1024;
     uint_t hopSize = winSize / 4;
     aubio_source_t *source = new_aubio_source((char_t *)(srcPath.UTF8String), 0, hopSize);

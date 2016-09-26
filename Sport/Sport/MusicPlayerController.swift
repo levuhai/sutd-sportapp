@@ -196,12 +196,19 @@ extension MusicPlayerController: MusicPlayerView {
     func initNavigationBar() {
         self.navigationController?.navigationBarHidden = false
         
-        let leftBarItem = UIBarButtonItem(image: UIImage(named: "music_library")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
-        leftBarItem.tintColor = UIColor.blueColor()
+        let leftBarItem = UIBarButtonItem(image: UIImage(named: "Playlist")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
+        leftBarItem.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = leftBarItem
         
-        let rightBarItem = UIBarButtonItem(image: UIImage(named: "ic_running")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
+        let rightBarItem = UIBarButtonItem(image: UIImage(named: "Trainers")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
+        
+        UINavigationBar.appearance().setBackgroundImage(
+            UIImage(),
+            forBarPosition: .Any,
+            barMetrics: .Default)
+        
+        UINavigationBar.appearance().shadowImage = UIImage()
     }
     
     func initMusicControlView() {
@@ -340,7 +347,7 @@ extension MusicPlayerController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistSongCell") as! PlaylistSongCell
         let songInfo = playlistSong[indexPath.row]
-        cell.displaySongInfo(songInfo.title, album: songInfo.artist, image: songInfo.image, playing: songInfo.isPlaying)
+        cell.displaySongInfo(songInfo)
         return cell
     }
     
