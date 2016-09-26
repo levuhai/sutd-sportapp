@@ -26,9 +26,12 @@
     aubio_tempo_t *tempoObject = new_aubio_tempo("default", winSize, hopSize, sampleRate);
     uint_t nFrames = 0;
     uint_t read = 0;
+    NSMutableDictionary* dic = [NSMutableDictionary new];
 
-    double currnetBpm = 0, lastBpm = 0;
-    double rate = 0.5;
+    
+    int cBPM = 0;
+    NSString* sBPM = @"";
+    
     double outputValue = 0;
     // TODO: Add energy, happiness analisys here.
     do {
@@ -39,29 +42,43 @@
         
         // do something with the beats
         if (outputVec->data[0] != 0) {
-#if AUBIO_DEBUG
+            #if AUBIO_DEBUG
             NSLog(@"beat at %.3fs, frame %d, %.2fbpm with confidence %.2f\n",
                       aubio_tempo_get_last_s(tempoObject),
                       aubio_tempo_get_last(tempoObject),
                       aubio_tempo_get_bpm(tempoObject),
                       aubio_tempo_get_confidence(tempoObject));
-#endif
+            #endif
         
-            // Low pass filter
-            currnetBpm = aubio_tempo_get_bpm(tempoObject);
-            outputValue = rate * currnetBpm + (1.0 - rate) * lastBpm;
-            lastBpm = currnetBpm;
-            
-        } else {
-//            NSLog(@"missed");
+            // Count instance
+            cBPM = aubio_tempo_get_bpm(tempoObject);
+            sBPM = [NSString stringWithFormat:@"%d",cBPM];
+            if (dic[sBPM]) {
+                int b = [dic[sBPM] intValue];
+                dic[sBPM] = [NSNumber numberWithInt:b+1];
+            } else {
+                dic[sBPM] = @1;
+            }
         }
         nFrames += read;
     } while (read == hopSize);
     
 #if AUBIO_DEBUG
     // Print tempo value
-    NSLog(@"TEMPO: %f", outputValue);
+    
 #endif
+    
+    // Get highest instance count
+    int count = 0;
+    
+    for (NSString* key in dic.allKeys) {
+        int val = [dic[key] intValue];
+        if (val > count) {
+            count = val;
+            outputValue = [key floatValue];
+        }
+    }
+    NSLog(@"TEMPO: %f", outputValue);
     
     del_aubio_tempo(tempoObject);
     del_fvec(inputVec);
