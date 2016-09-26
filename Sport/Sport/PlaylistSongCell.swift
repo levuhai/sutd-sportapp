@@ -33,6 +33,7 @@ class PlaylistSongCell: UITableViewCell {
     func displaySongInfo(songInfo: SongViewData) {
         albumImageView.image = songInfo.image
         playingIndicatorImageView.hidden = !songInfo.isPlaying
+        selectedIndicatorView.hidden = !songInfo.isPlaying
         titleLabel.text = songInfo.title
         albumLabel.text = songInfo.artist
         let f = songInfo.tempo
@@ -43,7 +44,7 @@ class PlaylistSongCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        selectedIndicatorView.hidden = !selected
+        //selectedIndicatorView.hidden = !selected
     }
 
 }
