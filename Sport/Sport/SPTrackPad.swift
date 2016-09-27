@@ -22,7 +22,8 @@ class SPTrackPad: UIControl {
     var usableVerticalLength: CGFloat = 0
     var usableHorizontalLength: CGFloat = 0
     
-    var previousPosition: CGPoint = CGPointZero
+    // TODO:
+    var previousPosition: CGPoint = CGPointMake(1, 1)
     
     var valence: Float = 0
     var energy: Float = 0.5
@@ -35,7 +36,8 @@ class SPTrackPad: UIControl {
         emitter.emitterShape = kCAEmitterLayerRectangle
         
         let fire = CAEmitterCell()
-        fire.birthRate = 0
+        fire.birthRate = -1
+        
         fire.lifetime = 3.0
         fire.lifetimeRange = 0.5
         fire.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.1).CGColor
@@ -71,10 +73,10 @@ class SPTrackPad: UIControl {
         let currentRect = CGRect(origin: emitter.emitterPosition, size: CGSize(width: 20, height: 20))
         previousPosition = touchPoint
         
-        if CGRectContainsPoint(currentRect, touchPoint) {
+        //if CGRectContainsPoint(currentRect, touchPoint) {
             setEmitting(true)
             return true
-        }
+        //}
         return false
     }
     
@@ -116,7 +118,7 @@ class SPTrackPad: UIControl {
     }
     
     func setEmitting(isEmitting: Bool) {
-        emitter.setValue(NSNumber.init(integer: isEmitting ? 200 : 0), forKeyPath: "emitterCells.fire.birthRate")
+        emitter.setValue(NSNumber.init(integer: isEmitting ? 10 : 0), forKeyPath: "emitterCells.fire.birthRate")
     }
     
     

@@ -27,12 +27,16 @@
     uint_t nFrames = 0;
     uint_t read = 0;
     NSMutableDictionary* dic = [NSMutableDictionary new];
-
     
+    // BPM
     int cBPM = 0;
     NSString* sBPM = @"";
-    
     double outputValue = 0;
+    // db level
+    smpl_t dbLevel = 0.0;
+    // count
+    int readCount = 0;
+    
     // TODO: Add energy, happiness analisys here.
     do {
         aubio_source_do(source, inputVec, &read);
@@ -40,14 +44,14 @@
         // execute tempo
         aubio_tempo_do(tempoObject, inputVec, outputVec);
         
-        // do something with the beats
+        // BPM
         if (outputVec->data[0] != 0) {
             #if AUBIO_DEBUG
-            NSLog(@"beat at %.3fs, frame %d, %.2fbpm with confidence %.2f\n",
-                      aubio_tempo_get_last_s(tempoObject),
-                      aubio_tempo_get_last(tempoObject),
-                      aubio_tempo_get_bpm(tempoObject),
-                      aubio_tempo_get_confidence(tempoObject));
+                NSLog(@"beat at %.3fs, frame %d, %.2fbpm with confidence %.2f\n",
+                        aubio_tempo_get_last_s(tempoObject),
+                        aubio_tempo_get_last(tempoObject),
+                        aubio_tempo_get_bpm(tempoObject),
+                        aubio_tempo_get_confidence(tempoObject));
             #endif
         
             // Count instance
@@ -60,7 +64,13 @@
                 dic[sBPM] = @1;
             }
         }
+        
+        // RMS: amplitude
+        // each element can be accessed directly
+        dbLevel += fmaxf(aubio_db_spl(inputVec),-70.0);
+        
         nFrames += read;
+        readCount += 1;
     } while (read == hopSize);
     
 #if AUBIO_DEBUG
@@ -68,6 +78,7 @@
     
 #endif
     
+    // Calculate BPM
     // Get highest instance count
     int count = 0;
     
@@ -78,7 +89,12 @@
             outputValue = [key floatValue];
         }
     }
-    NSLog(@"TEMPO: %f", outputValue);
+    
+    // Calculate Amplitude
+    dbLevel = (dbLevel/readCount)+120;
+    
+    // Log
+    NSLog(@"BPM:%f DB:%f",outputValue, dbLevel);
     
     del_aubio_tempo(tempoObject);
     del_fvec(inputVec);
@@ -87,7 +103,9 @@
     aubio_cleanup();
     
     // TODO: Change value of energy & valence to the analized value.
-    AnalysisOutput *output = [[AnalysisOutput alloc] initWithTempo:outputValue energy:0 valence:0];
+    AnalysisOutput *output = [[AnalysisOutput alloc] initWithTempo:outputValue
+                                                            energy:dbLevel
+                                                           valence:0];
     return output;
 }
 
