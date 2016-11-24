@@ -284,7 +284,7 @@ extension MusicPlayerPresenterImpl {
         let title = playerItem.mediaItem.title ?? Localizations.UnknownArtist
         let artist = playerItem.mediaItem.artist ?? Localizations.UnknownTitle
         let albumImage = playerItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
-        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo)
+        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo, energy: playerItem.energy)
         
     }
     

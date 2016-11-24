@@ -29,7 +29,7 @@ class SPPlayerItemAdapter: NSObject {
                 continue
             }
             
-            let playerItem = SPPlayerItem(asset: avasset!, mediaItem: mediaItem!, tempo: Float(song.tempo))
+            let playerItem = SPPlayerItem(asset: avasset!, mediaItem: mediaItem!, tempo: Float(song.tempo), energy: Float(song.energy))
             playerItems.append(playerItem)
         }
         return playerItems

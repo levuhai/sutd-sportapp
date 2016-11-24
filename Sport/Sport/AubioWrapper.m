@@ -8,6 +8,7 @@
 
 #import "AubioWrapper.h"
 #import <aubio/aubio.h>
+//#import <Essentia/>
 
 #define AUBIO_DEBUG 0
 
@@ -67,10 +68,13 @@
         
         // RMS: amplitude
         // each element can be accessed directly
-        dbLevel += fmaxf(aubio_db_spl(inputVec),-70.0);
+        float val = fmaxf(aubio_db_spl(inputVec),-60.0);
         
-        nFrames += read;
         readCount += 1;
+        dbLevel += val;
+
+        nFrames += read;
+        
     } while (read == hopSize);
     
 #if AUBIO_DEBUG
@@ -91,7 +95,7 @@
     }
     
     // Calculate Amplitude
-    dbLevel = (dbLevel/readCount)+120;
+    dbLevel = ((dbLevel/readCount)+60.0)/60.0;
     
     // Log
     NSLog(@"BPM:%f DB:%f",outputValue, dbLevel);

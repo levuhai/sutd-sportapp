@@ -17,12 +17,14 @@ class SongViewData: NSObject {
     
     // Technical info
     let tempo: Float
+    let energy: Float
     
-    init(image: UIImage, title: String, artist: String, tempo: Float, isPlaying: Bool = false) {
+    init(image: UIImage, title: String, artist: String, tempo: Float, isPlaying: Bool = false, energy: Float) {
         self.image = image
         self.title = title
         self.artist = artist
         self.isPlaying = isPlaying
         self.tempo = tempo
+        self.energy = energy
     }
 }
