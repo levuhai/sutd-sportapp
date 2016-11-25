@@ -396,7 +396,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
         self.base = base
     }
 
-    //TODO: copyedit private docstrings
+    // TODO (az): copyedit private docstrings
     // MARK: Properties
 
     /// The Realm the objects in this collection belong to, or `nil` if the

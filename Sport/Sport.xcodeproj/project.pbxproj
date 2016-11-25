@@ -45,7 +45,7 @@
 		7297330C1D034869000A6384 /* SongViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297330B1D034869000A6384 /* SongViewData.swift */; };
 		7297330E1D0348CE000A6384 /* PlaylistSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7297330D1D0348CE000A6384 /* PlaylistSongCell.swift */; };
 		729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6BC501CE24CE7007C0254 /* aubio.framework */; };
-		72A6BC571CE386DD007C0254 /* AubioWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC561CE386DD007C0254 /* AubioWrapper.m */; };
+		72A6BC571CE386DD007C0254 /* AubioWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC561CE386DD007C0254 /* AubioWrapper.mm */; };
 		72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */; };
 		72A6BC9D1CE4EBAD007C0254 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC9C1CE4EBAD007C0254 /* String+Extension.swift */; };
 		72A6BC9F1CE4F695007C0254 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6BC9E1CE4F695007C0254 /* FileManager.swift */; };
@@ -64,10 +64,16 @@
 		72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D11CE8E59800142CD0 /* SongRepository.swift */; };
 		72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */; };
 		72F8F5F61D2EC23A008C7517 /* SPPedometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8F5F51D2EC23A008C7517 /* SPPedometer.swift */; };
-		A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC91002C9502203A1525AEB /* Pods_Sport.framework */; };
 		A708319A1DE6C735008F83EE /* libessentia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A70831991DE6C735008F83EE /* libessentia.a */; };
+		A70856791DE74E1500CCD59F /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A70856781DE74E1500CCD59F /* libiconv.2.4.0.tbd */; };
+		A708567B1DE74E1F00CCD59F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A708567A1DE74E1F00CCD59F /* libz.tbd */; };
+		A708567D1DE74E2700CCD59F /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A708567C1DE74E2700CCD59F /* libbz2.1.0.tbd */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
 		A7B743541D95137900E5DB15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B743531D95137900E5DB15 /* Assets.xcassets */; };
+		A7CE05E81DE7CE7C0089BF84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */; };
+		A7CE05EA1DE7E34F0089BF84 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05E91DE7E34F0089BF84 /* VideoToolbox.framework */; };
+		A7CE05ED1DE7EFA40089BF84 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05EC1DE7EFA40089BF84 /* AudioKit.framework */; };
+		E2ABBDD0825D2823D2EEB629 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 627CE3E723BA807CA870F32B /* Pods_Sport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +90,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		627CE3E723BA807CA870F32B /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		720AC1B21CE70EED00898A87 /* SongData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongData.swift; sourceTree = "<group>"; };
 		720AC1B51CE799A400898A87 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		720AC1B71CE7A61500898A87 /* RealmFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmFactory.swift; sourceTree = "<group>"; };
@@ -127,7 +134,7 @@
 		72A6BC501CE24CE7007C0254 /* aubio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aubio.framework; path = Sport/Frameworks/aubio.framework; sourceTree = "<group>"; };
 		72A6BC521CE24F6E007C0254 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		72A6BC551CE386DD007C0254 /* AubioWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AubioWrapper.h; sourceTree = "<group>"; };
-		72A6BC561CE386DD007C0254 /* AubioWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AubioWrapper.m; sourceTree = "<group>"; };
+		72A6BC561CE386DD007C0254 /* AubioWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AubioWrapper.mm; sourceTree = "<group>"; };
 		72A6BC9A1CE4DDB7007C0254 /* SongAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongAnalyzer.swift; sourceTree = "<group>"; };
 		72A6BC9C1CE4EBAD007C0254 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		72A6BC9E1CE4F695007C0254 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -146,12 +153,17 @@
 		72F6F0D11CE8E59800142CD0 /* SongRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
 		72F6F0D31CE8E7E600142CD0 /* SongRealmRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRealmRepository.swift; sourceTree = "<group>"; };
 		72F8F5F51D2EC23A008C7517 /* SPPedometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPPedometer.swift; sourceTree = "<group>"; };
-		9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
-		9DC91002C9502203A1525AEB /* Pods_Sport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9817230583463F6DD3301FF7 /* Pods-Sport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.release.xcconfig"; sourceTree = "<group>"; };
+		A4B27EEDC961B8A3FCC99D4B /* Pods-Sport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.debug.xcconfig"; sourceTree = "<group>"; };
 		A70831991DE6C735008F83EE /* libessentia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libessentia.a; path = Essentia/libessentia.a; sourceTree = "<group>"; };
+		A70856781DE74E1500CCD59F /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		A708567A1DE74E1F00CCD59F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A708567C1DE74E2700CCD59F /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		A73913731CE47E4E00874A04 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A7B743531D95137900E5DB15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D6883B83CF75FC985F57A716 /* Pods-Sport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sport.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sport/Pods-Sport.release.xcconfig"; sourceTree = "<group>"; };
+		A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A7CE05E91DE7E34F0089BF84 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		A7CE05EC1DE7EFA40089BF84 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,37 +171,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7CE05EA1DE7E34F0089BF84 /* VideoToolbox.framework in Frameworks */,
+				A7CE05E81DE7CE7C0089BF84 /* Foundation.framework in Frameworks */,
+				A708567D1DE74E2700CCD59F /* libbz2.1.0.tbd in Frameworks */,
+				A708567B1DE74E1F00CCD59F /* libz.tbd in Frameworks */,
+				A70856791DE74E1500CCD59F /* libiconv.2.4.0.tbd in Frameworks */,
 				A708319A1DE6C735008F83EE /* libessentia.a in Frameworks */,
 				72EEA86B1D1D8C7C00E35D56 /* CoreMotion.framework in Frameworks */,
 				729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */,
 				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
+				A7CE05ED1DE7EFA40089BF84 /* AudioKit.framework in Frameworks */,
 				72B91D691CDF2266000E4923 /* MediaPlayer.framework in Frameworks */,
-				A1789A8E397D18DF87869E04 /* Pods_Sport.framework in Frameworks */,
+				E2ABBDD0825D2823D2EEB629 /* Pods_Sport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2645E1D6706C137743103C56 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */,
-				D6883B83CF75FC985F57A716 /* Pods-Sport.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		62A4BE94FF812D39540CFB3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE05E91DE7E34F0089BF84 /* VideoToolbox.framework */,
+				A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */,
+				A708567C1DE74E2700CCD59F /* libbz2.1.0.tbd */,
+				A708567A1DE74E1F00CCD59F /* libz.tbd */,
+				A70856781DE74E1500CCD59F /* libiconv.2.4.0.tbd */,
 				72EEA86A1D1D8C7C00E35D56 /* CoreMotion.framework */,
 				A73913731CE47E4E00874A04 /* Accelerate.framework */,
 				72A6BC501CE24CE7007C0254 /* aubio.framework */,
 				72B91D7D1CE2165D000E4923 /* AVFoundation.framework */,
 				72B91D681CDF2266000E4923 /* MediaPlayer.framework */,
-				9DC91002C9502203A1525AEB /* Pods_Sport.framework */,
+				627CE3E723BA807CA870F32B /* Pods_Sport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -229,6 +243,7 @@
 		720B34731CF750F1001D8893 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE05EB1DE7EF910089BF84 /* AudioKit */,
 				A73E3FD01DE29E7B007460BE /* Essentia */,
 				72A8C3CE1D0C8DD700DF08DF /* TNSlider */,
 				720B34751CF75278001D8893 /* Ionicons */,
@@ -343,8 +358,8 @@
 			children = (
 				72349B511CDDFBA4002B3B84 /* Sport */,
 				72349B501CDDFBA4002B3B84 /* Products */,
-				2645E1D6706C137743103C56 /* Pods */,
 				62A4BE94FF812D39540CFB3E /* Frameworks */,
+				E5A20245EEAE4F432B42E6C2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -407,7 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				72A6BC551CE386DD007C0254 /* AubioWrapper.h */,
-				72A6BC561CE386DD007C0254 /* AubioWrapper.m */,
+				72A6BC561CE386DD007C0254 /* AubioWrapper.mm */,
 				72468B941CEA2ACC00EFBF62 /* AnalysisOutput.h */,
 				72468B951CEA2ACC00EFBF62 /* AnalysisOutput.m */,
 			);
@@ -470,6 +485,23 @@
 			name = Essentia;
 			sourceTree = "<group>";
 		};
+		A7CE05EB1DE7EF910089BF84 /* AudioKit */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE05EC1DE7EFA40089BF84 /* AudioKit.framework */,
+			);
+			name = AudioKit;
+			sourceTree = "<group>";
+		};
+		E5A20245EEAE4F432B42E6C2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A4B27EEDC961B8A3FCC99D4B /* Pods-Sport.debug.xcconfig */,
+				9817230583463F6DD3301FF7 /* Pods-Sport.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -477,14 +509,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 72349B611CDDFBA4002B3B84 /* Build configuration list for PBXNativeTarget "Sport" */;
 			buildPhases = (
-				A1AB06069A1284B6A7CDD4A3 /* Check Pods Manifest.lock */,
+				18366BA8B515DCAACF2FFD1D /* [CP] Check Pods Manifest.lock */,
 				72349B4B1CDDFBA4002B3B84 /* Sources */,
 				72349B4C1CDDFBA4002B3B84 /* Frameworks */,
 				72349B4D1CDDFBA4002B3B84 /* Resources */,
-				22E780F2A9821E2941934D46 /* Embed Pods Frameworks */,
-				D17292C9EC5F8425BE6A7E24 /* Copy Pods Resources */,
 				72E11C891D1528FB0024803E /* Embed Frameworks */,
 				720B34B51CFF6093001D8893 /* Run Fabric Script */,
+				C7E94C289FCB334A42580AEB /* [CP] Embed Pods Frameworks */,
+				52664579EF9A79A25CE6D829 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -551,19 +583,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		22E780F2A9821E2941934D46 /* Embed Pods Frameworks */ = {
+		18366BA8B515DCAACF2FFD1D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sport/Pods-Sport-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		52664579EF9A79A25CE6D829 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sport/Pods-Sport-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		720B34B51CFF6093001D8893 /* Run Fabric Script */ = {
@@ -580,34 +627,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" c804603b40d70704536f6ceb7b4a689f97bcb1bf fb67ce4ac8b25298657c26558b1ed6dd1607fcd7c8f2af02a26068921bd19c49";
 		};
-		A1AB06069A1284B6A7CDD4A3 /* Check Pods Manifest.lock */ = {
+		C7E94C289FCB334A42580AEB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		D17292C9EC5F8425BE6A7E24 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sport/Pods-Sport-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sport/Pods-Sport-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -641,7 +673,7 @@
 				72A6BC9B1CE4DDB7007C0254 /* SongAnalyzer.swift in Sources */,
 				72F6F0D21CE8E59800142CD0 /* SongRepository.swift in Sources */,
 				72F6F0D41CE8E7E600142CD0 /* SongRealmRepository.swift in Sources */,
-				72A6BC571CE386DD007C0254 /* AubioWrapper.m in Sources */,
+				72A6BC571CE386DD007C0254 /* AubioWrapper.mm in Sources */,
 				720AC1B31CE70EED00898A87 /* SongData.swift in Sources */,
 				72A6BC9F1CE4F695007C0254 /* FileManager.swift in Sources */,
 				7297330C1D034869000A6384 /* SongViewData.swift in Sources */,
@@ -786,7 +818,7 @@
 		};
 		72349B621CDDFBA4002B3B84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AA234B362DD195B7C8D7C48 /* Pods-Sport.debug.xcconfig */;
+			baseConfigurationReference = A4B27EEDC961B8A3FCC99D4B /* Pods-Sport.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -796,6 +828,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sport/Frameworks",
+					"$(PROJECT_DIR)/Sport/Libraries",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -803,6 +836,8 @@
 					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
 					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 					"$(SRCROOT)/Sport/Libraries/Essentia/include/**",
+					/usr/local/include,
+					/usr/local,
 				);
 				INFOPLIST_FILE = Sport/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -811,6 +846,28 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sport/Libraries/Essentia",
 					/usr/local/lib,
+					/usr/local,
+					"$(PROJECT_DIR)/Sport/Libraries",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBCircularProgressBar/MBCircularProgressBar.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm/Realm.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift/RealmSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"-v",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tiennth.Sport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -822,7 +879,7 @@
 		};
 		72349B631CDDFBA4002B3B84 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6883B83CF75FC985F57A716 /* Pods-Sport.release.xcconfig */;
+			baseConfigurationReference = 9817230583463F6DD3301FF7 /* Pods-Sport.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -831,6 +888,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sport/Frameworks",
+					"$(PROJECT_DIR)/Sport/Libraries",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -838,6 +896,8 @@
 					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
 					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 					"$(SRCROOT)/Sport/Libraries/Essentia/include/**",
+					/usr/local/include,
+					/usr/local,
 				);
 				INFOPLIST_FILE = Sport/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -846,6 +906,28 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sport/Libraries/Essentia",
 					/usr/local/lib,
+					/usr/local,
+					"$(PROJECT_DIR)/Sport/Libraries",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBCircularProgressBar/MBCircularProgressBar.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm/Realm.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift/RealmSwift.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"-v",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tiennth.Sport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
