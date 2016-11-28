@@ -42,15 +42,36 @@ private class FontLoader {
     }
 }
 
+public extension DispatchQueue {
+    
+    private static var _onceTracker = [String]()
+    
+    /**
+     Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+     only execute the code once even in the presence of multithreaded calls.
+     
+     - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+     - parameter block: Block to execute once
+     */
+    public class func once(token: String, block:(Void)->Void) {
+        objc_sync_enter(self); defer { objc_sync_exit(self) }
+        
+        if _onceTracker.contains(token) {
+            return
+        }
+        
+        _onceTracker.append(token)
+        block()
+    }
+}
+
 public extension UIFont {
     public class func ioniconOfSize(_ fontSize: CGFloat) -> UIFont {
-        struct Static {
-            static var onceToken : Int = 0
-        }
+    
         
         let name  = "ionicons"
         if (UIFont.fontNames(forFamilyName: name).count == 0) {
-            dispatch_once(&Static.onceToken) {
+            DispatchQueue.once(token: "com.sutd.loadIoniconFont") {
                 FontLoader.loadFont(name)
             }
         }

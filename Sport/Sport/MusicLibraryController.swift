@@ -76,7 +76,7 @@ extension MusicLibraryController: MusicLibraryView {
     }
     
     func dispatchProgress(_ completed: Int, total: Int) {
-        hud?.labelText = "Processing \(completed)/\(total)"
+        hud?.label.text = "Processing \(completed)/\(total)"
     }
     
     func enableRightBarButton(_ enable: Bool) {

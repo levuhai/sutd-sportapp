@@ -20,7 +20,7 @@ class RealmFactory: NSObject {
         // Create custom Realm configuration.
         // Config Realm with new file name.
         realmConfig = Realm.Configuration.defaultConfiguration
-        realmConfig.fileURL = realmConfig.fileURL?.deletingLastPathComponent().URLByAppendingPathComponent(Constants.Realm.fileName)
+        realmConfig.fileURL = realmConfig.fileURL?.deletingLastPathComponent().appendingPathComponent(Constants.Realm.fileName)
         
         super.init()
     }

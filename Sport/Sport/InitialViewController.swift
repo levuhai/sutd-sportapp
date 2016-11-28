@@ -37,9 +37,9 @@ class InitialViewController: UIViewController {
             let newValue = 100 * CGFloat(current) / CGFloat(total)
             let oldValue = self?.progressView.value ?? 0
             if newValue - oldValue > 10 {
-                self?.progressView.setValue(newValue, animateWithDuration: 1.5)
+                self?.progressView.value = newValue
             } else if newValue - oldValue > 0.5 {
-                self?.progressView.setValue(newValue, animateWithDuration: 0.5)
+                self?.progressView.value = newValue
             } else {
                 self?.progressView.value = newValue
             }
