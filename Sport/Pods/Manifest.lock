@@ -2,32 +2,29 @@ PODS:
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - MBCircularProgressBar (0.3.4)
+  - MBCircularProgressBar (0.3.5)
   - MBProgressHUD (1.0.0)
-  - Realm (1.0.1):
-    - Realm/Headers (= 1.0.1)
-  - Realm/Headers (1.0.1)
-  - RealmSwift (1.0.1):
-    - Realm (= 1.0.1)
-  - SnapKit (0.22.0)
+  - Realm (2.1.0):
+    - Realm/Headers (= 2.1.0)
+  - Realm/Headers (2.1.0)
+  - RealmSwift (2.1.0):
+    - Realm (= 2.1.0)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
-  - MBCircularProgressBar (<= 0.3.4)
+  - MBCircularProgressBar
   - MBProgressHUD
-  - RealmSwift (<= 1.0.1)
-  - SnapKit (~> 0.22.0)
+  - RealmSwift
 
 SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  MBCircularProgressBar: ff3b8e2f441214d9ee122a24ba0d4d00cc7de881
+  MBCircularProgressBar: 0b795b722a5eb5b0923822f90474e2576a1a7855
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
-  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
-  SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
+  Realm: bc829ad0ef3d4eea70c34cfcc3b1704d18d50df1
+  RealmSwift: a4d4abbf0088c337cab5b738054395842e4b3052
 
-PODFILE CHECKSUM: 3e0e8251fdf6d1912aa625430a7665e7a02f964d
+PODFILE CHECKSUM: e8f6d40ab0bd39f061203291814e1c543bdaf569
 
 COCOAPODS: 1.1.1

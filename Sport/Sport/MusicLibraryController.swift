@@ -38,13 +38,13 @@ extension MusicLibraryController: MusicLibraryView {
         // Top item of navigation bar is navigation item of parent view controller. Here we have two view controllers so viewControllers[0] is parent of this view controller.
         // print(self.navigationController?.navigationBar.topItem == self.navigationController?.viewControllers[0].navigationItem)
         // So, if we want to custom back button shown in this vc, you should do like this.
-        self.navigationController?.navigationBar.topItem!.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.topItem!.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         let attributes = [NSFontAttributeName: UIFont.ioniconOfSize(40)] as Dictionary!
         
         // Add right bar button
-        let rightBarButton =  UIBarButtonItem(title: String.ioniconWithName(.IosRefreshEmpty), style: .Plain, target: self, action: #selector(MusicLibraryController.barButtonReloadDidClick(_:)))
-        rightBarButton.setTitleTextAttributes(attributes, forState: .Normal)
+        let rightBarButton =  UIBarButtonItem(title: String.ioniconWithName(.IosRefreshEmpty), style: .plain, target: self, action: #selector(MusicLibraryController.barButtonReloadDidClick(_:)))
+        rightBarButton.setTitleTextAttributes(attributes, for: UIControlState())
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         songTableView.rowHeight = UITableViewAutomaticDimension
@@ -53,53 +53,53 @@ extension MusicLibraryController: MusicLibraryView {
     
     func showEmptyList() {
         // emptyView.hidden = false
-        songTableView.hidden = true
+        songTableView.isHidden = true
     }
     
-    func showSongList(songViewData: [SongViewData]) {
+    func showSongList(_ songViewData: [SongViewData]) {
         self.songViewData = songViewData
-        songTableView.hidden = false
+        songTableView.isHidden = false
         // emptyView.hidden = true
         songTableView.reloadData()
     }
     
-    func barButtonReloadDidClick(sender: UIBarButtonItem) {
+    func barButtonReloadDidClick(_ sender: UIBarButtonItem) {
         libraryPresenter?.onBarButonReloadClick()
     }
     
-    func showLoading(show: Bool) {
+    func showLoading(_ show: Bool) {
         if (show) {
-            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         } else {
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
-    func dispatchProgress(completed: Int, total: Int) {
+    func dispatchProgress(_ completed: Int, total: Int) {
         hud?.labelText = "Processing \(completed)/\(total)"
     }
     
-    func enableRightBarButton(enable: Bool) {
-        self.navigationItem.rightBarButtonItem?.enabled = enable
+    func enableRightBarButton(_ enable: Bool) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = enable
     }
 }
 
 extension MusicLibraryController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let songCell = tableView.dequeueReusableCellWithIdentifier("SongTableCell") as! SongTableCell
-        let song = songViewData[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let songCell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell") as! SongTableCell
+        let song = songViewData[(indexPath as NSIndexPath).row]
         songCell.displaySong(song)
         return songCell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songViewData.count
     }
 }
 
 extension MusicLibraryController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         
     }
 }

@@ -19,18 +19,18 @@ class InitialViewController: UIViewController {
     
     let images = ["waiting_1", "waiting_2", "waiting_3"]
     var currentImageIndex = 0
-    var timer: NSTimer? = nil
+    var timer: Timer? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
         print("Count: \(navigationController?.viewControllers.count)")
         // Do any additional setup after loading the view.
         let songSyncManager = ItunesSyncManager.sharedInstance
         let songRepository = SongRealmRepository.sharedInstance
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: #selector(changeBackgroundImage), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(changeBackgroundImage), userInfo: nil, repeats: true)
         
         songSyncManager.syncWithRepo(songRepository, progress: { [weak self] (current, total) in
             print("Processing \(current)/\(total)")
@@ -44,7 +44,7 @@ class InitialViewController: UIViewController {
                 self?.progressView.value = newValue
             }
             }, completion: {
-                self.getStartedButton.enabled = true
+                self.getStartedButton.isEnabled = true
                 self.statusLabel.text = "All done"
                 self.timer?.invalidate()
         })
@@ -55,17 +55,17 @@ class InitialViewController: UIViewController {
         if (currentImageIndex >= images.count) {
             currentImageIndex = 0
         }
-        UIView.transitionWithView(slideImageView, duration: 1, options: .TransitionCrossDissolve, animations: {
+        UIView.transition(with: slideImageView, duration: 1, options: .transitionCrossDissolve, animations: {
             self.slideImageView.image = UIImage(named: self.images[self.currentImageIndex])
             }, completion: nil)
     }
     
-    @IBAction func getStartedButtonDidClick(sender: UIButton) {
+    @IBAction func getStartedButtonDidClick(_ sender: UIButton) {
         // Finished initializing
         AppUserDefaults.saveInitializeStatus(true)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let musicPlayerScreen = storyboard.instantiateViewControllerWithIdentifier("MusicPlayerController")
+        let musicPlayerScreen = storyboard.instantiateViewController(withIdentifier: "MusicPlayerController")
         
         self.navigationController?.setViewControllers([musicPlayerScreen], animated: true)
     }

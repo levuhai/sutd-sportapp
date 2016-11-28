@@ -22,13 +22,13 @@ class SongTableCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    func displaySong(song: SongViewData) {
+    func displaySong(_ song: SongViewData) {
         songTitleLabel.text = song.title
         songAlbumLabel.text = song.artist
         tempoLabel.text = "\(Int(song.tempo)) bpm"

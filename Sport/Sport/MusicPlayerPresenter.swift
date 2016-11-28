@@ -26,7 +26,7 @@ protocol MusicPlayerPresenter: SPActivityRateViewDataSource {
     func onRewindStarted()
     func onRewindEnded()
     
-    func onTempoSliderValueChanged(newValue: Float)
+    func onTempoSliderValueChanged(_ newValue: Float)
     
-    func playlistDidSelectItemAtIndex(indexPath: NSIndexPath)
+    func playlistDidSelectItemAtIndex(_ indexPath: IndexPath)
 }

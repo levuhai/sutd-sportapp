@@ -18,7 +18,7 @@ class MusicPlayerRouterImpl: NSObject, MusicPlayerRouter {
     
     func navigateToLibraryScreen() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let libraryVc = sb.instantiateViewControllerWithIdentifier("MusicLibraryController")
+        let libraryVc = sb.instantiateViewController(withIdentifier: "MusicLibraryController")
         self.controller.navigationController?.pushViewController(libraryVc, animated: true)
     }
     

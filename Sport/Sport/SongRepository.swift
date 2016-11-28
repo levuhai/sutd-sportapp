@@ -9,16 +9,16 @@
 import UIKit
 
 protocol SongRepository: class {
-    func addSongs(songs: [SongData])
-    func addSong(song: SongData)
+    func addSongs(_ songs: [SongData])
+    func addSong(_ song: SongData)
     
     func loadSongs() -> [SongData]
     
-    func isSongExisting(persistenceId: String) -> Bool
+    func isSongExisting(_ persistenceId: String) -> Bool
     
-    func loadSongs(tempo: Float) -> [SongData]
+    func loadSongs(_ tempo: Float) -> [SongData]
     
-    func deleteSong(persistentId: String)
+    func deleteSong(_ persistentId: String)
     
     func loadListSongViewData() -> [SongViewData]
 }

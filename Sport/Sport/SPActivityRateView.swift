@@ -9,13 +9,13 @@
 import UIKit
 
 protocol SPActivityRateViewDataSource: NSObjectProtocol {
-    func dataForActivityRateView(view: SPActivityRateView) -> Float
+    func dataForActivityRateView(_ view: SPActivityRateView) -> Float
 }
 
 class SPActivityRateView: UIView {
     
-    let maximumValue = Float(1.2)
-    let minimumValue = Float(0)
+    let maximumValue = Float(5.5)
+    let minimumValue = Float(0.5)
     let horizontalSpacing: CGFloat = 1
     let top: CGFloat = 10
     let bottom: CGFloat = 10
@@ -25,12 +25,12 @@ class SPActivityRateView: UIView {
 
     var path = UIBezierPath()
     
-    var lastRefresh = NSDate()
-    let drawInterval: NSTimeInterval = 1.0 / 60
+    var lastRefresh = Date()
+    let drawInterval: TimeInterval = 1.0 / 60
     
     var expiredIndex: Int = 0
     
-    var drawingTimer: NSTimer?
+    var drawingTimer: Timer?
     
     weak var dataSource: SPActivityRateViewDataSource?
     
@@ -42,25 +42,25 @@ class SPActivityRateView: UIView {
         guard let _ = dataSource else {
             return
         }
-        drawingTimer = NSTimer.scheduledTimerWithTimeInterval(drawInterval, target: self, selector: #selector(timerDidTick(_:)), userInfo: nil, repeats: true)
+        drawingTimer = Timer.scheduledTimer(timeInterval: drawInterval, target: self, selector: #selector(timerDidTick(_:)), userInfo: nil, repeats: true)
     }
     
     func stopReceivingUpdates() {
         drawingTimer?.invalidate()
     }
     
-    func timerDidTick(timer: NSTimer) {
+    func timerDidTick(_ timer: Timer) {
         let value = dataSource!.dataForActivityRateView(self)
         add(value)
         
         reloadData()
     }
     
-    func add(value: Float) {
+    func add(_ value: Float) {
         if (expiredIndex > 0) {
             activityRates.removeLast(activityRates.count - expiredIndex)
         }
-        activityRates.insert(value, atIndex: 0)
+        activityRates.insert(value, at: 0)
     }
     
     override func layoutSubviews() {
@@ -69,14 +69,15 @@ class SPActivityRateView: UIView {
     
     func reloadData() {
         path = pathFromData(activityRates, bounds: bounds, maxValue: maximumValue, minValue: minimumValue)
-        let currentDate = NSDate()
-        if currentDate.timeIntervalSinceDate(lastRefresh) > drawInterval {
+        let currentDate = Date()
+        if currentDate.timeIntervalSince(lastRefresh) > drawInterval {
             setNeedsDisplay()
         }
     }
     
-    func pathFromData(data: [Float], bounds: CGRect, maxValue: Float, minValue: Float) -> UIBezierPath {
+    func pathFromData(_ data: [Float], bounds: CGRect, maxValue: Float, minValue: Float) -> UIBezierPath {
         let path = UIBezierPath()
+        
         var x = bounds.size.width
         let height = bounds.size.height - top - bottom
         let valueLength = maxValue - minValue
@@ -85,13 +86,13 @@ class SPActivityRateView: UIView {
             return path
         }
         
-        let lastY = CGFloat(1 - data[0] / valueLength) * height
-        path.moveToPoint(CGPoint(x: x, y: lastY))
+        let lastY = CGFloat(data[0] / valueLength) * height
+        path.move(to: CGPoint(x: x, y: lastY))
         
         for index in 1..<data.count {
             let value = data[index]
-            let y = CGFloat(1 - value / valueLength) * height
-            path.addLineToPoint(CGPoint(x: x, y: y))
+            let y = CGFloat(value / valueLength) * height
+            path.addLine(to: CGPoint(x: x, y: y))
             x -= horizontalSpacing
             
             if x < 0 {
@@ -103,9 +104,9 @@ class SPActivityRateView: UIView {
         return path
     }
     
-    override func drawRect(rect: CGRect) {
-        lastRefresh = NSDate()
-        UIColor.whiteColor().setStroke()
+    override func draw(_ rect: CGRect) {
+        lastRefresh = Date()
+        UIColor.init(red: 246/255.0, green: 56/255.0, blue: 85/255.0, alpha: 1).setStroke()
         path.stroke()
     }
 

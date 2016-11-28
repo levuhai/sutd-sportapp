@@ -17,12 +17,12 @@ private extension String {
 
     var localized: String {
 
-        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
 
-    func localizedWithComment(comment:String) -> String {
+    func localizedWithComment(_ comment:String) -> String {
 
-        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: comment)
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: comment)
     }
 }
 

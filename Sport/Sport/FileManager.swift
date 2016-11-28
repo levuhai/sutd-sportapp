@@ -16,7 +16,7 @@ class FileManager: NSObject {
     }
     
     static var libraryFolder: String {
-        return NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true).first!
+        return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
     }
     
     /**
@@ -25,11 +25,11 @@ class FileManager: NSObject {
      - parameter path: folder path
      
      */
-    private class func initializeFolder(path: String) {
+    fileprivate class func initializeFolder(_ path: String) {
         var isDirectory: ObjCBool = false
         var isExisting = false
-        let fm = NSFileManager.defaultManager()
-        if fm.fileExistsAtPath(path, isDirectory: &isDirectory) {
+        let fm = Foundation.FileManager.default
+        if fm.fileExists(atPath: path, isDirectory: &isDirectory) {
             // If this is existing and is a directory -> no need to do anything more.
             isExisting = isDirectory.boolValue
             // If this exist but it's a file, remove it.
@@ -49,28 +49,28 @@ class FileManager: NSObject {
         return libraryFolder.stringByAppendingPathComponent(IMPORT_FOLDER)
     }
     
-    class func moveFileAtPath(srcPath: String, toPath dstPath: String) {
+    class func moveFileAtPath(_ srcPath: String, toPath dstPath: String) {
         do {
-            if (NSFileManager.defaultManager().fileExistsAtPath(dstPath)) {
-                try NSFileManager.defaultManager().removeItemAtPath(dstPath)
+            if (Foundation.FileManager.default.fileExists(atPath: dstPath)) {
+                try Foundation.FileManager.default.removeItem(atPath: dstPath)
             }
-            try NSFileManager.defaultManager().moveItemAtPath(srcPath, toPath: dstPath)
+            try Foundation.FileManager.default.moveItem(atPath: srcPath, toPath: dstPath)
         } catch {
             print(error)
         }
     }
     
-    class func removeItemAtPath(path: String) {
+    class func removeItemAtPath(_ path: String) {
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(path)
+            try Foundation.FileManager.default.removeItem(atPath: path)
         } catch {
             
         }
     }
     
-    class func createDirectoryAtPath(path: String) {
+    class func createDirectoryAtPath(_ path: String) {
         do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+            try Foundation.FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         } catch {
             
         }

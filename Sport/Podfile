@@ -6,10 +6,10 @@ use_frameworks!
 
 target 'Sport' do
 	project 'Sport.xcodeproj'
-    pod 'RealmSwift' ,'<= 1.0.1'
+    pod 'RealmSwift' #,'<= 1.0.1'
     pod 'MBProgressHUD'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'MBCircularProgressBar' ,'<= 0.3.4'
-    pod 'SnapKit' ,'~> 0.22.0'
+    pod 'MBCircularProgressBar' #,'<= 0.3.4'
+    #pod 'SnapKit' #,'~> 0.22.0'
 end

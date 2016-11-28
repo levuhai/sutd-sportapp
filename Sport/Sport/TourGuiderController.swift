@@ -19,24 +19,24 @@ class TourGuiderController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        pageViewController = storyboard.instantiateViewControllerWithIdentifier("TutorialPageContainer") as! UIPageViewController
+        pageViewController = storyboard.instantiateViewController(withIdentifier: "TutorialPageContainer") as! UIPageViewController
         pageViewController.dataSource = self
         pageViewController.delegate = self
         
         let firstController = contentViewControllerAtIndex(0)!
-        pageViewController.setViewControllers([firstController], direction: .Forward, animated: false, completion: nil)
+        pageViewController.setViewControllers([firstController], direction: .forward, animated: false, completion: nil)
         
-        pageViewController.view.frame = UIScreen.mainScreen().bounds
+        pageViewController.view.frame = UIScreen.main.bounds
         
         addChildViewController(pageViewController)
         view.addSubview(pageViewController.view)
-        pageViewController.didMoveToParentViewController(self)
+        pageViewController.didMove(toParentViewController: self)
         
         pageControl.numberOfPages = pageTitles.count;
-        view.bringSubviewToFront(pageControl)
+        view.bringSubview(toFront: pageControl)
     }
     
     func gotItButtonDidClick() {
@@ -44,7 +44,7 @@ class TourGuiderController: UIViewController {
         AppUserDefaults.saveTutorialStatus(finished)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialScreen = storyboard.instantiateViewControllerWithIdentifier("InitialViewController")
+        let initialScreen = storyboard.instantiateViewController(withIdentifier: "InitialViewController")
         navigationController?.setViewControllers([initialScreen], animated: true)
     }
     
@@ -53,12 +53,12 @@ class TourGuiderController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func contentViewControllerAtIndex(index: Int) -> TourGuideContentController? {
+    func contentViewControllerAtIndex(_ index: Int) -> TourGuideContentController? {
         if (index < 0 || index >= pageTitles.count) {
             return nil
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let contentController = storyboard.instantiateViewControllerWithIdentifier("PageContentController") as! TourGuideContentController
+        let contentController = storyboard.instantiateViewController(withIdentifier: "PageContentController") as! TourGuideContentController
         contentController.pageIndex = index
         contentController.pageTitle = pageTitles[index]
         contentController.guideImageName =  pageImages[index]
@@ -67,7 +67,7 @@ class TourGuiderController: UIViewController {
 }
 
 extension TourGuiderController: UIPageViewControllerDataSource {
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let contentController = viewController as! TourGuideContentController
         let pageIndex = contentController.pageIndex
         
@@ -87,7 +87,7 @@ extension TourGuiderController: UIPageViewControllerDataSource {
         return controller
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let contentController = viewController as! TourGuideContentController
         let pageIndex = contentController.pageIndex
         
@@ -100,12 +100,12 @@ extension TourGuiderController: UIPageViewControllerDataSource {
 }
 
 extension TourGuiderController: UIPageViewControllerDelegate {
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         let contentController = pendingViewControllers[0] as! TourGuideContentController
         pageControl.currentPage = contentController.pageIndex
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if (!completed) {
             let contentController = previousViewControllers[0] as! TourGuideContentController
             pageControl.currentPage = contentController.pageIndex

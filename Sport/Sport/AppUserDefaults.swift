@@ -9,33 +9,33 @@
 import UIKit
 
 class AppUserDefaults: NSObject {
-    private static let SP_LAST_TEMPO_KEY = "last_tempo"
-    private static let SP_INITIALIZED = "initialized"
-    private static let SP_TUTORIAL_FINISHED = "tutorial_finished"
+    fileprivate static let SP_LAST_TEMPO_KEY = "last_tempo"
+    fileprivate static let SP_INITIALIZED = "initialized"
+    fileprivate static let SP_TUTORIAL_FINISHED = "tutorial_finished"
     
-    class func saveLastTempo(tempo: Float) {
-        NSUserDefaults.standardUserDefaults().setObject(tempo, forKey: SP_LAST_TEMPO_KEY)
+    class func saveLastTempo(_ tempo: Float) {
+        UserDefaults.standard.set(tempo, forKey: SP_LAST_TEMPO_KEY)
     }
     
     class func lastTempo() -> Float? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(SP_LAST_TEMPO_KEY)?.floatValue
+        return (UserDefaults.standard.object(forKey: SP_LAST_TEMPO_KEY) as AnyObject).floatValue
     }
     
-    class func saveInitializeStatus(finished: Bool) {
-        NSUserDefaults.standardUserDefaults().setObject(finished, forKey: SP_INITIALIZED)
-        NSUserDefaults.standardUserDefaults().synchronize()
+    class func saveInitializeStatus(_ finished: Bool) {
+        UserDefaults.standard.set(finished, forKey: SP_INITIALIZED)
+        UserDefaults.standard.synchronize()
     }
     
     class func isFirstInitialSuccessfully() -> Bool {
-        return NSUserDefaults.standardUserDefaults().objectForKey(SP_INITIALIZED)?.boolValue ?? false
+        return (UserDefaults.standard.object(forKey: SP_INITIALIZED) as AnyObject).boolValue ?? false
     }
     
-    class func saveTutorialStatus(finished: Bool) {
-        NSUserDefaults.standardUserDefaults().setObject(finished, forKey: SP_TUTORIAL_FINISHED)
-        NSUserDefaults.standardUserDefaults().synchronize()
+    class func saveTutorialStatus(_ finished: Bool) {
+        UserDefaults.standard.set(finished, forKey: SP_TUTORIAL_FINISHED)
+        UserDefaults.standard.synchronize()
     }
     
     class func isTutorialFinished() -> Bool {
-        return NSUserDefaults.standardUserDefaults().objectForKey(SP_TUTORIAL_FINISHED)?.boolValue ?? false
+        return (UserDefaults.standard.object(forKey: SP_TUTORIAL_FINISHED) as AnyObject).boolValue ?? false
     }
 }

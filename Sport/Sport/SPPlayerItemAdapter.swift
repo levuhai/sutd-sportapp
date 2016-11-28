@@ -13,7 +13,7 @@ import AVFoundation
 class SPPlayerItemAdapter: NSObject {
     
     // Create list of playerItems from list of song's persistent ids.
-    func createPlayerItems(songData: [SongData]) -> [SPPlayerItem] {
+    func createPlayerItems(_ songData: [SongData]) -> [SPPlayerItem] {
         var playerItems: [SPPlayerItem] = []
         for song in songData {
             let persistentId = song.persistentId
@@ -35,16 +35,16 @@ class SPPlayerItemAdapter: NSObject {
         return playerItems
     }
     
-    private func AVAssetFromMPMediaItem(mediaItem: MPMediaItem) -> AVAsset? {
+    fileprivate func AVAssetFromMPMediaItem(_ mediaItem: MPMediaItem) -> AVAsset? {
         guard let assetURL = mediaItem.assetURL else {
             return nil
         }
-        return AVURLAsset(URL: assetURL)
+        return AVURLAsset(url: assetURL)
     }
     
     // Get media item from persistentId.
-    private func MPMediaItemFromPersistentId(persistentId: String) -> MPMediaItem? {
-        let query = MPMediaQuery.songsQuery()
+    fileprivate func MPMediaItemFromPersistentId(_ persistentId: String) -> MPMediaItem? {
+        let query = MPMediaQuery.songs()
         let predicate = MPMediaPropertyPredicate(value: persistentId, forProperty: MPMediaItemPropertyPersistentID)
         query.addFilterPredicate(predicate)
         return query.items?.first

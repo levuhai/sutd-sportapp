@@ -44,7 +44,7 @@ class MusicLibraryPresenterImpl: NSObject, MusicLibraryPresenter {
         }
     }
     
-    func onError(error: NSError) {
+    func onError(_ error: NSError) {
         print("Error: \(error)")
     }
     

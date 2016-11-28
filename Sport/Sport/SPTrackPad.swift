@@ -23,7 +23,7 @@ class SPTrackPad: UIControl {
     var usableHorizontalLength: CGFloat = 0
     
     // TODO:
-    var previousPosition: CGPoint = CGPointMake(1, 1)
+    var previousPosition: CGPoint = CGPoint(x: 1, y: 1)
     
     var valence: Float = 0
     var energy: Float = 0.5
@@ -40,8 +40,8 @@ class SPTrackPad: UIControl {
         
         fire.lifetime = 3.0
         fire.lifetimeRange = 0.5
-        fire.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.1).CGColor
-        fire.contents = UIImage(named: "Particles_fire")?.CGImage
+        fire.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.1).cgColor
+        fire.contents = UIImage(named: "Particles_fire")?.cgImage
         fire.name = "fire"
         fire.velocity = 10
         fire.velocityRange = 20
@@ -52,7 +52,7 @@ class SPTrackPad: UIControl {
         emitter.renderMode = kCAEmitterLayerAdditive;
         emitter.emitterCells = [fire]
         
-        emitter.emitterPosition = CGPointZero
+        emitter.emitterPosition = CGPoint.zero
         valence = VALENCE_MIN
         energy = ENERGY_MAX
     }
@@ -68,8 +68,8 @@ class SPTrackPad: UIControl {
         commonInit()
     }
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let touchPoint = touch.locationInView(self)
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let touchPoint = touch.location(in: self)
         let currentRect = CGRect(origin: emitter.emitterPosition, size: CGSize(width: 20, height: 20))
         previousPosition = touchPoint
         
@@ -80,8 +80,8 @@ class SPTrackPad: UIControl {
         return false
     }
     
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let touchPosition = touch.locationInView(self)
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let touchPosition = touch.location(in: self)
         
         let verticalDelta = previousPosition.y - touchPosition.y // Energy max value is top, but the positionY in coordinate is top-down.
         let horizontalDelta = touchPosition.x - previousPosition.x
@@ -107,23 +107,23 @@ class SPTrackPad: UIControl {
         
         previousPosition = touchPosition
         
-        emitter.emitterPosition = touch.locationInView(self)
+        emitter.emitterPosition = touch.location(in: self)
         return true
     }
     
-    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         print("End tracking")
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
 //        setEmitting(false)
     }
     
-    func setEmitting(isEmitting: Bool) {
-        emitter.setValue(NSNumber.init(integer: isEmitting ? 10 : 0), forKeyPath: "emitterCells.fire.birthRate")
+    func setEmitting(_ isEmitting: Bool) {
+        emitter.setValue(NSNumber.init(value: isEmitting ? 10 : 0 as Int), forKeyPath: "emitterCells.fire.birthRate")
     }
     
     
     
-    internal override class func layerClass() -> AnyClass {
+    internal override class var layerClass : AnyClass {
         return CAEmitterLayer.self
     }
 }

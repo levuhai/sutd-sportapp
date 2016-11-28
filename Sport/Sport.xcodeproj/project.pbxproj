@@ -72,7 +72,6 @@
 		A7B743541D95137900E5DB15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B743531D95137900E5DB15 /* Assets.xcassets */; };
 		A7CE05E81DE7CE7C0089BF84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */; };
 		A7CE05EA1DE7E34F0089BF84 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05E91DE7E34F0089BF84 /* VideoToolbox.framework */; };
-		A7CE05ED1DE7EFA40089BF84 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05EC1DE7EFA40089BF84 /* AudioKit.framework */; };
 		E2ABBDD0825D2823D2EEB629 /* Pods_Sport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 627CE3E723BA807CA870F32B /* Pods_Sport.framework */; };
 /* End PBXBuildFile section */
 
@@ -163,7 +162,6 @@
 		A7B743531D95137900E5DB15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7CE05E91DE7E34F0089BF84 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		A7CE05EC1DE7EFA40089BF84 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +179,6 @@
 				729D088A1D11BC04001AC7B2 /* aubio.framework in Frameworks */,
 				A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */,
 				72B91D7E1CE2165D000E4923 /* AVFoundation.framework in Frameworks */,
-				A7CE05ED1DE7EFA40089BF84 /* AudioKit.framework in Frameworks */,
 				72B91D691CDF2266000E4923 /* MediaPlayer.framework in Frameworks */,
 				E2ABBDD0825D2823D2EEB629 /* Pods_Sport.framework in Frameworks */,
 			);
@@ -488,7 +485,6 @@
 		A7CE05EB1DE7EF910089BF84 /* AudioKit */ = {
 			isa = PBXGroup;
 			children = (
-				A7CE05EC1DE7EFA40089BF84 /* AudioKit.framework */,
 			);
 			name = AudioKit;
 			sourceTree = "<group>";
@@ -534,12 +530,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = tiennth;
 				TargetAttributes = {
 					72349B4E1CDDFBA4002B3B84 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = L8GZZ588QM;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -747,8 +744,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -792,8 +791,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -812,6 +813,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -820,6 +822,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4B27EEDC961B8A3FCC99D4B /* Pods-Sport.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -873,6 +876,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Sport/BridgingHeader.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -881,6 +885,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9817230583463F6DD3301FF7 /* Pods-Sport.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -933,6 +938,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Sport/BridgingHeader.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

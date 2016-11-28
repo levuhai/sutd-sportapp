@@ -68,31 +68,31 @@ class MusicPlayerController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func leftBarButtonDidClick(sender: UIBarButtonItem) {
+    func leftBarButtonDidClick(_ sender: UIBarButtonItem) {
         screenPresenter?.onLeftBarButtonClicked()
     }
     
-    func rightBarButtonDidClick(sender: UIBarButtonItem) {
+    func rightBarButtonDidClick(_ sender: UIBarButtonItem) {
         screenPresenter?.onRightBarButtonClicked()
     }
     
-    @IBAction func playpauseButtonDidClick(sender: UIButton) {
+    @IBAction func playpauseButtonDidClick(_ sender: UIButton) {
         screenPresenter?.onPlayPauseButonClicked()
     }
     
-    @IBAction func fastforwardButtonDidClick(sender: UIButton) {
+    @IBAction func fastforwardButtonDidClick(_ sender: UIButton) {
         screenPresenter?.onFastForwardButtonClicked()
     }
     
-    @IBAction func rewindButtonDidClick(sender: UIButton) {
+    @IBAction func rewindButtonDidClick(_ sender: UIButton) {
         screenPresenter?.onRewindButtonClicked()
     }
     
-    @IBAction func tempoSliderValueChanged(sender: TNSlider) {
+    @IBAction func tempoSliderValueChanged(_ sender: TNSlider) {
         screenPresenter?.onTempoSliderValueChanged(sender.value)
     }
     
-    @IBAction func playlistButtonDidClick(sender: UIButton) {
+    @IBAction func playlistButtonDidClick(_ sender: UIButton) {
         toggleShowPlaylist()
     }
     
@@ -101,7 +101,7 @@ class MusicPlayerController: UIViewController {
         maskPlaylistView()
     }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         if isPlaylistOpened {
             topPlaylistToParentBottomConstraint.constant = self.view.bounds.size.height
         }
@@ -110,25 +110,25 @@ class MusicPlayerController: UIViewController {
     }
     
     func maskPlaylistView() {
-        let maskPath = UIBezierPath(roundedRect: playlistHeaderView.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSizeMake(10, 10))
+        let maskPath = UIBezierPath(roundedRect: playlistHeaderView.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 10, height: 10))
         let mask = CAShapeLayer()
-        mask.path = maskPath.CGPath
+        mask.path = maskPath.cgPath
         playlistHeaderView.layer.mask = mask
         playlistHeaderView.clipsToBounds = true
     }
     
-    func controlButtonLongPressed(gesture: UILongPressGestureRecognizer) {
+    func controlButtonLongPressed(_ gesture: UILongPressGestureRecognizer) {
         let sender = gesture.view
         let state = gesture.state
         
         switch state {
-        case .Began:
+        case .began:
             if sender == rewindButton {
                 screenPresenter?.onRewindStarted()
             } else if sender == fastForwardButton {
                 screenPresenter?.onFastForwardStarted()
             }
-        case .Ended:
+        case .ended:
             if sender == rewindButton {
                 screenPresenter?.onRewindEnded()
             } else if sender == fastForwardButton {
@@ -185,7 +185,7 @@ extension MusicPlayerController: MusicPlayerView {
         playlistHeaderView.addGestureRecognizer(tapPlaylistHeaderGesture)
         
         expandCollapseButton.titleLabel?.font = UIFont.ioniconOfSize(24)
-        expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), forState: .Normal)
+        expandCollapseButton.setTitle(String.ioniconWithName(.ArrowUpB), for: UIControlState())
         
         // Playing song info.
         updateSongInfo(nil)
@@ -194,19 +194,19 @@ extension MusicPlayerController: MusicPlayerView {
     }
     
     func initNavigationBar() {
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         
-        let leftBarItem = UIBarButtonItem(image: UIImage(named: "Playlist")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
-        leftBarItem.tintColor = UIColor.whiteColor()
+        let leftBarItem = UIBarButtonItem(image: UIImage(named: "Playlist")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(MusicPlayerController.leftBarButtonDidClick(_:)))
+        leftBarItem.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem = leftBarItem
         
-        let rightBarItem = UIBarButtonItem(image: UIImage(named: "Trainers")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
+        let rightBarItem = UIBarButtonItem(image: UIImage(named: "Trainers")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(MusicPlayerController.rightBarButtonDidClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
         
         UINavigationBar.appearance().setBackgroundImage(
             UIImage(),
-            forBarPosition: .Any,
-            barMetrics: .Default)
+            for: .any,
+            barMetrics: .default)
         
         UINavigationBar.appearance().shadowImage = UIImage()
     }
@@ -217,10 +217,10 @@ extension MusicPlayerController: MusicPlayerView {
         setButtonPlayImage(true)
         
         rewindButton.titleLabel?.font = UIFont.ioniconOfSize(45)
-        rewindButton.setTitle(String.ioniconWithName(.IosRewind), forState: .Normal)
+        rewindButton.setTitle(String.ioniconWithName(.IosRewind), for: UIControlState())
         
         fastForwardButton.titleLabel?.font = UIFont.ioniconOfSize(45)
-        fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), forState: .Normal)
+        fastForwardButton.setTitle(String.ioniconWithName(.IosFastforward), for: UIControlState())
         
         let longTapFastForwardGestureRegcognizer = UILongPressGestureRecognizer(target: self, action: #selector(MusicPlayerController.controlButtonLongPressed(_:)))
         fastForwardButton.addGestureRecognizer(longTapFastForwardGestureRegcognizer)
@@ -232,7 +232,7 @@ extension MusicPlayerController: MusicPlayerView {
         updatePlaybackProgress(0)
     }
     
-    func switchControlMode(runningMode: Bool) {
+    func switchControlMode(_ runningMode: Bool) {
         if runningMode {
             showAutoControl()
         } else {
@@ -240,13 +240,13 @@ extension MusicPlayerController: MusicPlayerView {
         }
     }
     
-    func updatePlaybackProgress(progress: Double) {
+    func updatePlaybackProgress(_ progress: Double) {
         progressView.value = CGFloat(progress)
     }
     
     func showManualControl() {
-        autoControlView.hidden = true
-        manualControlView.hidden = false
+        autoControlView.isHidden = true
+        manualControlView.isHidden = false
         
         activityRateView.stopReceivingUpdates()
     }
@@ -254,32 +254,32 @@ extension MusicPlayerController: MusicPlayerView {
     func showAutoControl() {
         activityRateView.startReceivingUpdate()
         
-        manualControlView.hidden = true
-        autoControlView.hidden = false
+        manualControlView.isHidden = true
+        autoControlView.isHidden = false
     }
     
     // MARK -- Private methods
     
-    private func setButtonPlayImage(isPlaying: Bool) {
+    fileprivate func setButtonPlayImage(_ isPlaying: Bool) {
         if isPlaying {
             playPauseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
-            playPauseButton.setTitle(String.ioniconWithName(.IosPause), forState: .Normal)
+            playPauseButton.setTitle(String.ioniconWithName(.IosPause), for: UIControlState())
         } else {
             playPauseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0)
-            playPauseButton.setTitle(String.ioniconWithName(.IosPlay), forState: .Normal)
+            playPauseButton.setTitle(String.ioniconWithName(.IosPlay), for: UIControlState())
         }
     }
     
-    func setTempoSliderValue(tempo: Float) {
+    func setTempoSliderValue(_ tempo: Float) {
 //        tempoSlider.setValue(tempo, animated: true)
         tnTempoSlider.value = tempo
     }
     
-    func updateViewForPlayingState(isPlaying: Bool) {
+    func updateViewForPlayingState(_ isPlaying: Bool) {
         setButtonPlayImage(isPlaying)
     }
     
-    func updateSongInfo(playerViewData: SongViewData?) {
+    func updateSongInfo(_ playerViewData: SongViewData?) {
         if (playerViewData == nil) {
             songTitleLabel.text = "---"
             albumImageView.image = UIImage(named: "unknown_album")
@@ -291,13 +291,13 @@ extension MusicPlayerController: MusicPlayerView {
         self.view.layoutIfNeeded()
     }
     
-    func displayPlaylist(playlist: [SongViewData]) {
+    func displayPlaylist(_ playlist: [SongViewData]) {
         self.playlistSong = playlist
         playlistSummaryLabel.text = "Total \(playlist.count) \(playlist.count > 1 ? "songs" : "song")"
         playlistTableView.reloadData()
     }
     
-    func showPlaylistView(show: Bool, animated: Bool) {
+    func showPlaylistView(_ show: Bool, animated: Bool) {
         var expandButtonIcon: String
         if show {
             expandButtonIcon = String.ioniconWithName(.ArrowDownB)
@@ -310,18 +310,18 @@ extension MusicPlayerController: MusicPlayerView {
         }
         self.view.setNeedsLayout()
         if animated {
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
                 }, completion: { (success) in
-                    self.expandCollapseButton.setTitle(expandButtonIcon, forState: .Normal)
+                    self.expandCollapseButton.setTitle(expandButtonIcon, for: UIControlState())
             })
         } else {
             self.view.layoutIfNeeded()
-            self.expandCollapseButton.setTitle(expandButtonIcon, forState: .Normal)
+            self.expandCollapseButton.setTitle(expandButtonIcon, for: UIControlState())
         }
     }
     
-    func showPlayingSongInPlaylist(indexInPlaylist: Int) {
+    func showPlayingSongInPlaylist(_ indexInPlaylist: Int) {
         // Change status of songViewData(s), determine which song is currently playing
         for i in 0..<playlistSong.count {
             let songAtIndex = playlistSong[i]
@@ -334,39 +334,39 @@ extension MusicPlayerController: MusicPlayerView {
         playlistTableView.reloadData()
     }
     
-    func updateActivityRatesData(data: Float) {
+    func updateActivityRatesData(_ data: Float) {
         activityRateView.add(data)
     }
     
-    func updateStepCount(stepCount: Int) {
+    func updateStepCount(_ stepCount: Int) {
         stepCountLabel.text = "\(stepCount)"
     }
 }
 
 extension MusicPlayerController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistSongCell") as! PlaylistSongCell
-        let songInfo = playlistSong[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlaylistSongCell") as! PlaylistSongCell
+        let songInfo = playlistSong[(indexPath as NSIndexPath).row]
         cell.displaySongInfo(songInfo)
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistSong.count
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
 }
 
 extension MusicPlayerController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         screenPresenter?.playlistDidSelectItemAtIndex(indexPath)
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }

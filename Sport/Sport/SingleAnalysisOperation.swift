@@ -36,25 +36,25 @@ class SingleAnalysisOperation: ConcurrentOperation {
         
         // Detect appropriate output file type
         var outputFileType: String? = nil
-        let dispatchGroupPrepare = dispatch_group_create()
-        dispatch_group_enter(dispatchGroupPrepare)
+        let dispatchGroupPrepare = DispatchGroup()
+        dispatchGroupPrepare.enter()
         
-        let avUrl = AVURLAsset(URL: song.assetURL!)
+        let avUrl = AVURLAsset(url: song.assetURL!)
         let exporter = AVAssetExportSession(asset: avUrl, presetName: AVAssetExportPresetPassthrough)
         guard let realExporter = exporter else {
             completeOperation()
             return
         }
         
-        exporter?.determineCompatibleFileTypesWithCompletionHandler({ (supportedFileTypes) in
+        exporter?.determineCompatibleFileTypes(completionHandler: { (supportedFileTypes) in
             if supportedFileTypes.contains(AVFileTypeAppleM4A) {
                 outputFileType = AVFileTypeAppleM4A
             } else if supportedFileTypes.contains(AVFileTypeQuickTimeMovie) {
                 outputFileType = AVFileTypeQuickTimeMovie
             }
-            dispatch_group_leave(dispatchGroupPrepare)
+            dispatchGroupPrepare.leave()
         })
-        dispatch_group_wait(dispatchGroupPrepare, DISPATCH_TIME_FOREVER)
+        dispatchGroupPrepare.wait(timeout: DispatchTime.distantFuture)
         
         guard let actualOutputFileType = outputFileType else {
             completeOperation()
@@ -65,20 +65,20 @@ class SingleAnalysisOperation: ConcurrentOperation {
         
         // Export
         var exportPath: String? = nil
-        let dispatchGroupExport = dispatch_group_create()
-        dispatch_group_enter(dispatchGroupExport)
-        realExporter.exportAsynchronouslyWithCompletionHandler {
-            if (realExporter.status == .Completed) {
-                let fileType = self.song.assetURL!.absoluteString.componentsSeparatedByString("?").first?.pathExtension
+        let dispatchGroupExport = DispatchGroup()
+        dispatchGroupExport.enter()
+        realExporter.exportAsynchronously {
+            if (realExporter.status == .completed) {
+                let fileType = self.song.assetURL!.absoluteString.components(separatedBy: "?").first?.pathExtension
                 let srcPath = exporter?.outputURL?.path
                 let dstPath = srcPath?.stringByAppendingPathExtension(fileType!)
                 FileManager.moveFileAtPath(srcPath!, toPath: dstPath!)
                 
                 exportPath = dstPath!
             }
-            dispatch_group_leave(dispatchGroupExport)
+            dispatchGroupExport.leave()
         }
-        dispatch_group_wait(dispatchGroupExport, DISPATCH_TIME_FOREVER)
+        dispatchGroupExport.wait(timeout: DispatchTime.distantFuture)
         
         guard let realExportPath = exportPath else {
             completeOperation()
@@ -86,7 +86,7 @@ class SingleAnalysisOperation: ConcurrentOperation {
         }
         
         let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(realExportPath)
-        let songData = SongData(persistentId: songPersistentId, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
+        let songData = SongData(persistentId: songPersistentId, energy: (analysisOutput?.energy)!, valence: (analysisOutput?.valence)!, tempo: (analysisOutput?.tempo)!)
         repository.addSong(songData)
         
         
@@ -95,21 +95,21 @@ class SingleAnalysisOperation: ConcurrentOperation {
     }
     
     func completeOperation() {
-        executing = false
-        finished = true
+        isExecuting = false
+        isFinished = true
     }
     
-    func configureExporter(exporter: AVAssetExportSession, outputFileType: String) {
+    func configureExporter(_ exporter: AVAssetExportSession, outputFileType: String) {
         exporter.outputFileType = outputFileType
         
         let exportPath = FileManager.songImportFolder().stringByAppendingPathComponent("\(song.persistentID)")
-        if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
+        if Foundation.FileManager.default.fileExists(atPath: exportPath) {
             FileManager.removeItemAtPath(exportPath)
         }
-        exporter.outputURL = NSURL(fileURLWithPath: exportPath)
+        exporter.outputURL = URL(fileURLWithPath: exportPath)
     }
     
-    private func cleanup(fileUrl: String) {
+    fileprivate func cleanup(_ fileUrl: String) {
         FileManager.removeItemAtPath(fileUrl)
     }
     

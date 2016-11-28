@@ -12,10 +12,10 @@ protocol MusicLibraryView: class {
     func initViews()
     
     func showEmptyList()
-    func showSongList(songViewData: [SongViewData])
+    func showSongList(_ songViewData: [SongViewData])
     
-    func showLoading(show: Bool)
-    func dispatchProgress(completed: Int, total: Int)
+    func showLoading(_ show: Bool)
+    func dispatchProgress(_ completed: Int, total: Int)
     
-    func enableRightBarButton(enable: Bool)
+    func enableRightBarButton(_ enable: Bool)
 }

@@ -30,7 +30,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     
     let pedometer = SPPedometer()
     
-    var stepTimer: NSTimer?
+    var stepTimer: Timer?
     
     init(musicView: MusicPlayerView, router: MusicPlayerRouter, songRepository: SongRepository) {
         self.playerView = musicView
@@ -65,7 +65,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         runningMode = !runningMode
         playerView?.switchControlMode(runningMode)
         
-        if !motionManager.accelerometerAvailable {
+        if !motionManager.isAccelerometerAvailable {
             return
         }
         if runningMode {
@@ -79,7 +79,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
              
              */
             stepTimer?.invalidate()
-            stepTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(updateTotalStep), userInfo: nil, repeats: true)
+            stepTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTotalStep), userInfo: nil, repeats: true)
         } else {
             motionManager.stopAccelerometerUpdates()
             // TODO: Stop step counter.
@@ -122,7 +122,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         }
     }
     
-    func onTempoSliderValueChanged(newValue: Float) {
+    func onTempoSliderValueChanged(_ newValue: Float) {
         AppUserDefaults.saveLastTempo(newValue)
         
         loadSongs(newValue)
@@ -131,14 +131,14 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         setupNewPlayList()
     }
     
-    func playlistDidSelectItemAtIndex(indexPath: NSIndexPath) {
-        audioPlayer.playPlayListFromIndex(indexPath.row)
+    func playlistDidSelectItemAtIndex(_ indexPath: IndexPath) {
+        audioPlayer.playPlayListFromIndex((indexPath as NSIndexPath).row)
     }
 }
 
 extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
     
-    func audioPlayerDidStartPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+    func audioPlayerDidStartPlay(_ audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
         playerView?.updatePlaybackProgress(0)
         
         let currentItem = song
@@ -156,34 +156,34 @@ extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
         playerView?.updateViewForPlayingState(true)
     }
     
-    func audioPlayerDidStop(audioPlayer: SPAudioPlayer) {
+    func audioPlayerDidStop(_ audioPlayer: SPAudioPlayer) {
         playerView?.updateViewForPlayingState(false)
         playerView?.updatePlaybackProgress(0)
     }
     
-    func audioPlayerDidPause(audioPlayer: SPAudioPlayer) {
+    func audioPlayerDidPause(_ audioPlayer: SPAudioPlayer) {
         playerView?.updateViewForPlayingState(false)
     }
     
-    func audioPlayerDidResume(audioPlayer: SPAudioPlayer) {
+    func audioPlayerDidResume(_ audioPlayer: SPAudioPlayer) {
         playerView?.updateViewForPlayingState(true)
     }
     
-    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
+    func audioPlayerFailedToPlay(_ audioPlayer: SPAudioPlayer, song: SPPlayerItem) {
         
     }
     
-    func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer) {
+    func audioPlayerDidReachEndOfPlaylist(_ audioPlayer: SPAudioPlayer) {
         audioDoStop()
         playerView?.showPlayingSongInPlaylist(-1)
     }
 }
 
 extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
-    func dataForActivityRateView(view: SPActivityRateView) -> Float {
+    func dataForActivityRateView(_ view: SPActivityRateView) -> Float {
         let nilableAccelerometerData = motionManager.accelerometerData
         
-        guard let accelerometerData = nilableAccelerometerData, lastAccelerometerData = self.lastAccelerometerData else {
+        guard let accelerometerData = nilableAccelerometerData, let lastAccelerometerData = self.lastAccelerometerData else {
             self.lastAccelerometerData = nilableAccelerometerData
             return Float(1.0)
         }
@@ -214,8 +214,29 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
         playerView?.updateStepCount(stepCount)
     }
     
-    func calculateDValue(currentAccel: CMAccelerometerData, lastAccel: CMAccelerometerData) -> Double {
-        
+    func calculateDValue(_ currentAccel: CMAccelerometerData, lastAccel: CMAccelerometerData) -> Double {
+/*
+         float xx = acceleration.x;
+ float yy = acceleration.y;
+ float zz = acceleration.z;
+ 
+ float dot = (px * xx) + (py * yy) + (pz * zz);
+ float a = ABS(sqrt(px * px + py * py + pz * pz));
+ float b = ABS(sqrt(xx * xx + yy * yy + zz * zz));
+ 
+ dot /= (a * b);
+ 
+ if (dot <= 0.82) {
+ if (!isSleeping) {
+ isSleeping = YES;
+ [self performSelector:@selector(wakeUp) withObject:nil afterDelay:0.3];
+ numSteps += 1;
+ self.stepCountLabel.text = [NSString stringWithFormat:@"%d", numSteps];
+ }
+ }
+ 
+ px = xx; py = yy; pz = zz;
+ */
         let x = currentAccel.acceleration.x
         let y = currentAccel.acceleration.y
         let z = currentAccel.acceleration.z
@@ -224,22 +245,22 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
         let y0 = lastAccel.acceleration.y
         let z0 = lastAccel.acceleration.z
         
-        let d = (x*x0 + y*y0 + z*z0) / sqrt((x*x + y*y + z*z) * (x0*x0 + y0*y0 + z0*z0));
+        let d = sqrt(x*x+y*y+z*z)//(x*x0 + y*y0 + z*z0) / sqrt((x*x + y*y + z*z) * (x0*x0 + y0*y0 + z0*z0));
         return d
     }
     
-    func calculateWMA(dvaltable: [Double]) -> Double {
+    func calculateWMA(_ dvaltable: [Double]) -> Double {
         var sum: Double = 0
         var factor: Double = 60
         
-        for index in (0..<dvaltable.count).reverse() {
+        for index in (0..<dvaltable.count).reversed() {
             sum += factor * dvaltable[index]
             factor -= 1
         }
         return sum / 1830.0
     }
     
-    func storeDvalue(value: Double, inout dvaltable: [Double]) {
+    func storeDvalue(_ value: Double, dvaltable: inout [Double]) {
         if (dvaltable.count > 60) {
             dvaltable.removeFirst()
         }
@@ -260,7 +281,7 @@ extension MusicPlayerPresenterImpl {
         print("Accelerometer interval: \(motionManager.accelerometerUpdateInterval)")
     }
     
-    func showCurrentSongInfo(playerItem: SPPlayerItem?) {
+    func showCurrentSongInfo(_ playerItem: SPPlayerItem?) {
         guard let currentItem = playerItem else {
             // ??? What to do if current item is nil 
             return
@@ -270,7 +291,7 @@ extension MusicPlayerPresenterImpl {
         playerView?.updateSongInfo(currentSongViewData)
     }
     
-    func getPlaylistForDisplay(playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem?) -> [SongViewData] {
+    func getPlaylistForDisplay(_ playlist: [SPPlayerItem], currentPlayingItem: SPPlayerItem?) -> [SongViewData] {
         var listSongViews = [SongViewData]()
         for spItem in playlist {
             let songView = songViewFromPlayerItem(spItem)
@@ -280,10 +301,10 @@ extension MusicPlayerPresenterImpl {
         return listSongViews
     }
     
-    func songViewFromPlayerItem(playerItem: SPPlayerItem) -> SongViewData {
+    func songViewFromPlayerItem(_ playerItem: SPPlayerItem) -> SongViewData {
         let title = playerItem.mediaItem.title ?? Localizations.UnknownArtist
         let artist = playerItem.mediaItem.artist ?? Localizations.UnknownTitle
-        let albumImage = playerItem.mediaItem.artwork?.imageWithSize(CGSizeMake(64, 64)) ?? UIImage(named: "unknown_album")
+        let albumImage = playerItem.mediaItem.artwork?.image(at: CGSize(width: 64, height: 64)) ?? UIImage(named: "unknown_album")
         return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo, energy: playerItem.energy)
         
     }
@@ -300,7 +321,7 @@ extension MusicPlayerPresenterImpl {
         audioPlayer.stop()
     }
     
-    func loadSongs(tempo: Float) {
+    func loadSongs(_ tempo: Float) {
         let songs = songRepository.loadSongs(tempo)
         playList.removeAll()
         

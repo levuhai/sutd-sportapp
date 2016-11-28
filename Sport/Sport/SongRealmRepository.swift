@@ -12,20 +12,20 @@ class SongRealmRepository: SongRepository {
     
     static let sharedInstance = SongRealmRepository()
     
-    func addSong(song: SongData) {
+    func addSong(_ song: SongData) {
         let realm = RealmFactory.sharedInstance.newRealm()
         realm.beginWrite()
         realm.add(song)
         try! realm.commitWrite()
     }
     
-    func addSongs(songs: [SongData]) {
+    func addSongs(_ songs: [SongData]) {
         
     }
     
-    func isSongExisting(persistenceId: String) -> Bool {
+    func isSongExisting(_ persistenceId: String) -> Bool {
         let realm = RealmFactory.sharedInstance.newRealm()
-        return realm.objectForPrimaryKey(SongData.self, key: persistenceId) != nil
+        return realm.object(ofType: SongData.self, forPrimaryKey: persistenceId as AnyObject) != nil
     }
     
     func loadSongs() -> [SongData] {
@@ -34,7 +34,7 @@ class SongRealmRepository: SongRepository {
         return Array(result)
     }
     
-    func loadSongs(tempo: Float) -> [SongData] {
+    func loadSongs(_ tempo: Float) -> [SongData] {
         let realm = RealmFactory.sharedInstance.newRealm()
         let predicate = NSPredicate(format: "\(SongData.Column.Tempo) BETWEEN {%f, %f}", tempo - 10, tempo + 10)
         let result = realm.objects(SongData).filter(predicate)
@@ -55,9 +55,9 @@ class SongRealmRepository: SongRepository {
         return listSongView
     }
     
-    func deleteSong(persistentId: String) {
+    func deleteSong(_ persistentId: String) {
         let realm = RealmFactory.sharedInstance.newRealm()
-        let objectToDelete = realm.objectForPrimaryKey(SongData.self, key: persistentId)
+        let objectToDelete = realm.object(ofType: SongData.self, forPrimaryKey: persistentId as AnyObject)
         if let obj = objectToDelete {
             realm.beginWrite()
             realm.delete(obj)

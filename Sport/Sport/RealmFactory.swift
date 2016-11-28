@@ -13,14 +13,14 @@ import RealmSwift
 class RealmFactory: NSObject {
     static let sharedInstance = RealmFactory()
     
-    private let realmConfig: Realm.Configuration!
+    fileprivate let realmConfig: Realm.Configuration!
 
     override init() {
         
         // Create custom Realm configuration.
         // Config Realm with new file name.
         realmConfig = Realm.Configuration.defaultConfiguration
-        realmConfig.fileURL = realmConfig.fileURL?.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(Constants.Realm.fileName)
+        realmConfig.fileURL = realmConfig.fileURL?.deletingLastPathComponent().URLByAppendingPathComponent(Constants.Realm.fileName)
         
         super.init()
     }

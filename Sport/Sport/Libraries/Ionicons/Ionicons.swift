@@ -24,32 +24,32 @@ import UIKit
 import CoreText
 
 private class FontLoader {
-    class func loadFont(name: String) {
-        let bundle  = NSBundle.mainBundle()
-        let fontURL  = bundle.URLForResource(name, withExtension: "ttf")
+    class func loadFont(_ name: String) {
+        let bundle  = Bundle.main
+        let fontURL  = bundle.url(forResource: name, withExtension: "ttf")
         
-        let data  = NSData(contentsOfURL: fontURL!)!
+        let data  = try! Data(contentsOf: fontURL!)
         
-        let provider  = CGDataProviderCreateWithCFData(data)
-        let font  = CGFontCreateWithDataProvider(provider)!
+        let provider  = CGDataProvider(data: data as CFData)
+        let font  = CGFont(provider!)
         
         var error: Unmanaged<CFError>?
         if !CTFontManagerRegisterGraphicsFont(font, &error) {
-            let errorDescription: CFStringRef  = CFErrorCopyDescription(error!.takeUnretainedValue())
+            let errorDescription: CFString  = CFErrorCopyDescription(error!.takeUnretainedValue())
             let nsError  = error!.takeUnretainedValue() as AnyObject as! NSError
-            NSException(name: NSInternalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+            NSException(name: NSExceptionName.internalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
         }
     }
 }
 
 public extension UIFont {
-    public class func ioniconOfSize(fontSize: CGFloat) -> UIFont {
+    public class func ioniconOfSize(_ fontSize: CGFloat) -> UIFont {
         struct Static {
-            static var onceToken : dispatch_once_t = 0
+            static var onceToken : Int = 0
         }
         
         let name  = "ionicons"
-        if (UIFont.fontNamesForFamilyName(name).count == 0) {
+        if (UIFont.fontNames(forFamilyName: name).count == 0) {
             dispatch_once(&Static.onceToken) {
                 FontLoader.loadFont(name)
             }
@@ -1532,15 +1532,15 @@ public let ioniconClasses = [
 ]
 
 public extension String {
-    public static func ioniconWithName(name: Ionicon) -> String {
-        return name.rawValue.substringToIndex(name.rawValue.startIndex.advancedBy(1))
+    public static func ioniconWithName(_ name: Ionicon) -> String {
+        return name.rawValue.substring(to: name.rawValue.characters.index(name.rawValue.startIndex, offsetBy: 1))
     }
 }
 
 public extension String {
-    public static func ioniconWithCode(code: String) -> String? {
+    public static func ioniconWithCode(_ code: String) -> String? {
         
-        if let raw = ioniconClasses[code], icon = Ionicon(rawValue: raw)  {
+        if let raw = ioniconClasses[code], let icon = Ionicon(rawValue: raw)  {
             return self.ioniconWithName(icon)
         }
         

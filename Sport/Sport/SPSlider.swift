@@ -10,8 +10,8 @@ import UIKit
 
 class SPSlider: UISlider {
 
-    override func trackRectForBounds(bounds: CGRect) -> CGRect {
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
         let trackHeight: CGFloat = 6
-        return CGRectMake(0, (bounds.height - trackHeight) / 2, bounds.width, trackHeight)
+        return CGRect(x: 0, y: (bounds.height - trackHeight) / 2, width: bounds.width, height: trackHeight)
     }
 }

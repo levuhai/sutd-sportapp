@@ -12,10 +12,10 @@ import CoreMotion
 class SPPedometer: NSObject {
     let pedometer = CMPedometer()
     
-    var stepCounterTimer: NSTimer?
-    var stepCounterInterval: NSTimeInterval = 0
-    var lastQueriedDate: NSDate!
-    var handler: ((totalStep: Int) -> Void)?
+    var stepCounterTimer: Timer?
+    var stepCounterInterval: TimeInterval = 0
+    var lastQueriedDate: Date!
+    var handler: ((_ totalStep: Int) -> Void)?
     
     var stepCounts = 0
     
@@ -23,7 +23,7 @@ class SPPedometer: NSObject {
         stepCounts = 0
     }
     
-    func startPedometerWithUpdateInterval(interval: NSTimeInterval, handler: (totalSteps: Int) -> Void) {
+    func startPedometerWithUpdateInterval(_ interval: TimeInterval, handler: @escaping (_ totalSteps: Int) -> Void) {
         self.handler = handler
         self.stepCounterInterval = interval
         startStepCounter()
@@ -33,8 +33,8 @@ class SPPedometer: NSObject {
         if CMPedometer.isStepCountingAvailable() {
             // Using system step counter.
             stepCounterTimer?.invalidate()
-            lastQueriedDate = NSDate()
-            stepCounterTimer = NSTimer.scheduledTimerWithTimeInterval(stepCounterInterval, target: self, selector: #selector(queryStepCount), userInfo: nil, repeats: true)
+            lastQueriedDate = Date()
+            stepCounterTimer = Timer.scheduledTimer(timeInterval: stepCounterInterval, target: self, selector: #selector(queryStepCount), userInfo: nil, repeats: true)
         } else {
             // Start my own step counter.
             // TODO:
@@ -42,16 +42,16 @@ class SPPedometer: NSObject {
     }
     
     func queryStepCount() {
-        let newDate = NSDate()
-        pedometer.queryPedometerDataFromDate(lastQueriedDate, toDate: newDate, withHandler: { [unowned self] (data, error) in
+        let newDate = Date()
+        pedometer.queryPedometerData(from: lastQueriedDate, to: newDate, withHandler: { [unowned self] (data, error) in
             guard let data = data else {
                 return
             }
-            let stepCount = data.numberOfSteps.integerValue
+            let stepCount = data.numberOfSteps.intValue
             self.stepCounts += stepCount
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.handler?(totalStep: self.stepCounts)
+            DispatchQueue.main.async(execute: {
+                self.handler?(self.stepCounts)
             })
             })
         lastQueriedDate = newDate
@@ -59,7 +59,7 @@ class SPPedometer: NSObject {
     
     func stopStepCounter() {
         if CMPedometer.isStepCountingAvailable() {
-            pedometer.stopPedometerUpdates()
+            pedometer.stopUpdates()
         } else {
             // Stop my own step counter.
             // TODO:

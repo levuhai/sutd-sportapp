@@ -8,6 +8,26 @@
 
 import MediaPlayer
 import AVFoundation
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 protocol ItunesDataImporterDelegate {
     
@@ -17,7 +37,7 @@ class ItunesSyncManager: NSObject, SongSyncManager {
     
     static let sharedInstance = ItunesSyncManager()
     
-    let opQueue = NSOperationQueue()
+    let opQueue = OperationQueue()
     
     override init() {
         super.init()
@@ -25,9 +45,9 @@ class ItunesSyncManager: NSObject, SongSyncManager {
         opQueue.maxConcurrentOperationCount = 1
     }
     
-    func syncWithRepo(repository: SongRepository, progress: ((current: Int, total: Int) -> ())?, completion: (() -> Void)?) {
-        func isExistInItuneLibrary(songPersistentId: String) -> Bool {
-                let query = MPMediaQuery.songsQuery()
+    func syncWithRepo(_ repository: SongRepository, progress: ((_ current: Int, _ total: Int) -> ())?, completion: (() -> Void)?) {
+        func isExistInItuneLibrary(_ songPersistentId: String) -> Bool {
+                let query = MPMediaQuery.songs()
                 let predicate = MPMediaPropertyPredicate(value: songPersistentId, forProperty: MPMediaItemPropertyPersistentID)
                 query.addFilterPredicate(predicate)
                 return query.items?.count > 0
@@ -45,8 +65,8 @@ class ItunesSyncManager: NSObject, SongSyncManager {
         importToRepository(repository, progress: progress, completion: completion)
     }
     
-    func importToRepository(repository: SongRepository, progress: ((current: Int, total: Int) -> ())?,  completion: (()->())?) {
-        let mediaQuery = MPMediaQuery.songsQuery()
+    func importToRepository(_ repository: SongRepository, progress: ((_ current: Int, _ total: Int) -> ())?,  completion: (()->())?) {
+        let mediaQuery = MPMediaQuery.songs()
         let mediaItems = mediaQuery.items;
         
         guard let songs  = mediaItems else {
@@ -60,8 +80,8 @@ class ItunesSyncManager: NSObject, SongSyncManager {
             let op = SingleAnalysisOperation(song: song, repository: repository)
             op.completionBlock = {
                 count += 1
-                dispatch_async(dispatch_get_main_queue(), { 
-                    progress?(current: count, total: total)
+                DispatchQueue.main.async(execute: { 
+                    progress?(count, total)
                 })
             }
             
@@ -69,8 +89,8 @@ class ItunesSyncManager: NSObject, SongSyncManager {
         }
         print(opQueue.operationCount)
         if (completion != nil) {
-            opQueue.addOperationWithBlock({ 
-                dispatch_async(dispatch_get_main_queue(), completion!)
+            opQueue.addOperation({ 
+                DispatchQueue.main.async(execute: completion!)
             })
         }
     }

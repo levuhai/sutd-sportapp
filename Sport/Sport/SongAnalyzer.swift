@@ -9,7 +9,7 @@
 import UIKit
 
 class SongAnalyzer: NSObject {
-    class func analyzeWithPath(path: String) {
+    class func analyzeWithPath(_ path: String) {
         AubioWrapper.simpleAnalyzeAudioFile(path);
     }
 }

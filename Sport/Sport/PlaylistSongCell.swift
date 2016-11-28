@@ -23,17 +23,17 @@ class PlaylistSongCell: UITableViewCell {
         // Initialization code
     }
 
-    func displaySongInfo(title: String, album: String, image: UIImage, playing: Bool) {
+    func displaySongInfo(_ title: String, album: String, image: UIImage, playing: Bool) {
         albumImageView.image = image
-        playingIndicatorImageView.hidden = !playing
+        playingIndicatorImageView.isHidden = !playing
         titleLabel.text = title
         albumLabel.text = album
     }
     
-    func displaySongInfo(songInfo: SongViewData) {
+    func displaySongInfo(_ songInfo: SongViewData) {
         albumImageView.image = songInfo.image
-        playingIndicatorImageView.hidden = !songInfo.isPlaying
-        selectedIndicatorView.hidden = !songInfo.isPlaying
+        playingIndicatorImageView.isHidden = !songInfo.isPlaying
+        selectedIndicatorView.isHidden = !songInfo.isPlaying
         titleLabel.text = songInfo.title
         albumLabel.text = songInfo.artist
         let f = songInfo.tempo
@@ -41,7 +41,7 @@ class PlaylistSongCell: UITableViewCell {
         bpmLabel.text = "\(s) bpm"
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         //selectedIndicatorView.hidden = !selected

@@ -8,20 +8,20 @@
 
 import UIKit
 
-class ConcurrentOperation: NSOperation {
-    override var asynchronous: Bool {
+class ConcurrentOperation: Operation {
+    override var isAsynchronous: Bool {
         get {
             return true
         }
     }
     
     var _finished = false
-    override var finished: Bool {
+    override var isFinished: Bool {
         set {
             if newValue != _finished {
-                willChangeValueForKey("isFinished")
+                willChangeValue(forKey: "isFinished")
                 _finished = newValue
-                didChangeValueForKey("isFinished")
+                didChangeValue(forKey: "isFinished")
             }
         }
         
@@ -31,12 +31,12 @@ class ConcurrentOperation: NSOperation {
     }
     
     var _ready = false
-    override var ready: Bool {
+    override var isReady: Bool {
         set {
             if newValue != _ready {
-                willChangeValueForKey("isReady")
+                willChangeValue(forKey: "isReady")
                 _ready = newValue
-                didChangeValueForKey("isReady")
+                didChangeValue(forKey: "isReady")
             }
         }
         
@@ -46,12 +46,12 @@ class ConcurrentOperation: NSOperation {
     }
     
     var _executing = false
-    override var executing: Bool {
+    override var isExecuting: Bool {
         set {
             if newValue != _executing {
-                willChangeValueForKey("isExecuting")
+                willChangeValue(forKey: "isExecuting")
                 _executing = newValue
-                didChangeValueForKey("isExecuting")
+                didChangeValue(forKey: "isExecuting")
             }
         }
         
@@ -63,19 +63,19 @@ class ConcurrentOperation: NSOperation {
     override init() {
         super.init()
         
-        _finished = super.finished
-        _executing = super.executing
-        _ready = super.ready
+        _finished = super.isFinished
+        _executing = super.isExecuting
+        _ready = super.isReady
     }
     
     override func start() {
-        if cancelled {
-            executing = false
-            finished = true
+        if isCancelled {
+            isExecuting = false
+            isFinished = true
             return
         }
         
-        finished = false
-        executing = true
+        isFinished = false
+        isExecuting = true
     }
 }

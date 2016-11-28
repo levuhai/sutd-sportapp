@@ -10,21 +10,21 @@ import AVFoundation
 import MediaPlayer
 
 protocol SPAudioPlayerDelegate: class {
-    func audioPlayerDidStartPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
-    func audioPlayerDidPause(audioPlayer: SPAudioPlayer)
-    func audioPlayerDidResume(audioPlayer: SPAudioPlayer)
-    func audioPlayerDidStop(audioPlayer: SPAudioPlayer)
-    func audioPlayerFailedToPlay(audioPlayer: SPAudioPlayer, song: SPPlayerItem)
-    func audioPlayerDidReachEndOfPlaylist(audioPlayer: SPAudioPlayer)
+    func audioPlayerDidStartPlay(_ audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerDidPause(_ audioPlayer: SPAudioPlayer)
+    func audioPlayerDidResume(_ audioPlayer: SPAudioPlayer)
+    func audioPlayerDidStop(_ audioPlayer: SPAudioPlayer)
+    func audioPlayerFailedToPlay(_ audioPlayer: SPAudioPlayer, song: SPPlayerItem)
+    func audioPlayerDidReachEndOfPlaylist(_ audioPlayer: SPAudioPlayer)
 }
 
 class SPAudioPlayer: NSObject {
     
     enum SPAudioPlaybackState {
-        case Stopped
-        case Paused
-        case Preparing
-        case Playing
+        case stopped
+        case paused
+        case preparing
+        case playing
     }
     
     // Shared instance.
@@ -43,29 +43,29 @@ class SPAudioPlayer: NSObject {
             if (currentItem == nil) {
                 return
             }
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
         }
         
         didSet {
             if (currentItem == nil) {
                 return
             }
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SPAudioPlayer.playerItemDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
+            NotificationCenter.default.addObserver(self, selector: #selector(SPAudioPlayer.playerItemDidFinishPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
         }
     }
     var observingObject: SPPlayerItem?
     
     // Events handler.
-    var progressHandlerBlock: ((progress: Double)->())?
+    var progressHandlerBlock: ((_ progress: Double)->())?
     
-    var playbackState: SPAudioPlaybackState = .Stopped
+    var playbackState: SPAudioPlaybackState = .stopped
 
-    var seekTimer: NSTimer?
+    var seekTimer: Timer?
     /// =============================================================================
     //  Methods
     //
     
-    func setup(songQueue: [SPPlayerItem]) {
+    func setup(_ songQueue: [SPPlayerItem]) {
         currentItem = nil
         
         playerItems = Array(songQueue)
@@ -73,14 +73,14 @@ class SPAudioPlayer: NSObject {
    
     // MARK: - Event listeners
     // Set progress listener
-    func setProgressHandler(block: ((progress: Double)->())?) {
+    func setProgressHandler(_ block: ((_ progress: Double)->())?) {
         progressHandlerBlock = block
     }
     
     // MARK: - Playback functions
     // Play current song currentItem
     func playPlayListFromStopped() {
-        playbackState = .Preparing
+        playbackState = .preparing
         if (currentItem == nil) {
             currentItem = playerItems.first
             currentPlayingIndex = 0
@@ -88,7 +88,7 @@ class SPAudioPlayer: NSObject {
         playCurrentItem()
     }
     
-    func playPlayListFromIndex(index: Int) {
+    func playPlayListFromIndex(_ index: Int) {
         stop()
         if index > playerItems.count {
             return
@@ -102,29 +102,29 @@ class SPAudioPlayer: NSObject {
     }
     
     func play() {
-        if playbackState == .Paused {
+        if playbackState == .paused {
             resume()
-        } else if playbackState == .Stopped {
+        } else if playbackState == .stopped {
             playPlayListFromStopped()
         }
     }
     
     func resume() {
-        playbackState = .Playing
+        playbackState = .playing
         thePlayer?.play()
         
         delegate?.audioPlayerDidResume(self)
     }
     
     func pause() {
-        playbackState = .Paused
+        playbackState = .paused
         thePlayer?.pause()
         
         delegate?.audioPlayerDidPause(self)
     }
     
     func stop() {
-        playbackState = .Stopped
+        playbackState = .stopped
         detachListener(currentItem)
         thePlayer?.pause()
         currentItem = nil
@@ -134,21 +134,21 @@ class SPAudioPlayer: NSObject {
     }
     
     func moveToNext() {
-        let shouldAutoPlay = playbackState == .Playing
+        let shouldAutoPlay = playbackState == .playing
         moveToNext(shouldAutoPlay)
     }
     
     func moveToPrevious() {
-        let shouldAutoPlay = playbackState == .Playing
+        let shouldAutoPlay = playbackState == .playing
         moveToPrevious(shouldAutoPlay)
     }
     
-    func moveToNext(autoPlay: Bool) {
+    func moveToNext(_ autoPlay: Bool) {
         stop()
         next(autoPlay)
     }
     
-    func next(autoPlay: Bool) {
+    func next(_ autoPlay: Bool) {
         if let nextItem = nextPlayerItem() {
             currentPlayingIndex += 1
             currentItem = nextItem
@@ -157,12 +157,12 @@ class SPAudioPlayer: NSObject {
                 playCurrentItem()
             }
         } else {
-            playbackState = .Stopped
+            playbackState = .stopped
             didReachEndOfPlaylist()
         }
     }
     
-    func previous(autoPlay: Bool) {
+    func previous(_ autoPlay: Bool) {
         if let previousItem = previousPlayerItem() {
             currentPlayingIndex -= 1
             currentItem = previousItem
@@ -171,12 +171,12 @@ class SPAudioPlayer: NSObject {
                 playCurrentItem()
             }
         } else {
-            playbackState = .Stopped
+            playbackState = .stopped
             didReachEndOfPlaylist()
         }
     }
     
-    func moveToPrevious(autoPlay: Bool) {
+    func moveToPrevious(_ autoPlay: Bool) {
         stop()
         previous(autoPlay)
     }
@@ -189,13 +189,13 @@ class SPAudioPlayer: NSObject {
         if (thePlayer == nil) {
             thePlayer = AVPlayer(playerItem: currentItem!)
         } else {
-            thePlayer?.replaceCurrentItemWithPlayerItem(currentItem)
+            thePlayer?.replaceCurrentItem(with: currentItem)
         }
-        thePlayer?.seekToTime(kCMTimeZero)
+        thePlayer?.seek(to: kCMTimeZero)
         
         attachListener(currentItem!)
         
-        playbackState = .Playing
+        playbackState = .playing
         thePlayer?.play()
         
         delegate?.audioPlayerDidStartPlay(self, song: currentItem!)
@@ -203,16 +203,16 @@ class SPAudioPlayer: NSObject {
     }
    
     func rewind() {
-        if playbackState == .Playing {
+        if playbackState == .playing {
             seekTimer?.invalidate()
-            seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SPAudioPlayer.moveRewind), userInfo: nil, repeats: true)
+            seekTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(SPAudioPlayer.moveRewind), userInfo: nil, repeats: true)
         }
     }
     
     func fastforward() {
-        if playbackState == .Playing {
+        if playbackState == .playing {
             seekTimer?.invalidate()
-            seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SPAudioPlayer.moveFastForward), userInfo: nil, repeats: true)
+            seekTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(SPAudioPlayer.moveFastForward), userInfo: nil, repeats: true)
         }
     }
     
@@ -222,7 +222,7 @@ class SPAudioPlayer: NSObject {
         }
         
         let future = CMTimeMakeWithSeconds(CMTimeGetSeconds(currentTime) + 5, currentTime.timescale)
-        thePlayer?.seekToTime(future, completionHandler: { (success) in
+        thePlayer?.seek(to: future, completionHandler: { (success) in
             
         })
     }
@@ -233,7 +233,7 @@ class SPAudioPlayer: NSObject {
         }
         
         let future = CMTimeMakeWithSeconds(CMTimeGetSeconds(currentTime) - 5, currentTime.timescale)
-        thePlayer?.seekToTime(future, completionHandler: { (success) in
+        thePlayer?.seek(to: future, completionHandler: { (success) in
             
         })
     }
@@ -243,7 +243,7 @@ class SPAudioPlayer: NSObject {
     }
     
     func isPlaying() -> Bool {
-        return playbackState == .Playing
+        return playbackState == .playing
     }
     
     func nextPlayerItem() -> SPPlayerItem? {
@@ -260,7 +260,7 @@ class SPAudioPlayer: NSObject {
         return playerItems[currentPlayingIndex - 1]
     }
     
-    func playerItemDidFinishPlaying(notification: NSNotification) {
+    func playerItemDidFinishPlaying(_ notification: Notification) {
         print("Finished")
         seekTimer?.invalidate()
         stop()
@@ -271,11 +271,11 @@ class SPAudioPlayer: NSObject {
         delegate?.audioPlayerDidReachEndOfPlaylist(self)
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if let item = object as? SPPlayerItem, let keyPath = keyPath where item == currentItem && keyPath == "status" {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let item = object as? SPPlayerItem, let keyPath = keyPath , item == currentItem && keyPath == "status" {
             let status = item.status
-            if status == .Failed {
-                playbackState = .Stopped
+            if status == .failed {
+                playbackState = .stopped
                 delegate?.audioPlayerFailedToPlay(self, song: item)
             }
         }
@@ -285,25 +285,25 @@ class SPAudioPlayer: NSObject {
 extension SPAudioPlayer {
     
     // MARK: - Private methods.
-    func attachListener(playerItem: SPPlayerItem) {
+    func attachListener(_ playerItem: SPPlayerItem) {
         registerForTimeTracking(progressHandlerBlock)
-        playerItem.addObserver(self, forKeyPath: "status", options: .New, context: nil)
+        playerItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         observingObject = playerItem
     }
     
-    func detachListener(playerItem: SPPlayerItem?) {
+    func detachListener(_ playerItem: SPPlayerItem?) {
         unregisterTimeTracking()
         observingObject?.removeObserver(self, forKeyPath: "status")
         observingObject = nil
     }
     
-    func registerForTimeTracking(block: ((progress: Double)->())?) {
+    func registerForTimeTracking(_ block: ((_ progress: Double)->())?) {
         if block == nil {
             return
         }
         
         let interval = CMTimeMake(5, 100) // 0.05 milisecond per update.
-        playbackObserver = thePlayer?.addPeriodicTimeObserverForInterval(interval, queue: dispatch_get_main_queue(), usingBlock: { [unowned self] (cmTime) in
+        playbackObserver = thePlayer?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [unowned self] (cmTime) in
             let duration = self.currentPlayerItemDuration()
             if !CMTIME_IS_VALID(duration) {
                 return
@@ -312,9 +312,9 @@ extension SPAudioPlayer {
             let currentTimeSecond = CMTimeGetSeconds(self.thePlayer!.currentTime())
             let durationInSecond = CMTimeGetSeconds(duration)
             if currentTimeSecond >= 0 && currentTimeSecond <= durationInSecond {
-                block!(progress: currentTimeSecond/durationInSecond)
+                block!(currentTimeSecond/durationInSecond)
             }
-        })
+        }) as AnyObject?
     }
     
     func unregisterTimeTracking() {
@@ -328,7 +328,7 @@ extension SPAudioPlayer {
         guard let currentPlayerItem = thePlayer?.currentItem else {
             return kCMTimeInvalid
         }
-        if currentPlayerItem.status == .ReadyToPlay {
+        if currentPlayerItem.status == .readyToPlay {
             return currentPlayerItem.duration
         }
         return kCMTimeInvalid
@@ -337,12 +337,12 @@ extension SPAudioPlayer {
 
 // Show playing item on lock screen.
 extension SPAudioPlayer {
-    func configureNowPlayingInfo(mediaItem: MPMediaItem) {
-        let infoCenter = MPNowPlayingInfoCenter.defaultCenter()
+    func configureNowPlayingInfo(_ mediaItem: MPMediaItem) {
+        let infoCenter = MPNowPlayingInfoCenter.default()
         var newInfo = [String: AnyObject]()
         let itemProperties = Set([MPMediaItemPropertyTitle, MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPMediaItemPropertyAlbumTitle, MPNowPlayingInfoPropertyElapsedPlaybackTime])
-        mediaItem.enumerateValuesForProperties(itemProperties) { (property, value, stop) in
-            newInfo[property] = value
+        mediaItem.enumerateValues(forProperties: itemProperties) { (property, value, stop) in
+            newInfo[property] = value as AnyObject?
         }
         
         infoCenter.nowPlayingInfo = newInfo

@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class TNSlider: UIControl {
+open class TNSlider: UIControl {
     
-    private var _value: Float = 0
+    fileprivate var _value: Float = 0
     // default 0.0. this value will be pinned to min/max
-    public var value: Float {
+    open var value: Float {
         set {
 //            if (newValue < _minimumValue) {
 //                _minimumValue = newValue
@@ -36,8 +36,8 @@ public class TNSlider: UIControl {
         }
     }
     
-    private var _minimumValue: Float = 0 // default 0.0. the current value may change if outside new min value
-    public var minimumValue: Float {
+    fileprivate var _minimumValue: Float = 0 // default 0.0. the current value may change if outside new min value
+    open var minimumValue: Float {
         set {
             if (newValue > _maximumValue) {
                 _maximumValue = newValue
@@ -59,8 +59,8 @@ public class TNSlider: UIControl {
         }
     }
     
-    private var _maximumValue: Float = 1 // default 1.0. the current value may change if outside new max value
-    public var maximumValue: Float {
+    fileprivate var _maximumValue: Float = 1 // default 1.0. the current value may change if outside new max value
+    open var maximumValue: Float {
         set {
             if (newValue < _minimumValue) {
                 _minimumValue = newValue
@@ -82,32 +82,32 @@ public class TNSlider: UIControl {
         }
     }
     
-    @IBInspectable public var trackMinColor: UIColor? {
+    @IBInspectable open var trackMinColor: UIColor? {
         didSet {
             trackLayer.trackMinColor = trackMinColor
             redrawLayers()
         }
     }
     
-    @IBInspectable public var trackMaxColor: UIColor? {
+    @IBInspectable open var trackMaxColor: UIColor? {
         didSet {
             trackLayer.trackMaxColor = trackMaxColor
             redrawLayers()
         }
     }
     
-    @IBInspectable public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
+    @IBInspectable open var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
     
-    private var trackLayer: TNTrackLayer
-    private var thumbLayer: CATextLayer
+    fileprivate var trackLayer: TNTrackLayer
+    fileprivate var thumbLayer: CATextLayer
     
-    private var previousTouchPoint = CGPointZero
-    private var usableTrackingLength: CGFloat = 0
+    fileprivate var previousTouchPoint = CGPoint.zero
+    fileprivate var usableTrackingLength: CGFloat = 0
     
-    private let trackHeight: CGFloat = 4
-    private let trackInset: CGFloat = 0
-    private let thumbHeight: CGFloat = 16
-    private let thumbWidth: CGFloat = 38
+    fileprivate let trackHeight: CGFloat = 4
+    fileprivate let trackInset: CGFloat = 0
+    fileprivate let thumbHeight: CGFloat = 16
+    fileprivate let thumbWidth: CGFloat = 38
     
     
     required public override init(frame: CGRect) {
@@ -141,7 +141,7 @@ public class TNSlider: UIControl {
     
     // MARK: - Init functions
     func initLayers() {
-        trackLayer.contentsScale = UIScreen.mainScreen().scale
+        trackLayer.contentsScale = UIScreen.main.scale
         trackLayer.frame = trackRectForBound(bounds)
         trackLayer.setNeedsDisplay()
         
@@ -150,21 +150,21 @@ public class TNSlider: UIControl {
     
     func initThumbLayer() {
         thumbLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        thumbLayer.bounds = CGRectMake(0, 0, thumbWidth, thumbHeight)
+        thumbLayer.bounds = CGRect(x: 0, y: 0, width: thumbWidth, height: thumbHeight)
         thumbLayer.position = CGPoint(x: positionForValue(minimumValue), y: bounds.size.height / 2)
-        thumbLayer.foregroundColor = UIColor.blackColor().CGColor
+        thumbLayer.foregroundColor = UIColor.black.cgColor
         thumbLayer.cornerRadius = thumbHeight / 2
         thumbLayer.fontSize = 11
-        thumbLayer.backgroundColor = UIColor.whiteColor().CGColor
+        thumbLayer.backgroundColor = UIColor.white.cgColor
         thumbLayer.alignmentMode = kCAAlignmentCenter
-        thumbLayer.contentsScale = UIScreen.mainScreen().scale
+        thumbLayer.contentsScale = UIScreen.main.scale
         
         thumbLayer.masksToBounds = false
         thumbLayer.shadowOffset = CGSize(width: 0, height: 0.5)
-        thumbLayer.shadowColor = UIColor.blackColor().CGColor
+        thumbLayer.shadowColor = UIColor.black.cgColor
         thumbLayer.shadowRadius = 2
         thumbLayer.shadowOpacity = 0.125
-        thumbLayer.shadowPath = UIBezierPath(roundedRect: thumbLayer.bounds, cornerRadius: thumbHeight / 2).CGPath
+        thumbLayer.shadowPath = UIBezierPath(roundedRect: thumbLayer.bounds, cornerRadius: thumbHeight / 2).cgPath
         
     }
     
@@ -196,23 +196,23 @@ public class TNSlider: UIControl {
         trackLayer.value = _value
     }
     
-    func positionForValue(value: Float) -> CGFloat {
+    func positionForValue(_ value: Float) -> CGFloat {
         return usableTrackingLength * CGFloat((value - _minimumValue) / (_maximumValue - _minimumValue)) + thumbWidth / 2
     }
     
     // MARK: - Touch handling functions
-    public override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        previousTouchPoint = touch.locationInView(self)
+    open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        previousTouchPoint = touch.location(in: self)
         print(previousTouchPoint)
-        if CGRectContainsPoint(thumbLayer.frame, previousTouchPoint) {
+        if thumbLayer.frame.contains(previousTouchPoint) {
             return true
         }
         return false
     }
     
-    public override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
-        let touchPoint = touch.locationInView(self)
+        let touchPoint = touch.location(in: self)
         let delta = touchPoint.x - previousTouchPoint.x
         let valueDelta = (maximumValue - minimumValue) * Float(delta / usableTrackingLength)
         
@@ -238,20 +238,20 @@ public class TNSlider: UIControl {
         CATransaction.commit()
 
         if continuous {
-            sendActionsForControlEvents(.ValueChanged)
+            sendActions(for: .valueChanged)
         }
         
         return true
     }
     
-    public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+    open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         if !continuous {
-            sendActionsForControlEvents(.ValueChanged)
+            sendActions(for: .valueChanged)
         }
     }
     
     // MARK: - Auto layout
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         trackLayer.frame = trackRectForBound(bounds)
@@ -260,16 +260,16 @@ public class TNSlider: UIControl {
         redrawLayers()
     }
     
-    public override func intrinsicContentSize() -> CGSize {
+    open override var intrinsicContentSize : CGSize {
         return CGSize(width: frame.size.width, height: 31)
     }
     
     // MARK: - Helper functions
-    func trackRectForBound(bound: CGRect) -> CGRect {
-        return CGRectMake(trackInset, (bound.size.height - trackHeight) / 2, bound.size.width - 2 * trackInset, trackHeight)
+    func trackRectForBound(_ bound: CGRect) -> CGRect {
+        return CGRect(x: trackInset, y: (bound.size.height - trackHeight) / 2, width: bound.size.width - 2 * trackInset, height: trackHeight)
     }
     
-    func textForValue(value: Float) -> String {
+    func textForValue(_ value: Float) -> String {
         return "\(Int(value))"
     }
 }

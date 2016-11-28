@@ -11,19 +11,19 @@ import UIKit
 protocol MusicPlayerView: class {
     func initialize()
     
-    func switchControlMode(runningMode: Bool)
+    func switchControlMode(_ runningMode: Bool)
     
-    func updatePlaybackProgress(progress: Double)
+    func updatePlaybackProgress(_ progress: Double)
     
-    func setTempoSliderValue(tempo: Float)
+    func setTempoSliderValue(_ tempo: Float)
     
-    func updateViewForPlayingState(isPlaying: Bool)
+    func updateViewForPlayingState(_ isPlaying: Bool)
     
-    func updateSongInfo(playerViewData: SongViewData?)
+    func updateSongInfo(_ playerViewData: SongViewData?)
     
-    func displayPlaylist(playlist: [SongViewData])
-    func showPlayingSongInPlaylist(indexInPlaylist: Int)
+    func displayPlaylist(_ playlist: [SongViewData])
+    func showPlayingSongInPlaylist(_ indexInPlaylist: Int)
     
-    func updateActivityRatesData(data: Float)
-    func updateStepCount(stepCount: Int)
+    func updateActivityRatesData(_ data: Float)
+    func updateStepCount(_ stepCount: Int)
 }

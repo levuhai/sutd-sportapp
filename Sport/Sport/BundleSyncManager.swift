@@ -7,14 +7,34 @@
 //
 
 import MediaPlayer
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class BundleSyncManager: SongSyncManager {
     
     static let sharedInstance = BundleSyncManager()
     
-    func importToRepository(repository: SongRepository, completion: (() -> ())?) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
-            let songPaths = NSBundle.mainBundle().pathsForResourcesOfType(nil, inDirectory: "songs")
+    func importToRepository(_ repository: SongRepository, completion: (() -> ())?) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { 
+            let songPaths = Bundle.main.paths(forResourcesOfType: nil, inDirectory: "songs")
             print("Count: \(songPaths.count)")
             var count = 0
             for path in songPaths {
@@ -22,20 +42,20 @@ class BundleSyncManager: SongSyncManager {
                 let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(path)
                 let persistentId = "persistent_id\(count)"
                 count += 1
-                let songData = SongData(persistentId: persistentId, energy: analysisOutput.energy, valence: analysisOutput.valence, tempo: analysisOutput.tempo)
+                let songData = SongData(persistentId: persistentId, energy: (analysisOutput?.energy)!, valence: (analysisOutput?.valence)!, tempo: (analysisOutput?.tempo)!)
                 
                 repository.addSong(songData)
             }
             
-            dispatch_async(dispatch_get_main_queue(), { 
+            DispatchQueue.main.async(execute: { 
                 completion?()
             })
         }
     }
     
-    func syncWithRepo(repository: SongRepository, progress: ((current: Int, total: Int) -> ())?, completion: (() -> Void)?) {
-        func isExistInItuneLibrary(songPersistentId: String) -> Bool {
-            let query = MPMediaQuery.songsQuery()
+    func syncWithRepo(_ repository: SongRepository, progress: ((_ current: Int, _ total: Int) -> ())?, completion: (() -> Void)?) {
+        func isExistInItuneLibrary(_ songPersistentId: String) -> Bool {
+            let query = MPMediaQuery.songs()
             let predicate = MPMediaPropertyPredicate(value: songPersistentId, forProperty: MPMediaItemPropertyPersistentID)
             query.addFilterPredicate(predicate)
             return query.items?.count > 0

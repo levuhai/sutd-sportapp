@@ -30,12 +30,12 @@ class TourGuideContentController: UIViewController {
         guideImageView.image = UIImage(named: guideImageName)
         
         actionButton.layer.borderWidth = 1
-        actionButton.layer.borderColor = UIColor.sportPink().CGColor
+        actionButton.layer.borderColor = UIColor.sportPink().cgColor
         actionButton.layer.cornerRadius = 8
-        actionButton.hidden = !enableFinishButton
+        actionButton.isHidden = !enableFinishButton
         
-        view.bringSubviewToFront(titleLabel)
-        view.bringSubviewToFront(actionButton)
+        view.bringSubview(toFront: titleLabel)
+        view.bringSubview(toFront: actionButton)
         
     }
 
@@ -44,12 +44,12 @@ class TourGuideContentController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func enableFinishButtonWithAction(action: ()->Void) {
+    func enableFinishButtonWithAction(_ action: @escaping ()->Void) {
         enableFinishButton = true
         finishAction = action
     }
     
-    @IBAction func buttonFinishDidClick(sender: UIButton) {
+    @IBAction func buttonFinishDidClick(_ sender: UIButton) {
         finishAction?()
     }
     
