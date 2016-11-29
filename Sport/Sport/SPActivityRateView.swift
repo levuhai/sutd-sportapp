@@ -14,11 +14,11 @@ protocol SPActivityRateViewDataSource: NSObjectProtocol {
 
 class SPActivityRateView: UIView {
     
-    let maximumValue = Float(5.5)
-    let minimumValue = Float(0.5)
+    let maximumValue = Float(220)
+    let minimumValue = Float(80)
     let horizontalSpacing: CGFloat = 1
-    let top: CGFloat = 10
-    let bottom: CGFloat = 10
+    let top: CGFloat = 15
+    let bottom: CGFloat = 20
     let left: CGFloat = 10
     
     var activityRates = [Float]()
@@ -26,7 +26,7 @@ class SPActivityRateView: UIView {
     var path = UIBezierPath()
     
     var lastRefresh = Date()
-    let drawInterval: TimeInterval = 1.0 / 60
+    let drawInterval: TimeInterval = 1.0 / 50
     
     var expiredIndex: Int = 0
     
@@ -80,18 +80,18 @@ class SPActivityRateView: UIView {
         
         var x = bounds.size.width
         let height = bounds.size.height - top - bottom
-        let valueLength = maxValue - minValue
+        let valueLength = maxValue
         
         if data.count == 0 {
             return path
         }
         
-        let lastY = CGFloat(data[0] / valueLength) * height
+        let lastY = height-CGFloat(data[0] / valueLength) * height
         path.move(to: CGPoint(x: x, y: lastY))
         
         for index in 1..<data.count {
             let value = data[index]
-            let y = CGFloat(value / valueLength) * height
+            let y = height - CGFloat(value / valueLength) * height
             path.addLine(to: CGPoint(x: x, y: y))
             x -= horizontalSpacing
             

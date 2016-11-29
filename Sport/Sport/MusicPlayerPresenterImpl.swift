@@ -186,18 +186,18 @@ extension MusicPlayerPresenterImpl: SPAudioPlayerDelegate {
 
 extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
     func dataForActivityRateView(_ view: SPActivityRateView) -> Float {
-        let nilableAccelerometerData = motionManager.accelerometerData
-        
-        guard let accelerometerData = nilableAccelerometerData, let lastAccelerometerData = self.lastAccelerometerData else {
-            self.lastAccelerometerData = nilableAccelerometerData
-            return Float(1.0)
-        }
-        
-        let dValue = calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
-        self.lastAccelerometerData = accelerometerData
-        storeDvalue(dValue, dvaltable: &self.dvalArray)
-        
-        return Float(dValue)
+//        let nilableAccelerometerData = motionManager.accelerometerData
+//        
+//        guard let accelerometerData = nilableAccelerometerData, let lastAccelerometerData = self.lastAccelerometerData else {
+//            self.lastAccelerometerData = nilableAccelerometerData
+//            return Float(1.0)
+//        }
+//        
+//        let dValue = calculateDValue(accelerometerData, lastAccel: lastAccelerometerData)
+//        self.lastAccelerometerData = accelerometerData
+//        storeDvalue(dValue, dvaltable: &self.dvalArray)
+        return Float ((pedometer.stepsPerSecond?.floatValue ?? 0)*60)
+        //return Float(dValue)
     }
     
     func updateTotalStep() {
