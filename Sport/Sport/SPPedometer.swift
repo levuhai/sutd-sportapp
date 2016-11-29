@@ -11,55 +11,81 @@ import CoreMotion
 
 class SPPedometer: NSObject {
     let pedometer = CMPedometer()
+    let activityManager = CMMotionActivityManager()
     
     var stepCounterTimer: Timer?
     var stepCounterInterval: TimeInterval = 0
+    var activityStr = ""
     var lastQueriedDate: Date!
-    var handler: ((_ totalStep: Int) -> Void)?
+    var handler: ((_ totalStep: Int, _ stepsPerSecond: NSNumber) -> Void)?
+    var activityHandler: ((_ activity: String) -> Void)?
     
     var stepCounts = 0
-    
+    var stepsPerSecond: NSNumber?
     func reset() {
         stepCounts = 0
     }
     
-    func startPedometerWithUpdateInterval(_ interval: TimeInterval, handler: @escaping (_ totalSteps: Int) -> Void) {
+    func startPedometerWithUpdateInterval(_ interval: TimeInterval, handler: @escaping (_ totalSteps: Int, _ stepsPerSecond: NSNumber) -> Void) {
         self.handler = handler
         self.stepCounterInterval = interval
+        
         startStepCounter()
     }
     
-    func startStepCounter() {
-        if CMPedometer.isStepCountingAvailable() {
-            // Using system step counter.
-            stepCounterTimer?.invalidate()
-            lastQueriedDate = Date()
-            stepCounterTimer = Timer.scheduledTimer(timeInterval: stepCounterInterval, target: self, selector: #selector(queryStepCount), userInfo: nil, repeats: true)
-        } else {
-            // Start my own step counter.
-            // TODO:
+    func startActivityUpdate(_ handler: @escaping (_ activity: String) -> Void) {
+        self.activityHandler = handler
+        
+        if(CMMotionActivityManager.isActivityAvailable()){
+            self.activityManager.startActivityUpdates(to: OperationQueue.main, withHandler: { (data) -> Void in
+                
+                if(data?.stationary == true) {
+                    self.activityStr = "Standing"
+                } else if (data?.walking == true){
+                    self.activityStr = "Walking"
+                } else if (data?.running == true){
+                    self.activityStr = "Running"
+                } else if (data?.automotive == true){
+                    self.activityStr = "Standing"
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    self.activityHandler?(self.activityStr)
+                })
+            })
         }
     }
     
-    func queryStepCount() {
-        let newDate = Date()
-        pedometer.queryPedometerData(from: lastQueriedDate, to: newDate, withHandler: { [unowned self] (data, error) in
-            guard let data = data else {
-                return
-            }
-            let stepCount = data.numberOfSteps.intValue
-            self.stepCounts += stepCount
-            
-            DispatchQueue.main.async(execute: {
-                self.handler?(self.stepCounts)
+    func startStepCounter() {
+        
+        if CMPedometer.isStepCountingAvailable() {
+            // Start update pedometer
+            pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
+                if let data = data {
+                    self.stepCounts = data.numberOfSteps.intValue
+                    self.stepsPerSecond = data.currentCadence
+                    
+                    //let distance = data.distance
+                    DispatchQueue.main.async(execute: {
+                        self.handler?(self.stepCounts, self.stepsPerSecond ?? 0)
+                    })
+                }
             })
-            })
-        lastQueriedDate = newDate
+        }
+//        else {
+//            // Start my own step counter.
+//            // TODO:
+////            // Using system step counter.
+////            stepCounterTimer?.invalidate()
+////            lastQueriedDate = Date()
+////            stepCounterTimer = Timer.scheduledTimer(timeInterval: stepCounterInterval, target: self, selector: #selector(queryStepCount), userInfo: nil, repeats: true)
+//        }
     }
     
     func stopStepCounter() {
         if CMPedometer.isStepCountingAvailable() {
             pedometer.stopUpdates()
+            activityManager.stopActivityUpdates()
         } else {
             // Stop my own step counter.
             // TODO:

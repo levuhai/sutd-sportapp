@@ -22,6 +22,8 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var trackpadView: SPTrackPad!
     @IBOutlet weak var activityRateView: SPActivityRateView!
     @IBOutlet weak var stepCountLabel: UILabel!
+    @IBOutlet weak var stepsPerMinute: UILabel!
+    @IBOutlet weak var activityImage: UIImageView!
     
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -340,6 +342,17 @@ extension MusicPlayerController: MusicPlayerView {
     
     func updateStepCount(_ stepCount: Int) {
         stepCountLabel.text = "\(stepCount)"
+    }
+    
+    func updateStepsPerMinute(_ rate: Float) {
+        stepsPerMinute.text = String(format: "%.01f", rate)
+    }
+    
+    func updateActivityImage(_ str: String) {
+        print(str)
+        DispatchQueue.main.async(execute: {
+            self.activityImage.image = UIImage.init(named: str)
+        })
     }
 }
 

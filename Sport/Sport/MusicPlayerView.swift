@@ -26,4 +26,6 @@ protocol MusicPlayerView: class {
     
     func updateActivityRatesData(_ data: Float)
     func updateStepCount(_ stepCount: Int)
+    func updateStepsPerMinute(_ rate: Float)
+    func updateActivityImage(_ str: String)
 }

@@ -69,22 +69,27 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
             return
         }
         if runningMode {
-            motionManager.startAccelerometerUpdates()
+            //motionManager.startAccelerometerUpdates()
             // TODO: Start step counter here and update total steps in the handler.
-            /*
              
-             pedometer.startPedometerWithUpdateInterval(1, handler: { [weak self] (totalSteps) in
+             pedometer.startPedometerWithUpdateInterval(0.5, handler: { [weak self] (totalSteps, stepsPerSecond) in
                 self?.playerView?.updateStepCount(totalSteps)
+                self?.playerView?.updateStepsPerMinute(stepsPerSecond.floatValue*60)
              })
-             
-             */
-            stepTimer?.invalidate()
-            stepTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTotalStep), userInfo: nil, repeats: true)
+            
+            pedometer.startActivityUpdate({ [weak self] (activityStr) in
+                self?.playerView?.updateActivityImage(activityStr)
+            })
+            
+ 
+//            stepTimer?.invalidate()
+//            stepTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTotalStep), userInfo: nil, repeats: true)
         } else {
-            motionManager.stopAccelerometerUpdates()
+            //motionManager.stopAccelerometerUpdates()
             // TODO: Stop step counter.
-//            pedometer.stopStepCounter()
-            stepTimer?.invalidate()
+            pedometer.stopStepCounter()
+            
+//            stepTimer?.invalidate()
         }
     }
     
@@ -215,28 +220,7 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
     }
     
     func calculateDValue(_ currentAccel: CMAccelerometerData, lastAccel: CMAccelerometerData) -> Double {
-/*
-         float xx = acceleration.x;
- float yy = acceleration.y;
- float zz = acceleration.z;
- 
- float dot = (px * xx) + (py * yy) + (pz * zz);
- float a = ABS(sqrt(px * px + py * py + pz * pz));
- float b = ABS(sqrt(xx * xx + yy * yy + zz * zz));
- 
- dot /= (a * b);
- 
- if (dot <= 0.82) {
- if (!isSleeping) {
- isSleeping = YES;
- [self performSelector:@selector(wakeUp) withObject:nil afterDelay:0.3];
- numSteps += 1;
- self.stepCountLabel.text = [NSString stringWithFormat:@"%d", numSteps];
- }
- }
- 
- px = xx; py = yy; pz = zz;
- */
+
         let x = currentAccel.acceleration.x
         let y = currentAccel.acceleration.y
         let z = currentAccel.acceleration.z
@@ -245,7 +229,7 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
         let y0 = lastAccel.acceleration.y
         let z0 = lastAccel.acceleration.z
         
-        let d = sqrt(x*x+y*y+z*z)//(x*x0 + y*y0 + z*z0) / sqrt((x*x + y*y + z*z) * (x0*x0 + y0*y0 + z0*z0));
+        let d = (x*x0 + y*y0 + z*z0) / sqrt((x*x + y*y + z*z) * (x0*x0 + y0*y0 + z0*z0));
         return d
     }
     

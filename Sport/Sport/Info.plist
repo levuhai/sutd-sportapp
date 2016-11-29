@@ -36,6 +36,8 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMotionUsageDescription</key>
+	<string>Used to keep track of user's activity rate</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ionicons.ttf</string>
