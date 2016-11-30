@@ -58,7 +58,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
              
              pedometer.startPedometerWithUpdateInterval(1/60.0, handler: { [weak self] (totalSteps, stepsPerSecond) in
                 self?.playerView?.updateStepCount(totalSteps)
-                self?.playerView?.updateStepsPerMinute(stepsPerSecond.floatValue*60)
+                self?.playerView?.updateStepsPerMinute(stepsPerSecond*60)
              })
             
             pedometer.startActivityUpdate({ [weak self] (activityStr) in
@@ -174,7 +174,7 @@ extension MusicPlayerPresenterImpl: SPActivityRateViewDataSource {
 //        self.lastAccelerometerData = accelerometerData
 //        storeDvalue(dValue, dvaltable: &self.dvalArray)
 //        return Float(dValue)
-        return Float ((pedometer.stepsPerSecond?.floatValue ?? 0)*60)
+        return Float (pedometer.stepsPerSecond*60)
         
     }    
 }

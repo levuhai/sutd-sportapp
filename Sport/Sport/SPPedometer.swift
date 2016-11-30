@@ -18,12 +18,12 @@ class SPPedometer: NSObject {
     var stepCounterInterval: TimeInterval = 0
     var activityStr = ""
     var lastQueriedDate: Date!
-    var handler: ((_ totalStep: Int, _ stepsPerSecond: NSNumber) -> Void)?
+    var handler: ((_ totalStep: Int, _ stepsPerSecond: Float) -> Void)?
     var activityHandler: ((_ activity: String) -> Void)?
     
     var stepCounts = 0
     var isSleeping = false
-    var stepsPerSecond: NSNumber?
+    var stepsPerSecond: Float = 0.0
     
     // Accelerometer
     let motionManager = CMMotionManager()
@@ -34,14 +34,14 @@ class SPPedometer: NSObject {
     var lastAccelerometerData: CMAccelerometerData? = nil
     var lastAccelerometerDataStepTracking: CMAccelerometerData? = nil
     var dvalArray = [Double]()
-    
+    var stepArray = [Int]()
     var stepTimer: Timer?
     
     func reset() {
         stepCounts = 0
     }
     
-    func startPedometerWithUpdateInterval(_ interval: TimeInterval, handler: @escaping (_ totalSteps: Int, _ stepsPerSecond: NSNumber) -> Void) {
+    func startPedometerWithUpdateInterval(_ interval: TimeInterval, handler: @escaping (_ totalSteps: Int, _ stepsPerSecond: Float) -> Void) {
         self.handler = handler
         stepCounterInterval = interval
         //usingStepCounting = CMPedometer.isStepCountingAvailable()
@@ -54,8 +54,8 @@ class SPPedometer: NSObject {
                     DispatchQueue.main.async(execute: {
                         self.stepCounts = data!.numberOfSteps.intValue
                         print(self.stepCounts)
-                        self.stepsPerSecond = data!.currentCadence
-                        self.handler?(self.stepCounts, self.stepsPerSecond ?? 0)
+                        self.stepsPerSecond = data!.currentCadence?.floatValue ?? 0.0
+                        self.handler?(self.stepCounts, self.stepsPerSecond)
                     })
                 }
             })
@@ -63,8 +63,8 @@ class SPPedometer: NSObject {
             if !motionManager.isAccelerometerAvailable {
                 return
             }
+            initStepArr()
             motionManager.accelerometerUpdateInterval = 1.0/60
-            
             motionManager.startAccelerometerUpdates()
             
             
@@ -126,8 +126,11 @@ class SPPedometer: NSObject {
             stepCounts += 1
             Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(wakeUp), userInfo: nil, repeats: false)
         }
+        storeStep(stepCounts)
+        calculateStepsPerSecond()
+        
         DispatchQueue.main.async(execute: {
-            self.handler?(self.stepCounts, self.stepsPerSecond ?? 0)
+            self.handler?(self.stepCounts, self.stepsPerSecond)
         })
     }
     
@@ -168,5 +171,21 @@ class SPPedometer: NSObject {
         dvaltable.append(value)
     }
 
+    func initStepArr() {
+        for _ in (0..<600) {
+            stepArray.append(0)
+        }
+    }
+    
+    func storeStep(_ value: Int) {
+        if (stepArray.count > 600) {
+            stepArray.removeFirst()
+        }
+        stepArray.append(value)
+    }
+    
+    func calculateStepsPerSecond() {
+        self.stepsPerSecond  = Float(stepArray.last! - stepArray.first!)/10.0;
+    }
 
 }
