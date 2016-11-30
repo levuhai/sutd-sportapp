@@ -105,33 +105,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="97.5"/>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Left Shoe" translatesAutoresizingMaskIntoConstraints="NO" id="1ah-ES-0Uz">
-                                        <rect key="frame" x="267" y="79" width="13" height="13"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="1ah-ES-0Uz" secondAttribute="height" multiplier="1:1" id="Pww-US-7G8"/>
-                                            <constraint firstAttribute="width" constant="13" id="u5u-PJ-jpE"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counting" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="NQI-5u-agq">
-                                        <rect key="frame" x="285" y="78" width="50" height="14.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="CS8-6x-2B1"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="0.39215686274509803" green="0.70980392156862748" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Standing" translatesAutoresizingMaskIntoConstraints="NO" id="xyS-hD-hGh">
-                                        <rect key="frame" x="182" y="77.5" width="15" height="15"/>
+                                        <rect key="frame" x="245" y="77.5" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xyS-hD-hGh" secondAttribute="height" multiplier="1:1" id="GcA-qH-S6G"/>
                                             <constraint firstAttribute="width" constant="15" id="e9b-4g-lJC"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analyzing" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IZp-he-xyv">
-                                        <rect key="frame" x="202" y="78" width="50" height="14.5"/>
+                                        <rect key="frame" x="265" y="78" width="75" height="14.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="3aw-Wk-2sq"/>
+                                            <constraint firstAttribute="width" constant="75" id="3aw-Wk-2sq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.54509803921568623" green="0.76470588235294112" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -140,18 +124,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="NQI-5u-agq" firstAttribute="leading" secondItem="1ah-ES-0Uz" secondAttribute="trailing" constant="5" id="Dzv-m8-tre"/>
                                     <constraint firstAttribute="bottom" secondItem="1FI-UX-eLK" secondAttribute="bottom" id="Gy2-dO-5Wq"/>
                                     <constraint firstItem="1FI-UX-eLK" firstAttribute="top" secondItem="2Qs-yJ-YoN" secondAttribute="top" id="QP9-8W-wL5"/>
                                     <constraint firstItem="1FI-UX-eLK" firstAttribute="leading" secondItem="2Qs-yJ-YoN" secondAttribute="leading" id="SyB-Bo-Ill"/>
                                     <constraint firstAttribute="trailing" secondItem="1FI-UX-eLK" secondAttribute="trailing" id="TUo-ak-asH"/>
-                                    <constraint firstItem="IZp-he-xyv" firstAttribute="centerY" secondItem="NQI-5u-agq" secondAttribute="centerY" id="WFR-Vd-Z57"/>
-                                    <constraint firstItem="1ah-ES-0Uz" firstAttribute="leading" secondItem="IZp-he-xyv" secondAttribute="trailing" constant="15" id="X0E-DF-kKA"/>
+                                    <constraint firstAttribute="bottom" secondItem="IZp-he-xyv" secondAttribute="bottom" constant="5" id="b49-AP-CGP"/>
                                     <constraint firstItem="IZp-he-xyv" firstAttribute="leading" secondItem="xyS-hD-hGh" secondAttribute="trailing" constant="5" id="bTU-qd-6YY"/>
-                                    <constraint firstAttribute="trailing" secondItem="NQI-5u-agq" secondAttribute="trailing" constant="10" id="cm7-nV-G3l"/>
                                     <constraint firstItem="1FI-UX-eLK" firstAttribute="centerY" secondItem="2Qs-yJ-YoN" secondAttribute="centerY" id="dTw-wV-kPy"/>
-                                    <constraint firstAttribute="bottom" secondItem="NQI-5u-agq" secondAttribute="bottom" constant="5" id="h7s-JR-r8c"/>
-                                    <constraint firstItem="1ah-ES-0Uz" firstAttribute="centerY" secondItem="NQI-5u-agq" secondAttribute="centerY" id="q2h-Hf-3Tq"/>
+                                    <constraint firstAttribute="trailing" secondItem="IZp-he-xyv" secondAttribute="trailing" constant="5" id="kD8-iP-EOY"/>
                                     <constraint firstItem="xyS-hD-hGh" firstAttribute="centerY" secondItem="IZp-he-xyv" secondAttribute="centerY" id="soK-ON-gEb"/>
                                 </constraints>
                             </view>
@@ -477,7 +457,6 @@
                         <outlet property="progressView" destination="HGA-Mz-Shb" id="8jX-yI-A3A"/>
                         <outlet property="rewindButton" destination="HkD-FV-QOd" id="UWf-Ax-hpO"/>
                         <outlet property="songTitleLabel" destination="JLb-Nb-Xra" id="VRu-Om-Zb6"/>
-                        <outlet property="stepCountLabel" destination="NQI-5u-agq" id="AS0-NJ-PRd"/>
                         <outlet property="stepsPerMinute" destination="IZp-he-xyv" id="Ovw-UE-wYG"/>
                         <outlet property="tnTempoSlider" destination="L7i-xq-y7j" id="DY3-Ex-oNE"/>
                         <outlet property="topPlaylistToParentBottomConstraint" destination="DlU-J2-xbX" id="FZA-bm-FAc"/>
@@ -798,7 +777,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Left Shoe" width="128" height="128"/>
         <image name="Standing" width="128" height="128"/>
         <image name="bgImage" width="375" height="290"/>
         <image name="ic_play" width="164" height="164"/>
