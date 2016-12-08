@@ -22,7 +22,58 @@ using namespace standard;
 
 @implementation AubioWrapper
 
+
++ (AnalysisOutput *)analyzeAudioFile:(NSString*)path dataArray:(NSArray*)arr {
+    std::vector<Real> vec;
+    for (NSNumber* num in arr) {
+        vec.push_back(num.floatValue);
+    }
+    
+    // ====================================================
+    // ESSENTIA
+    
+    // register the algorithms in the factory(ies)
+    essentia::init();
+    
+    // instanciate factory
+    AlgorithmFactory& factory = AlgorithmFactory::instance();
+    
+    Real energy,dynamicComplexity;
+    Algorithm* energyAlgo = factory.create("DynamicComplexity");
+    energyAlgo->input("signal").set(vec);
+    energyAlgo->output("loudness").set(energy);
+    energyAlgo->output("dynamicComplexity").set(dynamicComplexity);
+    energyAlgo->compute();
+    
+    Real bpm, confidence;
+    std::vector<Real> ticks, estimates, bpmIntervals;
+    Algorithm* rhythmAlgo = factory.create("RhythmExtractor2013");
+    rhythmAlgo->input("signal").set(vec);
+    rhythmAlgo->output("bpm").set(bpm);
+    rhythmAlgo->output("confidence").set(confidence);
+    rhythmAlgo->output("ticks").set(ticks);
+    rhythmAlgo->output("estimates").set(estimates);
+    rhythmAlgo->output("bpmIntervals").set(bpmIntervals);
+    rhythmAlgo->compute();
+    
+    delete rhythmAlgo;
+    delete energyAlgo;
+    
+    // shut down essentia
+    essentia::shutdown();
+    vec.clear();
+    
+    
+    // ====================================================
+    // TODO: Change value of energy & valence to the analized value.
+    AnalysisOutput *output = [[AnalysisOutput alloc] initWithTempo:bpm
+                                                            energy:energy
+                                                           valence:0];
+    return output;
+}
+
 + (AnalysisOutput *)simpleAnalyzeAudioFile:(NSString *)srcPath {
+    [self printFloatDataFromAudioFile:srcPath];
     
     // ====================================================
     // ESSENTIA

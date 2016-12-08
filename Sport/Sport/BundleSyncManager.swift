@@ -7,6 +7,8 @@
 //
 
 import MediaPlayer
+import AudioKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -38,6 +40,9 @@ class BundleSyncManager: SongSyncManager {
             print("Count: \(songPaths.count)")
             var count = 0
             for path in songPaths {
+                
+                let file = try! AKAudioFile(forReading: URL(fileURLWithPath: path))
+                print(file.samplesCount)
                 
                 let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(path)
                 let persistentId = "persistent_id\(count)"

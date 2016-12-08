@@ -7,6 +7,7 @@
 //
 
 import MediaPlayer
+import AudioKit
 
 class SingleAnalysisOperation: ConcurrentOperation {
     
@@ -85,7 +86,9 @@ class SingleAnalysisOperation: ConcurrentOperation {
             return
         }
         
-        let analysisOutput = AubioWrapper.simpleAnalyzeAudioFile(realExportPath)
+        let file = try! AKAudioFile(forReading: URL(fileURLWithPath: realExportPath))
+        
+        let analysisOutput = AubioWrapper.analyzeAudioFile(realExportPath, dataArray: file.arraysOfFloats[0])
         let songData = SongData(persistentId: songPersistentId, energy: (analysisOutput?.energy)!, valence: (analysisOutput?.valence)!, tempo: (analysisOutput?.tempo)!)
         repository.addSong(songData)
         
