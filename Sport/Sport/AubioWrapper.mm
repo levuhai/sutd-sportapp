@@ -45,6 +45,12 @@ using namespace standard;
     energyAlgo->output("dynamicComplexity").set(dynamicComplexity);
     energyAlgo->compute();
     
+    Real intensive;
+    Algorithm* intensiveAlgo = factory.create("Intensity");
+    intensiveAlgo->input("signal").set(vec);
+    intensiveAlgo->output("intensive").set(intensive);
+    intensiveAlgo->compute();
+    
     Real bpm, confidence;
     std::vector<Real> ticks, estimates, bpmIntervals;
     Algorithm* rhythmAlgo = factory.create("RhythmExtractor2013");
@@ -58,6 +64,7 @@ using namespace standard;
     
     delete rhythmAlgo;
     delete energyAlgo;
+    delete intensiveAlgo;
     
     // shut down essentia
     essentia::shutdown();
@@ -68,7 +75,7 @@ using namespace standard;
     // TODO: Change value of energy & valence to the analized value.
     AnalysisOutput *output = [[AnalysisOutput alloc] initWithTempo:bpm
                                                             energy:energy
-                                                           valence:0];
+                                                           valence:intensive];
     return output;
 }
 
