@@ -367,13 +367,13 @@ extension MusicPlayerController: UITableViewDataSource {
         return playlistSong.count
     }
     
-    private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.01
-    }
-    
-    private func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
+//    private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 0.00
+//    }
+//    
+//    private func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 0.00
+//    }
 }
 
 extension MusicPlayerController: UITableViewDelegate {

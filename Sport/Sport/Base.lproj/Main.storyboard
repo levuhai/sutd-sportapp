@@ -45,28 +45,28 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNu-n5-Ceu">
-                                <rect key="frame" x="0.0" y="424" width="414" height="112.66666666666663"/>
+                                <rect key="frame" x="0.0" y="424" width="414" height="114.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HE4-lC-0Gk">
-                                        <rect key="frame" x="190.66666666666666" y="61.666666666666686" width="32" height="18"/>
+                                        <rect key="frame" x="190.66666666666666" y="63.666666666666686" width="32" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCd-yy-ckM">
-                                        <rect key="frame" x="374" y="67.666666666666686" width="26" height="16"/>
+                                        <rect key="frame" x="374" y="69.666666666666686" width="26" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g82-Oc-hk6">
-                                        <rect key="frame" x="14" y="67.666666666666686" width="29" height="16"/>
+                                        <rect key="frame" x="14" y="69.666666666666686" width="29" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.69019607839999997" green="0.71372549019999998" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7i-xq-y7j" customClass="TNSlider" customModule="Sport" customModuleProvider="target">
-                                        <rect key="frame" x="12" y="81.666666666666686" width="390" height="30.999999999999943"/>
+                                        <rect key="frame" x="12" y="83.666666666666686" width="390" height="30.999999999999943"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="fyb-mr-txa"/>
@@ -99,21 +99,21 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qs-yJ-YoN" userLabel="Auto View">
-                                <rect key="frame" x="15" y="424" width="384" height="112.66666666666663"/>
+                                <rect key="frame" x="15" y="424" width="384" height="114.66666666666663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FI-UX-eLK" customClass="SPActivityRateView" customModule="Sport" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="112.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="114.66666666666663"/>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Standing" translatesAutoresizingMaskIntoConstraints="NO" id="xyS-hD-hGh">
-                                        <rect key="frame" x="284" y="92.666666666666629" width="15" height="15"/>
+                                        <rect key="frame" x="284" y="94.666666666666629" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xyS-hD-hGh" secondAttribute="height" multiplier="1:1" id="GcA-qH-S6G"/>
                                             <constraint firstAttribute="width" constant="15" id="e9b-4g-lJC"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analyzing" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IZp-he-xyv">
-                                        <rect key="frame" x="304" y="93" width="75" height="14.666666666666629"/>
+                                        <rect key="frame" x="304" y="95" width="75" height="14.666666666666629"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="3aw-Wk-2sq"/>
                                         </constraints>
@@ -197,13 +197,13 @@
                                             <constraint firstAttribute="height" constant="1" id="NBr-CW-MHT"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="83" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-Q4-Qsn">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" style="plain" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-Q4-Qsn">
                                         <rect key="frame" x="0.0" y="45" width="414" height="55"/>
                                         <color key="backgroundColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="separatorColor" red="0.3803921569" green="0.3803921569" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PlaylistSongCell" rowHeight="83" id="WZB-GQ-WPO" customClass="PlaylistSongCell" customModule="Sport" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="55.333333333333336" width="414" height="83"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="83"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WZB-GQ-WPO" id="QCh-v6-IHd">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="82.666666666666671"/>
@@ -320,10 +320,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-AJ-iiw" userLabel="Controller bar view">
-                                <rect key="frame" x="0.0" y="544.66666666666652" width="414" height="142.33333333333337"/>
+                                <rect key="frame" x="0.0" y="546.66666666666652" width="414" height="140.33333333333337"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGA-Mz-Shb" customClass="MBCircularProgressBarView">
-                                        <rect key="frame" x="140.66666666666669" y="5" width="133.00000000000006" height="133"/>
+                                        <rect key="frame" x="141.66666666666663" y="5" width="131.33333333333337" height="131"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="50" id="wiv-Wt-eWc"/>
@@ -355,11 +355,11 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhz-wR-U52">
-                                        <rect key="frame" x="160.33333333333334" y="24" width="93.333333333333314" height="93.666666666666742"/>
+                                        <rect key="frame" x="161" y="23" width="92" height="92.666666666666742"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Nhz-wR-U52" secondAttribute="height" multiplier="1:1" id="Tux-sD-Szn"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="35"/>
+                                        <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="36"/>
                                         <state key="normal" title="A">
                                             <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -368,7 +368,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYM-7S-LKy">
-                                        <rect key="frame" x="287.66666666666669" y="47.333333333333371" width="48" height="48"/>
+                                        <rect key="frame" x="287" y="46.333333333333371" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="E26-Us-lxU"/>
                                             <constraint firstAttribute="width" constant="48" id="j4L-x2-ERI"/>
@@ -382,7 +382,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-FV-QOd">
-                                        <rect key="frame" x="78.333333333333329" y="47.333333333333371" width="48" height="48"/>
+                                        <rect key="frame" x="79" y="46.333333333333371" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="7pc-x0-cIi"/>
                                             <constraint firstAttribute="width" constant="48" id="9WQ-bp-IZo"/>
@@ -432,7 +432,7 @@
                             <constraint firstItem="DNu-n5-Ceu" firstAttribute="leading" secondItem="CIS-J8-Mcd" secondAttribute="leading" id="ctJ-lU-nog"/>
                             <constraint firstAttribute="trailing" secondItem="MwS-p2-H7l" secondAttribute="trailing" id="gde-RQ-DXD"/>
                             <constraint firstItem="oU0-Vs-srb" firstAttribute="top" secondItem="MwS-p2-H7l" secondAttribute="bottom" constant="-100" id="js9-lW-5mv"/>
-                            <constraint firstItem="DNu-n5-Ceu" firstAttribute="height" secondItem="rKi-AJ-iiw" secondAttribute="height" constant="-30" id="oE0-bo-Oqq"/>
+                            <constraint firstItem="DNu-n5-Ceu" firstAttribute="height" secondItem="rKi-AJ-iiw" secondAttribute="height" constant="-26" id="oE0-bo-Oqq"/>
                             <constraint firstItem="7aC-Pr-mJ1" firstAttribute="leading" secondItem="CIS-J8-Mcd" secondAttribute="leading" constant="15" id="rj2-Mc-MLU"/>
                             <constraint firstItem="7aC-Pr-mJ1" firstAttribute="top" secondItem="5c9-3k-EcD" secondAttribute="bottom" constant="10" id="sJx-rQ-nuO"/>
                             <constraint firstAttribute="trailing" secondItem="rKi-AJ-iiw" secondAttribute="trailing" id="xJi-kd-Kyg"/>
@@ -479,7 +479,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bGV-ZR-cdD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" style="plain" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bGV-ZR-cdD">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
