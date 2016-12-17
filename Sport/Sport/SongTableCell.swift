@@ -15,6 +15,7 @@ class SongTableCell: UITableViewCell {
     @IBOutlet weak var songAlbumLabel: UILabel!
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var energyLabel: UILabel!
+    @IBOutlet weak var happinessLabel: UILabel!
     @IBOutlet weak var emotionImageView: UIImageView!
     
     override func awakeFromNib() {
@@ -34,5 +35,6 @@ class SongTableCell: UITableViewCell {
         tempoLabel.text = "\(Int(song.tempo)) bpm"
         albumIconImageView.image = song.image
         energyLabel.text = String.init(format: "%.f%%", song.energy)
+        happinessLabel.text = String.init(format: "%f", song.happiness)
     }
 }

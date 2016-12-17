@@ -11,8 +11,7 @@
 
 @interface AubioWrapper : NSObject
 
-+ (AnalysisOutput *)simpleAnalyzeAudioFile:(NSString *)srcPath;
-+ (AnalysisOutput *)analyzeAudioFile:(NSString*)path dataArray:(NSArray*)arr;
-+ (void)printFloatDataFromAudioFile:(NSString *)srcPath;
++ (AnalysisOutput *)analyzeAudioFile:(NSString *)srcPath;
+//+ (AnalysisOutput *)analyzeAudioFile:(NSString*)path dataArray:(NSArray*)arr;
 
 @end

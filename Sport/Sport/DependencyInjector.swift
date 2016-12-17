@@ -13,7 +13,7 @@ class DependencyInjector: NSObject {
         var result = [SongViewData]()
         let unknownAlbumImage = UIImage(named: "unknown_album")
         for index in 1..<20 {
-            result.append(SongViewData(image: unknownAlbumImage!, title: "Song \(index)", artist: "Unknown album", tempo: 0, isPlaying: index == 5, energy: 0))
+            result.append(SongViewData(image: unknownAlbumImage!, title: "Song \(index)", artist: "Unknown album", tempo: 0, isPlaying: index == 5, energy: 0, happiness: 0))
         }
         return result
     }

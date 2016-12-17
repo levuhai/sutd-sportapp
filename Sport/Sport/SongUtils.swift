@@ -29,6 +29,7 @@ class SongUtils: NSObject {
         let albumImage = mpItem.artwork?.image(at: CGSize(width: 64, height: 64)) ?? UIImage(named: "unknown_album")
         let tempo = Float(analysisInfo.tempo)
         let energy = Float(analysisInfo.energy)
-        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: tempo, energy: energy)
+        let happiness = Float(analysisInfo.valence)
+        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: tempo, energy: energy, happiness: happiness)
     }
 }

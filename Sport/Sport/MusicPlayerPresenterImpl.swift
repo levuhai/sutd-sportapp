@@ -210,8 +210,8 @@ extension MusicPlayerPresenterImpl {
     func songViewFromPlayerItem(_ playerItem: SPPlayerItem) -> SongViewData {
         let title = playerItem.mediaItem.title ?? Localizations.UnknownArtist
         let artist = playerItem.mediaItem.artist ?? Localizations.UnknownTitle
-        let albumImage = playerItem.mediaItem.artwork?.image(at: CGSize(width: 64, height: 64)) ?? UIImage(named: "unknown_album")
-        return SongViewData(image: albumImage!, title: title, artist: artist, tempo: playerItem.tempo, energy: playerItem.energy)
+        let albumImage = playerItem.mediaItem.artwork?.image(at: CGSize(width: 64, height: 64)) ?? #imageLiteral(resourceName: "unknown_album")
+        return SongViewData(image: albumImage, title: title, artist: artist, tempo: playerItem.tempo, energy: playerItem.energy, happiness: playerItem.valence)
         
     }
     

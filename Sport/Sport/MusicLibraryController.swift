@@ -40,12 +40,18 @@ extension MusicLibraryController: MusicLibraryView {
         // So, if we want to custom back button shown in this vc, you should do like this.
         self.navigationController?.navigationBar.topItem!.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        let attributes = [NSFontAttributeName: UIFont.ioniconOfSize(40)] as Dictionary!
+        //create a new button
+        let button: UIButton = UIButton.init(type:.custom)
+        //set image for button
+        button.setImage(#imageLiteral(resourceName: "Restart_fafafa_100"), for:.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(MusicLibraryController.barButtonReloadDidClick(_:)), for: .touchUpInside)
+        //set frame
+        button.frame = CGRect.init(x:0, y:0, width:32, height:32)
         
-        // Add right bar button
-        let rightBarButton =  UIBarButtonItem(title: String.ioniconWithName(.IosRefreshEmpty), style: .plain, target: self, action: #selector(MusicLibraryController.barButtonReloadDidClick(_:)))
-        rightBarButton.setTitleTextAttributes(attributes, for: UIControlState())
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
         
         songTableView.rowHeight = UITableViewAutomaticDimension
         songTableView.estimatedRowHeight = 10
