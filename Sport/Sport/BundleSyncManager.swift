@@ -41,9 +41,6 @@ class BundleSyncManager: SongSyncManager {
             var count = 0
             for path in songPaths {
                 
-//                let file = try! AKAudioFile(forReading: URL(fileURLWithPath: path))
-//                print(file.samplesCount)
-                
                 let analysisOutput = AubioWrapper.analyzeAudioFile(path)
                 let persistentId = "persistent_id\(count)"
                 count += 1

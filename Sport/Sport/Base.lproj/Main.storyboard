@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -700,19 +700,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting_1" translatesAutoresizingMaskIntoConstraints="NO" id="HhF-io-GUJ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtS-Ki-dfx">
-                                <rect key="frame" x="164" y="463" width="86" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Importing songs..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtS-Ki-dfx">
+                                <rect key="frame" x="139" y="463" width="136.66666666666669" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNr-39-eYi">
-                                <rect key="frame" x="276" y="678" width="118" height="38"/>
+                                <rect key="frame" x="315" y="676" width="79" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Get started"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="getStartedButtonDidClick:" destination="nHA-vT-pkV" eventType="touchUpInside" id="hwP-Q8-ELb"/>
                                 </connections>
@@ -738,7 +741,7 @@
                                         <real key="value" value="100"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="progressLineWidth">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="progressRotationAngle">
                                         <real key="value" value="0.0"/>
@@ -759,24 +762,19 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HhF-io-GUJ" firstAttribute="top" secondItem="eXo-pS-NJT" secondAttribute="top" id="3X7-4X-QPG"/>
                             <constraint firstItem="bz8-yT-fCf" firstAttribute="top" secondItem="xNr-39-eYi" secondAttribute="bottom" constant="20" id="84z-5p-z6d"/>
                             <constraint firstItem="rtS-Ki-dfx" firstAttribute="top" secondItem="GR4-OW-aCA" secondAttribute="bottom" constant="20" id="AUQ-hY-tIM"/>
                             <constraint firstItem="GR4-OW-aCA" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="EHc-e0-pve"/>
-                            <constraint firstAttribute="trailing" secondItem="HhF-io-GUJ" secondAttribute="trailing" id="JTU-JC-jEs"/>
                             <constraint firstItem="xNr-39-eYi" firstAttribute="trailing" secondItem="eXo-pS-NJT" secondAttribute="trailingMargin" id="Tzy-de-3OX"/>
-                            <constraint firstAttribute="bottom" secondItem="HhF-io-GUJ" secondAttribute="bottom" id="kv5-de-q9K"/>
                             <constraint firstItem="rtS-Ki-dfx" firstAttribute="centerX" secondItem="eXo-pS-NJT" secondAttribute="centerX" id="tMh-qE-3Yt"/>
-                            <constraint firstItem="HhF-io-GUJ" firstAttribute="leading" secondItem="eXo-pS-NJT" secondAttribute="leading" id="vNV-ig-LBE"/>
                             <constraint firstItem="GR4-OW-aCA" firstAttribute="centerY" secondItem="eXo-pS-NJT" secondAttribute="centerY" id="zFS-gg-BPE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="getStartedButton" destination="xNr-39-eYi" id="Jx4-Fy-9rh"/>
                         <outlet property="progressView" destination="GR4-OW-aCA" id="G83-qh-dFi"/>
-                        <outlet property="slideImageView" destination="HhF-io-GUJ" id="7lC-dI-oZ3"/>
                         <outlet property="statusLabel" destination="rtS-Ki-dfx" id="bzP-Ox-1gw"/>
                     </connections>
                 </viewController>
@@ -790,6 +788,5 @@
         <image name="bgImage" width="375" height="290"/>
         <image name="ic_play" width="164" height="164"/>
         <image name="unknown_album" width="93" height="93"/>
-        <image name="waiting_1" width="417" height="663"/>
     </resources>
 </document>

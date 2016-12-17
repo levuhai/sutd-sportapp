@@ -8,6 +8,7 @@
 
 import UIKit
 import MBCircularProgressBar
+import MediaPlayer
 
 class InitialViewController: UIViewController {
 
@@ -27,10 +28,25 @@ class InitialViewController: UIViewController {
         
         print("Count: \(navigationController?.viewControllers.count)")
         // Do any additional setup after loading the view.
+        
+        if #available(iOS 9.3, *) {
+            MPMediaLibrary.requestAuthorization { (status) in
+                if (status == .authorized) {
+                    self.startSync()
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+            startSync()
+        }
+        //timer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(changeBackgroundImage), userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    func startSync() {
         let songSyncManager = ItunesSyncManager.sharedInstance
         let songRepository = SongRealmRepository.sharedInstance
-        
-        timer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(changeBackgroundImage), userInfo: nil, repeats: true)
         
         songSyncManager.syncWithRepo(songRepository, progress: { [weak self] (current, total) in
             print("Processing \(current)/\(total)")
@@ -45,7 +61,7 @@ class InitialViewController: UIViewController {
             }
             }, completion: {
                 self.getStartedButton.isEnabled = true
-                self.statusLabel.text = "All done"
+                self.statusLabel.text = ""
                 self.timer?.invalidate()
         })
     }

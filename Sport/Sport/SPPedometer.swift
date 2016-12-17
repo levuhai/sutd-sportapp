@@ -11,7 +11,7 @@ import CoreMotion
 
 class SPPedometer: NSObject {
     var usingStepCounting = false
-    let pedometer = CMPedometer()
+    //let pedometer = CMPedometer()
     let activityManager = CMMotionActivityManager()
     
     var stepCounterTimer: Timer?
@@ -48,17 +48,17 @@ class SPPedometer: NSObject {
         
         if usingStepCounting {
             // Start update pedometer
-            pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
-                if data != nil {
-                    //let distance = data.distance
-                    DispatchQueue.main.async(execute: {
-                        self.stepCounts = data!.numberOfSteps.intValue
-                        print(self.stepCounts)
-                        self.stepsPerSecond = data!.currentCadence?.floatValue ?? 0.0
-                        self.handler?(self.stepCounts, self.stepsPerSecond)
-                    })
-                }
-            })
+//            pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
+//                if data != nil {
+//                    //let distance = data.distance
+//                    DispatchQueue.main.async(execute: {
+//                        self.stepCounts = data!.numberOfSteps.intValue
+//                        print(self.stepCounts)
+//                        self.stepsPerSecond = data!.currentCadence?.floatValue ?? 0.0
+//                        self.handler?(self.stepCounts, self.stepsPerSecond)
+//                    })
+//                }
+//            })
         } else {
             if !motionManager.isAccelerometerAvailable {
                 return
@@ -97,8 +97,8 @@ class SPPedometer: NSObject {
     
     func stopStepCounter() {
         if usingStepCounting {
-            pedometer.stopUpdates()
-            activityManager.stopActivityUpdates()
+//            pedometer.stopUpdates()
+//            activityManager.stopActivityUpdates()
         } else {
             stepTimer?.invalidate()
             motionManager.stopAccelerometerUpdates()

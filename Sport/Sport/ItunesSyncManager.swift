@@ -46,6 +46,7 @@ class ItunesSyncManager: NSObject, SongSyncManager {
     }
     
     func syncWithRepo(_ repository: SongRepository, progress: ((_ current: Int, _ total: Int) -> ())?, completion: (() -> Void)?) {
+        
         func isExistInItuneLibrary(_ songPersistentId: String) -> Bool {
                 let query = MPMediaQuery.songs()
                 let predicate = MPMediaPropertyPredicate(value: songPersistentId, forProperty: MPMediaItemPropertyPersistentID)

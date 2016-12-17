@@ -38,10 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func firstViewController() -> UIViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        
-        if (!AppUserDefaults.isTutorialFinished()) {
-            return sb.instantiateViewController(withIdentifier: "TourGuideController")
-        } else if (!AppUserDefaults.isFirstInitialSuccessfully()) {
+//        return sb.instantiateViewController(withIdentifier: "InitialViewController")
+        if (!AppUserDefaults.isFirstInitialSuccessfully()) {
             return sb.instantiateViewController(withIdentifier: "InitialViewController")
         }
         return sb.instantiateViewController(withIdentifier: "MusicPlayerController")

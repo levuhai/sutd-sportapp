@@ -39,7 +39,7 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Import music to analyze</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Used to keep track of user's activity rate</string>
+	<string>Access activity data</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ionicons.ttf</string>
