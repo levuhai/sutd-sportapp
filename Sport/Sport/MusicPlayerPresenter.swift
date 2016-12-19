@@ -27,6 +27,7 @@ protocol MusicPlayerPresenter: SPActivityRateViewDataSource {
     func onRewindEnded()
     
     func onTempoSliderValueChanged(_ newValue: Float)
+    func onTrackPadValueChanged(_ eValue: Float, _ vValue: Float)
     
     func playlistDidSelectItemAtIndex(_ indexPath: IndexPath)
 }

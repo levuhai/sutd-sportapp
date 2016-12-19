@@ -16,7 +16,7 @@ protocol SongRepository: class {
     
     func isSongExisting(_ persistenceId: String) -> Bool
     
-    func loadSongs(_ tempo: Float) -> [SongData]
+    func loadSongs(_ tempo: Float, _ energy: Float, _ valence: Float) -> [SongData]
     
     func deleteSong(_ persistentId: String)
     

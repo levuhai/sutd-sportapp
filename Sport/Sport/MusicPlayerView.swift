@@ -16,6 +16,7 @@ protocol MusicPlayerView: class {
     func updatePlaybackProgress(_ progress: Double)
     
     func setTempoSliderValue(_ tempo: Float)
+    func setTrackPadValue(_ energy: Float, _ valence: Float)
     
     func updateViewForPlayingState(_ isPlaying: Bool)
     

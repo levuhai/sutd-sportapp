@@ -13,7 +13,7 @@ class SPPedometer: NSObject {
     var usingStepCounting = false
     //let pedometer = CMPedometer()
     let activityManager = CMMotionActivityManager()
-    
+    var accelSamplesPerSecond = 60.0
     var stepCounterTimer: Timer?
     var stepCounterInterval: TimeInterval = 0
     var activityStr = ""
@@ -64,7 +64,7 @@ class SPPedometer: NSObject {
                 return
             }
             initStepArr()
-            motionManager.accelerometerUpdateInterval = 1.0/60
+            motionManager.accelerometerUpdateInterval = 1.0/accelSamplesPerSecond
             motionManager.startAccelerometerUpdates()
             
             
@@ -120,7 +120,7 @@ class SPPedometer: NSObject {
         storeDvalue(dValue, dvaltable: &self.dvalArray)
         
         let wma = self.calculateWMA(self.dvalArray)
-        print("\(stepCounts) \(wma)")
+        //print("\(stepCounts) \(wma)")
         if (wma < rightLegThreshold && dvalArray.count > 10 && !isSleeping) {
             isSleeping = true;
             stepCounts += 1
@@ -172,20 +172,20 @@ class SPPedometer: NSObject {
     }
 
     func initStepArr() {
-        for _ in (0..<600) {
+        for _ in (0..<Int(accelSamplesPerSecond)*5) {
             stepArray.append(0)
         }
     }
     
     func storeStep(_ value: Int) {
-        if (stepArray.count > 600) {
+        if (stepArray.count > Int(accelSamplesPerSecond)*5) {
             stepArray.removeFirst()
         }
         stepArray.append(value)
     }
     
     func calculateStepsPerSecond() {
-        self.stepsPerSecond  = Float(stepArray.last! - stepArray.first!)/10.0;
+        self.stepsPerSecond  = Float(stepArray.last! - stepArray.first!)/5.0;
     }
 
 }

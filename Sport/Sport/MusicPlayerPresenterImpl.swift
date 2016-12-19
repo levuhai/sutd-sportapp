@@ -36,10 +36,16 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
             self.playerView?.updatePlaybackProgress(progress)
         }
         audioPlayer.delegate = self
+        
+        // Query las tempo data
         let savedTempo = AppUserDefaults.lastTempo() ?? Constants.Defaults.tempoMin
         playerView?.setTempoSliderValue(savedTempo)
         
-        loadSongs(savedTempo)
+        let savedEngery = AppUserDefaults.lastEnergy() ?? 0.0
+        let savedValence = AppUserDefaults.lastEnergy() ?? 0.0
+        playerView?.setTrackPadValue(savedEngery, savedValence)
+        
+        loadSongs(AppUserDefaults.tempo, AppUserDefaults.energy, AppUserDefaults.valence)
         
         setupNewPlayList()
     }
@@ -107,7 +113,17 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     func onTempoSliderValueChanged(_ newValue: Float) {
         AppUserDefaults.saveLastTempo(newValue)
         
-        loadSongs(newValue)
+        loadSongs(AppUserDefaults.tempo, AppUserDefaults.energy, AppUserDefaults.valence)
+        
+        playerView?.updateSongInfo(nil)
+        setupNewPlayList()
+    }
+    
+    func onTrackPadValueChanged(_ eValue: Float, _ vValue: Float) {
+        AppUserDefaults.saveLastEnergy(eValue)
+        AppUserDefaults.saveLastValence(vValue)
+        
+        loadSongs(AppUserDefaults.tempo, AppUserDefaults.energy, AppUserDefaults.valence)
         
         playerView?.updateSongInfo(nil)
         setupNewPlayList()
@@ -227,8 +243,8 @@ extension MusicPlayerPresenterImpl {
         audioPlayer.stop()
     }
     
-    func loadSongs(_ tempo: Float) {
-        let songs = songRepository.loadSongs(tempo)
+    func loadSongs(_ tempo: Float, _ energy: Float, _ valence: Float) {
+        let songs = songRepository.loadSongs(tempo, energy, valence)
         playList.removeAll()
         
         let adapter = SPPlayerItemAdapter()

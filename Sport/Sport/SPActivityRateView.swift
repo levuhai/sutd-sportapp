@@ -17,9 +17,9 @@ class SPActivityRateView: UIView {
     let maximumValue = Float(220)
     let minimumValue = Float(80)
     let horizontalSpacing: CGFloat = 1
-    let top: CGFloat = 15
-    let bottom: CGFloat = 20
-    let left: CGFloat = 10
+    let atop: CGFloat = 15
+    let abottom: CGFloat = 20
+    //let aleft: CGFloat = 10
     
     var activityRates = [Float]()
 
@@ -79,7 +79,7 @@ class SPActivityRateView: UIView {
         let path = UIBezierPath()
         
         var x = bounds.size.width
-        let height = bounds.size.height - top - bottom
+        let height = bounds.size.height - atop - abottom
         let valueLength = maxValue
         
         if data.count == 0 {

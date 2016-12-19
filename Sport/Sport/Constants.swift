@@ -16,5 +16,11 @@ class Constants: NSObject {
     struct Defaults {
         static let tempoMin: Float = 20.0
         static let tempoMax: Float = 250.0
+        
+        static let energyMin: Float = -30
+        static let energyMax: Float = -10
+        
+        static let valenceMin: Float = -1.0
+        static let valenceMax: Float = 1.0
     }
 }

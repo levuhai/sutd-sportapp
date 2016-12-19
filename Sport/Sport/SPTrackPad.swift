@@ -9,7 +9,7 @@
 import UIKit
 
 class SPTrackPad: UIControl {
-    var emitter: CAEmitterLayer!
+    //var emitter: CAEmitterLayer!
     
     let ENERGY_MAX: Float = 1.0
     let ENERGY_MIN: Float = 0.0
@@ -17,7 +17,7 @@ class SPTrackPad: UIControl {
     let VALENCE_MAX: Float = 1.0
     let VALENCE_MIN: Float = -1.0
     
-    let EMITTER_SIZE = CGSize(width: 10, height: 10)
+    let EMITTER_SIZE = CGSize(width: 20, height: 20)
     
     var usableVerticalLength: CGFloat = 0
     var usableHorizontalLength: CGFloat = 0
@@ -28,31 +28,16 @@ class SPTrackPad: UIControl {
     var valence: Float = 0
     var energy: Float = 0.5
     
+    var dot: UIImageView!
+    
     override func awakeFromNib() {
         commonInit()
         
-        emitter = self.layer as! CAEmitterLayer
-        emitter.emitterSize = CGSize(width: 10, height: 10)
-        emitter.emitterShape = kCAEmitterLayerRectangle
         
-        let fire = CAEmitterCell()
-        fire.birthRate = -1
+        dot = UIImageView.init(image: #imageLiteral(resourceName: "dot"))
+        self.addSubview(dot)
         
-        fire.lifetime = 3.0
-        fire.lifetimeRange = 0.5
-        fire.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.1).cgColor
-        fire.contents = UIImage(named: "Particles_fire")?.cgImage
-        fire.name = "fire"
-        fire.velocity = 10
-        fire.velocityRange = 20
-        fire.emissionRange = CGFloat(M_PI_2)
-        fire.scaleSpeed = 0.3;
-        fire.spin = 0.5;
         
-        emitter.renderMode = kCAEmitterLayerAdditive;
-        emitter.emitterCells = [fire]
-        
-        emitter.emitterPosition = CGPoint.zero
         valence = VALENCE_MIN
         energy = ENERGY_MAX
     }
@@ -70,55 +55,29 @@ class SPTrackPad: UIControl {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let touchPoint = touch.location(in: self)
-        let currentRect = CGRect(origin: emitter.emitterPosition, size: CGSize(width: 20, height: 20))
-        previousPosition = touchPoint
+        setDotPosition(touchPoint)
         
-        //if CGRectContainsPoint(currentRect, touchPoint) {
-            setEmitting(true)
-            return true
-        //}
-        return false
+        return true
     }
     
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        let touchPosition = touch.location(in: self)
+        let touchPoint = touch.location(in: self)
+        setDotPosition(touchPoint)
         
-        let verticalDelta = previousPosition.y - touchPosition.y // Energy max value is top, but the positionY in coordinate is top-down.
-        let horizontalDelta = touchPosition.x - previousPosition.x
-        let valenceDelta = (VALENCE_MAX - VALENCE_MIN) * Float(horizontalDelta / usableHorizontalLength)
-        let energyDelta = (ENERGY_MAX - ENERGY_MIN) * Float(verticalDelta / usableVerticalLength)
-        var newValence = valence + valenceDelta
-        var newEnergy = energy + energyDelta
-        
-        if newValence > VALENCE_MAX {
-            newValence = VALENCE_MAX
-        } else if newValence < VALENCE_MIN {
-            newValence = VALENCE_MIN
-        }
-        valence = newValence
-        
-        if newEnergy > ENERGY_MAX {
-            newEnergy = ENERGY_MAX
-        } else if newEnergy < ENERGY_MIN {
-            newEnergy = ENERGY_MIN
-        }
-        energy = newEnergy
-        print("Valence: \(valence) --- Energy: \(energy)")
-        
-        previousPosition = touchPosition
-        
-        emitter.emitterPosition = touch.location(in: self)
         return true
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         print("End tracking")
         sendActions(for: .valueChanged)
-//        setEmitting(false)
     }
     
-    func setEmitting(_ isEmitting: Bool) {
-        emitter.setValue(NSNumber.init(value: isEmitting ? 10 : 0 as Int), forKeyPath: "emitterCells.fire.birthRate")
+    func setDotPosition(_ p: CGPoint) {
+        previousPosition = p
+        dot.setCenter(newCenter: p)
+        
+        energy = (ENERGY_MAX-ENERGY_MIN)*(Float(p.y/self.height()))+ENERGY_MIN
+        valence = (VALENCE_MAX-VALENCE_MIN)*(Float(p.x/self.width()))+VALENCE_MIN
     }
     
     

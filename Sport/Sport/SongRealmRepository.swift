@@ -34,7 +34,7 @@ class SongRealmRepository: SongRepository {
         return Array(result)
     }
     
-    func loadSongs(_ tempo: Float) -> [SongData] {
+    func loadSongs(_ tempo: Float, _ energy: Float, _ valence: Float) -> [SongData] {
         let realm = RealmFactory.sharedInstance.newRealm()
         let predicate = NSPredicate(format: "\(SongData.Column.Tempo) BETWEEN {%f, %f}", tempo - 10, tempo + 10)
         let result = realm.objects(SongData).filter(predicate)

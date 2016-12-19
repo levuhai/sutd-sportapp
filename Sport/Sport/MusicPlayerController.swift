@@ -44,7 +44,6 @@ class MusicPlayerController: UIViewController {
     
     @IBOutlet weak var bottomPlaylistToParentBottomConstraint: NSLayoutConstraint!
     
-    
     var currentSong: SongData?
     var playlistSong = [SongViewData]()
     
@@ -92,6 +91,10 @@ class MusicPlayerController: UIViewController {
     
     @IBAction func tempoSliderValueChanged(_ sender: TNSlider) {
         screenPresenter?.onTempoSliderValueChanged(sender.value)
+    }
+    
+    func trackPadValueChanged(sender: SPTrackPad) {
+        screenPresenter?.onTrackPadValueChanged(sender.energy, sender.valence)
     }
     
     @IBAction func playlistButtonDidClick(_ sender: UIButton) {
@@ -157,6 +160,7 @@ extension MusicPlayerController: MusicPlayerView {
         // Setup trackpad view.
         trackpadView.layer.cornerRadius = 8
         trackpadView.clipsToBounds = true
+        trackpadView.addTarget(self, action: #selector(trackPadValueChanged), for: .valueChanged)
         
         // Setup activity rate view
         activityRateView.layer.cornerRadius = 8
@@ -275,6 +279,10 @@ extension MusicPlayerController: MusicPlayerView {
     func setTempoSliderValue(_ tempo: Float) {
 //        tempoSlider.setValue(tempo, animated: true)
         tnTempoSlider.value = tempo
+    }
+    
+    func setTrackPadValue(_ energy: Float, _ valence: Float) {
+        //TODO: set trackpad value
     }
     
     func updateViewForPlayingState(_ isPlaying: Bool) {
