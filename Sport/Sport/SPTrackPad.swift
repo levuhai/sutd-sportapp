@@ -9,18 +9,14 @@
 import UIKit
 
 class SPTrackPad: UIControl {
-    //var emitter: CAEmitterLayer!
     
-    let ENERGY_MAX: Float = 1.0
-    let ENERGY_MIN: Float = 0.0
+    let ENERGY_MAX: Float = Constants.Defaults.energyMax
+    let ENERGY_MIN: Float = Constants.Defaults.energyMin
     
-    let VALENCE_MAX: Float = 1.0
-    let VALENCE_MIN: Float = -1.0
+    let VALENCE_MAX: Float = Constants.Defaults.valenceMax
+    let VALENCE_MIN: Float = Constants.Defaults.valenceMin
     
-    let EMITTER_SIZE = CGSize(width: 20, height: 20)
-    
-    var usableVerticalLength: CGFloat = 0
-    var usableHorizontalLength: CGFloat = 0
+   
     
     // TODO:
     var previousPosition: CGPoint = CGPoint(x: 1, y: 1)
@@ -31,8 +27,6 @@ class SPTrackPad: UIControl {
     var dot: UIImageView!
     
     override func awakeFromNib() {
-        commonInit()
-        
         
         dot = UIImageView.init(image: #imageLiteral(resourceName: "dot"))
         self.addSubview(dot)
@@ -42,15 +36,8 @@ class SPTrackPad: UIControl {
         energy = ENERGY_MAX
     }
     
-    func commonInit() {
-        usableHorizontalLength = bounds.size.width - EMITTER_SIZE.width
-        usableVerticalLength = bounds.size.height - EMITTER_SIZE.height
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        commonInit()
     }
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -72,17 +59,20 @@ class SPTrackPad: UIControl {
         sendActions(for: .valueChanged)
     }
     
+    func setValue(_ e: Float, _ v: Float) {
+        self.energy = e
+        self.valence = v
+        
+        let posY = (e-ENERGY_MIN)/(ENERGY_MAX-ENERGY_MIN)*Float(self.height())
+        let posX = (v-VALENCE_MIN)/(VALENCE_MAX-VALENCE_MIN)*Float(self.width())
+        dot.setCenter(newCenter: CGPoint(x: CGFloat(posX), y: CGFloat(posY)))
+    }
+    
     func setDotPosition(_ p: CGPoint) {
         previousPosition = p
         dot.setCenter(newCenter: p)
         
         energy = (ENERGY_MAX-ENERGY_MIN)*(Float(p.y/self.height()))+ENERGY_MIN
         valence = (VALENCE_MAX-VALENCE_MIN)*(Float(p.x/self.width()))+VALENCE_MIN
-    }
-    
-    
-    
-    internal override class var layerClass : AnyClass {
-        return CAEmitterLayer.self
     }
 }

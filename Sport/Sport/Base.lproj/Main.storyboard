@@ -43,6 +43,9 @@
                                         <exclude reference="HkA-Sp-yN4"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="trackPadValueChanged:" destination="wXN-UV-aQG" eventType="valueChanged" id="v5k-nq-eXY"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNu-n5-Ceu">
                                 <rect key="frame" x="0.0" y="424" width="414" height="114.66666666666663"/>
@@ -206,7 +209,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="83"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WZB-GQ-WPO" id="QCh-v6-IHd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aoq-GB-4iI">
@@ -488,7 +491,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9oz-nd-vQU" id="6ae-AL-ISk">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="108.66666666666667"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="73U-gH-7j5">

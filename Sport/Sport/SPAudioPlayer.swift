@@ -199,7 +199,7 @@ class SPAudioPlayer: NSObject {
         thePlayer?.play()
         
         delegate?.audioPlayerDidStartPlay(self, song: currentItem!)
-        configureNowPlayingInfo(currentItem!.mediaItem)
+        configureNowPlayingInfo()
     }
    
     func rewind() {
@@ -337,14 +337,23 @@ extension SPAudioPlayer {
 
 // Show playing item on lock screen.
 extension SPAudioPlayer {
-    func configureNowPlayingInfo(_ mediaItem: MPMediaItem) {
+    func configureNowPlayingInfo() {
+        let mediaItem = currentItem!.mediaItem
         let infoCenter = MPNowPlayingInfoCenter.default()
-        var newInfo = [String: AnyObject]()
-        let itemProperties = Set([MPMediaItemPropertyTitle, MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPMediaItemPropertyAlbumTitle, MPNowPlayingInfoPropertyElapsedPlaybackTime])
-        mediaItem.enumerateValues(forProperties: itemProperties) { (property, value, stop) in
-            newInfo[property] = value as AnyObject?
-        }
+        //var newInfo = [String: AnyObject]()
+        let songInfo: [String: AnyObject]? = [
+            MPMediaItemPropertyTitle: mediaItem.title as AnyObject,
+            MPMediaItemPropertyArtist: mediaItem.artist as AnyObject,
+            MPMediaItemPropertyArtwork: mediaItem.artwork!,
+            MPMediaItemPropertyPlaybackDuration: mediaItem.playbackDuration as AnyObject
+            
+        ]
         
-        infoCenter.nowPlayingInfo = newInfo
+//        let itemProperties = Set([MPMediaItemPropertyTitle, MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPMediaItemPropertyAlbumTitle, MPNowPlayingInfoPropertyElapsedPlaybackTime])
+//        mediaItem.enumerateValues(forProperties: itemProperties) { (property, value, stop) in
+//            newInfo[property] = value as AnyObject?
+//        }
+        
+        infoCenter.nowPlayingInfo = songInfo
     }
 }

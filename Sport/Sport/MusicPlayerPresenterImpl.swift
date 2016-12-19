@@ -41,8 +41,8 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         let savedTempo = AppUserDefaults.lastTempo() ?? Constants.Defaults.tempoMin
         playerView?.setTempoSliderValue(savedTempo)
         
-        let savedEngery = AppUserDefaults.lastEnergy() ?? 0.0
-        let savedValence = AppUserDefaults.lastEnergy() ?? 0.0
+        let savedEngery = AppUserDefaults.lastEnergy() ?? Constants.Defaults.energyMin
+        let savedValence = AppUserDefaults.lastValence() ?? Constants.Defaults.valenceMin
         playerView?.setTrackPadValue(savedEngery, savedValence)
         
         loadSongs(AppUserDefaults.tempo, AppUserDefaults.energy, AppUserDefaults.valence)

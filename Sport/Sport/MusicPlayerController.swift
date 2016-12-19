@@ -93,7 +93,7 @@ class MusicPlayerController: UIViewController {
         screenPresenter?.onTempoSliderValueChanged(sender.value)
     }
     
-    func trackPadValueChanged(sender: SPTrackPad) {
+    @IBAction func trackPadValueChanged(_ sender: SPTrackPad) {
         screenPresenter?.onTrackPadValueChanged(sender.energy, sender.valence)
     }
     
@@ -160,7 +160,6 @@ extension MusicPlayerController: MusicPlayerView {
         // Setup trackpad view.
         trackpadView.layer.cornerRadius = 8
         trackpadView.clipsToBounds = true
-        trackpadView.addTarget(self, action: #selector(trackPadValueChanged), for: .valueChanged)
         
         // Setup activity rate view
         activityRateView.layer.cornerRadius = 8
@@ -283,6 +282,7 @@ extension MusicPlayerController: MusicPlayerView {
     
     func setTrackPadValue(_ energy: Float, _ valence: Float) {
         //TODO: set trackpad value
+        trackpadView.setValue(energy, valence)
     }
     
     func updateViewForPlayingState(_ isPlaying: Bool) {
