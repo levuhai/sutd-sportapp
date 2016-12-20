@@ -185,7 +185,10 @@ class SPPedometer: NSObject {
     }
     
     func calculateStepsPerSecond() {
-        self.stepsPerSecond  = Float(stepArray.last! - stepArray.first!)/5.0;
+        self.stepsPerSecond  = Float(stepArray.last! - stepArray.first!)/5.0
+        if(self.stepsPerSecond > 3.166) {
+            self.stepsPerSecond = 190.0/60.0
+        }
     }
 
 }

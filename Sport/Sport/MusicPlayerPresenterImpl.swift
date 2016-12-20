@@ -15,7 +15,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
     var songRepository: SongRepository
     let audioPlayer = SPAudioPlayer.sharedInstance
     var runningMode = false
-    
+    var lastSPM: Float = 0.0
     var playList: [SPPlayerItem] = []
     
     let pedometer = SPPedometer()
@@ -64,7 +64,24 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
              
              pedometer.startPedometerWithUpdateInterval(1/60.0, handler: { [weak self] (totalSteps, stepsPerSecond) in
                 self?.playerView?.updateStepCount(totalSteps)
-                self?.playerView?.updateStepsPerMinute(stepsPerSecond*60)
+                var tempo:Float = stepsPerSecond*60
+                self?.playerView?.updateStepsPerMinute(tempo)
+                if (tempo < 60.0) {
+                    tempo = 30.0
+                } else if (tempo >= 60.0 && tempo < 120.0) {
+                    tempo = 90.0
+                } else {
+                    tempo = 150.0
+                }
+                
+                if (tempo != self?.lastSPM) {
+                    self?.loadSongs(tempo, AppUserDefaults.energy, AppUserDefaults.valence)
+                    
+                    self?.playerView?.updateSongInfo(nil)
+                    self?.setupNewPlayList()
+                    self?.onPlayPauseButonClicked()
+                }
+                self?.lastSPM = tempo
              })
             
             pedometer.startActivityUpdate({ [weak self] (activityStr) in
@@ -117,6 +134,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         
         playerView?.updateSongInfo(nil)
         setupNewPlayList()
+        self.onPlayPauseButonClicked()
     }
     
     func onTrackPadValueChanged(_ eValue: Float, _ vValue: Float) {
@@ -127,6 +145,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         
         playerView?.updateSongInfo(nil)
         setupNewPlayList()
+        self.onPlayPauseButonClicked()
     }
     
     func playlistDidSelectItemAtIndex(_ indexPath: IndexPath) {

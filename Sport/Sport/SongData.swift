@@ -17,6 +17,8 @@ class SongData: Object {
     struct Column {
         static let PersistentId = "persistentId"
         static let Tempo = "tempo"
+        static let Energy = "energy"
+        static let Valence = "valence"
     }
     
     // Persistent ID of this song in itunes library.

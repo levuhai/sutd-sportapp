@@ -30,14 +30,41 @@ class SongRealmRepository: SongRepository {
     
     func loadSongs() -> [SongData] {
         let realm = RealmFactory.sharedInstance.newRealm()
-        let result = realm.objects(SongData)
+        let result = realm.objects(SongData.self)
         return Array(result)
     }
     
     func loadSongs(_ tempo: Float, _ energy: Float, _ valence: Float) -> [SongData] {
         let realm = RealmFactory.sharedInstance.newRealm()
-        let predicate = NSPredicate(format: "\(SongData.Column.Tempo) BETWEEN {%f, %f}", tempo - 10, tempo + 10)
-        let result = realm.objects(SongData).filter(predicate)
+        // Energy calculate
+        let eScale = (Constants.Defaults.energyMax - Constants.Defaults.energyMin)/3
+        let scale1 = Constants.Defaults.energyMin + eScale
+        let scale2 = Constants.Defaults.energyMax - eScale;
+        var eHigh: Float = scale2
+        var eLow: Float = scale1
+        if (energy < scale1) {
+            eHigh = scale1
+            eLow = Constants.Defaults.energyMin
+        } else if (energy > scale2) {
+            eHigh = Constants.Defaults.energyMax
+            eLow = scale2
+        }
+        // Valence calculate
+        let vScale = (Constants.Defaults.valenceMax - Constants.Defaults.valenceMin)/3
+        let scale3 = Constants.Defaults.valenceMin + vScale
+        let scale4 = Constants.Defaults.valenceMax - vScale;
+        var vHigh: Float = scale4
+        var vLow: Float = scale3
+        if (valence < scale3) {
+            vHigh = scale3
+            vLow = Constants.Defaults.valenceMin
+        } else if (valence > scale4) {
+            vHigh = Constants.Defaults.valenceMax
+            vLow = scale4
+        }
+        
+        let predicate = NSPredicate(format: "\(SongData.Column.Tempo) BETWEEN {%f, %f} AND \(SongData.Column.Energy) BETWEEN {%f, %f} AND \(SongData.Column.Valence) BETWEEN {%f, %f}", tempo - 30, tempo + 30, eLow, eHigh, vLow, vHigh)
+        let result = realm.objects(SongData.self).filter(predicate)
         return Array(result)
     }
     

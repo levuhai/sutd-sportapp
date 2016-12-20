@@ -33,10 +33,45 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aC-Pr-mJ1" userLabel="Trackpad view" customClass="SPTrackPad" customModule="Sport" customModuleProvider="target">
                                 <rect key="frame" x="15" y="30" width="384" height="384"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8J-eK-aTL">
+                                        <rect key="frame" x="12" y="330" width="42" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OT-oZ-Lm4">
+                                        <rect key="frame" x="12" y="355" width="45" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLU-ZE-dW9">
+                                        <rect key="frame" x="67" y="355" width="45" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-GX-RIj">
+                                        <rect key="frame" x="67" y="328" width="21" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Dl4-ae-7Wy"/>
+                                            <constraint firstAttribute="width" secondItem="lgR-GX-RIj" secondAttribute="height" multiplier="1:1" id="zQq-Ic-8L3"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="0OT-oZ-Lm4" secondAttribute="bottom" constant="12" id="Go8-fb-6qs"/>
                                     <constraint firstAttribute="width" secondItem="7aC-Pr-mJ1" secondAttribute="height" id="HkA-Sp-yN4"/>
+                                    <constraint firstItem="0OT-oZ-Lm4" firstAttribute="leading" secondItem="7aC-Pr-mJ1" secondAttribute="leading" constant="12" id="NpO-Kh-ww6"/>
+                                    <constraint firstItem="mLU-ZE-dW9" firstAttribute="leading" secondItem="0OT-oZ-Lm4" secondAttribute="trailing" constant="10" id="P9M-oR-G1b"/>
+                                    <constraint firstItem="N8J-eK-aTL" firstAttribute="leading" secondItem="0OT-oZ-Lm4" secondAttribute="leading" id="cSV-Vq-oIi"/>
+                                    <constraint firstItem="0OT-oZ-Lm4" firstAttribute="top" secondItem="N8J-eK-aTL" secondAttribute="bottom" constant="8" id="cgE-qT-BNL"/>
+                                    <constraint firstItem="mLU-ZE-dW9" firstAttribute="centerY" secondItem="0OT-oZ-Lm4" secondAttribute="centerY" id="pXE-dq-iPe"/>
                                     <constraint firstAttribute="width" secondItem="7aC-Pr-mJ1" secondAttribute="height" multiplier="1:1" id="raF-gj-OwV"/>
+                                    <constraint firstItem="lgR-GX-RIj" firstAttribute="leading" secondItem="mLU-ZE-dW9" secondAttribute="leading" id="uIV-YX-GCg"/>
+                                    <constraint firstItem="lgR-GX-RIj" firstAttribute="centerY" secondItem="N8J-eK-aTL" secondAttribute="centerY" id="zow-dA-H6C"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -45,6 +80,8 @@
                                 </variation>
                                 <connections>
                                     <action selector="trackPadValueChanged:" destination="wXN-UV-aQG" eventType="valueChanged" id="v5k-nq-eXY"/>
+                                    <outlet property="imgFace" destination="lgR-GX-RIj" id="wvj-Ld-vE8"/>
+                                    <outlet property="lbEnergy" destination="mLU-ZE-dW9" id="40m-ug-g6h"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNu-n5-Ceu">
@@ -468,7 +505,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6E-8b-VU4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1476" y="218.1409295352324"/>
+            <point key="canvasLocation" x="1475.3623188405797" y="217.66304347826087"/>
         </scene>
         <!--Music Library Controller-->
         <scene sceneID="IVQ-hY-1Nt">
@@ -605,7 +642,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="XDT-YN-BuZ">
-                                <rect key="frame" x="187.66666666666666" y="699" width="39" height="37"/>
+                                <rect key="frame" x="188" y="699" width="39" height="37"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -655,7 +692,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izm-Gl-abm">
-                                <rect key="frame" x="144.66666666666669" y="654" width="125.00000000000006" height="40"/>
+                                <rect key="frame" x="145" y="654" width="125" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OD4-Ty-Cpv"/>
