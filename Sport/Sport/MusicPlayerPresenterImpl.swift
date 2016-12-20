@@ -66,12 +66,12 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
                 self?.playerView?.updateStepCount(totalSteps)
                 var tempo:Float = stepsPerSecond*60
                 self?.playerView?.updateStepsPerMinute(tempo)
-                if (tempo < 60.0) {
-                    tempo = 30.0
-                } else if (tempo >= 60.0 && tempo < 120.0) {
-                    tempo = 90.0
+                if (tempo < 70.0) {
+                    tempo = 45.0
+                } else if (tempo >= 70.0 && tempo < 130.0) {
+                    tempo = 105.0
                 } else {
-                    tempo = 150.0
+                    tempo = 145.0
                 }
                 
                 if (tempo != self?.lastSPM) {
