@@ -66,20 +66,23 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
                 self?.playerView?.updateStepCount(totalSteps)
                 var tempo:Float = stepsPerSecond*60
                 self?.playerView?.updateStepsPerMinute(tempo)
-                if (tempo < 70.0) {
-                    tempo = 45.0
-                } else if (tempo >= 70.0 && tempo < 130.0) {
-                    tempo = 105.0
+                if (tempo == 0.0) {
+                    self?.audioDoStop()
                 } else {
-                    tempo = 145.0
-                }
-                
-                if (tempo != self?.lastSPM) {
-                    self?.loadSongs(tempo, AppUserDefaults.energy, AppUserDefaults.valence)
-                    
-                    self?.playerView?.updateSongInfo(nil)
-                    self?.setupNewPlayList()
-                    self?.onPlayPauseButonClicked()
+                    if (tempo < 70.0) {
+                        tempo = 45.0
+                    } else if (tempo >= 70.0 && tempo < 130.0) {
+                        tempo = 105.0
+                    } else {
+                        tempo = 145.0
+                    }
+                    if (tempo != self?.lastSPM) {
+                        self?.loadSongs(tempo, AppUserDefaults.energy, AppUserDefaults.valence)
+                        
+                        self?.playerView?.updateSongInfo(nil)
+                        self?.setupNewPlayList()
+                        self?.onPlayPauseButonClicked()
+                    }
                 }
                 self?.lastSPM = tempo
              })
