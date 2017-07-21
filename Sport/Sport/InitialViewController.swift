@@ -16,6 +16,7 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var slideImageView: UIImageView!
     @IBOutlet weak var progressView: MBCircularProgressBarView!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var songProgress: UILabel!
     @IBOutlet weak var getStartedButton: UIButton!
     
     let images = ["waiting_1", "waiting_2", "waiting_3"]
@@ -26,7 +27,6 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         
-        print("Count: \(navigationController?.viewControllers.count)")
         // Do any additional setup after loading the view.
         
         if #available(iOS 9.3, *) {
@@ -50,6 +50,7 @@ class InitialViewController: UIViewController {
         
         songSyncManager.syncWithRepo(songRepository, progress: { [weak self] (current, total) in
             print("Processing \(current)/\(total)")
+            self?.songProgress.text = "\(current)/\(total)"
             let newValue = 100 * CGFloat(current) / CGFloat(total)
             let oldValue = self?.progressView.value ?? 0
             if newValue - oldValue > 10 {

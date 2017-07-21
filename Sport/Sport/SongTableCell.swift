@@ -34,7 +34,7 @@ class SongTableCell: UITableViewCell {
         songAlbumLabel.text = song.artist
         tempoLabel.text = "\(Int(song.tempo)) bpm"
         albumIconImageView.image = song.image
-        energyLabel.text = String.init(format: "%.f%%", song.energy)
-        happinessLabel.text = String.init(format: "%f", song.happiness)
+        energyLabel.text = String.init(format: "%.1f%%", song.energy)
+        happinessLabel.text = String.init(format: "%.2f", song.happiness)
     }
 }

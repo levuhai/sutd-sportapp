@@ -7,7 +7,7 @@
 //
 
 import MediaPlayer
-import AudioKit
+//import AudioKit
 
 class SingleAnalysisOperation: ConcurrentOperation {
     
@@ -41,6 +41,7 @@ class SingleAnalysisOperation: ConcurrentOperation {
         dispatchGroupPrepare.enter()
         
         let avUrl = AVURLAsset(url: song.assetURL!)
+        
         let exporter = AVAssetExportSession(asset: avUrl, presetName: AVAssetExportPresetPassthrough)
         guard let realExporter = exporter else {
             completeOperation()
@@ -50,8 +51,10 @@ class SingleAnalysisOperation: ConcurrentOperation {
         exporter?.determineCompatibleFileTypes(completionHandler: { (supportedFileTypes) in
             if supportedFileTypes.contains(AVFileTypeAppleM4A) {
                 outputFileType = AVFileTypeAppleM4A
-            } else if supportedFileTypes.contains(AVFileTypeQuickTimeMovie) {
-                outputFileType = AVFileTypeQuickTimeMovie
+            } else if supportedFileTypes.contains(AVFileTypeWAVE) {
+                outputFileType = AVFileTypeWAVE
+            } else if supportedFileTypes.contains(AVFileTypeMPEGLayer3) {
+                outputFileType = AVFileTypeMPEGLayer3
             }
             dispatchGroupPrepare.leave()
         })

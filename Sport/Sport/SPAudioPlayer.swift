@@ -340,14 +340,26 @@ extension SPAudioPlayer {
     func configureNowPlayingInfo() {
         let mediaItem = currentItem!.mediaItem
         let infoCenter = MPNowPlayingInfoCenter.default()
+        let songInfo: [String: AnyObject?]?
+        
+        if (mediaItem.artwork != nil) {
         //var newInfo = [String: AnyObject]()
-        let songInfo: [String: AnyObject]? = [
-            MPMediaItemPropertyTitle: mediaItem.title as AnyObject,
-            MPMediaItemPropertyArtist: mediaItem.artist as AnyObject,
-            MPMediaItemPropertyArtwork: mediaItem.artwork!,
-            MPMediaItemPropertyPlaybackDuration: mediaItem.playbackDuration as AnyObject
-            
-        ]
+            songInfo = [
+                MPMediaItemPropertyTitle: mediaItem.title as AnyObject,
+                MPMediaItemPropertyArtist: mediaItem.artist as AnyObject,
+                MPMediaItemPropertyArtwork: mediaItem.artwork,
+                MPMediaItemPropertyPlaybackDuration: mediaItem.playbackDuration as AnyObject
+                
+            ]
+        } else {
+            songInfo = [
+                MPMediaItemPropertyTitle: mediaItem.title as AnyObject,
+                MPMediaItemPropertyArtist: mediaItem.artist as AnyObject,
+                //MPMediaItemPropertyArtwork: mediaItem.artwork,
+                MPMediaItemPropertyPlaybackDuration: mediaItem.playbackDuration as AnyObject
+                
+            ]
+        }
         
 //        let itemProperties = Set([MPMediaItemPropertyTitle, MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPMediaItemPropertyAlbumTitle, MPNowPlayingInfoPropertyElapsedPlaybackTime])
 //        mediaItem.enumerateValues(forProperties: itemProperties) { (property, value, stop) in

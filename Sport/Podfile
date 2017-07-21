@@ -12,5 +12,5 @@ target 'Sport' do
     pod 'Crashlytics'
     pod 'MBCircularProgressBar' #,'<= 0.3.4'
     #pod 'SnapKit' #,'~> 0.22.0'
-    pod 'AudioKit', '~> 3.5'
+    #pod 'AudioKit', '~> 3.5'
 end

@@ -68,8 +68,6 @@
 		A708567B1DE74E1F00CCD59F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A708567A1DE74E1F00CCD59F /* libz.tbd */; };
 		A708567D1DE74E2700CCD59F /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A708567C1DE74E2700CCD59F /* libbz2.1.0.tbd */; };
 		A73913741CE47E4E00874A04 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73913731CE47E4E00874A04 /* Accelerate.framework */; };
-		A76D48E21E07B9CB009548DF /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = A76D48E11E07B9CB009548DF /* MyParticle.sks */; };
-		A76D48E41E07BEE4009548DF /* Tap.sks in Resources */ = {isa = PBXBuildFile; fileRef = A76D48E31E07BEE4009548DF /* Tap.sks */; };
 		A76D48E71E07C840009548DF /* FrameAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76D48E61E07C840009548DF /* FrameAccessor.swift */; };
 		A7B743541D95137900E5DB15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7B743531D95137900E5DB15 /* Assets.xcassets */; };
 		A7CE05E81DE7CE7C0089BF84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */; };
@@ -160,8 +158,6 @@
 		A708567A1DE74E1F00CCD59F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A708567C1DE74E2700CCD59F /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		A73913731CE47E4E00874A04 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		A76D48E11E07B9CB009548DF /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
-		A76D48E31E07BEE4009548DF /* Tap.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tap.sks; sourceTree = "<group>"; };
 		A76D48E61E07C840009548DF /* FrameAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrameAccessor.swift; path = FrameAccessor/FrameAccessor.swift; sourceTree = "<group>"; };
 		A7B743531D95137900E5DB15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7CE05E71DE7CE7C0089BF84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -351,8 +347,6 @@
 				72571D6F1D0F2F14001198E5 /* Localization.strings */,
 				720B34741CF75149001D8893 /* ionicons.ttf */,
 				722BE8E31CEE191E00E51D68 /* songs */,
-				A76D48E11E07B9CB009548DF /* MyParticle.sks */,
-				A76D48E31E07BEE4009548DF /* Tap.sks */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -585,9 +579,7 @@
 				720B34781CF75EFA001D8893 /* ionicons.ttf in Resources */,
 				72349B5D1CDDFBA4002B3B84 /* LaunchScreen.storyboard in Resources */,
 				72571D6D1D0F2F14001198E5 /* Localization.strings in Resources */,
-				A76D48E41E07BEE4009548DF /* Tap.sks in Resources */,
 				72349B581CDDFBA4002B3B84 /* Main.storyboard in Resources */,
-				A76D48E21E07B9CB009548DF /* MyParticle.sks in Resources */,
 				A7B743541D95137900E5DB15 /* Assets.xcassets in Resources */,
 				722BE8E41CEE191E00E51D68 /* songs in Resources */,
 			);
@@ -608,7 +600,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		52664579EF9A79A25CE6D829 /* [CP] Copy Pods Resources */ = {
