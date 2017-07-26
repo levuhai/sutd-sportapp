@@ -11,7 +11,7 @@ import CoreMotion
 
 class SPPedometer: NSObject {
     var usingStepCounting = false
-    //let pedometer = CMPedometer()
+    let pedometer = CMPedometer()
     let activityManager = CMMotionActivityManager()
     var accelSamplesPerSecond = 60.0
     var stepCounterTimer: Timer?
@@ -44,21 +44,21 @@ class SPPedometer: NSObject {
     func startPedometerWithUpdateInterval(_ interval: TimeInterval, handler: @escaping (_ totalSteps: Int, _ stepsPerSecond: Float) -> Void) {
         self.handler = handler
         stepCounterInterval = interval
-        //usingStepCounting = CMPedometer.isStepCountingAvailable()
+        usingStepCounting = CMPedometer.isStepCountingAvailable()
         
         if usingStepCounting {
             // Start update pedometer
-//            pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
-//                if data != nil {
-//                    //let distance = data.distance
-//                    DispatchQueue.main.async(execute: {
-//                        self.stepCounts = data!.numberOfSteps.intValue
-//                        print(self.stepCounts)
-//                        self.stepsPerSecond = data!.currentCadence?.floatValue ?? 0.0
-//                        self.handler?(self.stepCounts, self.stepsPerSecond)
-//                    })
-//                }
-//            })
+            pedometer.startUpdates(from: Date(), withHandler: { (data, error) in
+                if data != nil {
+                    //let distance = data.distance
+                    DispatchQueue.main.async(execute: {
+                        self.stepCounts = data!.numberOfSteps.intValue
+                        print("Step count: \(self.stepCounts)")
+                        self.stepsPerSecond = data!.currentCadence?.floatValue ?? 0.0
+                        self.handler?(self.stepCounts, self.stepsPerSecond)
+                    })
+                }
+            })
         } else {
             if !motionManager.isAccelerometerAvailable {
                 return
@@ -97,8 +97,9 @@ class SPPedometer: NSObject {
     
     func stopStepCounter() {
         if usingStepCounting {
-//            pedometer.stopUpdates()
-//            activityManager.stopActivityUpdates()
+            pedometer.stopUpdates()
+            activityManager.stopActivityUpdates()
+            stepCounts = 0
         } else {
             stepTimer?.invalidate()
             motionManager.stopAccelerometerUpdates()

@@ -148,6 +148,7 @@ class MusicPlayerPresenterImpl: NSObject, MusicPlayerPresenter {
         
         playerView?.updateSongInfo(nil)
         setupNewPlayList()
+        print(AppUserDefaults.tempo)
         self.onPlayPauseButonClicked()
     }
     
